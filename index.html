@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ========================= -->
+    <!-- META -->
+    <!-- ========================= -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="A little story made for someone very special."
+    >
+
+
+    <!-- ========================= -->
+    <!-- PAGE TITLE -->
+    <!-- ========================= -->
+
+    <title>For Someone Very Special ❤️</title>
+
+
+    <!-- ========================= -->
+    <!-- GOOGLE FONTS -->
+    <!-- ========================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ========================= -->
+    <!-- CSS -->
+    <!-- ========================= -->
+
+    <link
+        rel="stylesheet"
+        href="css/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/animations.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/responsive.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ================================================== -->
+    <!-- CHAPTER 0 : LOADING SCREEN -->
+    <!-- ================================================== -->
+
+    <div id="loader">
+
+        <div class="loader-content">
+
+            <div class="loader-title">
+                Our Story
+            </div>
+
+            <div class="loader-line">
+
+                <span id="loader-progress"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================================== -->
+    <!-- BACKGROUND : STARS -->
+    <!-- ================================================== -->
+
+    <div id="stars"></div>
+
+
+    <!-- ================================================== -->
+    <!-- CHAPTER 0 : WELCOME -->
+    <!-- ================================================== -->
+
+    <main id="chapter0">
+
+        <div class="chapter-container">
+
+
+            <!-- Greeting -->
+
+            <h1 id="greeting">
+
+                Hi,
+
+                <span id="her-name">
+                    Princess
+                </span>
+
+            </h1>
+
+
+            <!-- First Message -->
+
+            <p id="line1">
+                Before you continue...
+            </p>
+
+
+            <!-- Second Message -->
+
+            <p id="line2">
+                There's something I've been wanting to tell you.
+            </p>
+
+
+            <!-- Start Button -->
+
+            <button
+                id="startBtn"
+                type="button"
+            >
+                Open My Story
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================================================== -->
+    <!-- CUSTOM CURSOR -->
+    <!-- ================================================== -->
+
+    <div id="cursor"></div>
+
+
+    <!-- ================================================== -->
+    <!-- BACKGROUND MUSIC -->
+    <!-- ================================================== -->
+
+    <audio
+        id="bgMusic"
+        loop
+        preload="auto"
+    >
+
+        <source
+            src="assets/music/theme.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+    <!-- ================================================== -->
+    <!-- GSAP -->
+    <!-- ================================================== -->
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+    ></script>
+
+
+    <!-- ================================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================== -->
+
+    <!-- Main Application Controller -->
+
+    <script src="js/app.js"></script>
+
+
+    <!-- Custom Cursor -->
+
+    <script src="js/cursor.js"></script>
+
+
+    <!-- Loading Screen -->
+
+    <script src="js/loader.js"></script>
+
+
+    <!-- Audio -->
+
+    <script src="js/audio.js"></script>
+
+
+    <!-- Particles / Stars -->
+
+    <script src="js/particles.js"></script>
+
+
+    <!-- Page Transitions -->
+
+    <script src="js/transition.js"></script>
+
+
+    <!-- Chapter 0 -->
+
+    <script src="js/chapter0.js"></script>
+
+
+</body>
+
+</html>

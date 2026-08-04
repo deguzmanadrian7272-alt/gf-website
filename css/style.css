@@ -1,0 +1,412 @@
+/* ==========================================================
+   STYLE.CSS
+   Project : Our Story
+   Chapter : 0 - Welcome
+   Author  : Adrian + ChatGPT
+========================================================== */
+
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:var(--font-body);
+
+    background:var(--bg-primary);
+
+    color:var(--text-primary);
+
+    overflow:hidden;
+
+    min-height:100vh;
+
+}
+
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+::selection{
+
+    background:var(--pink-500);
+
+    color:var(--white);
+
+}
+
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+/* ==========================================================
+   BUTTON RESET
+========================================================== */
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    font:inherit;
+
+    cursor:pointer;
+
+}
+
+
+/* ==========================================================
+   LOADER
+========================================================== */
+
+#loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:var(--bg-primary);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:var(--z-loader);
+
+}
+
+.loader-content{
+
+    width:320px;
+
+    text-align:center;
+
+}
+
+.loader-title{
+
+    font-family:var(--font-heading);
+
+    font-size:2.3rem;
+
+    font-weight:500;
+
+    letter-spacing:2px;
+
+    margin-bottom:30px;
+
+}
+
+.loader-line{
+
+    width:100%;
+
+    height:4px;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+#loader-progress{
+
+    display:block;
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        var(--pink-500),
+        var(--gold)
+    );
+
+}
+
+
+/* ==========================================================
+   STARS
+========================================================== */
+
+#stars{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:var(--z-stars);
+
+}
+
+
+/* ==========================================================
+   CHAPTER 0
+========================================================== */
+
+#chapter0{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    z-index:var(--z-content);
+
+}
+
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.chapter-container{
+
+    width:min(700px,90%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+
+/* ==========================================================
+   HEADING
+========================================================== */
+
+#greeting{
+
+    font-family:var(--font-heading);
+
+    font-size:4.8rem;
+
+    font-weight:600;
+
+    line-height:1.1;
+
+    letter-spacing:1px;
+
+    opacity:0;
+
+}
+
+#her-name{
+
+    color:var(--pink-500);
+
+}
+
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+#line1,
+#line2{
+
+    font-size:1.15rem;
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+
+    max-width:520px;
+
+    opacity:0;
+
+}
+
+#line1{
+
+    margin-top:28px;
+
+}
+
+#line2{
+
+    margin-top:16px;
+
+}
+
+
+/* ==========================================================
+   BUTTON
+========================================================== */
+
+#startBtn{
+
+    margin-top:60px;
+
+    padding:18px 42px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    color:var(--white);
+
+    font-size:1rem;
+
+    font-weight:500;
+
+    letter-spacing:.5px;
+
+    transition:all .4s ease;
+
+    opacity:0;
+
+}
+
+#startBtn:hover{
+
+    transform:translateY(-5px);
+
+    background:var(--pink-500);
+
+    box-shadow:
+        0 0 30px rgba(255,143,171,.35);
+
+}
+
+#startBtn:active{
+
+    transform:scale(.97);
+
+}
+
+
+/* ==========================================================
+   CUSTOM CURSOR
+========================================================== */
+
+#cursor{
+
+    width:18px;
+
+    height:18px;
+
+    border-radius:50%;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    background:rgba(255,255,255,.9);
+
+    mix-blend-mode:difference;
+
+    z-index:var(--z-cursor);
+
+}
+
+
+/* ==========================================================
+   GLASS GLOW
+========================================================== */
+
+.chapter-container::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    background:radial-gradient(
+        circle,
+        rgba(255,143,171,.10),
+        transparent 70%
+    );
+
+    filter:blur(50px);
+
+    z-index:-1;
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:var(--bg-primary);
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--pink-500);
+
+    border-radius:999px;
+
+}
