@@ -1,0 +1,557 @@
+/* ==========================================================
+   CHAPTER II — THE LITTLE THINGS
+   ========================================================== */
+
+
+/* ==========================================================
+   CHAPTER 2 CONTAINER
+   ========================================================== */
+
+#chapter2 {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    padding: 80px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   CHAPTER 2 BACKGROUND
+   ========================================================== */
+
+.chapter2-background {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* ==========================================================
+   SOFT DECORATIVE GLOW
+   ========================================================== */
+
+.chapter2-glow {
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 182, 193, 0.16) 0%,
+            rgba(255, 182, 193, 0.06) 40%,
+            transparent 70%
+        );
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+
+.chapter2-glow-1 {
+    top: -120px;
+    left: -120px;
+}
+
+
+.chapter2-glow-2 {
+    right: -150px;
+    bottom: -150px;
+}
+
+
+/* ==========================================================
+   FLOATING HEARTS
+   ========================================================== */
+
+.chapter2-heart {
+    position: absolute;
+
+    color: rgba(255, 192, 203, 0.35);
+
+    font-size: 1rem;
+
+    pointer-events: none;
+
+    animation:
+        chapter2Float 8s ease-in-out infinite;
+}
+
+
+.chapter2-heart:nth-child(1) {
+    left: 10%;
+    top: 20%;
+    animation-delay: 0s;
+}
+
+
+.chapter2-heart:nth-child(2) {
+    left: 25%;
+    top: 75%;
+    animation-delay: 2s;
+}
+
+
+.chapter2-heart:nth-child(3) {
+    left: 70%;
+    top: 18%;
+    animation-delay: 1s;
+}
+
+
+.chapter2-heart:nth-child(4) {
+    left: 85%;
+    top: 65%;
+    animation-delay: 3s;
+}
+
+
+.chapter2-heart:nth-child(5) {
+    left: 50%;
+    top: 10%;
+    animation-delay: 4s;
+}
+
+
+/* ==========================================================
+   MAIN WRAPPER
+   ========================================================== */
+
+.chapter2-wrapper {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(900px, 100%);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   INTRODUCTION
+   ========================================================== */
+
+.chapter2-intro {
+    width: min(700px, 100%);
+
+    margin-bottom: 45px;
+}
+
+
+.chapter2-intro h2 {
+    margin: 0 0 15px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: clamp(
+        2.5rem,
+        6vw,
+        4.5rem
+    );
+
+    font-weight: 500;
+
+    letter-spacing: 0.03em;
+
+    line-height: 1.1;
+}
+
+
+.chapter2-intro p {
+    margin: 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.95rem;
+
+    line-height: 1.8;
+
+    opacity: 0.8;
+}
+
+
+/* ==========================================================
+   LITTLE THINGS CONTENT
+   ========================================================== */
+
+.chapter2-content {
+    width: min(760px, 100%);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* ==========================================================
+   STORY CARDS
+   ========================================================== */
+
+.chapter2-card {
+    position: relative;
+
+    width: 100%;
+
+    padding: 28px 32px;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    text-align: left;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+.chapter2-card:hover {
+    transform:
+        translateY(-5px);
+
+    background:
+        rgba(255, 255, 255, 0.075);
+
+    border-color:
+        rgba(255, 192, 203, 0.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==========================================================
+   CARD TITLE
+   ========================================================== */
+
+.chapter2-card h3 {
+    margin: 0 0 10px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 1.7rem;
+
+    font-weight: 600;
+
+    line-height: 1.2;
+}
+
+
+/* ==========================================================
+   CARD TEXT
+   ========================================================== */
+
+.chapter2-card p {
+    margin: 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.9rem;
+
+    line-height: 1.8;
+
+    opacity: 0.82;
+}
+
+
+/* ==========================================================
+   CARD HEART
+   ========================================================== */
+
+.chapter2-card-heart {
+    position: absolute;
+
+    top: 22px;
+    right: 25px;
+
+    font-size: 1rem;
+
+    opacity: 0.6;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+
+.chapter2-card:hover
+.chapter2-card-heart {
+    opacity: 1;
+
+    transform:
+        scale(1.2)
+        rotate(-8deg);
+}
+
+
+/* ==========================================================
+   QUOTE / SPECIAL MESSAGE
+   ========================================================== */
+
+.chapter2-special {
+    width: min(680px, 100%);
+
+    margin-top: 25px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+.chapter2-special p {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: clamp(
+        1.4rem,
+        3vw,
+        2rem
+    );
+
+    font-style: italic;
+
+    line-height: 1.6;
+
+    opacity: 0.9;
+}
+
+
+/* ==========================================================
+   CONTINUE BUTTON
+   ========================================================== */
+
+.chapter2-continue {
+    margin-top: 40px;
+
+    padding: 13px 28px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.2);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    color: inherit;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.85rem;
+
+    letter-spacing: 0.05em;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.chapter2-continue:hover {
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(255, 192, 203, 0.12);
+
+    border-color:
+        rgba(255, 192, 203, 0.4);
+}
+
+
+.chapter2-continue:active {
+    transform:
+        translateY(0);
+}
+
+
+/* ==========================================================
+   FLOATING ANIMATION
+   ========================================================== */
+
+@keyframes chapter2Float {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0.25;
+    }
+
+    50% {
+        transform:
+            translateY(-18px)
+            rotate(8deg);
+
+        opacity: 0.55;
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0.25;
+    }
+
+}
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    #chapter2 {
+        padding:
+            70px 18px;
+    }
+
+
+    .chapter2-intro {
+        margin-bottom: 35px;
+    }
+
+
+    .chapter2-card {
+        padding: 25px;
+    }
+
+
+    .chapter2-card h3 {
+        font-size: 1.5rem;
+    }
+
+
+    .chapter2-card p {
+        font-size: 0.85rem;
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    #chapter2 {
+        padding:
+            60px 15px;
+    }
+
+
+    .chapter2-intro h2 {
+        font-size: 2.6rem;
+    }
+
+
+    .chapter2-intro p {
+        font-size: 0.82rem;
+    }
+
+
+    .chapter2-card {
+        padding: 22px 20px;
+    }
+
+
+    .chapter2-card h3 {
+        padding-right: 25px;
+
+        font-size: 1.4rem;
+    }
+
+
+    .chapter2-card p {
+        font-size: 0.8rem;
+
+        line-height: 1.7;
+    }
+
+
+    .chapter2-special {
+        padding: 20px 10px;
+    }
+
+
+    .chapter2-special p {
+        font-size: 1.3rem;
+    }
+
+
+    .chapter2-continue {
+        margin-top: 30px;
+
+        padding:
+            11px 23px;
+    }
+
+}
