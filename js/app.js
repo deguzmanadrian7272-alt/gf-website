@@ -97,6 +97,12 @@ function initializeApp() {
         initChapter0
     );
 
+   initializeModule(
+       "Chapter 1",
+       typeof initChapter1 === "function",
+       initChapter1
+   );
+
 
     App.initialized = true;
 
