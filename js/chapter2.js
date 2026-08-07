@@ -15,7 +15,9 @@ const Chapter2State = {
 
     visible: false,
 
-    finished: false
+    finished: false,
+
+    transitioning: false
 
 };
 
@@ -52,6 +54,16 @@ function initChapter2() {
     */
 
     if (continueButton) {
+
+        /*
+            Prevent duplicate event listeners.
+        */
+
+        continueButton.removeEventListener(
+            "click",
+            finishChapter2
+        );
+
 
         continueButton.addEventListener(
             "click",
@@ -105,7 +117,8 @@ function prepareChapter2() {
 
 
     /*
-        Prepare cards for entrance animation.
+        Get the actual elements
+        from your current index.html.
     */
 
     const intro =
@@ -114,15 +127,21 @@ function prepareChapter2() {
         );
 
 
-    const cards =
+    const stories =
         chapter.querySelectorAll(
-            ".chapter2-card"
+            ".chapter2-story"
         );
 
 
-    const special =
+    const jokes =
         chapter.querySelector(
-            ".chapter2-special"
+            ".chapter2-inside-jokes"
+        );
+
+
+    const ending =
+        chapter.querySelector(
+            ".chapter2-ending"
         );
 
 
@@ -136,31 +155,44 @@ function prepareChapter2() {
 
 
     if (intro) {
+
         elements.push(intro);
+
     }
 
 
-    cards.forEach(
-        (card) => {
+    stories.forEach(
+        (story) => {
 
-            elements.push(card);
+            elements.push(story);
 
         }
     );
 
 
-    if (special) {
-        elements.push(special);
+    if (jokes) {
+
+        elements.push(jokes);
+
+    }
+
+
+    if (ending) {
+
+        elements.push(ending);
+
     }
 
 
     if (continueButton) {
+
         elements.push(continueButton);
+
     }
 
 
     /*
-        Set initial state.
+        Set initial animation state.
     */
 
     elements.forEach(
@@ -170,7 +202,7 @@ function prepareChapter2() {
                 "0";
 
             element.style.transform =
-                "translateY(20px)";
+                "translateY(25px)";
 
         }
     );
@@ -188,8 +220,12 @@ function openChapter2Screen() {
         document.getElementById("chapter2");
 
 
-    const previousChapter =
+    const chapter1 =
         document.getElementById("chapter1");
+
+
+    const chapter0 =
+        document.getElementById("chapter0");
 
 
     if (!chapter) {
@@ -204,28 +240,24 @@ function openChapter2Screen() {
 
 
     /*
-        Hide Chapter 1.
+        Hide Chapter 0.
     */
 
-    if (previousChapter) {
+    if (chapter0) {
 
-        previousChapter.style.display =
+        chapter0.style.display =
             "none";
 
     }
 
 
     /*
-        Hide Chapter 0 as an extra safety check.
+        Hide Chapter 1.
     */
 
-    const chapter0 =
-        document.getElementById("chapter0");
+    if (chapter1) {
 
-
-    if (chapter0) {
-
-        chapter0.style.display =
+        chapter1.style.display =
             "none";
 
     }
@@ -247,11 +279,31 @@ function openChapter2Screen() {
         false;
 
 
+    Chapter2State.transitioning =
+        false;
+
+
+    /*
+        Scroll to the beginning
+        of Chapter 2.
+    */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+
     /*
         Start entrance animation.
     */
 
     startChapter2Intro();
+
+
+    console.log(
+        "💗 Chapter 2 is now visible."
+    );
 
 }
 
@@ -279,15 +331,21 @@ function startChapter2Intro() {
         );
 
 
-    const cards =
+    const stories =
         chapter.querySelectorAll(
-            ".chapter2-card"
+            ".chapter2-story"
         );
 
 
-    const special =
+    const jokes =
         chapter.querySelector(
-            ".chapter2-special"
+            ".chapter2-inside-jokes"
+        );
+
+
+    const ending =
+        chapter.querySelector(
+            ".chapter2-ending"
         );
 
 
@@ -298,7 +356,7 @@ function startChapter2Intro() {
 
 
     /*
-        Use GSAP if available.
+        GSAP animation.
     */
 
     if (
@@ -329,10 +387,10 @@ function startChapter2Intro() {
         }
 
 
-        if (cards.length) {
+        if (stories.length) {
 
             timeline.to(
-                cards,
+                stories,
                 {
 
                     opacity: 1,
@@ -341,21 +399,22 @@ function startChapter2Intro() {
 
                     duration: 0.8,
 
-                    stagger: 0.15,
+                    stagger: 0.18,
 
                     ease: "power3.out"
 
                 },
-                "-=0.45"
+
+                "-=0.4"
             );
 
         }
 
 
-        if (special) {
+        if (jokes) {
 
             timeline.to(
-                special,
+                jokes,
                 {
 
                     opacity: 1,
@@ -367,7 +426,30 @@ function startChapter2Intro() {
                     ease: "power3.out"
 
                 },
+
                 "-=0.35"
+            );
+
+        }
+
+
+        if (ending) {
+
+            timeline.to(
+                ending,
+                {
+
+                    opacity: 1,
+
+                    y: 0,
+
+                    duration: 0.8,
+
+                    ease: "power3.out"
+
+                },
+
+                "-=0.3"
             );
 
         }
@@ -388,7 +470,8 @@ function startChapter2Intro() {
                     ease: "power3.out"
 
                 },
-                "-=0.3"
+
+                "-=0.25"
             );
 
         }
@@ -400,13 +483,14 @@ function startChapter2Intro() {
 
 
     /*
-        Fallback if GSAP is unavailable.
+        Fallback without GSAP.
     */
 
     fallbackChapter2Intro(
         intro,
-        cards,
-        special,
+        stories,
+        jokes,
+        ending,
         continueButton
     );
 
@@ -419,8 +503,9 @@ function startChapter2Intro() {
 
 function fallbackChapter2Intro(
     intro,
-    cards,
-    special,
+    stories,
+    jokes,
+    ending,
     continueButton
 ) {
 
@@ -446,14 +531,14 @@ function fallbackChapter2Intro(
     }
 
 
-    cards.forEach(
-        (card) => {
+    stories.forEach(
+        (story) => {
 
             setTimeout(
                 () => {
 
                     revealChapter2Element(
-                        card
+                        story
                     );
 
                 },
@@ -467,13 +552,32 @@ function fallbackChapter2Intro(
     );
 
 
-    if (special) {
+    if (jokes) {
 
         setTimeout(
             () => {
 
                 revealChapter2Element(
-                    special
+                    jokes
+                );
+
+            },
+            delay
+        );
+
+
+        delay += 400;
+
+    }
+
+
+    if (ending) {
+
+        setTimeout(
+            () => {
+
+                revealChapter2Element(
+                    ending
                 );
 
             },
@@ -534,18 +638,64 @@ function revealChapter2Element(
 
 
 /* ==========================================================
-   CARD HOVER INTERACTION
+   CARD / STORY HOVER INTERACTION
    ========================================================== */
 
 function setupChapter2Cards() {
 
-    const cards =
+    /*
+        Your current index.html uses
+        .chapter2-story instead of
+        .chapter2-card.
+    */
+
+    const stories =
         document.querySelectorAll(
-            ".chapter2-card"
+            ".chapter2-story"
         );
 
 
-    cards.forEach(
+    stories.forEach(
+        (story) => {
+
+            story.addEventListener(
+                "mouseenter",
+                () => {
+
+                    story.classList.add(
+                        "is-hovered"
+                    );
+
+                }
+            );
+
+
+            story.addEventListener(
+                "mouseleave",
+                () => {
+
+                    story.classList.remove(
+                        "is-hovered"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+        Inside joke cards.
+    */
+
+    const jokeCards =
+        document.querySelectorAll(
+            ".chapter2-joke-card"
+        );
+
+
+    jokeCards.forEach(
         (card) => {
 
             card.addEventListener(
@@ -583,8 +733,13 @@ function setupChapter2Cards() {
 
 function finishChapter2() {
 
+    /*
+        Prevent double clicking.
+    */
+
     if (
-        Chapter2State.finished
+        Chapter2State.finished ||
+        Chapter2State.transitioning
     ) {
 
         return;
@@ -596,18 +751,23 @@ function finishChapter2() {
         true;
 
 
+    Chapter2State.transitioning =
+        true;
+
+
     console.log(
         "💗 Chapter 2 complete."
     );
 
 
-    /*
-        Chapter III isn't built yet.
+    console.log(
+        "📖 Opening Chapter 3..."
+    );
 
-        For now, transition to Chapter 3
-        will be prepared but won't break
-        the website if Chapter 3 doesn't
-        exist yet.
+
+    /*
+        IMPORTANT:
+        Use the existing transition system.
     */
 
     if (
@@ -622,8 +782,143 @@ function finishChapter2() {
     }
 
 
+    /*
+        Emergency fallback if
+        transition.js isn't loaded.
+    */
+
     console.warn(
-        "Transition system is not available."
+        "Transition system is not available. Using direct Chapter 3 opening."
+    );
+
+
+    openChapter3Screen();
+
+}
+
+
+/* ==========================================================
+   OPEN CHAPTER 3 DIRECTLY
+   ========================================================== */
+
+function openChapter3Screen() {
+
+    const chapter2 =
+        document.getElementById(
+            "chapter2"
+        );
+
+
+    const chapter3 =
+        document.getElementById(
+            "chapter3"
+        );
+
+
+    if (!chapter3) {
+
+        console.error(
+            "❌ Chapter 3 was not found in index.html."
+        );
+
+        Chapter2State.transitioning =
+            false;
+
+        return;
+
+    }
+
+
+    /*
+        Hide Chapter 2.
+    */
+
+    if (chapter2) {
+
+        chapter2.style.display =
+            "none";
+
+    }
+
+
+    /*
+        Hide previous chapters
+        as extra protection.
+    */
+
+    const chapter0 =
+        document.getElementById(
+            "chapter0"
+        );
+
+
+    const chapter1 =
+        document.getElementById(
+            "chapter1"
+        );
+
+
+    if (chapter0) {
+
+        chapter0.style.display =
+            "none";
+
+    }
+
+
+    if (chapter1) {
+
+        chapter1.style.display =
+            "none";
+
+    }
+
+
+    /*
+        Show Chapter 3.
+    */
+
+    chapter3.style.display =
+        "flex";
+
+
+    /*
+        Scroll to the top.
+    */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+
+    /*
+        If Chapter 3 has its own
+        opening function, run it.
+    */
+
+    if (
+        typeof startChapter3Intro ===
+        "function"
+    ) {
+
+        startChapter3Intro();
+
+    }
+
+
+    if (
+        typeof openChapter3 ===
+        "function"
+    ) {
+
+        openChapter3();
+
+    }
+
+
+    console.log(
+        "🌹 Chapter 3 is now visible."
     );
 
 }
@@ -641,11 +936,28 @@ document.addEventListener(
             event.detail.chapter;
 
 
+        /*
+            Chapter II
+        */
+
         if (
             chapterNumber === 2
         ) {
 
             openChapter2Screen();
+
+        }
+
+
+        /*
+            Chapter III
+        */
+
+        if (
+            chapterNumber === 3
+        ) {
+
+            openChapter3Screen();
 
         }
 
@@ -662,7 +974,12 @@ function resetChapter2() {
     Chapter2State.visible =
         false;
 
+
     Chapter2State.finished =
+        false;
+
+
+    Chapter2State.transitioning =
         false;
 
 
