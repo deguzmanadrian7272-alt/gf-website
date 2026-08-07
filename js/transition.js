@@ -122,14 +122,31 @@ function transitionToChapter(
                 */
 
                 if (
-                    typeof setChapter === "function"
-                ) {
+                      typeof setChapter === "function"
+               ) {
 
-                    setChapter(
-                        chapterNumber
-                    );
+                setChapter(
+                             chapterNumber
+                );
 
-                }
+               }
+
+
+/*
+    Open the correct chapter screen.
+*/
+
+if (chapterNumber === 1) {
+
+    if (
+        typeof openChapter1Screen === "function"
+    ) {
+
+        openChapter1Screen();
+
+    }
+
+}
 
 
                 /*
