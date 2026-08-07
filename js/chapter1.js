@@ -1,5 +1,7 @@
 /* ==========================================================
    CHAPTER I — ONCE UPON A TIME
+   Project : Our Story
+   Purpose : Chapter I Storybook
    ========================================================== */
 
 
@@ -11,13 +13,15 @@ const Chapter1State = {
 
     currentPage: 0,
 
-    totalPages: 5,
+    totalPages: 0,
 
     initialized: false,
 
     introFinished: false,
 
-    chapterFinished: false
+    chapterFinished: false,
+
+    isAnimating: false
 
 };
 
@@ -30,6 +34,7 @@ function initChapter1() {
 
     const chapter =
         document.getElementById("chapter1");
+
 
     if (!chapter) {
 
@@ -81,6 +86,17 @@ function initChapter1() {
         pages.length;
 
 
+    /*
+        Prepare Chapter 1.
+    */
+
+    prepareChapter1();
+
+
+    /*
+        Setup buttons.
+    */
+
     setupChapter1Buttons(
         nextButton,
         previousButton,
@@ -88,8 +104,16 @@ function initChapter1() {
     );
 
 
+    /*
+        Create falling petals.
+    */
+
     createChapter1Petals();
 
+
+    /*
+        Show Page 1.
+    */
 
     updateChapter1Page();
 
@@ -106,23 +130,123 @@ function initChapter1() {
 
 
 /* ==========================================================
-   OPEN CHAPTER 1
+   PREPARE CHAPTER 1
+   ========================================================== */
+
+function prepareChapter1() {
+
+    const chapter =
+        document.getElementById(
+            "chapter1"
+        );
+
+
+    if (!chapter) {
+
+        return;
+
+    }
+
+
+    /*
+        Chapter 1 stays hidden until
+        Chapter 0 finishes.
+    */
+
+    chapter.style.display =
+        "none";
+
+
+    /*
+        Prepare all pages.
+
+        Only Page 1 will be visible.
+    */
+
+    const pages =
+        chapter.querySelectorAll(
+            ".chapter1-page"
+        );
+
+
+    pages.forEach(
+        (page, index) => {
+
+            if (index === 0) {
+
+                page.classList.add(
+                    "active"
+                );
+
+                page.style.display =
+                    "block";
+
+                page.style.opacity =
+                    "1";
+
+                page.style.transform =
+                    "none";
+
+            } else {
+
+                page.classList.remove(
+                    "active"
+                );
+
+                page.style.display =
+                    "none";
+
+                page.style.opacity =
+                    "0";
+
+            }
+
+        }
+    );
+
+
+    /*
+        Continue button starts hidden.
+    */
+
+    const continueButton =
+        document.getElementById(
+            "chapter1Continue"
+        );
+
+
+    if (continueButton) {
+
+        continueButton.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* ==========================================================
+   OPEN CHAPTER 1 SCREEN
    ========================================================== */
 
 function openChapter1Screen() {
 
     const chapter =
-        document.getElementById("chapter1");
+        document.getElementById(
+            "chapter1"
+        );
 
 
     const chapter0 =
-        document.getElementById("chapter0");
+        document.getElementById(
+            "chapter0"
+        );
 
 
     if (!chapter) {
 
         console.warn(
-            "Chapter 1 screen does not exist yet."
+            "Chapter 1 screen does not exist."
         );
 
         return;
@@ -151,7 +275,7 @@ function openChapter1Screen() {
 
 
     /*
-        Start the intro.
+        Start Chapter 1 intro.
     */
 
     startChapter1Intro();
@@ -184,20 +308,23 @@ function startChapter1Intro() {
     }
 
 
+    Chapter1State.introFinished =
+        false;
+
+
     /*
-        Make sure the book starts hidden.
+        Make sure book starts hidden.
     */
 
     book.style.opacity =
         "0";
-
 
     book.style.transform =
         "scale(0.96)";
 
 
     /*
-        Intro animation.
+        GSAP animation.
     */
 
     if (
@@ -211,7 +338,6 @@ function startChapter1Intro() {
                 opacity: 0,
 
                 y: 20
-
             },
 
             {
@@ -257,7 +383,7 @@ function startChapter1Intro() {
 
 
 /* ==========================================================
-   REVEAL BOOK
+   REVEAL STORYBOOK
    ========================================================== */
 
 function revealChapter1Book() {
@@ -285,6 +411,10 @@ function revealChapter1Book() {
         true;
 
 
+    /*
+        GSAP version.
+    */
+
     if (
         typeof gsap !== "undefined"
     ) {
@@ -293,28 +423,32 @@ function revealChapter1Book() {
             gsap.timeline();
 
 
-        timeline.to(
-            intro,
-            {
+        if (intro) {
 
-                opacity: 0,
+            timeline.to(
+                intro,
+                {
 
-                duration: 0.8,
+                    opacity: 0,
 
-                ease: "power2.out"
+                    duration: 0.8,
 
-            }
-        );
+                    ease: "power2.out"
+
+                }
+            );
 
 
-        timeline.set(
-            intro,
-            {
+            timeline.set(
+                intro,
+                {
 
-                display: "none"
+                    display: "none"
 
-            }
-        );
+                }
+            );
+
+        }
 
 
         timeline.set(
@@ -451,9 +585,29 @@ function handleChapter1Keyboard(
         );
 
 
+    if (!chapter) {
+
+        return;
+
+    }
+
+
     if (
-        !chapter ||
         chapter.style.display === "none"
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+        Don't navigate while an
+        animation is running.
+    */
+
+    if (
+        Chapter1State.isAnimating
     ) {
 
         return;
@@ -488,6 +642,15 @@ function handleChapter1Keyboard(
 function nextChapter1Page() {
 
     if (
+        Chapter1State.isAnimating
+    ) {
+
+        return;
+
+    }
+
+
+    if (
         Chapter1State.chapterFinished
     ) {
 
@@ -495,6 +658,11 @@ function nextChapter1Page() {
 
     }
 
+
+    /*
+        If we're already on the final page,
+        clicking Next finishes the story.
+    */
 
     if (
         Chapter1State.currentPage >=
@@ -538,6 +706,15 @@ function nextChapter1Page() {
 function previousChapter1Page() {
 
     if (
+        Chapter1State.isAnimating
+    ) {
+
+        return;
+
+    }
+
+
+    if (
         Chapter1State.currentPage <= 0
     ) {
 
@@ -575,15 +752,28 @@ function previousChapter1Page() {
 
 function getCurrentChapter1Page() {
 
+    const chapter =
+        document.getElementById(
+            "chapter1"
+        );
+
+
+    if (!chapter) {
+
+        return null;
+
+    }
+
+
     const pages =
-        document.querySelectorAll(
+        chapter.querySelectorAll(
             ".chapter1-page"
         );
 
 
     return pages[
         Chapter1State.currentPage
-    ];
+    ] || null;
 
 }
 
@@ -594,8 +784,21 @@ function getCurrentChapter1Page() {
 
 function updateChapter1Page() {
 
+    const chapter =
+        document.getElementById(
+            "chapter1"
+        );
+
+
+    if (!chapter) {
+
+        return;
+
+    }
+
+
     const pages =
-        document.querySelectorAll(
+        chapter.querySelectorAll(
             ".chapter1-page"
         );
 
@@ -603,11 +806,37 @@ function updateChapter1Page() {
     pages.forEach(
         (page, index) => {
 
-            page.classList.toggle(
-                "active",
+            if (
                 index ===
                 Chapter1State.currentPage
-            );
+            ) {
+
+                page.classList.add(
+                    "active"
+                );
+
+                page.style.display =
+                    "block";
+
+                page.style.opacity =
+                    "1";
+
+                page.style.transform =
+                    "none";
+
+            } else {
+
+                page.classList.remove(
+                    "active"
+                );
+
+                page.style.display =
+                    "none";
+
+                page.style.opacity =
+                    "0";
+
+            }
 
         }
     );
@@ -642,6 +871,10 @@ function updateChapter1Navigation() {
         );
 
 
+    /*
+        Previous button.
+    */
+
     if (previousButton) {
 
         previousButton.disabled =
@@ -650,18 +883,33 @@ function updateChapter1Navigation() {
     }
 
 
+    /*
+        Next button.
+    */
+
     if (nextButton) {
 
-        nextButton.textContent =
+        if (
             Chapter1State.currentPage ===
             Chapter1State.totalPages - 1
+        ) {
 
-                ? "Finish"
+            nextButton.textContent =
+                "Finish";
 
-                : "Next →";
+        } else {
+
+            nextButton.textContent =
+                "Next →";
+
+        }
 
     }
 
+
+    /*
+        Page indicator.
+    */
 
     if (indicator) {
 
@@ -693,138 +941,51 @@ function animatePageTurn(
 
 
     /*
-        GSAP animation.
+        Prevent another page click
+        while animation is running.
+    */
+
+    Chapter1State.isAnimating =
+        true;
+
+
+    /*
+        No GSAP fallback.
     */
 
     if (
-        typeof gsap !== "undefined"
+        typeof gsap === "undefined"
     ) {
 
-        const timeline =
-            gsap.timeline();
-
-
-        /*
-            Prepare new page.
-        */
-
-        gsap.set(
-            newPage,
-            {
-
-                opacity: 0,
-
-                x:
-                    direction === "next"
-                        ? 35
-                        : -35,
-
-                rotateY:
-                    direction === "next"
-                        ? -8
-                        : 8
-
-            }
+        oldPage.classList.remove(
+            "active"
         );
 
+        oldPage.style.display =
+            "none";
 
-        /*
-            Old page leaves.
-        */
 
-        timeline.to(
-            oldPage,
-            {
-
-                opacity: 0,
-
-                x:
-                    direction === "next"
-                        ? -35
-                        : 35,
-
-                rotateY:
-                    direction === "next"
-                        ? 8
-                        : -8,
-
-                duration: 0.45,
-
-                ease: "power2.inOut"
-
-            }
+        newPage.classList.add(
+            "active"
         );
 
+        newPage.style.display =
+            "block";
 
-        /*
-            Switch active page.
-        */
-
-        timeline.call(
-            () => {
-
-                oldPage.classList.remove(
-                    "active"
-                );
-
-                newPage.classList.add(
-                    "active"
-                );
-
-            }
-        );
+        newPage.style.opacity =
+            "1";
 
 
-        /*
-            New page enters.
-        */
-
-        timeline.to(
-            newPage,
-            {
-
-                opacity: 1,
-
-                x: 0,
-
-                rotateY: 0,
-
-                duration: 0.65,
-
-                ease: "power3.out"
-
-            }
-        );
+        newPage.style.transform =
+            "none";
 
 
-        /*
-            Reset old page.
-        */
-
-        timeline.set(
-            oldPage,
-            {
-
-                x: 0,
-
-                rotateY: 0
-
-            }
-        );
+        Chapter1State.isAnimating =
+            false;
 
 
-        /*
-            Trigger a small text animation.
-        */
-
-        timeline.call(
-            () => {
-
-                animateChapter1Text(
-                    newPage
-                );
-
-            }
+        animateChapter1Text(
+            newPage
         );
 
 
@@ -834,19 +995,114 @@ function animatePageTurn(
 
 
     /*
-        Fallback without GSAP.
+        Make sure new page is visible
+        to GSAP before animation.
     */
 
-    oldPage.classList.remove(
-        "active"
-    );
+    newPage.style.display =
+        "block";
+
 
     newPage.classList.add(
         "active"
     );
 
-    animateChapter1Text(
-        newPage
+
+    /*
+        Prepare new page.
+    */
+
+    gsap.set(
+        newPage,
+        {
+
+            opacity: 0,
+
+            x:
+                direction === "next"
+                    ? 35
+                    : -35,
+
+            rotateY:
+                direction === "next"
+                    ? -8
+                    : 8
+
+        }
+    );
+
+
+    /*
+        Animate old page away.
+    */
+
+    gsap.to(
+        oldPage,
+        {
+
+            opacity: 0,
+
+            x:
+                direction === "next"
+                    ? -35
+                    : 35,
+
+            rotateY:
+                direction === "next"
+                    ? 8
+                    : -8,
+
+            duration: 0.45,
+
+            ease: "power2.inOut",
+
+            onComplete: () => {
+
+                oldPage.classList.remove(
+                    "active"
+                );
+
+
+                oldPage.style.display =
+                    "none";
+
+
+                /*
+                    Animate new page in.
+                */
+
+                gsap.to(
+                    newPage,
+                    {
+
+                        opacity: 1,
+
+                        x: 0,
+
+                        rotateY: 0,
+
+                        duration: 0.65,
+
+                        ease: "power3.out",
+
+                        onComplete: () => {
+
+                            Chapter1State.isAnimating =
+                                false;
+
+
+                            animateChapter1Text(
+                                newPage
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+
+        }
     );
 
 }
@@ -1015,6 +1271,10 @@ function finishChapter1Story() {
     }
 
 
+    /*
+        Fallback.
+    */
+
     if (navigation) {
 
         navigation.style.display =
@@ -1045,9 +1305,10 @@ function finishChapter1() {
 
 
     /*
-        We are not building Chapter II yet.
+        Chapter II isn't built yet.
 
-        For now, we simply prepare the transition.
+        For now, transitionToChapter(2)
+        is prepared for the next chapter.
     */
 
     if (
@@ -1070,7 +1331,7 @@ function finishChapter1() {
 
 
 /* ==========================================================
-   CREATE PETALS
+   CREATE FALLING PETALS
    ========================================================== */
 
 function createChapter1Petals() {
@@ -1089,7 +1350,7 @@ function createChapter1Petals() {
 
 
     /*
-        Avoid creating them twice.
+        Don't create petals twice.
     */
 
     if (
@@ -1103,13 +1364,18 @@ function createChapter1Petals() {
 
 
     const petalSymbols = [
+
         "✿",
+
         "❀",
+
         "🌸"
+
     ];
 
 
-    const petalCount = 14;
+    const petalCount =
+        14;
 
 
     for (
@@ -1175,15 +1441,29 @@ function resetChapter1() {
     Chapter1State.currentPage =
         0;
 
+
     Chapter1State.chapterFinished =
         false;
+
 
     Chapter1State.introFinished =
         false;
 
 
+    Chapter1State.isAnimating =
+        false;
+
+
+    /*
+        Reset page visibility.
+    */
+
     updateChapter1Page();
 
+
+    /*
+        Restore navigation.
+    */
 
     const navigation =
         document.querySelector(
@@ -1205,6 +1485,9 @@ function resetChapter1() {
         navigation.style.opacity =
             "1";
 
+        navigation.style.transform =
+            "none";
+
     }
 
 
@@ -1213,6 +1496,46 @@ function resetChapter1() {
         continueButton.style.display =
             "none";
 
+        continueButton.style.opacity =
+            "0";
+
     }
 
 }
+
+
+/* ==========================================================
+   AUTO INITIALIZATION SAFETY
+   ========================================================== */
+
+/*
+    app.js normally initializes Chapter 1.
+
+    This event is included only as a safety
+    measure if Chapter 1 is loaded separately.
+*/
+
+document.addEventListener(
+    "chapterChange",
+    (event) => {
+
+        if (
+            !event.detail
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            event.detail.chapter === 1 &&
+            !Chapter1State.initialized
+        ) {
+
+            initChapter1();
+
+        }
+
+    }
+);
