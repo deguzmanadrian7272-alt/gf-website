@@ -26,6 +26,17 @@ const Chapter3State = {
 
 function initChapter3() {
 
+    /*
+        Prevent duplicate initialization.
+    */
+
+    if (Chapter3State.initialized) {
+
+        return;
+
+    }
+
+
     const chapter =
         document.getElementById("chapter3");
 
@@ -56,10 +67,17 @@ function initChapter3() {
 
 
     /*
-        Connect button.
+        Connect Continue button.
     */
 
     if (continueButton) {
+
+        /*
+            Remove any previous copy of
+            the listener before adding it.
+
+            This prevents duplicate clicks.
+        */
 
         continueButton.addEventListener(
             "click",
@@ -70,22 +88,21 @@ function initChapter3() {
 
 
     /*
-        Prepare the chapter.
+        Prepare Chapter 3.
     */
 
     prepareChapter3();
 
 
     /*
-        Create additional visual effects.
+        Create visual sparkles.
     */
 
     createChapter3Sparkles();
 
 
     /*
-        Allow the chapter to react
-        when it becomes visible.
+        Listen for chapter changes.
     */
 
     document.addEventListener(
@@ -125,10 +142,7 @@ function prepareChapter3() {
 
 
     /*
-        Chapter 3 begins hidden.
-
-        The transition system or Chapter 2
-        will reveal it when appropriate.
+        Chapter 3 starts hidden.
     */
 
     chapter.style.display =
@@ -136,27 +150,19 @@ function prepareChapter3() {
 
 
     /*
-        Make sure the page starts
-        at the beginning.
+        Reset Chapter 3 scroll position.
+
+        IMPORTANT:
+        The scroll belongs to #chapter3,
+        NOT .chapter3-wrapper.
     */
 
-    const wrapper =
-        chapter.querySelector(
-            ".chapter3-wrapper"
-        );
-
-
-    if (wrapper) {
-
-        wrapper.scrollTop =
-            0;
-
-    }
+    chapter.scrollTop =
+        0;
 
 
     /*
-        Make the continue button
-        ready for interaction.
+        Make Continue button interactive.
     */
 
     const continueButton =
@@ -169,6 +175,9 @@ function prepareChapter3() {
 
         continueButton.style.pointerEvents =
             "auto";
+
+        continueButton.disabled =
+            false;
 
     }
 
@@ -191,13 +200,28 @@ function handleChapter3Change(event) {
     }
 
 
+    /*
+        Support both:
+
+        detail: {
+            chapter: 3
+        }
+
+        and
+
+        detail: {
+            chapter: "3"
+        }
+    */
+
     const chapterNumber =
-        event.detail.chapter;
+        Number(
+            event.detail.chapter
+        );
 
 
     /*
-        Only react when Chapter 3
-        becomes active.
+        Only respond to Chapter 3.
     */
 
     if (
@@ -238,7 +262,7 @@ function openChapter3Screen() {
 
 
     /*
-        Hide other chapter screens.
+        Hide all other chapters.
     */
 
     hideOtherChapters();
@@ -253,7 +277,7 @@ function openChapter3Screen() {
 
 
     /*
-        Mark as started.
+        Mark Chapter 3 as started.
     */
 
     Chapter3State.started =
@@ -261,19 +285,27 @@ function openChapter3Screen() {
 
 
     /*
-        Scroll to the beginning.
+        Reset completion state
+        whenever Chapter 3 opens.
     */
 
-    window.scrollTo(
-        {
-            top: 0,
-            behavior: "instant"
-        }
-    );
+    Chapter3State.finished =
+        false;
 
 
     /*
-        Start the entrance animation.
+        Reset scroll position.
+
+        #chapter3 is the actual
+        scrolling container.
+    */
+
+    chapter.scrollTop =
+        0;
+
+
+    /*
+        Animate the chapter.
     */
 
     animateChapter3Entrance();
@@ -317,7 +349,7 @@ function hideOtherChapters() {
 
 
 /* ==========================================================
-   CHAPTER 3 ENTRANCE
+   CHAPTER 3 ENTRANCE ANIMATION
    ========================================================== */
 
 function animateChapter3Entrance() {
@@ -328,15 +360,9 @@ function animateChapter3Entrance() {
         );
 
 
-    const poemIntro =
-        document.querySelector(
-            "#chapter3 .chapter3-poem-intro"
-        );
-
-
-    const stanzas =
+    const poems =
         document.querySelectorAll(
-            "#chapter3 .chapter3-stanza"
+            "#chapter3 .chapter3-poem"
         );
 
 
@@ -346,35 +372,35 @@ function animateChapter3Entrance() {
         );
 
 
-    const continueSection =
-        document.querySelector(
-            "#chapter3 .chapter3-continue-section"
+    const continueButton =
+        document.getElementById(
+            "chapter3Continue"
         );
 
 
     /*
-        If GSAP exists,
-        create a smooth entrance.
+        GSAP animation.
     */
 
     if (
         typeof gsap !== "undefined"
     ) {
 
-        /*
-            Intro.
-        */
+
+        /* ------------------------------------------
+           INTRO
+           ------------------------------------------ */
 
         if (intro) {
 
             gsap.fromTo(
+
                 intro,
 
                 {
                     opacity: 0,
 
                     y: 35
-
                 },
 
                 {
@@ -382,30 +408,30 @@ function animateChapter3Entrance() {
 
                     y: 0,
 
-                    duration: 1.3,
+                    duration: 1.2,
 
                     ease: "power3.out"
-
                 }
+
             );
 
         }
 
 
-        /*
-            Poem introduction.
-        */
+        /* ------------------------------------------
+           POEMS
+           ------------------------------------------ */
 
-        if (poemIntro) {
+        if (poems.length) {
 
             gsap.fromTo(
-                poemIntro,
+
+                poems,
 
                 {
                     opacity: 0,
 
-                    y: 25
-
+                    y: 40
                 },
 
                 {
@@ -415,30 +441,65 @@ function animateChapter3Entrance() {
 
                     duration: 1,
 
+                    stagger: 0.25,
+
                     delay: 0.35,
 
                     ease: "power3.out"
-
                 }
+
             );
 
         }
 
 
-        /*
-            Stanzas.
-        */
+        /* ------------------------------------------
+           ENDING
+           ------------------------------------------ */
 
-        if (stanzas.length) {
+        if (ending) {
 
             gsap.fromTo(
-                stanzas,
+
+                ending,
 
                 {
                     opacity: 0,
 
                     y: 30
+                },
 
+                {
+                    opacity: 1,
+
+                    y: 0,
+
+                    duration: 1,
+
+                    delay: 0.9,
+
+                    ease: "power3.out"
+                }
+
+            );
+
+        }
+
+
+        /* ------------------------------------------
+           CONTINUE BUTTON
+           ------------------------------------------ */
+
+        if (continueButton) {
+
+            gsap.fromTo(
+
+                continueButton,
+
+                {
+                    opacity: 0,
+
+                    y: 25
                 },
 
                 {
@@ -448,79 +509,11 @@ function animateChapter3Entrance() {
 
                     duration: 0.9,
 
-                    stagger: 0.18,
-
-                    delay: 0.55,
+                    delay: 1.2,
 
                     ease: "power3.out"
-
                 }
-            );
 
-        }
-
-
-        /*
-            Ending.
-        */
-
-        if (ending) {
-
-            gsap.fromTo(
-                ending,
-
-                {
-                    opacity: 0,
-
-                    y: 25
-
-                },
-
-                {
-                    opacity: 1,
-
-                    y: 0,
-
-                    duration: 1,
-
-                    delay: 1.1,
-
-                    ease: "power3.out"
-
-                }
-            );
-
-        }
-
-
-        /*
-            Continue section.
-        */
-
-        if (continueSection) {
-
-            gsap.fromTo(
-                continueSection,
-
-                {
-                    opacity: 0,
-
-                    y: 25
-
-                },
-
-                {
-                    opacity: 1,
-
-                    y: 0,
-
-                    duration: 1,
-
-                    delay: 1.3,
-
-                    ease: "power3.out"
-
-                }
             );
 
         }
@@ -540,24 +533,19 @@ function animateChapter3Entrance() {
         intro.style.opacity =
             "1";
 
-    }
-
-
-    if (poemIntro) {
-
-        poemIntro.style.opacity =
-            "1";
+        intro.style.transform =
+            "translateY(0)";
 
     }
 
 
-    stanzas.forEach(
-        (stanza) => {
+    poems.forEach(
+        (poem) => {
 
-            stanza.style.opacity =
+            poem.style.opacity =
                 "1";
 
-            stanza.style.transform =
+            poem.style.transform =
                 "translateY(0)";
 
         }
@@ -569,13 +557,19 @@ function animateChapter3Entrance() {
         ending.style.opacity =
             "1";
 
+        ending.style.transform =
+            "translateY(0)";
+
     }
 
 
-    if (continueSection) {
+    if (continueButton) {
 
-        continueSection.style.opacity =
+        continueButton.style.opacity =
             "1";
+
+        continueButton.style.transform =
+            "translateY(0)";
 
     }
 
@@ -583,7 +577,7 @@ function animateChapter3Entrance() {
 
 
 /* ==========================================================
-   CREATE SPARKLES
+   CREATE CHAPTER 3 SPARKLES
    ========================================================== */
 
 function createChapter3Sparkles() {
@@ -602,7 +596,7 @@ function createChapter3Sparkles() {
 
 
     /*
-        Prevent duplicates.
+        Prevent duplicate sparkles.
     */
 
     if (
@@ -625,6 +619,7 @@ function createChapter3Sparkles() {
         i++
     ) {
 
+
         const sparkle =
             document.createElement(
                 "span"
@@ -636,7 +631,9 @@ function createChapter3Sparkles() {
 
 
         sparkle.textContent =
-            "✦";
+            Math.random() > 0.5
+                ? "✦"
+                : "✧";
 
 
         sparkle.style.position =
@@ -663,6 +660,10 @@ function createChapter3Sparkles() {
             "none";
 
 
+        sparkle.style.userSelect =
+            "none";
+
+
         sparkle.style.animation =
             "chapter3SparkleFloat " +
             `${4 + Math.random() * 6}s ` +
@@ -685,7 +686,8 @@ function createChapter3Sparkles() {
 
 
     /*
-        Add animation dynamically.
+        Create sparkle animation
+        only once.
     */
 
     if (
@@ -755,10 +757,14 @@ function createChapter3Sparkles() {
 
 
 /* ==========================================================
-   CONTINUE BUTTON
+   CONTINUE TO CHAPTER 4
    ========================================================== */
 
 function handleChapter3Continue() {
+
+    /*
+        Prevent multiple clicks.
+    */
 
     if (
         Chapter3State.finished
@@ -769,20 +775,31 @@ function handleChapter3Continue() {
     }
 
 
-    Chapter3State.finished =
-        true;
-
-
     const button =
         document.getElementById(
             "chapter3Continue"
         );
 
 
+    /*
+        Mark Chapter 3 as complete.
+    */
+
+    Chapter3State.finished =
+        true;
+
+
+    /*
+        Temporarily disable button.
+    */
+
     if (button) {
 
         button.style.pointerEvents =
             "none";
+
+        button.disabled =
+            true;
 
     }
 
@@ -792,40 +809,154 @@ function handleChapter3Continue() {
     );
 
 
-    /*
-        If our transition system exists,
-        transition to Chapter IV.
-    */
+    /* ======================================================
+       OPTION 1 — USE EXISTING TRANSITION SYSTEM
+       ====================================================== */
 
     if (
         typeof transitionToChapter ===
         "function"
     ) {
 
-        transitionToChapter(4);
+        console.log(
+            "➡️ Transitioning to Chapter 4..."
+        );
+
+
+        /*
+            Give the transition system
+            Chapter 4.
+
+            Small timeout allows the
+            button interaction to finish
+            cleanly before transition.
+        */
+
+        setTimeout(
+            () => {
+
+                transitionToChapter(4);
+
+            },
+
+            50
+
+        );
+
 
         return;
 
     }
 
 
-    /*
-        Fallback.
+    /* ======================================================
+       OPTION 2 — DIRECT CHAPTER 4 FALLBACK
+       ====================================================== */
 
-        Chapter IV isn't built yet,
-        so don't leave the user with
-        a broken screen.
-    */
+    const chapter4 =
+        document.getElementById(
+            "chapter4"
+        );
 
-    console.log(
+
+    if (chapter4) {
+
+        console.log(
+            "➡️ Transition system unavailable."
+        );
+
+        console.log(
+            "➡️ Opening Chapter 4 directly."
+        );
+
+
+        /*
+            Hide all chapters.
+        */
+
+        document
+            .querySelectorAll(
+                "main[id^='chapter']"
+            )
+            .forEach(
+                (chapter) => {
+
+                    chapter.style.display =
+                        "none";
+
+                }
+            );
+
+
+        /*
+            Show Chapter 4.
+        */
+
+        chapter4.style.display =
+            "block";
+
+
+        /*
+            Reset Chapter 4 scroll.
+        */
+
+        chapter4.scrollTop =
+            0;
+
+
+        /*
+            Dispatch chapterChange event
+            so Chapter 4's JS can react.
+        */
+
+        document.dispatchEvent(
+
+            new CustomEvent(
+                "chapterChange",
+                {
+                    detail: {
+                        chapter: 4
+                    }
+                }
+            )
+
+        );
+
+
+        /*
+            Reset Chapter 3 state.
+        */
+
+        Chapter3State.finished =
+            false;
+
+
+        return;
+
+    }
+
+
+    /* ======================================================
+       CHAPTER 4 DOES NOT EXIST
+       ====================================================== */
+
+    console.warn(
         "Chapter IV is not available yet."
     );
 
+
+    /*
+        Restore button if Chapter 4
+        cannot be found.
+    */
 
     if (button) {
 
         button.style.pointerEvents =
             "auto";
+
+        button.disabled =
+            false;
 
     }
 
@@ -864,19 +995,15 @@ function resetChapter3() {
 
 
     /*
-        Reset scroll position.
+        Reset scroll.
     */
 
-    window.scrollTo(
-        {
-            top: 0,
-            behavior: "instant"
-        }
-    );
+    chapter.scrollTop =
+        0;
 
 
     /*
-        Reset button.
+        Reset Continue button.
     */
 
     const button =
@@ -890,11 +1017,14 @@ function resetChapter3() {
         button.style.pointerEvents =
             "auto";
 
+        button.disabled =
+            false;
+
     }
 
 
     /*
-        Reset chapter visibility.
+        Hide Chapter 3.
     */
 
     chapter.style.display =
@@ -924,6 +1054,11 @@ document.addEventListener(
         }
 
 
+        /*
+            Don't respond if Chapter 3
+            isn't visible.
+        */
+
         if (
             chapter.style.display ===
             "none"
@@ -935,16 +1070,22 @@ document.addEventListener(
 
 
         /*
-            Press Enter when the
-            Continue button is focused.
+            Enter key when Continue
+            button is focused.
         */
 
         if (
+
             event.key === "Enter" &&
+
             document.activeElement &&
+
             document.activeElement.id ===
                 "chapter3Continue"
+
         ) {
+
+            event.preventDefault();
 
             handleChapter3Continue();
 
@@ -952,3 +1093,32 @@ document.addEventListener(
 
     }
 );
+
+
+/* ==========================================================
+   DOM READY
+   ========================================================== */
+
+/*
+    This is important.
+
+    It makes sure Chapter 3 actually
+    initializes even if app.js does
+    not call initChapter3().
+*/
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initChapter3
+    );
+
+} else {
+
+    initChapter3();
+
+}
