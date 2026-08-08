@@ -57,6 +57,16 @@ function initChapter4() {
 
     if (continueButton) {
 
+        /*
+            Prevent duplicate listeners.
+        */
+
+        continueButton.removeEventListener(
+            "click",
+            finishChapter4
+        );
+
+
         continueButton.addEventListener(
             "click",
             finishChapter4
@@ -158,7 +168,8 @@ function prepareChapter4() {
         letters.length;
 
 
-    Chapter4State.currentLetter = 1;
+    Chapter4State.currentLetter =
+        1;
 
 
     /*
@@ -630,8 +641,6 @@ function showChapter4Letter(
     /*
         Scroll the DOCUMENT,
         not Chapter 4 itself.
-
-        This prevents nested scrolling.
     */
 
     const letterNav =
@@ -707,25 +716,30 @@ function updateChapter4Navigation() {
 
     if (indicator) {
 
-        /*
-            Your HTML uses:
-            I / III
-
-            So we use Roman numerals.
-        */
-
         const romanNumerals = [
+
             "",
+
             "I",
+
             "II",
+
             "III",
+
             "IV",
+
             "V",
+
             "VI",
+
             "VII",
+
             "VIII",
+
             "IX",
+
             "X"
+
         ];
 
 
@@ -829,7 +843,6 @@ function openChapter4Screen() {
 
 
     /*
-        VERY IMPORTANT:
         Chapter 4 must NOT become
         its own scrolling container.
     */
@@ -848,9 +861,6 @@ function openChapter4Screen() {
 
     /*
         Restore normal browser scrolling.
-
-        This is especially important if
-        earlier chapters use body overflow hidden.
     */
 
     document.documentElement.style.height =
@@ -1369,9 +1379,53 @@ function setupChapter4Letter() {
 
 /* ==========================================================
    FINISH CHAPTER 4
+   CONTINUE TO CHAPTER 5
 ========================================================== */
 
 function finishChapter4() {
+
+    console.log(
+        "💌 Chapter 4 Continue button clicked."
+    );
+
+
+    /*
+        Find Chapter 5.
+    */
+
+    const chapter5 =
+        document.getElementById(
+            "chapter5"
+        );
+
+
+    /*
+        IMPORTANT:
+
+        If Chapter 5 doesn't exist in index.html,
+        we cannot continue.
+    */
+
+    if (!chapter5) {
+
+        console.error(
+            "❌ Chapter 5 was not found in index.html."
+        );
+
+
+        alert(
+            "Chapter 5 could not be found. Please make sure <main id=\"chapter5\"> exists in index.html."
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+        Prevent multiple clicks.
+    */
 
     if (
         Chapter4State.finished
@@ -1382,33 +1436,144 @@ function finishChapter4() {
     }
 
 
+    Chapter4State.finished =
+        true;
+
+
+    /*
+        Disable button while transitioning.
+    */
+
+    const button =
+        document.getElementById(
+            "chapter4Continue"
+        );
+
+
+    if (button) {
+
+        button.disabled =
+            true;
+
+        button.style.pointerEvents =
+            "none";
+
+    }
+
+
+    console.log(
+        "📖 Opening Chapter 5..."
+    );
+
+
+    /*
+        ------------------------------------------------------
+        TRY THE EXISTING TRANSITION SYSTEM FIRST
+        ------------------------------------------------------
+    */
+
+    if (
+        typeof transitionToChapter ===
+        "function"
+    ) {
+
+        try {
+
+            transitionToChapter(5);
+
+
+            /*
+                Give transition.js a moment
+                to handle Chapter 5.
+
+                If Chapter 5 does not actually
+                become visible, use our direct
+                navigation fallback.
+            */
+
+            setTimeout(
+                () => {
+
+                    const chapter5Visible =
+                        chapter5.style.display !==
+                            "none" &&
+                        getComputedStyle(
+                            chapter5
+                        ).display !==
+                            "none";
+
+
+                    if (
+                        !chapter5Visible
+                    ) {
+
+                        console.warn(
+                            "⚠️ transitionToChapter(5) did not open Chapter 5. Using direct navigation."
+                        );
+
+
+                        openChapter5Directly();
+
+                    }
+
+                },
+
+                700
+            );
+
+
+            return;
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "❌ transitionToChapter(5) failed:",
+                error
+            );
+
+            /*
+                Continue to direct navigation.
+            */
+
+        }
+
+    }
+
+
+    /*
+        ------------------------------------------------------
+        DIRECT NAVIGATION FALLBACK
+        ------------------------------------------------------
+    */
+
+    openChapter5Directly();
+
+}
+
+
+/* ==========================================================
+   DIRECTLY OPEN CHAPTER 5
+========================================================== */
+
+function openChapter5Directly() {
+
     const chapter5 =
         document.getElementById(
             "chapter5"
         );
 
 
-    /*
-        If Chapter 5 exists,
-        continue to it.
-    */
+    if (!chapter5) {
 
-    if (
-        chapter5 &&
-        typeof transitionToChapter ===
-            "function"
-    ) {
-
-        Chapter4State.finished =
-            true;
-
-
-        console.log(
-            "💌 Chapter 4 complete."
+        console.error(
+            "❌ Cannot open Chapter 5 because #chapter5 does not exist."
         );
 
 
-        transitionToChapter(5);
+        resetChapter4ContinueButton();
+
 
         return;
 
@@ -1416,16 +1581,225 @@ function finishChapter4() {
 
 
     /*
-        Chapter 5 doesn't exist yet.
+        Hide every chapter.
     */
 
-    console.log(
-        "💌 Chapter 4 complete. Chapter 5 is not ready yet."
+    const chapters =
+        document.querySelectorAll(
+            "main[id^='chapter']"
+        );
+
+
+    chapters.forEach(
+        (chapter) => {
+
+            if (
+                chapter !== chapter5
+            ) {
+
+                chapter.style.display =
+                    "none";
+
+            }
+
+        }
     );
+
+
+    /*
+        Show Chapter 5.
+    */
+
+    chapter5.style.display =
+        "block";
+
+
+    /*
+        Make sure Chapter 5
+        uses the browser document
+        for scrolling.
+    */
+
+    chapter5.style.height =
+        "auto";
+
+
+    chapter5.style.minHeight =
+        "100vh";
+
+
+    chapter5.style.overflowX =
+        "hidden";
+
+
+    chapter5.style.overflowY =
+        "visible";
+
+
+    /*
+        Restore normal browser scrolling.
+    */
+
+    document.documentElement.style.height =
+        "auto";
+
+
+    document.documentElement.style.overflowY =
+        "auto";
+
+
+    document.body.style.height =
+        "auto";
+
+
+    document.body.style.overflowY =
+        "auto";
+
+
+    document.body.style.overflowX =
+        "hidden";
+
+
+    /*
+        Reset page position.
+    */
+
+    if (
+        typeof window.scrollTo ===
+        "function"
+    ) {
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "instant"
+
+        });
+
+    }
+
+
+    /*
+        Fire chapterChange.
+
+        This is important because
+        chapter5.js can listen for:
+
+        chapter === 5
+    */
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+            "chapterChange",
+
+            {
+
+                detail: {
+
+                    chapter: 5
+
+                }
+
+            }
+
+        )
+
+    );
+
+
+    /*
+        If Chapter 5 has its own
+        opening function, use it.
+    */
+
+    if (
+        typeof openChapter5Screen ===
+        "function"
+    ) {
+
+        try {
+
+            openChapter5Screen();
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Chapter 5 opening function encountered an error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    console.log(
+        "✨ Chapter 5 opened successfully."
+    );
+
+}
+
+
+/* ==========================================================
+   RESET CONTINUE BUTTON
+========================================================== */
+
+function resetChapter4ContinueButton() {
+
+    Chapter4State.finished =
+        false;
+
+
+    const button =
+        document.getElementById(
+            "chapter4Continue"
+        );
+
+
+    if (button) {
+
+        button.disabled =
+            false;
+
+
+        button.style.pointerEvents =
+            "auto";
+
+
+        button.style.opacity =
+            "1";
+
+    }
+
+}
+
+
+/* ==========================================================
+   RESET CHAPTER 4
+========================================================== */
+
+function resetChapter4() {
+
+    Chapter4State.visible =
+        false;
 
 
     Chapter4State.finished =
         false;
+
+
+    Chapter4State.currentLetter =
+        1;
+
+
+    resetChapter4ContinueButton();
+
+
+    prepareChapter4();
 
 }
 
@@ -1449,7 +1823,9 @@ document.addEventListener(
 
 
         const chapterNumber =
-            event.detail.chapter;
+            Number(
+                event.detail.chapter
+            );
 
 
         if (
@@ -1462,29 +1838,6 @@ document.addEventListener(
 
     }
 );
-
-
-/* ==========================================================
-   RESET CHAPTER 4
-========================================================== */
-
-function resetChapter4() {
-
-    Chapter4State.visible =
-        false;
-
-
-    Chapter4State.finished =
-        false;
-
-
-    Chapter4State.currentLetter =
-        1;
-
-
-    prepareChapter4();
-
-}
 
 
 /* ==========================================================
@@ -1554,6 +1907,7 @@ document.addEventListener(
 
             event.preventDefault();
 
+
             changeChapter4Letter(
                 -1
             );
@@ -1571,6 +1925,7 @@ document.addEventListener(
         ) {
 
             event.preventDefault();
+
 
             changeChapter4Letter(
                 1
