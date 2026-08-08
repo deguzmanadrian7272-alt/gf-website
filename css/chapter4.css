@@ -1,83 +1,69 @@
 /* ==========================================================
    CHAPTER IV — LETTERS
    Project : Our Story
-   Purpose : Romantic handwritten letters
-========================================================== */
+   Purpose : Romantic Letter Chapter
+   ========================================================== */
 
 
 /* ==========================================================
    CHAPTER 4 BASE
-========================================================== */
+   ========================================================== */
 
 #chapter4 {
 
     position: relative;
 
     width: 100%;
+
     min-height: 100vh;
 
-    /*
-        IMPORTANT:
-        Chapter 4 contains multiple long letters,
-        so the chapter itself must be scrollable.
-    */
+    height: 100vh;
 
     overflow-x: hidden;
-    overflow-y: auto;
 
-    display: none;
+    overflow-y: auto;
 
     box-sizing: border-box;
 
+    display: none;
+
+    scroll-behavior: smooth;
+
     background:
         radial-gradient(
-            circle at 50% 5%,
-            rgba(
-                255,
-                190,
-                215,
-                0.14
-            ),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 10% 45%,
-            rgba(
-                180,
-                125,
-                205,
-                0.10
-            ),
+            circle at 50% 15%,
+            rgba(255, 190, 145, 0.16),
             transparent 30%
         ),
+
+        radial-gradient(
+            circle at 10% 55%,
+            rgba(220, 145, 155, 0.12),
+            transparent 32%
+        ),
+
         radial-gradient(
             circle at 90% 75%,
-            rgba(
-                255,
-                160,
-                205,
-                0.08
-            ),
+            rgba(190, 120, 145, 0.10),
             transparent 30%
         ),
+
         linear-gradient(
             180deg,
-            #130c17 0%,
-            #1c101b 35%,
-            #241321 65%,
-            #100910 100%
+            #1a0e13 0%,
+            #241219 38%,
+            #2d171d 68%,
+            #12090d 100%
         );
 
     color: #fff;
-
-    scroll-behavior: smooth;
 
 }
 
 
 /* ==========================================================
    BACKGROUND
-========================================================== */
+   ========================================================== */
 
 .chapter4-background {
 
@@ -86,6 +72,7 @@
     inset: 0;
 
     width: 100%;
+
     min-height: 100%;
 
     overflow: hidden;
@@ -99,7 +86,7 @@
 
 /* ==========================================================
    GLOWING ORBS
-========================================================== */
+   ========================================================== */
 
 .chapter4-glow {
 
@@ -107,9 +94,9 @@
 
     border-radius: 50%;
 
-    filter: blur(85px);
+    filter: blur(90px);
 
-    opacity: 0.40;
+    opacity: 0.45;
 
     animation:
         chapter4GlowFloat
@@ -123,18 +110,20 @@
 
 .chapter4-glow-1 {
 
-    width: 380px;
-    height: 380px;
+    width: 420px;
+
+    height: 420px;
 
     top: 5%;
+
     left: -150px;
 
     background:
         rgba(
             255,
-            145,
-            195,
-            0.28
+            170,
+            150,
+            0.25
         );
 
 }
@@ -142,21 +131,24 @@
 
 .chapter4-glow-2 {
 
-    width: 420px;
-    height: 420px;
+    width: 400px;
 
-    right: -160px;
-    top: 55%;
+    height: 400px;
+
+    right: -140px;
+
+    top: 50%;
 
     background:
         rgba(
+            210,
+            130,
             155,
-            105,
-            205,
-            0.25
+            0.22
         );
 
-    animation-delay: -4s;
+    animation-delay:
+        -4s;
 
 }
 
@@ -180,10 +172,10 @@
         transform:
             translate3d(
                 35px,
-                -30px,
+                -25px,
                 0
             )
-            scale(1.12);
+            scale(1.1);
 
     }
 
@@ -191,10 +183,11 @@
 
 
 /* ==========================================================
-   FLOATING STARS
-========================================================== */
+   FLOATING DECORATIONS
+   ========================================================== */
 
-.chapter4-star {
+.chapter4-star,
+.chapter4-heart {
 
     position: absolute;
 
@@ -202,71 +195,131 @@
         "Cormorant Garamond",
         serif;
 
-    color:
-        rgba(
-            255,
-            210,
-            230,
-            0.55
-        );
-
-    text-shadow:
-        0 0 15px
-        rgba(
-            255,
-            180,
-            220,
-            0.30
-        );
-
-    animation:
-        chapter4StarFloat
-        7s
-        ease-in-out
-        infinite;
+    pointer-events: none;
 
 }
 
 
+.chapter4-star {
+
+    color:
+        rgba(
+            255,
+            220,
+            195,
+            0.55
+        );
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            255,
+            200,
+            180,
+            0.35
+        );
+
+    animation:
+        chapter4StarFloat
+        6s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+.chapter4-heart {
+
+    color:
+        rgba(
+            255,
+            190,
+            185,
+            0.45
+        );
+
+    text-shadow:
+        0 0 18px
+        rgba(
+            255,
+            160,
+            165,
+            0.3
+        );
+
+    animation:
+        chapter4HeartFloat
+        9s
+        ease-in-out
+        infinite
+        alternate;
+
+}
+
+
+/* ==========================================================
+   STAR POSITIONS
+   ========================================================== */
+
 .chapter4-star-1 {
 
-    top: 15%;
-    left: 10%;
+    left: 8%;
 
-    font-size: 1.4rem;
+    top: 15%;
+
+    font-size: 1.5rem;
 
 }
 
 
 .chapter4-star-2 {
 
-    top: 32%;
-    right: 12%;
+    right: 10%;
 
-    font-size: 1rem;
+    top: 28%;
 
-    animation-delay: -2s;
+    font-size: 1.1rem;
+
+    animation-delay:
+        -2s;
 
 }
 
 
 .chapter4-star-3 {
 
-    bottom: 22%;
-    left: 17%;
+    left: 13%;
 
-    font-size: 1.2rem;
+    bottom: 20%;
 
-    animation-delay: -4s;
+    font-size: 1rem;
+
+    animation-delay:
+        -4s;
+
+}
+
+
+.chapter4-star-4 {
+
+    right: 14%;
+
+    bottom: 15%;
+
+    font-size: 1.7rem;
+
+    animation-delay:
+        -1s;
 
 }
 
 
 @keyframes chapter4StarFloat {
 
-    0% {
+    from {
 
-        opacity: 0.15;
+        opacity: 0.25;
 
         transform:
             translateY(10px)
@@ -274,7 +327,7 @@
 
     }
 
-    50% {
+    to {
 
         opacity: 0.75;
 
@@ -284,105 +337,71 @@
 
     }
 
-    100% {
-
-        opacity: 0.15;
-
-        transform:
-            translateY(10px)
-            rotate(0deg);
-
-    }
-
 }
 
 
 /* ==========================================================
-   FLOATING HEARTS
-========================================================== */
-
-.chapter4-heart {
-
-    position: absolute;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    color:
-        rgba(
-            255,
-            180,
-            215,
-            0.45
-        );
-
-    font-size: 1.5rem;
-
-    animation:
-        chapter4HeartFloat
-        8s
-        ease-in-out
-        infinite;
-
-}
-
+   HEART POSITIONS
+   ========================================================== */
 
 .chapter4-heart-1 {
 
-    top: 22%;
-    right: 7%;
+    left: 6%;
+
+    top: 40%;
+
+    font-size: 1.4rem;
 
 }
 
 
 .chapter4-heart-2 {
 
-    bottom: 18%;
-    left: 8%;
+    right: 7%;
 
-    font-size: 1.2rem;
+    top: 58%;
 
-    animation-delay: -3s;
+    font-size: 1.8rem;
+
+    animation-delay:
+        -3s;
+
+}
+
+
+.chapter4-heart-3 {
+
+    left: 17%;
+
+    bottom: 8%;
+
+    font-size: 1.1rem;
+
+    animation-delay:
+        -6s;
 
 }
 
 
 @keyframes chapter4HeartFloat {
 
-    0% {
+    from {
 
-        opacity: 0;
+        opacity: 0.15;
 
         transform:
-            translateY(25px)
+            translateY(15px)
             rotate(-8deg);
 
     }
 
-    30% {
-
-        opacity: 0.45;
-
-    }
-
-    60% {
+    to {
 
         opacity: 0.65;
 
         transform:
-            translateY(-15px)
+            translateY(-20px)
             rotate(8deg);
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translateY(-50px)
-            rotate(-5deg);
 
     }
 
@@ -391,7 +410,7 @@
 
 /* ==========================================================
    MAIN WRAPPER
-========================================================== */
+   ========================================================== */
 
 .chapter4-wrapper {
 
@@ -401,7 +420,7 @@
 
     width:
         min(
-            950px,
+            900px,
             calc(100% - 40px)
         );
 
@@ -409,9 +428,9 @@
         0 auto;
 
     padding:
-        110px
+        100px
         0
-        160px;
+        150px;
 
     box-sizing: border-box;
 
@@ -420,13 +439,13 @@
 
 /* ==========================================================
    INTRO
-========================================================== */
+   ========================================================== */
 
 .chapter4-intro {
 
     text-align: center;
 
-    margin-bottom: 65px;
+    margin-bottom: 75px;
 
 }
 
@@ -435,7 +454,7 @@
 
     display: inline-block;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
     padding:
         7px
@@ -445,9 +464,9 @@
         1px solid
         rgba(
             255,
-            200,
-            225,
-            0.25
+            215,
+            190,
+            0.3
         );
 
     border-radius: 50px;
@@ -457,17 +476,18 @@
             255,
             255,
             255,
-            0.035
+            0.045
         );
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size: 0.7rem;
+    font-size:
+        0.7rem;
 
     letter-spacing:
-        0.32em;
+        0.3em;
 
     text-transform:
         uppercase;
@@ -475,9 +495,9 @@
     color:
         rgba(
             255,
-            215,
-            232,
-            0.78
+            220,
+            205,
+            0.85
         );
 
     backdrop-filter:
@@ -496,7 +516,7 @@
 
     font-size:
         clamp(
-            3.8rem,
+            3.5rem,
             9vw,
             6.5rem
         );
@@ -505,23 +525,23 @@
 
     line-height: 0.95;
 
-    color: #fff;
+    color: #fff7f2;
 
     text-shadow:
-        0 0 35px
+        0 0 30px
         rgba(
             255,
-            175,
-            215,
-            0.20
+            190,
+            165,
+            0.18
         );
 
 }
 
 
-.chapter4-subtitle {
+.chapter4-intro p {
 
-    max-width: 550px;
+    max-width: 580px;
 
     margin:
         28px
@@ -532,42 +552,19 @@
         "Cormorant Garamond",
         serif;
 
-    font-size: 1.4rem;
+    font-size:
+        1.35rem;
 
     font-style: italic;
 
-    line-height: 1.7;
+    line-height: 1.75;
 
     color:
         rgba(
             255,
             230,
-            240,
-            0.72
-        );
-
-}
-
-
-.chapter4-intro-divider {
-
-    margin-top: 30px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.2rem;
-
-    letter-spacing:
-        0.35em;
-
-    color:
-        rgba(
-            255,
-            190,
             220,
-            0.65
+            0.76
         );
 
 }
@@ -575,172 +572,122 @@
 
 /* ==========================================================
    LETTER NAVIGATION
-========================================================== */
+   ========================================================== */
 
-.chapter4-letter-nav {
+.chapter4-letter-navigation {
 
     display: flex;
 
+    align-items: center;
+
     justify-content: center;
 
-    align-items: stretch;
+    gap: 20px;
 
-    gap: 12px;
-
-    margin:
-        0
-        auto
-        45px;
-
-    width: min(
-        760px,
-        100%
-    );
+    margin-bottom: 45px;
 
 }
 
 
-.chapter4-letter-tab {
-
-    flex: 1;
-
-    min-height: 65px;
+.chapter4-nav-btn {
 
     padding:
         10px
-        15px;
+        20px;
 
     border:
         1px solid
         rgba(
             255,
-            210,
-            230,
-            0.14
+            215,
+            195,
+            0.3
         );
 
-    border-radius: 10px;
+    border-radius: 30px;
 
     background:
         rgba(
             255,
             255,
             255,
-            0.025
-        );
-
-    color:
-        rgba(
-            255,
-            230,
-            240,
-            0.60
-        );
-
-    cursor: pointer;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    transition:
-        transform 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease,
-        color 0.35s ease,
-        box-shadow 0.35s ease;
-
-}
-
-
-.chapter4-letter-tab:hover {
-
-    transform:
-        translateY(-3px);
-
-    border-color:
-        rgba(
-            255,
-            195,
-            220,
-            0.30
+            0.045
         );
 
     color:
         rgba(
             255,
             235,
-            245,
-            0.85
+            225,
+            0.9
         );
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.78rem;
+
+    cursor: pointer;
+
+    transition:
+        0.3s ease;
 
 }
 
 
-.chapter4-letter-tab.active {
+.chapter4-nav-btn:hover {
 
     background:
         rgba(
             255,
-            190,
-            220,
-            0.08
+            200,
+            180,
+            0.12
         );
 
     border-color:
         rgba(
             255,
+            215,
             195,
-            220,
-            0.40
+            0.6
         );
 
-    color: #fff;
-
-    box-shadow:
-        0 10px 35px
-        rgba(
-            255,
-            160,
-            210,
-            0.08
-        );
+    transform:
+        translateY(-2px);
 
 }
 
 
-.chapter4-letter-tab-number {
+.chapter4-letter-indicator {
 
-    display: block;
+    min-width: 70px;
 
-    margin-bottom: 3px;
+    text-align: center;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size: 1rem;
+    font-size:
+        1.1rem;
 
-    font-style: italic;
-
-}
-
-
-.chapter4-letter-tab-title {
-
-    display: block;
-
-    font-size: 0.72rem;
-
-    letter-spacing:
-        0.04em;
+    color:
+        rgba(
+            255,
+            220,
+            205,
+            0.75
+        );
 
 }
 
 
 /* ==========================================================
-   LETTER AREA
-========================================================== */
+   LETTER CONTAINER
+   ========================================================== */
 
 .chapter4-letters {
 
@@ -753,7 +700,7 @@
 
 /* ==========================================================
    LETTER
-========================================================== */
+   ========================================================== */
 
 .chapter4-letter {
 
@@ -768,43 +715,12 @@
 
     display: block;
 
-    animation:
-        chapter4LetterOpen
-        0.8s
-        ease
-        both;
-
-}
-
-
-@keyframes chapter4LetterOpen {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(20px)
-            scale(0.985);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-    }
-
 }
 
 
 /* ==========================================================
-   LETTER PAPER
-========================================================== */
+   OLD LOVE LETTER PAPER
+   ========================================================== */
 
 .chapter4-letter-paper {
 
@@ -812,109 +728,80 @@
 
     width:
         min(
-            760px,
+            720px,
             100%
         );
+
+    min-height: 620px;
 
     margin:
         0 auto;
 
     padding:
-        65px
         75px
-        75px;
+        80px;
 
     box-sizing: border-box;
 
     /*
-        Warm paper appearance.
+        IMPORTANT:
+
+        Brighter paper so the text
+        is actually readable.
     */
 
     background:
         linear-gradient(
             135deg,
-            rgba(
-                255,
-                247,
-                239,
-                0.98
-            ),
-            rgba(
-                249,
-                231,
-                226,
-                0.98
-            )
+            #fffaf1 0%,
+            #f8ead7 50%,
+            #f2dfc9 100%
         );
-
-    color:
-        #3a2630;
-
-    border-radius:
-        3px;
 
     border:
         1px solid
         rgba(
-            255,
-            255,
-            255,
-            0.30
+            105,
+            65,
+            45,
+            0.18
         );
 
-    box-shadow:
-        0 35px 90px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        ),
-        0 0 60px
-        rgba(
-            255,
-            175,
-            215,
-            0.06
-        );
+    border-radius:
+        4px;
 
     /*
-        Very subtle paper texture.
+        Stronger paper separation
+        from the dark background.
     */
 
-    background-image:
-        linear-gradient(
-            rgba(
-                255,
-                255,
-                255,
-                0.12
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                0.12
-            )
+    box-shadow:
+
+        0 30px 90px
+        rgba(
+            0,
+            0,
+            0,
+            0.45
         ),
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 31px,
-            rgba(
-                150,
-                100,
-                110,
-                0.055
-            ) 32px
+
+        0 0 50px
+        rgba(
+            255,
+            190,
+            150,
+            0.08
         );
+
+    color:
+        #49362e;
 
 }
 
 
 /* ==========================================================
-   PAPER SIDE ACCENT
-========================================================== */
+   PAPER INNER BORDER
+   ========================================================== */
 
 .chapter4-letter-paper::before {
 
@@ -922,138 +809,45 @@
 
     position: absolute;
 
-    top: 0;
-    bottom: 0;
+    inset: 18px;
 
-    left: 22px;
-
-    width: 1px;
-
-    background:
-        rgba(
-            190,
-            115,
-            130,
-            0.14
-        );
-
-}
-
-
-/* ==========================================================
-   PAPER CORNERS
-========================================================== */
-
-.chapter4-paper-corner {
-
-    position: absolute;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.4rem;
-
-    color:
-        rgba(
-            170,
-            90,
-            120,
-            0.45
-        );
-
-}
-
-
-.chapter4-paper-corner-top {
-
-    top: 20px;
-
-    right: 25px;
-
-}
-
-
-.chapter4-paper-corner-bottom {
-
-    bottom: 20px;
-
-    left: 25px;
-
-}
-
-
-/* ==========================================================
-   LETTER HEADER
-========================================================== */
-
-.chapter4-letter-header {
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    margin-bottom: 40px;
-
-    padding-bottom: 15px;
-
-    border-bottom:
+    border:
         1px solid
         rgba(
             120,
-            70,
-            85,
+            75,
+            50,
             0.16
         );
 
-}
-
-
-.chapter4-letter-date {
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 0.68rem;
-
-    letter-spacing:
-        0.18em;
-
-    text-transform:
-        uppercase;
-
-    color:
-        rgba(
-            90,
-            55,
-            65,
-            0.60
-        );
+    pointer-events: none;
 
 }
 
 
-.chapter4-letter-number {
+.chapter4-letter-paper::after {
+
+    content: "♡";
+
+    position: absolute;
+
+    top: 24px;
+
+    right: 30px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size: 1.2rem;
-
-    font-style: italic;
+    font-size:
+        1.6rem;
 
     color:
         rgba(
             150,
-            80,
-            110,
-            0.65
+            75,
+            75,
+            0.38
         );
 
 }
@@ -1061,24 +855,89 @@
 
 /* ==========================================================
    LETTER CONTENT
-========================================================== */
+   ========================================================== */
 
 .chapter4-letter-content {
 
-    max-width: 620px;
+    position: relative;
 
-    margin:
-        0 auto;
+    z-index: 2;
 
 }
 
 
-.chapter4-letter-content p {
+/* ==========================================================
+   LETTER DATE
+   ========================================================== */
+
+.chapter4-letter-date {
+
+    margin-bottom:
+        38px;
+
+    text-align:
+        right;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.7rem;
+
+    letter-spacing:
+        0.08em;
+
+    color:
+        rgba(
+            75,
+            50,
+            40,
+            0.58
+        );
+
+}
+
+
+/* ==========================================================
+   LETTER GREETING
+   ========================================================== */
+
+.chapter4-letter-content h3 {
 
     margin:
         0
         0
-        25px;
+        35px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            2.8rem
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        1.2;
+
+    color:
+        #3b2823;
+
+}
+
+
+/* ==========================================================
+   LETTER BODY
+   ========================================================== */
+
+.chapter4-letter-text {
 
     font-family:
         "Cormorant Garamond",
@@ -1087,119 +946,63 @@
     font-size:
         clamp(
             1.25rem,
-            2.2vw,
+            2.5vw,
             1.5rem
         );
 
-    font-weight: 400;
-
     line-height:
-        1.85;
+        2;
 
     letter-spacing:
         0.01em;
 
     color:
-        rgba(
-            55,
-            38,
-            45,
-            0.90
-        );
+        #49362e;
 
 }
 
 
-.chapter4-letter-content p:last-child {
+.chapter4-letter-text p {
 
-    margin-bottom: 0;
+    margin:
+        0
+        0
+        25px;
 
 }
 
 
-/* ==========================================================
-   LETTER GREETING
-========================================================== */
+.chapter4-letter-text p:last-child {
 
-.chapter4-greeting {
-
-    margin-bottom: 35px !important;
-
-    font-family:
-        "Caveat",
-        cursive !important;
-
-    font-size:
-        clamp(
-            2.1rem,
-            5vw,
-            2.8rem
-        ) !important;
-
-    line-height: 1.1 !important;
-
-    color:
-        #713b52 !important;
+    margin-bottom:
+        0;
 
 }
 
 
 /* ==========================================================
-   EMPHASIS
-========================================================== */
+   EMPHASIZED TEXT
+   ========================================================== */
 
-.chapter4-letter-content em {
+.chapter4-letter-text em {
 
-    font-family:
-        "Caveat",
-        cursive;
-
-    font-size:
-        1.15em;
+    font-style:
+        italic;
 
     color:
-        #713b52;
+        #824f56;
 
 }
 
 
 /* ==========================================================
    SIGNATURE
-========================================================== */
+   ========================================================== */
 
-.chapter4-letter-signature {
+.chapter4-signature {
 
     margin-top:
-        45px !important;
-
-    padding-top:
-        25px;
-
-    border-top:
-        1px solid
-        rgba(
-            120,
-            70,
-            85,
-            0.15
-        );
-
-    font-family:
-        "Caveat",
-        cursive !important;
-
-    font-size:
-        clamp(
-            1.8rem,
-            4vw,
-            2.4rem
-        ) !important;
-
-    line-height:
-        1.25 !important;
-
-    color:
-        #713b52 !important;
+        50px;
 
     text-align:
         right;
@@ -1207,124 +1010,59 @@
 }
 
 
-/* ==========================================================
-   LETTER CONTROLS
-========================================================== */
+.chapter4-signature p {
 
-.chapter4-letter-controls {
-
-    display: flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        center;
-
-    gap: 30px;
-
-    margin-top:
-        35px;
-
-}
-
-
-.chapter4-control-btn {
-
-    padding:
-        11px
-        20px;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            200,
-            225,
-            0.25
-        );
-
-    border-radius:
-        50px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.035
-        );
-
-    color:
-        rgba(
-            255,
-            230,
-            240,
-            0.78
-        );
+    margin:
+        0;
 
     font-family:
-        "Poppins",
-        sans-serif;
+        "Cormorant Garamond",
+        serif;
 
     font-size:
-        0.75rem;
+        1.25rem;
 
-    cursor:
-        pointer;
+    font-style:
+        italic;
 
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        background 0.3s ease,
-        color 0.3s ease;
+    color:
+        #65443b;
 
 }
 
 
-.chapter4-control-btn:hover {
+.chapter4-signature strong {
 
-    transform:
-        translateY(-2px);
+    display:
+        block;
 
-    border-color:
-        rgba(
-            255,
-            195,
-            220,
-            0.55
-        );
+    margin-top:
+        5px;
 
-    background:
-        rgba(
-            255,
-            190,
-            220,
-            0.08
-        );
+    font-family:
+        "Cormorant Garamond",
+        serif;
 
-    color: #fff;
+    font-size:
+        2rem;
+
+    font-weight:
+        500;
+
+    color:
+        #3b2823;
 
 }
 
 
-.chapter4-control-btn:disabled {
+/* ==========================================================
+   LETTER FOOTER DECORATION
+   ========================================================== */
 
-    opacity: 0.30;
+.chapter4-letter-decoration {
 
-    cursor:
-        not-allowed;
-
-    transform:
-        none;
-
-}
-
-
-.chapter4-indicator {
-
-    min-width:
-        60px;
+    margin-top:
+        45px;
 
     text-align:
         center;
@@ -1334,33 +1072,71 @@
         serif;
 
     font-size:
-        1.1rem;
+        1.3rem;
 
-    font-style:
-        italic;
+    letter-spacing:
+        0.35em;
 
     color:
         rgba(
-            255,
-            210,
-            230,
-            0.65
+            125,
+            70,
+            70,
+            0.5
         );
 
 }
 
 
 /* ==========================================================
+   LETTER TRANSITION
+   ========================================================== */
+
+.chapter4-letter {
+
+    animation:
+        chapter4LetterReveal
+        0.7s
+        ease
+        forwards;
+
+}
+
+
+@keyframes chapter4LetterReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================================
    ENDING
-========================================================== */
+   ========================================================== */
 
 .chapter4-ending {
 
     max-width:
-        700px;
+        650px;
 
     margin:
-        125px
+        110px
         auto
         0;
 
@@ -1377,35 +1153,61 @@
         serif;
 
     font-size:
-        1.7rem;
+        2rem;
 
     color:
         rgba(
             255,
-            190,
-            220,
-            0.70
+            195,
+            175,
+            0.7
         );
 
 }
 
 
-.chapter4-ending-text {
-
-    max-width:
-        560px;
+.chapter4-ending h3 {
 
     margin:
-        30px
-        auto
-        20px;
+        20px
+        0
+        15px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.4rem;
+        clamp(
+            2rem,
+            5vw,
+            3rem
+        );
+
+    font-weight:
+        400;
+
+    color:
+        #fff5ef;
+
+}
+
+
+.chapter4-ending p {
+
+    max-width:
+        560px;
+
+    margin:
+        0
+        auto;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.3rem;
 
     font-style:
         italic;
@@ -1417,48 +1219,8 @@
         rgba(
             255,
             225,
-            238,
-            0.70
-        );
-
-}
-
-
-.chapter4-ending-highlight {
-
-    max-width:
-        680px;
-
-    margin:
-        0
-        auto;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            2rem,
-            5vw,
-            3.2rem
-        );
-
-    font-weight:
-        400;
-
-    line-height:
-        1.25;
-
-    color: #fff;
-
-    text-shadow:
-        0 0 30px
-        rgba(
-            255,
-            175,
             215,
-            0.20
+            0.75
         );
 
 }
@@ -1466,7 +1228,7 @@
 
 /* ==========================================================
    CONTINUE SECTION
-========================================================== */
+   ========================================================== */
 
 .chapter4-continue-section {
 
@@ -1474,7 +1236,7 @@
         100px;
 
     padding:
-        60px
+        65px
         0
         20px;
 
@@ -1485,9 +1247,9 @@
         1px solid
         rgba(
             255,
-            210,
-            230,
-            0.13
+            215,
+            200,
+            0.15
         );
 
 }
@@ -1497,7 +1259,7 @@
 
     margin:
         0
-        0
+        auto
         28px;
 
     font-family:
@@ -1505,7 +1267,7 @@
         serif;
 
     font-size:
-        1.35rem;
+        1.3rem;
 
     font-style:
         italic;
@@ -1514,7 +1276,7 @@
         rgba(
             255,
             225,
-            238,
+            215,
             0.72
         );
 
@@ -1523,12 +1285,9 @@
 
 /* ==========================================================
    CONTINUE BUTTON
-========================================================== */
+   ========================================================== */
 
 .chapter4-continue {
-
-    position:
-        relative;
 
     padding:
         15px
@@ -1538,9 +1297,9 @@
         1px solid
         rgba(
             255,
-            200,
-            225,
-            0.38
+            210,
+            190,
+            0.4
         );
 
     border-radius:
@@ -1551,15 +1310,15 @@
             255,
             255,
             255,
-            0.035
+            0.045
         );
 
     color:
         rgba(
             255,
             235,
-            245,
-            0.92
+            225,
+            0.95
         );
 
     font-family:
@@ -1570,28 +1329,16 @@
         0.82rem;
 
     letter-spacing:
-        0.04em;
+        0.05em;
 
     cursor:
         pointer;
 
-    backdrop-filter:
-        blur(10px);
-
-    box-shadow:
-        0 10px 35px
-        rgba(
-            255,
-            170,
-            220,
-            0.07
-        );
-
     transition:
-        transform 0.4s ease,
-        background 0.4s ease,
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 
 }
 
@@ -1604,25 +1351,25 @@
     background:
         rgba(
             255,
-            190,
-            225,
-            0.11
+            195,
+            175,
+            0.12
         );
 
     border-color:
         rgba(
             255,
+            215,
             200,
-            225,
-            0.65
+            0.7
         );
 
     box-shadow:
-        0 14px 45px
+        0 12px 40px
         rgba(
             255,
             170,
-            220,
+            150,
             0.15
         );
 
@@ -1639,7 +1386,7 @@
 
 /* ==========================================================
    SCROLLBAR
-========================================================== */
+   ========================================================== */
 
 #chapter4::-webkit-scrollbar {
 
@@ -1656,7 +1403,7 @@
             255,
             255,
             255,
-            0.02
+            0.025
         );
 
 }
@@ -1668,16 +1415,16 @@
         linear-gradient(
             180deg,
             rgba(
-                255,
-                190,
                 220,
-                0.35
+                160,
+                140,
+                0.45
             ),
             rgba(
-                185,
-                135,
-                220,
-                0.35
+                170,
+                110,
+                125,
+                0.45
             )
         );
 
@@ -1693,16 +1440,16 @@
         linear-gradient(
             180deg,
             rgba(
-                255,
-                190,
-                220,
-                0.55
+                235,
+                175,
+                155,
+                0.65
             ),
             rgba(
                 185,
+                120,
                 135,
-                220,
-                0.55
+                0.65
             )
         );
 
@@ -1711,11 +1458,17 @@
 
 /* ==========================================================
    TABLET
-========================================================== */
+   ========================================================== */
 
 @media (max-width: 768px) {
 
     #chapter4 {
+
+        height:
+            100vh;
+
+        min-height:
+            100vh;
 
         overflow-x:
             hidden;
@@ -1732,7 +1485,7 @@
             calc(100% - 30px);
 
         padding:
-            80px
+            75px
             0
             120px;
 
@@ -1742,51 +1495,38 @@
     .chapter4-intro {
 
         margin-bottom:
-            50px;
-
-    }
-
-
-    .chapter4-letter-nav {
-
-        gap:
-            8px;
-
-        margin-bottom:
-            35px;
-
-    }
-
-
-    .chapter4-letter-tab {
-
-        min-height:
-            58px;
-
-        padding:
-            8px
-            10px;
+            55px;
 
     }
 
 
     .chapter4-letter-paper {
 
+        min-height:
+            auto;
+
         padding:
-            55px
-            45px
-            60px;
+            60px
+            55px;
 
     }
 
 
-    .chapter4-letter-content p {
+    .chapter4-letter-paper::before {
+
+        inset:
+            13px;
+
+    }
+
+
+    .chapter4-letter-text {
 
         font-size:
-            1.3rem;
+            1.35rem;
 
         line-height:
-            1.8;
+            1.9;
 
     }
 
@@ -1794,7 +1534,7 @@
     .chapter4-ending {
 
         margin-top:
-            90px;
+            85px;
 
     }
 
@@ -1811,9 +1551,29 @@
 
 /* ==========================================================
    MOBILE
-========================================================== */
+   ========================================================== */
 
 @media (max-width: 480px) {
+
+    #chapter4 {
+
+        height:
+            100vh;
+
+        min-height:
+            100vh;
+
+        overflow-x:
+            hidden;
+
+        overflow-y:
+            auto;
+
+        -webkit-overflow-scrolling:
+            touch;
+
+    }
+
 
     .chapter4-wrapper {
 
@@ -1821,7 +1581,7 @@
             calc(100% - 22px);
 
         padding:
-            65px
+            60px
             0
             100px;
 
@@ -1831,12 +1591,12 @@
     .chapter4-intro h2 {
 
         font-size:
-            3.7rem;
+            3.3rem;
 
     }
 
 
-    .chapter4-subtitle {
+    .chapter4-intro p {
 
         font-size:
             1.15rem;
@@ -1844,108 +1604,10 @@
     }
 
 
-    .chapter4-intro-divider {
-
-        margin-top:
-            25px;
-
-    }
-
-
-    .chapter4-letter-nav {
-
-        display:
-            grid;
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            8px;
-
-    }
-
-
-    .chapter4-letter-tab {
-
-        min-height:
-            52px;
-
-        display:
-            flex;
-
-        justify-content:
-            center;
-
-        align-items:
-            center;
+    .chapter4-letter-navigation {
 
         gap:
             10px;
-
-    }
-
-
-    .chapter4-letter-tab-number {
-
-        display:
-            inline;
-
-        margin:
-            0;
-
-    }
-
-
-    .chapter4-letter-tab-title {
-
-        display:
-            inline;
-
-    }
-
-
-    .chapter4-letter-paper {
-
-        padding:
-            45px
-            30px
-            55px;
-
-    }
-
-
-    .chapter4-letter-paper::before {
-
-        left:
-            15px;
-
-    }
-
-
-    .chapter4-paper-corner-top {
-
-        top:
-            15px;
-
-        right:
-            18px;
-
-    }
-
-
-    .chapter4-paper-corner-bottom {
-
-        bottom:
-            15px;
-
-        left:
-            18px;
-
-    }
-
-
-    .chapter4-letter-header {
 
         margin-bottom:
             30px;
@@ -1953,77 +1615,119 @@
     }
 
 
-    .chapter4-letter-date {
+    .chapter4-nav-btn {
+
+        padding:
+            9px
+            14px;
 
         font-size:
-            0.58rem;
-
-        letter-spacing:
-            0.12em;
+            0.7rem;
 
     }
 
 
-    .chapter4-letter-number {
+    .chapter4-letter-indicator {
+
+        min-width:
+            50px;
 
         font-size:
-            1rem;
+            0.95rem;
 
     }
 
 
-    .chapter4-letter-content p {
+    .chapter4-letter-paper {
 
-        font-size:
-            1.2rem;
+        width:
+            100%;
 
-        line-height:
-            1.8;
+        min-height:
+            auto;
 
-        margin-bottom:
-            22px;
+        padding:
+            55px
+            28px;
 
-    }
-
-
-    .chapter4-greeting {
-
-        font-size:
-            2rem !important;
-
-        margin-bottom:
-            28px !important;
+        border-radius:
+            3px;
 
     }
 
 
-    .chapter4-letter-signature {
+    .chapter4-letter-paper::before {
 
-        font-size:
-            1.9rem !important;
-
-        margin-top:
-            35px !important;
-
-    }
-
-
-    .chapter4-letter-controls {
-
-        gap:
+        inset:
             10px;
 
     }
 
 
-    .chapter4-control-btn {
+    .chapter4-letter-paper::after {
 
-        padding:
-            10px
-            15px;
+        top:
+            18px;
+
+        right:
+            20px;
+
+    }
+
+
+    .chapter4-letter-date {
+
+        margin-bottom:
+            28px;
 
         font-size:
-            0.68rem;
+            0.62rem;
+
+    }
+
+
+    .chapter4-letter-content h3 {
+
+        margin-bottom:
+            28px;
+
+        font-size:
+            2rem;
+
+    }
+
+
+    .chapter4-letter-text {
+
+        font-size:
+            1.22rem;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .chapter4-letter-text p {
+
+        margin-bottom:
+            21px;
+
+    }
+
+
+    .chapter4-signature {
+
+        margin-top:
+            40px;
+
+    }
+
+
+    .chapter4-signature strong {
+
+        font-size:
+            1.75rem;
 
     }
 
@@ -2031,23 +1735,23 @@
     .chapter4-ending {
 
         margin-top:
-            75px;
+            70px;
 
     }
 
 
-    .chapter4-ending-text {
+    .chapter4-ending h3 {
 
         font-size:
-            1.2rem;
+            2.2rem;
 
     }
 
 
-    .chapter4-ending-highlight {
+    .chapter4-ending p {
 
         font-size:
-            2rem;
+            1.15rem;
 
     }
 
@@ -2066,8 +1770,8 @@
     .chapter4-continue {
 
         padding:
-            14px
-            24px;
+            13px
+            25px;
 
         font-size:
             0.75rem;
@@ -2075,23 +1779,23 @@
     }
 
 
-    .chapter4-star-1 {
+    .chapter4-heart-1 {
 
         left:
-            4%;
+            2%;
 
     }
 
 
-    .chapter4-star-2 {
+    .chapter4-heart-2 {
 
         right:
-            4%;
+            2%;
 
     }
 
 
-    .chapter4-star-3 {
+    .chapter4-heart-3 {
 
         left:
             5%;
@@ -2099,18 +1803,18 @@
     }
 
 
-    .chapter4-heart-1 {
+    .chapter4-star-1 {
 
-        right:
+        left:
             3%;
 
     }
 
 
-    .chapter4-heart-2 {
+    .chapter4-star-2 {
 
-        left:
-            4%;
+        right:
+            3%;
 
     }
 
@@ -2119,21 +1823,14 @@
 
 /* ==========================================================
    REDUCED MOTION
-========================================================== */
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
     .chapter4-glow,
     .chapter4-star,
-    .chapter4-heart {
-
-        animation:
-            none;
-
-    }
-
-
-    .chapter4-letter.active {
+    .chapter4-heart,
+    .chapter4-letter {
 
         animation:
             none;
