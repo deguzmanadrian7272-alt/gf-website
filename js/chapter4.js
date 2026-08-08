@@ -46,21 +46,7 @@ function initChapter4() {
 
 
     /*
-        Count letters.
-    */
-
-    const letters =
-        chapter.querySelectorAll(
-            ".chapter4-letter"
-        );
-
-
-    Chapter4State.totalLetters =
-        letters.length;
-
-
-    /*
-        Continue button.
+        Continue button
     */
 
     const continueButton =
@@ -80,35 +66,34 @@ function initChapter4() {
 
 
     /*
-        Setup navigation buttons.
+        Setup navigation
     */
 
     setupChapter4Navigation();
 
 
     /*
-        Setup letter tabs.
+        Setup letter tabs
     */
 
-    setupChapter4Tabs();
+    setupChapter4LetterTabs();
 
 
     /*
-        Setup letter hover effects.
+        Setup letter interactions
     */
 
     setupChapter4Letter();
 
 
     /*
-        Prepare Chapter 4.
+        Prepare Chapter 4
     */
 
     prepareChapter4();
 
 
-    Chapter4State.initialized =
-        true;
+    Chapter4State.initialized = true;
 
 
     console.log(
@@ -138,26 +123,29 @@ function prepareChapter4() {
 
 
     /*
-        Chapter 4 starts hidden.
+        Chapter starts hidden.
     */
 
-    chapter.style.display =
-        "none";
+    chapter.style.display = "none";
 
 
     /*
-        Reset state.
+        IMPORTANT:
+        Do NOT create an internal scrollbar.
+        The browser document should handle scrolling.
     */
 
-    Chapter4State.currentLetter =
-        1;
+    chapter.style.height = "auto";
 
-    Chapter4State.finished =
-        false;
+    chapter.style.minHeight = "100vh";
+
+    chapter.style.overflowX = "hidden";
+
+    chapter.style.overflowY = "visible";
 
 
     /*
-        Find letters.
+        Find all letters.
     */
 
     const letters =
@@ -170,8 +158,11 @@ function prepareChapter4() {
         letters.length;
 
 
+    Chapter4State.currentLetter = 1;
+
+
     /*
-        Show only first letter.
+        Reset letters.
     */
 
     letters.forEach(
@@ -202,17 +193,51 @@ function prepareChapter4() {
 
 
     /*
-        Update controls.
+        Reset letter tabs.
     */
 
-    updateChapter4Navigation();
+    const tabs =
+        chapter.querySelectorAll(
+            ".chapter4-letter-tab"
+        );
+
+
+    tabs.forEach(
+        (tab, index) => {
+
+            if (index === 0) {
+
+                tab.classList.add(
+                    "active"
+                );
+
+                tab.setAttribute(
+                    "aria-selected",
+                    "true"
+                );
+
+            } else {
+
+                tab.classList.remove(
+                    "active"
+                );
+
+                tab.setAttribute(
+                    "aria-selected",
+                    "false"
+                );
+
+            }
+
+        }
+    );
 
 
     /*
-        Update letter tabs.
+        Update navigation.
     */
 
-    updateChapter4Tabs();
+    updateChapter4Navigation();
 
 
     /*
@@ -225,7 +250,13 @@ function prepareChapter4() {
         );
 
 
-    const lettersContainer =
+    const navigation =
+        chapter.querySelector(
+            ".chapter4-letter-nav"
+        );
+
+
+    const letterContainer =
         chapter.querySelector(
             ".chapter4-letters"
         );
@@ -253,7 +284,9 @@ function prepareChapter4() {
 
         intro,
 
-        lettersContainer,
+        navigation,
+
+        letterContainer,
 
         controls,
 
@@ -274,8 +307,7 @@ function prepareChapter4() {
             }
 
 
-            element.style.opacity =
-                "0";
+            element.style.opacity = "0";
 
             element.style.transform =
                 "translateY(25px)";
@@ -287,61 +319,26 @@ function prepareChapter4() {
 
 
 /* ==========================================================
-   SETUP LETTER NAVIGATION
+   SETUP LETTER TAB NAVIGATION
 ========================================================== */
 
-function setupChapter4Navigation() {
+function setupChapter4LetterTabs() {
 
-    const previousButton =
+    const chapter =
         document.getElementById(
-            "chapter4Previous"
+            "chapter4"
         );
 
 
-    const nextButton =
-        document.getElementById(
-            "chapter4Next"
-        );
+    if (!chapter) {
 
-
-    if (previousButton) {
-
-        previousButton.addEventListener(
-            "click",
-            () => {
-
-                changeChapter4Letter(-1);
-
-            }
-        );
+        return;
 
     }
 
-
-    if (nextButton) {
-
-        nextButton.addEventListener(
-            "click",
-            () => {
-
-                changeChapter4Letter(1);
-
-            }
-        );
-
-    }
-
-}
-
-
-/* ==========================================================
-   SETUP LETTER TABS
-========================================================== */
-
-function setupChapter4Tabs() {
 
     const tabs =
-        document.querySelectorAll(
+        chapter.querySelectorAll(
             ".chapter4-letter-tab"
         );
 
@@ -367,9 +364,9 @@ function setupChapter4Tabs() {
 
 
                     if (
-                        !letterNumber ||
-                        letterNumber ===
-                            Chapter4State.currentLetter
+                        Number.isNaN(
+                            letterNumber
+                        )
                     ) {
 
                         return;
@@ -391,6 +388,58 @@ function setupChapter4Tabs() {
 
 
 /* ==========================================================
+   SETUP PREVIOUS / NEXT BUTTONS
+========================================================== */
+
+function setupChapter4Navigation() {
+
+    const previousButton =
+        document.getElementById(
+            "chapter4Previous"
+        );
+
+
+    const nextButton =
+        document.getElementById(
+            "chapter4Next"
+        );
+
+
+    if (previousButton) {
+
+        previousButton.addEventListener(
+            "click",
+            () => {
+
+                changeChapter4Letter(
+                    -1
+                );
+
+            }
+        );
+
+    }
+
+
+    if (nextButton) {
+
+        nextButton.addEventListener(
+            "click",
+            () => {
+
+                changeChapter4Letter(
+                    1
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
    CHANGE LETTER
 ========================================================== */
 
@@ -406,7 +455,7 @@ function changeChapter4Letter(
     if (
         newLetter < 1 ||
         newLetter >
-            Chapter4State.totalLetters
+        Chapter4State.totalLetters
     ) {
 
         return;
@@ -448,6 +497,12 @@ function showChapter4Letter(
         );
 
 
+    const tabs =
+        chapter.querySelectorAll(
+            ".chapter4-letter-tab"
+        );
+
+
     if (!letters.length) {
 
         return;
@@ -457,8 +512,7 @@ function showChapter4Letter(
 
     if (
         letterNumber < 1 ||
-        letterNumber >
-            letters.length
+        letterNumber > letters.length
     ) {
 
         return;
@@ -466,81 +520,96 @@ function showChapter4Letter(
     }
 
 
-    const oldIndex =
-        Chapter4State.currentLetter - 1;
-
-
-    const newIndex =
+    const targetIndex =
         letterNumber - 1;
 
 
-    const oldLetter =
-        letters[oldIndex];
+    /*
+        Hide all letters.
+    */
 
+    letters.forEach(
+        (letter) => {
 
-    const newLetter =
-        letters[newIndex];
+            letter.classList.remove(
+                "active"
+            );
+
+            letter.style.display =
+                "none";
+
+        }
+    );
 
 
     /*
-        Don't do anything if
-        clicking current letter.
+        Show selected letter.
     */
 
-    if (
-        oldLetter === newLetter
-    ) {
-
-        return;
-
-    }
+    const selectedLetter =
+        letters[targetIndex];
 
 
-    /*
-        Hide old letter.
-    */
+    if (selectedLetter) {
 
-    if (oldLetter) {
-
-        oldLetter.classList.remove(
-            "active"
-        );
-
-        oldLetter.style.display =
-            "none";
-
-    }
-
-
-    /*
-        Show new letter.
-    */
-
-    if (newLetter) {
-
-        newLetter.style.display =
+        selectedLetter.style.display =
             "block";
-
-        newLetter.classList.add(
-            "active"
-        );
 
 
         /*
-            Restart letter animation.
+            Restart animation.
         */
 
-        newLetter.style.animation =
-            "none";
+        selectedLetter.classList.remove(
+            "active"
+        );
 
 
-        void newLetter.offsetWidth;
+        void selectedLetter.offsetWidth;
 
 
-        newLetter.style.animation =
-            "";
+        selectedLetter.classList.add(
+            "active"
+        );
 
     }
+
+
+    /*
+        Update tabs.
+    */
+
+    tabs.forEach(
+        (tab, index) => {
+
+            if (
+                index === targetIndex
+            ) {
+
+                tab.classList.add(
+                    "active"
+                );
+
+                tab.setAttribute(
+                    "aria-selected",
+                    "true"
+                );
+
+            } else {
+
+                tab.classList.remove(
+                    "active"
+                );
+
+                tab.setAttribute(
+                    "aria-selected",
+                    "false"
+                );
+
+            }
+
+        }
+    );
 
 
     /*
@@ -552,36 +621,41 @@ function showChapter4Letter(
 
 
     /*
-        Update controls.
+        Update Previous / Next.
     */
 
     updateChapter4Navigation();
 
 
     /*
-        Update top tabs.
+        Scroll the DOCUMENT,
+        not Chapter 4 itself.
+
+        This prevents nested scrolling.
     */
 
-    updateChapter4Tabs();
-
-
-    /*
-        Keep the letter area visible.
-    */
-
-    const letterArea =
+    const letterNav =
         chapter.querySelector(
-            ".chapter4-letters"
+            ".chapter4-letter-nav"
         );
 
 
-    if (letterArea) {
+    if (letterNav) {
 
-        letterArea.scrollIntoView({
+        const navTop =
+            letterNav.getBoundingClientRect().top +
+            window.scrollY;
 
-            behavior: "smooth",
 
-            block: "start"
+        window.scrollTo({
+
+            top:
+                Math.max(
+                    0,
+                    navTop - 30
+                ),
+
+            behavior: "smooth"
 
         });
 
@@ -596,7 +670,7 @@ function showChapter4Letter(
 
 
 /* ==========================================================
-   UPDATE NAVIGATION BUTTONS
+   UPDATE NAVIGATION
 ========================================================== */
 
 function updateChapter4Navigation() {
@@ -628,10 +702,17 @@ function updateChapter4Navigation() {
 
 
     /*
-        Indicator.
+        Indicator
     */
 
     if (indicator) {
+
+        /*
+            Your HTML uses:
+            I / III
+
+            So we use Roman numerals.
+        */
 
         const romanNumerals = [
             "",
@@ -639,28 +720,33 @@ function updateChapter4Navigation() {
             "II",
             "III",
             "IV",
-            "V"
+            "V",
+            "VI",
+            "VII",
+            "VIII",
+            "IX",
+            "X"
         ];
 
 
-        const currentRoman =
+        const currentText =
             romanNumerals[current] ||
             current;
 
 
-        const totalRoman =
+        const totalText =
             romanNumerals[total] ||
             total;
 
 
         indicator.textContent =
-            `${currentRoman} / ${totalRoman}`;
+            `${currentText} / ${totalText}`;
 
     }
 
 
     /*
-        Previous button.
+        Previous
     */
 
     if (previousButton) {
@@ -672,7 +758,7 @@ function updateChapter4Navigation() {
 
 
     /*
-        Next button.
+        Next
     */
 
     if (nextButton) {
@@ -681,50 +767,6 @@ function updateChapter4Navigation() {
             current >= total;
 
     }
-
-}
-
-
-/* ==========================================================
-   UPDATE TOP LETTER TABS
-========================================================== */
-
-function updateChapter4Tabs() {
-
-    const tabs =
-        document.querySelectorAll(
-            ".chapter4-letter-tab"
-        );
-
-
-    tabs.forEach(
-        (tab) => {
-
-            const letterNumber =
-                Number(
-                    tab.dataset.letter
-                );
-
-
-            if (
-                letterNumber ===
-                Chapter4State.currentLetter
-            ) {
-
-                tab.classList.add(
-                    "active"
-                );
-
-            } else {
-
-                tab.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
 
 }
 
@@ -753,7 +795,7 @@ function openChapter4Screen() {
 
 
     /*
-        Hide all other chapters.
+        Hide every chapter.
     */
 
     const chapters =
@@ -786,6 +828,55 @@ function openChapter4Screen() {
         "block";
 
 
+    /*
+        VERY IMPORTANT:
+        Chapter 4 must NOT become
+        its own scrolling container.
+    */
+
+    chapter.style.height = "auto";
+
+    chapter.style.minHeight =
+        "100vh";
+
+    chapter.style.overflowX =
+        "hidden";
+
+    chapter.style.overflowY =
+        "visible";
+
+
+    /*
+        Restore normal browser scrolling.
+
+        This is especially important if
+        earlier chapters use body overflow hidden.
+    */
+
+    document.documentElement.style.height =
+        "auto";
+
+
+    document.documentElement.style.overflowY =
+        "auto";
+
+
+    document.body.style.height =
+        "auto";
+
+
+    document.body.style.overflowY =
+        "auto";
+
+
+    document.body.style.overflowX =
+        "hidden";
+
+
+    /*
+        Update state.
+    */
+
     Chapter4State.visible =
         true;
 
@@ -795,17 +886,17 @@ function openChapter4Screen() {
 
 
     /*
-        Reset to first letter.
+        Always start at Letter I.
     */
+
+    Chapter4State.currentLetter =
+        1;
+
 
     const letters =
         chapter.querySelectorAll(
             ".chapter4-letter"
         );
-
-
-    Chapter4State.currentLetter =
-        1;
 
 
     letters.forEach(
@@ -835,23 +926,65 @@ function openChapter4Screen() {
     );
 
 
-    updateChapter4Navigation();
+    /*
+        Reset tabs.
+    */
 
-    updateChapter4Tabs();
+    const tabs =
+        chapter.querySelectorAll(
+            ".chapter4-letter-tab"
+        );
+
+
+    tabs.forEach(
+        (tab, index) => {
+
+            if (index === 0) {
+
+                tab.classList.add(
+                    "active"
+                );
+
+                tab.setAttribute(
+                    "aria-selected",
+                    "true"
+                );
+
+            } else {
+
+                tab.classList.remove(
+                    "active"
+                );
+
+                tab.setAttribute(
+                    "aria-selected",
+                    "false"
+                );
+
+            }
+
+        }
+    );
+
+
+    updateChapter4Navigation();
 
 
     /*
-        Reset page scroll.
+        Scroll the DOCUMENT to the top.
     */
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "instant"
+
     });
 
 
     /*
-        Restart entrance animation.
+        Start entrance animation.
     */
 
     startChapter4Intro();
@@ -889,6 +1022,12 @@ function startChapter4Intro() {
         );
 
 
+    const navigation =
+        chapter.querySelector(
+            ".chapter4-letter-nav"
+        );
+
+
     const letters =
         chapter.querySelector(
             ".chapter4-letters"
@@ -914,7 +1053,7 @@ function startChapter4Intro() {
 
 
     /*
-        GSAP available.
+        GSAP available
     */
 
     if (
@@ -935,11 +1074,34 @@ function startChapter4Intro() {
 
                     y: 0,
 
-                    duration: 1.1,
+                    duration: 0.9,
 
                     ease: "power3.out"
 
                 }
+            );
+
+        }
+
+
+        if (navigation) {
+
+            timeline.to(
+                navigation,
+                {
+
+                    opacity: 1,
+
+                    y: 0,
+
+                    duration: 0.7,
+
+                    ease: "power3.out"
+
+                },
+
+                "-=0.45"
+
             );
 
         }
@@ -955,13 +1117,13 @@ function startChapter4Intro() {
 
                     y: 0,
 
-                    duration: 1,
+                    duration: 0.9,
 
                     ease: "power3.out"
 
                 },
 
-                "-=0.4"
+                "-=0.35"
 
             );
 
@@ -978,7 +1140,7 @@ function startChapter4Intro() {
 
                     y: 0,
 
-                    duration: 0.7,
+                    duration: 0.6,
 
                     ease: "power3.out"
 
@@ -1001,7 +1163,7 @@ function startChapter4Intro() {
 
                     y: 0,
 
-                    duration: 0.9,
+                    duration: 0.8,
 
                     ease: "power3.out"
 
@@ -1024,13 +1186,13 @@ function startChapter4Intro() {
 
                     y: 0,
 
-                    duration: 0.8,
+                    duration: 0.7,
 
                     ease: "power3.out"
 
                 },
 
-                "-=0.25"
+                "-=0.2"
 
             );
 
@@ -1043,15 +1205,23 @@ function startChapter4Intro() {
 
 
     /*
-        Fallback if GSAP isn't available.
+        Fallback
     */
 
     fallbackChapter4Intro(
+
         intro,
+
+        navigation,
+
         letters,
+
         controls,
+
         ending,
+
         continueSection
+
     );
 
 }
@@ -1063,6 +1233,7 @@ function startChapter4Intro() {
 
 function fallbackChapter4Intro(
     intro,
+    navigation,
     letters,
     controls,
     ending,
@@ -1072,6 +1243,8 @@ function fallbackChapter4Intro(
     const elements = [
 
         intro,
+
+        navigation,
 
         letters,
 
@@ -1103,8 +1276,8 @@ function fallbackChapter4Intro(
 
                 },
 
-                250 +
-                (index * 450)
+                150 +
+                index * 300
 
             );
 
@@ -1144,7 +1317,7 @@ function revealChapter4Element(
 
 
 /* ==========================================================
-   LETTER HOVER INTERACTION
+   LETTER INTERACTION
 ========================================================== */
 
 function setupChapter4Letter() {
@@ -1216,7 +1389,8 @@ function finishChapter4() {
 
 
     /*
-        Chapter 5 exists.
+        If Chapter 5 exists,
+        continue to it.
     */
 
     if (
@@ -1249,11 +1423,15 @@ function finishChapter4() {
         "💌 Chapter 4 complete. Chapter 5 is not ready yet."
     );
 
+
+    Chapter4State.finished =
+        false;
+
 }
 
 
 /* ==========================================================
-   CHAPTER CHANGE LISTENER
+   CHAPTER CHANGE EVENT
 ========================================================== */
 
 document.addEventListener(
@@ -1341,23 +1519,33 @@ document.addEventListener(
 
 
         /*
-            Don't hijack arrow keys
-            while typing in an input.
+            Don't hijack arrow keys while
+            typing into an input or textarea.
         */
 
-        const tag =
-            document.activeElement?.tagName;
+        const activeElement =
+            document.activeElement;
 
 
         if (
-            tag === "INPUT" ||
-            tag === "TEXTAREA"
+            activeElement &&
+            (
+                activeElement.tagName ===
+                    "INPUT" ||
+
+                activeElement.tagName ===
+                    "TEXTAREA"
+            )
         ) {
 
             return;
 
         }
 
+
+        /*
+            Left = previous
+        */
 
         if (
             event.key ===
@@ -1366,10 +1554,16 @@ document.addEventListener(
 
             event.preventDefault();
 
-            changeChapter4Letter(-1);
+            changeChapter4Letter(
+                -1
+            );
 
         }
 
+
+        /*
+            Right = next
+        */
 
         if (
             event.key ===
@@ -1378,7 +1572,9 @@ document.addEventListener(
 
             event.preventDefault();
 
-            changeChapter4Letter(1);
+            changeChapter4Letter(
+                1
+            );
 
         }
 
