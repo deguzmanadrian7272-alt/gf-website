@@ -26,17 +26,6 @@ const Chapter3State = {
 
 function initChapter3() {
 
-    /*
-        Prevent duplicate initialization.
-    */
-
-    if (Chapter3State.initialized) {
-
-        return;
-
-    }
-
-
     const chapter =
         document.getElementById("chapter3");
 
@@ -73,11 +62,14 @@ function initChapter3() {
     if (continueButton) {
 
         /*
-            Remove any previous copy of
-            the listener before adding it.
-
-            This prevents duplicate clicks.
+            Prevent duplicate listeners.
         */
+
+        continueButton.removeEventListener(
+            "click",
+            handleChapter3Continue
+        );
+
 
         continueButton.addEventListener(
             "click",
@@ -95,7 +87,7 @@ function initChapter3() {
 
 
     /*
-        Create visual sparkles.
+        Create sparkles.
     */
 
     createChapter3Sparkles();
@@ -150,11 +142,7 @@ function prepareChapter3() {
 
 
     /*
-        Reset Chapter 3 scroll position.
-
-        IMPORTANT:
-        The scroll belongs to #chapter3,
-        NOT .chapter3-wrapper.
+        Reset scroll.
     */
 
     chapter.scrollTop =
@@ -162,7 +150,7 @@ function prepareChapter3() {
 
 
     /*
-        Make Continue button interactive.
+        Enable button.
     */
 
     const continueButton =
@@ -173,11 +161,14 @@ function prepareChapter3() {
 
     if (continueButton) {
 
+        continueButton.disabled =
+            false;
+
         continueButton.style.pointerEvents =
             "auto";
 
-        continueButton.disabled =
-            false;
+        continueButton.style.opacity =
+            "1";
 
     }
 
@@ -200,28 +191,12 @@ function handleChapter3Change(event) {
     }
 
 
-    /*
-        Support both:
-
-        detail: {
-            chapter: 3
-        }
-
-        and
-
-        detail: {
-            chapter: "3"
-        }
-    */
-
     const chapterNumber =
-        Number(
-            event.detail.chapter
-        );
+        Number(event.detail.chapter);
 
 
     /*
-        Only respond to Chapter 3.
+        Only react to Chapter 3.
     */
 
     if (
@@ -265,7 +240,9 @@ function openChapter3Screen() {
         Hide all other chapters.
     */
 
-    hideOtherChapters();
+    hideOtherChapters(
+        "chapter3"
+    );
 
 
     /*
@@ -284,20 +261,12 @@ function openChapter3Screen() {
         true;
 
 
-    /*
-        Reset completion state
-        whenever Chapter 3 opens.
-    */
-
     Chapter3State.finished =
         false;
 
 
     /*
-        Reset scroll position.
-
-        #chapter3 is the actual
-        scrolling container.
+        Reset internal scroll.
     */
 
     chapter.scrollTop =
@@ -305,7 +274,20 @@ function openChapter3Screen() {
 
 
     /*
-        Animate the chapter.
+        Scroll page to top.
+    */
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "instant"
+
+    });
+
+
+    /*
+        Start entrance animation.
     */
 
     animateChapter3Entrance();
@@ -322,7 +304,9 @@ function openChapter3Screen() {
    HIDE OTHER CHAPTERS
    ========================================================== */
 
-function hideOtherChapters() {
+function hideOtherChapters(
+    activeChapterId
+) {
 
     const chapters =
         document.querySelectorAll(
@@ -334,7 +318,8 @@ function hideOtherChapters() {
         (chapter) => {
 
             if (
-                chapter.id !== "chapter3"
+                chapter.id !==
+                activeChapterId
             ) {
 
                 chapter.style.display =
@@ -349,10 +334,17 @@ function hideOtherChapters() {
 
 
 /* ==========================================================
-   CHAPTER 3 ENTRANCE ANIMATION
+   CHAPTER 3 ENTRANCE
    ========================================================== */
 
 function animateChapter3Entrance() {
+
+    /*
+        IMPORTANT:
+
+        These selectors match the HTML
+        you currently provided.
+    */
 
     const intro =
         document.querySelector(
@@ -379,7 +371,7 @@ function animateChapter3Entrance() {
 
 
     /*
-        GSAP animation.
+        Use GSAP when available.
     */
 
     if (
@@ -387,9 +379,9 @@ function animateChapter3Entrance() {
     ) {
 
 
-        /* ------------------------------------------
-           INTRO
-           ------------------------------------------ */
+        /*
+            Intro.
+        */
 
         if (intro) {
 
@@ -418,9 +410,9 @@ function animateChapter3Entrance() {
         }
 
 
-        /* ------------------------------------------
-           POEMS
-           ------------------------------------------ */
+        /*
+            Poems.
+        */
 
         if (poems.length) {
 
@@ -431,7 +423,7 @@ function animateChapter3Entrance() {
                 {
                     opacity: 0,
 
-                    y: 40
+                    y: 35
                 },
 
                 {
@@ -443,7 +435,7 @@ function animateChapter3Entrance() {
 
                     stagger: 0.25,
 
-                    delay: 0.35,
+                    delay: 0.25,
 
                     ease: "power3.out"
                 }
@@ -453,9 +445,9 @@ function animateChapter3Entrance() {
         }
 
 
-        /* ------------------------------------------
-           ENDING
-           ------------------------------------------ */
+        /*
+            Ending.
+        */
 
         if (ending) {
 
@@ -476,7 +468,7 @@ function animateChapter3Entrance() {
 
                     duration: 1,
 
-                    delay: 0.9,
+                    delay: 0.8,
 
                     ease: "power3.out"
                 }
@@ -486,9 +478,9 @@ function animateChapter3Entrance() {
         }
 
 
-        /* ------------------------------------------
-           CONTINUE BUTTON
-           ------------------------------------------ */
+        /*
+            Continue button.
+        */
 
         if (continueButton) {
 
@@ -499,7 +491,7 @@ function animateChapter3Entrance() {
                 {
                     opacity: 0,
 
-                    y: 25
+                    y: 20
                 },
 
                 {
@@ -507,9 +499,9 @@ function animateChapter3Entrance() {
 
                     y: 0,
 
-                    duration: 0.9,
+                    duration: 0.8,
 
-                    delay: 1.2,
+                    delay: 1.1,
 
                     ease: "power3.out"
                 }
@@ -525,7 +517,7 @@ function animateChapter3Entrance() {
 
 
     /*
-        Fallback if GSAP isn't available.
+        Fallback without GSAP.
     */
 
     if (intro) {
@@ -577,7 +569,7 @@ function animateChapter3Entrance() {
 
 
 /* ==========================================================
-   CREATE CHAPTER 3 SPARKLES
+   CREATE SPARKLES
    ========================================================== */
 
 function createChapter3Sparkles() {
@@ -596,7 +588,7 @@ function createChapter3Sparkles() {
 
 
     /*
-        Prevent duplicate sparkles.
+        Prevent duplicates.
     */
 
     if (
@@ -619,7 +611,6 @@ function createChapter3Sparkles() {
         i++
     ) {
 
-
         const sparkle =
             document.createElement(
                 "span"
@@ -631,9 +622,7 @@ function createChapter3Sparkles() {
 
 
         sparkle.textContent =
-            Math.random() > 0.5
-                ? "✦"
-                : "✧";
+            "✦";
 
 
         sparkle.style.position =
@@ -660,10 +649,6 @@ function createChapter3Sparkles() {
             "none";
 
 
-        sparkle.style.userSelect =
-            "none";
-
-
         sparkle.style.animation =
             "chapter3SparkleFloat " +
             `${4 + Math.random() * 6}s ` +
@@ -686,8 +671,7 @@ function createChapter3Sparkles() {
 
 
     /*
-        Create sparkle animation
-        only once.
+        Create animation only once.
     */
 
     if (
@@ -762,6 +746,43 @@ function createChapter3Sparkles() {
 
 function handleChapter3Continue() {
 
+    console.log(
+        "💌 Chapter 3 Continue button clicked."
+    );
+
+
+    /*
+        Find Chapter 4.
+    */
+
+    const chapter4 =
+        document.getElementById(
+            "chapter4"
+        );
+
+
+    /*
+        IMPORTANT:
+
+        If Chapter 4 doesn't exist in index.html,
+        we cannot continue.
+    */
+
+    if (!chapter4) {
+
+        console.error(
+            "❌ Chapter 4 was not found in index.html."
+        );
+
+        alert(
+            "Chapter 4 could not be found. Please make sure <main id=\"chapter4\"> exists in index.html."
+        );
+
+        return;
+
+    }
+
+
     /*
         Prevent multiple clicks.
     */
@@ -775,83 +796,124 @@ function handleChapter3Continue() {
     }
 
 
+    Chapter3State.finished =
+        true;
+
+
     const button =
         document.getElementById(
             "chapter3Continue"
         );
 
 
-    /*
-        Mark Chapter 3 as complete.
-    */
-
-    Chapter3State.finished =
-        true;
-
-
-    /*
-        Temporarily disable button.
-    */
-
     if (button) {
-
-        button.style.pointerEvents =
-            "none";
 
         button.disabled =
             true;
+
+        button.style.pointerEvents =
+            "none";
 
     }
 
 
     console.log(
-        "💌 Chapter 3 complete."
+        "📖 Opening Chapter 4..."
     );
 
 
-    /* ======================================================
-       OPTION 1 — USE EXISTING TRANSITION SYSTEM
-       ====================================================== */
+    /*
+        ------------------------------------------------------
+        TRY THE EXISTING TRANSITION SYSTEM FIRST
+        ------------------------------------------------------
+    */
 
     if (
         typeof transitionToChapter ===
         "function"
     ) {
 
-        console.log(
-            "➡️ Transitioning to Chapter 4..."
-        );
+        try {
+
+            transitionToChapter(4);
 
 
-        /*
-            Give the transition system
-            Chapter 4.
+            /*
+                Give the transition system
+                a moment to handle Chapter 4.
 
-            Small timeout allows the
-            button interaction to finish
-            cleanly before transition.
-        */
+                If it doesn't actually open
+                Chapter 4, our fallback below
+                will handle it.
+            */
 
-        setTimeout(
-            () => {
+            setTimeout(
+                () => {
 
-                transitionToChapter(4);
+                    const chapter4Visible =
+                        chapter4.style.display !==
+                            "none" &&
+                        getComputedStyle(
+                            chapter4
+                        ).display !==
+                            "none";
 
-            },
 
-            50
+                    if (
+                        !chapter4Visible
+                    ) {
 
-        );
+                        console.warn(
+                            "⚠️ transitionToChapter(4) did not open Chapter 4. Using direct navigation."
+                        );
 
 
-        return;
+                        openChapter4Directly();
+
+                    }
+
+                },
+
+                700
+            );
+
+
+            return;
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "❌ transitionToChapter(4) failed:",
+                error
+            );
+
+            /*
+                Continue to direct navigation.
+            */
+
+        }
 
     }
 
 
-    /* ======================================================
-       OPTION 2 — DIRECT CHAPTER 4 FALLBACK
-       ====================================================== */
+    /*
+        ------------------------------------------------------
+        DIRECT NAVIGATION FALLBACK
+        ------------------------------------------------------
+    */
+
+    openChapter4Directly();
+
+}
+
+
+/* ==========================================================
+   DIRECTLY OPEN CHAPTER 4
+   ========================================================== */
+
+function openChapter4Directly() {
 
     const chapter4 =
         document.getElementById(
@@ -859,110 +921,144 @@ function handleChapter3Continue() {
         );
 
 
-    if (chapter4) {
+    if (!chapter4) {
 
-        console.log(
-            "➡️ Transition system unavailable."
+        console.error(
+            "❌ Cannot open Chapter 4 because #chapter4 does not exist."
         );
 
-        console.log(
-            "➡️ Opening Chapter 4 directly."
-        );
-
-
-        /*
-            Hide all chapters.
-        */
-
-        document
-            .querySelectorAll(
-                "main[id^='chapter']"
-            )
-            .forEach(
-                (chapter) => {
-
-                    chapter.style.display =
-                        "none";
-
-                }
-            );
-
-
-        /*
-            Show Chapter 4.
-        */
-
-        chapter4.style.display =
-            "block";
-
-
-        /*
-            Reset Chapter 4 scroll.
-        */
-
-        chapter4.scrollTop =
-            0;
-
-
-        /*
-            Dispatch chapterChange event
-            so Chapter 4's JS can react.
-        */
-
-        document.dispatchEvent(
-
-            new CustomEvent(
-                "chapterChange",
-                {
-                    detail: {
-                        chapter: 4
-                    }
-                }
-            )
-
-        );
-
-
-        /*
-            Reset Chapter 3 state.
-        */
-
-        Chapter3State.finished =
-            false;
-
+        resetChapter3ContinueButton();
 
         return;
 
     }
 
 
-    /* ======================================================
-       CHAPTER 4 DOES NOT EXIST
-       ====================================================== */
+    /*
+        Hide every chapter.
+    */
 
-    console.warn(
-        "Chapter IV is not available yet."
+    hideOtherChapters(
+        "chapter4"
     );
 
 
     /*
-        Restore button if Chapter 4
-        cannot be found.
+        Show Chapter 4.
     */
 
-    if (button) {
+    chapter4.style.display =
+        "block";
 
-        button.style.pointerEvents =
-            "auto";
 
-        button.disabled =
-            false;
+    /*
+        Make sure Chapter 4
+        is positioned at the top.
+    */
+
+    chapter4.scrollTop =
+        0;
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "instant"
+
+    });
+
+
+    /*
+        Fire the chapterChange event.
+
+        This allows chapter4.js
+        to detect that Chapter 4
+        is now active.
+    */
+
+    document.dispatchEvent(
+
+        new CustomEvent(
+            "chapterChange",
+
+            {
+                detail: {
+
+                    chapter: 4
+
+                }
+
+            }
+
+        )
+
+    );
+
+
+    /*
+        If Chapter 4 has its own
+        opening function, use it.
+    */
+
+    if (
+        typeof openChapter4Screen ===
+        "function"
+    ) {
+
+        try {
+
+            openChapter4Screen();
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Chapter 4 opening function encountered an error:",
+                error
+            );
+
+        }
 
     }
 
 
+    console.log(
+        "✨ Chapter 4 opened successfully."
+    );
+
+}
+
+
+/* ==========================================================
+   RESET CONTINUE BUTTON
+   ========================================================== */
+
+function resetChapter3ContinueButton() {
+
     Chapter3State.finished =
         false;
+
+
+    const button =
+        document.getElementById(
+            "chapter3Continue"
+        );
+
+
+    if (button) {
+
+        button.disabled =
+            false;
+
+        button.style.pointerEvents =
+            "auto";
+
+        button.style.opacity =
+            "1";
+
+    }
 
 }
 
@@ -1002,25 +1098,20 @@ function resetChapter3() {
         0;
 
 
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "instant"
+
+    });
+
+
     /*
-        Reset Continue button.
+        Reset button.
     */
 
-    const button =
-        document.getElementById(
-            "chapter3Continue"
-        );
-
-
-    if (button) {
-
-        button.style.pointerEvents =
-            "auto";
-
-        button.disabled =
-            false;
-
-    }
+    resetChapter3ContinueButton();
 
 
     /*
@@ -1054,15 +1145,13 @@ document.addEventListener(
         }
 
 
-        /*
-            Don't respond if Chapter 3
-            isn't visible.
-        */
+        const chapterVisible =
+            getComputedStyle(
+                chapter
+            ).display !== "none";
 
-        if (
-            chapter.style.display ===
-            "none"
-        ) {
+
+        if (!chapterVisible) {
 
             return;
 
@@ -1070,8 +1159,7 @@ document.addEventListener(
 
 
         /*
-            Enter key when Continue
-            button is focused.
+            Enter when button is focused.
         */
 
         if (
@@ -1096,16 +1184,8 @@ document.addEventListener(
 
 
 /* ==========================================================
-   DOM READY
+   START CHAPTER 3
    ========================================================== */
-
-/*
-    This is important.
-
-    It makes sure Chapter 3 actually
-    initializes even if app.js does
-    not call initChapter3().
-*/
 
 if (
     document.readyState ===
@@ -1117,7 +1197,9 @@ if (
         initChapter3
     );
 
-} else {
+}
+
+else {
 
     initChapter3();
 
