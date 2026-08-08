@@ -1,67 +1,74 @@
 /* ==========================================================
    CHAPTER III — POETRY
    Project : Our Story
-   Style   : Romantic Midnight Poetry Journal
-========================================================== */
+   Purpose : Romantic Poetry Chapter
+   ========================================================== */
 
 
 /* ==========================================================
    CHAPTER 3 BASE
-========================================================== */
+   ========================================================== */
 
 #chapter3 {
 
     position: relative;
 
     width: 100%;
-
+    height: 100vh;
     min-height: 100vh;
 
     /*
         IMPORTANT:
-        Let the content determine the height.
-        Do NOT lock Chapter 3 to the viewport.
+        Chapter 3 contains more content than the viewport.
+        The chapter itself must be the scroll container.
     */
 
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: auto;
 
     display: none;
 
     box-sizing: border-box;
 
-    color: #fff;
-
     background:
         radial-gradient(
-            circle at 50% 0%,
-            rgba(255, 190, 225, 0.18),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 5% 35%,
-            rgba(186, 133, 225, 0.14),
+            circle at 50% 5%,
+            rgba(255, 185, 220, 0.16),
             transparent 28%
         ),
+
         radial-gradient(
-            circle at 95% 70%,
-            rgba(255, 160, 215, 0.12),
+            circle at 10% 45%,
+            rgba(180, 125, 225, 0.14),
             transparent 30%
         ),
+
+        radial-gradient(
+            circle at 90% 75%,
+            rgba(255, 170, 215, 0.12),
+            transparent 28%
+        ),
+
         linear-gradient(
             180deg,
-            #120a18 0%,
-            #1d1023 25%,
-            #281329 55%,
-            #180c1d 78%,
-            #0d0711 100%
+            #140b1c 0%,
+            #211126 35%,
+            #29142d 68%,
+            #100812 100%
         );
+
+    color: #ffffff;
+
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
 
 }
 
 
 /* ==========================================================
    BACKGROUND LAYER
-========================================================== */
+   ========================================================== */
 
 .chapter3-background {
 
@@ -71,6 +78,8 @@
     left: 0;
 
     width: 100%;
+    height: 100%;
+
     min-height: 100%;
 
     overflow: hidden;
@@ -83,22 +92,38 @@
 
 
 /* ==========================================================
-   SOFT GLOWING ORBS
-========================================================== */
+   GLOW
+   ========================================================== */
 
 .chapter3-glow {
 
     position: absolute;
 
+    width: 450px;
+    height: 450px;
+
+    top: 5%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
     border-radius: 50%;
 
-    filter: blur(85px);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 170, 215, 0.18),
+            rgba(190, 125, 220, 0.08),
+            transparent 70%
+        );
 
-    opacity: 0.45;
+    filter: blur(45px);
+
+    opacity: 0.8;
 
     animation:
-        chapter3GlowFloat
-        10s
+        chapter3GlowPulse
+        8s
         ease-in-out
         infinite
         alternate;
@@ -106,96 +131,25 @@
 }
 
 
-/* Pink glow */
-
-.chapter3-glow-1 {
-
-    width: 380px;
-    height: 380px;
-
-    top: 4%;
-    left: -140px;
-
-    background:
-        rgba(
-            255,
-            135,
-            205,
-            0.38
-        );
-
-}
-
-
-/* Purple glow */
-
-.chapter3-glow-2 {
-
-    width: 450px;
-    height: 450px;
-
-    top: 38%;
-    right: -180px;
-
-    background:
-        rgba(
-            160,
-            105,
-            225,
-            0.32
-        );
-
-    animation-delay: -4s;
-
-}
-
-
-/* Bottom pink glow */
-
-.chapter3-glow-3 {
-
-    width: 330px;
-    height: 330px;
-
-    bottom: 5%;
-    left: 40%;
-
-    background:
-        rgba(
-            255,
-            170,
-            220,
-            0.20
-        );
-
-    animation-delay: -7s;
-
-}
-
-
-@keyframes chapter3GlowFloat {
+@keyframes chapter3GlowPulse {
 
     from {
 
         transform:
-            translate3d(
-                0,
-                0,
-                0
-            )
-            scale(1);
+            translateX(-50%)
+            scale(0.95);
+
+        opacity: 0.55;
 
     }
 
     to {
 
         transform:
-            translate3d(
-                35px,
-                -30px,
-                0
-            )
-            scale(1.12);
+            translateX(-50%)
+            scale(1.15);
+
+        opacity: 0.9;
 
     }
 
@@ -203,10 +157,46 @@
 
 
 /* ==========================================================
-   FLOATING HEARTS
-========================================================== */
+   MOON
+   ========================================================== */
 
-.chapter3-heart {
+.chapter3-moon {
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: 70px;
+    right: -75px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 35%,
+            rgba(255, 245, 250, 0.9),
+            rgba(255, 205, 230, 0.35) 40%,
+            rgba(255, 170, 215, 0.08) 65%,
+            transparent 72%
+        );
+
+    filter: blur(1px);
+
+    opacity: 0.55;
+
+    box-shadow:
+        0 0 50px
+        rgba(255, 190, 225, 0.18);
+
+}
+
+
+/* ==========================================================
+   STARS
+   ========================================================== */
+
+.chapter3-star {
 
     position: absolute;
 
@@ -217,126 +207,97 @@
     color:
         rgba(
             255,
-            195,
-            225,
-            0.65
+            210,
+            235,
+            0.75
         );
 
     text-shadow:
-        0 0 18px
+        0 0 12px
         rgba(
             255,
-            150,
-            210,
-            0.45
+            185,
+            225,
+            0.55
         );
 
-    opacity: 0;
-
     animation:
-        chapter3HeartFloat
-        9s
+        chapter3StarFloat
+        5s
         ease-in-out
-        infinite;
+        infinite alternate;
 
 }
 
 
-/* Heart 1 */
+.chapter3-star-1 {
 
-.chapter3-heart-1 {
+    top: 18%;
+    left: 8%;
 
-    top: 15%;
-    left: 7%;
-
-    font-size: 2rem;
+    font-size: 1.4rem;
 
 }
 
 
-/* Heart 2 */
+.chapter3-star-2 {
 
-.chapter3-heart-2 {
+    top: 35%;
+    right: 10%;
 
-    top: 31%;
-    right: 9%;
+    font-size: 1.1rem;
+
+    animation-delay:
+        -1.5s;
+
+}
+
+
+.chapter3-star-3 {
+
+    top: 62%;
+    left: 12%;
+
+    font-size: 1rem;
+
+    animation-delay:
+        -3s;
+
+}
+
+
+.chapter3-star-4 {
+
+    top: 78%;
+    right: 13%;
 
     font-size: 1.5rem;
 
-    animation-delay: -3s;
+    animation-delay:
+        -4s;
 
 }
 
 
-/* Heart 3 */
+@keyframes chapter3StarFloat {
 
-.chapter3-heart-3 {
-
-    bottom: 20%;
-    left: 12%;
-
-    font-size: 1.35rem;
-
-    animation-delay: -6s;
-
-}
-
-
-/* Heart 4 */
-
-.chapter3-heart-4 {
-
-    bottom: 30%;
-    right: 15%;
-
-    font-size: 2.1rem;
-
-    animation-delay: -1.5s;
-
-}
-
-
-@keyframes chapter3HeartFloat {
-
-    0% {
-
-        opacity: 0;
+    from {
 
         transform:
-            translateY(30px)
-            rotate(-10deg);
+            translateY(0)
+            scale(0.85);
+
+        opacity: 0.35;
 
     }
 
-    20% {
-
-        opacity: 0.55;
-
-    }
-
-    50% {
-
-        opacity: 0.85;
+    to {
 
         transform:
-            translateY(-18px)
-            rotate(8deg);
+            translateY(-12px)
+            scale(1.15);
 
-    }
-
-    80% {
-
-        opacity: 0.4;
-
-    }
-
-    100% {
-
-        opacity: 0;
-
-        transform:
-            translateY(-60px)
-            rotate(-5deg);
+        opacity: 0.9;
 
     }
 
@@ -344,8 +305,8 @@
 
 
 /* ==========================================================
-   MAIN CONTENT WRAPPER
-========================================================== */
+   MAIN WRAPPER
+   ========================================================== */
 
 .chapter3-wrapper {
 
@@ -355,7 +316,7 @@
 
     width:
         min(
-            920px,
+            900px,
             calc(100% - 40px)
         );
 
@@ -363,9 +324,9 @@
         0 auto;
 
     padding:
-        110px
+        100px
         0
-        160px;
+        150px;
 
     box-sizing:
         border-box;
@@ -375,77 +336,43 @@
 
 /* ==========================================================
    INTRO
-========================================================== */
+   ========================================================== */
 
 .chapter3-intro {
 
     position: relative;
 
-    text-align: center;
+    text-align:
+        center;
 
-    margin-bottom:
-        85px;
+    margin:
+        0 auto
+        90px;
 
     opacity: 0;
 
-    animation:
-        chapter3IntroReveal
-        1.4s
-        ease
-        forwards;
-
 }
 
-
-@keyframes chapter3IntroReveal {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(35px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-/* ==========================================================
-   CHAPTER LABEL
-========================================================== */
 
 .chapter3-label {
 
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
+    display:
+        inline-block;
 
     margin-bottom:
-        20px;
+        18px;
 
     padding:
-        8px
-        18px;
+        7px
+        17px;
 
     border:
         1px solid
         rgba(
             255,
-            205,
-            230,
-            0.25
+            200,
+            225,
+            0.28
         );
 
     border-radius:
@@ -456,20 +383,8 @@
             255,
             255,
             255,
-            0.035
+            0.04
         );
-
-    box-shadow:
-        0 0 25px
-        rgba(
-            255,
-            170,
-            220,
-            0.06
-        );
-
-    backdrop-filter:
-        blur(10px);
 
     font-family:
         "Poppins",
@@ -482,7 +397,7 @@
         500;
 
     letter-spacing:
-        0.32em;
+        0.28em;
 
     text-transform:
         uppercase;
@@ -492,22 +407,35 @@
             255,
             215,
             235,
-            0.82
+            0.8
+        );
+
+    backdrop-filter:
+        blur(8px);
+
+    box-shadow:
+        0 5px 25px
+        rgba(
+            255,
+            170,
+            220,
+            0.06
         );
 
 }
 
 
 /* ==========================================================
-   MAIN TITLE
-========================================================== */
+   TITLE
+   ========================================================== */
 
 .chapter3-intro h2 {
 
-    position: relative;
+    max-width:
+        760px;
 
     margin:
-        0;
+        0 auto;
 
     font-family:
         "Cormorant Garamond",
@@ -515,265 +443,28 @@
 
     font-size:
         clamp(
-            4.2rem,
-            10vw,
-            7.5rem
+            4rem,
+            9vw,
+            7rem
         );
 
     font-weight:
         400;
 
     line-height:
-        0.88;
+        0.92;
 
     letter-spacing:
-        0.015em;
+        0.01em;
 
     color:
-        #fff;
+        #ffffff;
 
     text-shadow:
         0 0 35px
         rgba(
             255,
-            175,
-            220,
-            0.22
-        );
-
-}
-
-
-/* Decorative little glow */
-
-.chapter3-intro h2::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        120px;
-
-    height:
-        1px;
-
-    left:
-        50%;
-
-    bottom:
-        -25px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(
-                255,
-                195,
-                225,
-                0.65
-            ),
-            transparent
-        );
-
-}
-
-
-/* ==========================================================
-   SUBTITLE
-========================================================== */
-
-.chapter3-subtitle {
-
-    max-width:
-        550px;
-
-    margin:
-        45px
-        auto
-        0;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.4rem;
-
-    font-style:
-        italic;
-
-    line-height:
-        1.75;
-
-    color:
-        rgba(
-            255,
-            230,
-            242,
-            0.75
-        );
-
-}
-
-
-/* ==========================================================
-   DECORATIVE DIVIDER
-========================================================== */
-
-.chapter3-intro::after {
-
-    content:
-        "♡   ✦   ♡";
-
-    display:
-        block;
-
-    margin:
-        32px
-        auto
-        0;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.2rem;
-
-    letter-spacing:
-        0.25em;
-
-    color:
-        rgba(
-            255,
-            195,
-            225,
-            0.7
-        );
-
-}
-
-
-/* ==========================================================
-   POEM INTRODUCTION
-========================================================== */
-
-.chapter3-poem-intro {
-
-    position:
-        relative;
-
-    width:
-        min(
-            700px,
-            100%
-        );
-
-    margin:
-        0
-        auto
-        105px;
-
-    padding:
-        52px
-        60px;
-
-    text-align:
-        center;
-
-    box-sizing:
-        border-box;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.055
-            ),
-            rgba(
-                255,
-                180,
-                220,
-                0.025
-            )
-        );
-
-    border:
-        1px solid
-        rgba(
-            255,
-            215,
-            235,
-            0.13
-        );
-
-    border-radius:
-        18px;
-
-    box-shadow:
-        0 25px 80px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        ),
-        inset 0 1px 0
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
-
-    backdrop-filter:
-        blur(12px);
-
-}
-
-
-/* ==========================================================
-   DECORATIVE QUOTE
-========================================================== */
-
-.chapter3-poem-intro::before {
-
-    content:
-        "“";
-
-    position:
-        absolute;
-
-    top:
-        -32px;
-
-    left:
-        25px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        7rem;
-
-    line-height:
-        1;
-
-    color:
-        rgba(
-            255,
-            185,
+            180,
             220,
             0.20
         );
@@ -781,48 +472,17 @@
 }
 
 
-/* Decorative heart */
-
-.chapter3-poem-intro::after {
-
-    content:
-        "♡";
-
-    position:
-        absolute;
-
-    right:
-        28px;
-
-    bottom:
-        -25px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        2rem;
-
-    color:
-        rgba(
-            255,
-            190,
-            225,
-            0.55
-        );
-
-}
-
-
 /* ==========================================================
-   POEM INTRO TEXT
-========================================================== */
+   INTRO DESCRIPTION
+   ========================================================== */
 
-.chapter3-poem-intro p {
+.chapter3-intro > p {
+
+    max-width:
+        540px;
 
     margin:
-        8px
+        28px auto
         0;
 
     font-family:
@@ -830,64 +490,67 @@
         serif;
 
     font-size:
-        1.5rem;
-
-    line-height:
-        1.85;
-
-    color:
-        rgba(
-            255,
-            242,
-            247,
-            0.88
-        );
-
-}
-
-
-.chapter3-poem-intro p:last-child {
-
-    margin-top:
-        24px;
+        1.25rem;
 
     font-style:
         italic;
 
+    line-height:
+        1.7;
+
     color:
         rgba(
             255,
-            200,
-            225,
-            0.92
+            230,
+            240,
+            0.75
         );
 
 }
 
 
 /* ==========================================================
-   POEM CONTAINER
-========================================================== */
+   INTRO DECORATION
+   ========================================================== */
 
-.chapter3-poem {
+.chapter3-intro::after {
+
+    content:
+        "♡  ✦  ♡";
 
     display:
-        flex;
+        block;
 
-    flex-direction:
-        column;
+    margin:
+        30px auto
+        0;
 
-    gap:
-        65px;
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.1rem;
+
+    letter-spacing:
+        0.35em;
+
+    color:
+        rgba(
+            255,
+            190,
+            220,
+            0.7
+        );
 
 }
 
 
 /* ==========================================================
-   STANZA
-========================================================== */
+   POEM SECTION
+   ========================================================== */
 
-.chapter3-stanza {
+.chapter3-poem {
 
     position:
         relative;
@@ -899,11 +562,11 @@
         );
 
     margin:
-        0
-        auto;
+        0 auto
+        70px;
 
     padding:
-        62px
+        60px
         70px;
 
     box-sizing:
@@ -923,8 +586,8 @@
             ),
             rgba(
                 255,
-                180,
-                220,
+                185,
+                225,
                 0.025
             )
         );
@@ -935,60 +598,51 @@
             255,
             220,
             235,
-            0.15
+            0.16
         );
 
     border-radius:
         18px;
 
     box-shadow:
-        0 25px 70px
+        0 25px 80px
         rgba(
             0,
             0,
             0,
-            0.26
+            0.25
         ),
+
         inset 0 1px 0
         rgba(
             255,
             255,
             255,
-            0.045
+            0.05
         );
 
     backdrop-filter:
-        blur(12px);
+        blur(14px);
 
-    opacity:
-        0;
-
-    transform:
-        translateY(40px);
-
-    animation:
-        chapter3StanzaReveal
-        1s
-        ease
-        forwards;
+    -webkit-backdrop-filter:
+        blur(14px);
 
     transition:
         transform 0.5s ease,
         border-color 0.5s ease,
-        box-shadow 0.5s ease,
-        background 0.5s ease;
+        box-shadow 0.5s ease;
 
 }
 
 
 /* ==========================================================
-   DECORATIVE CORNERS
-========================================================== */
+   POEM CARD DECORATIVE CORNERS
+   ========================================================== */
 
-.chapter3-stanza::before {
+.chapter3-poem::before {
 
     content:
-        "✦";
+        "♡";
 
     position:
         absolute;
@@ -999,13 +653,17 @@
     left:
         22px;
 
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
     font-size:
-        0.9rem;
+        1.2rem;
 
     color:
         rgba(
             255,
-            195,
+            190,
             225,
             0.45
         );
@@ -1013,10 +671,10 @@
 }
 
 
-.chapter3-stanza::after {
+.chapter3-poem::after {
 
     content:
-        "✦";
+        "♡";
 
     position:
         absolute;
@@ -1027,159 +685,107 @@
     bottom:
         18px;
 
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
     font-size:
-        0.9rem;
+        1.2rem;
 
     color:
         rgba(
             255,
-            195,
+            190,
             225,
-            0.35
+            0.45
         );
 
 }
 
 
 /* ==========================================================
-   STANZA REVEAL
-========================================================== */
+   POEM HOVER
+   ========================================================== */
 
-@keyframes chapter3StanzaReveal {
-
-    to {
-
-        opacity:
-            1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-
-
-/* ==========================================================
-   STAGGERED STANZAS
-========================================================== */
-
-.chapter3-stanza:nth-child(1) {
-
-    animation-delay:
-        0.15s;
-
-}
-
-
-.chapter3-stanza:nth-child(2) {
-
-    animation-delay:
-        0.3s;
-
-}
-
-
-.chapter3-stanza:nth-child(3) {
-
-    animation-delay:
-        0.45s;
-
-}
-
-
-.chapter3-stanza:nth-child(4) {
-
-    animation-delay:
-        0.6s;
-
-}
-
-
-.chapter3-stanza:nth-child(5) {
-
-    animation-delay:
-        0.75s;
-
-}
-
-
-.chapter3-stanza:nth-child(6) {
-
-    animation-delay:
-        0.9s;
-
-}
-
-
-/* ==========================================================
-   STANZA HOVER
-========================================================== */
-
-.chapter3-stanza:hover {
+.chapter3-poem:hover {
 
     transform:
-        translateY(-8px);
+        translateY(-6px);
 
     border-color:
         rgba(
             255,
             195,
             225,
-            0.35
-        );
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.09
-            ),
-            rgba(
-                255,
-                180,
-                220,
-                0.045
-            )
+            0.34
         );
 
     box-shadow:
-        0 35px 85px
+        0 35px 90px
         rgba(
             0,
             0,
             0,
-            0.34
+            0.32
         ),
+
         0 0 45px
         rgba(
             255,
             175,
             220,
-            0.10
+            0.08
         );
 
 }
 
 
 /* ==========================================================
-   STANZA NUMBER
-========================================================== */
+   POEM DECORATION
+   ========================================================== */
 
-.chapter3-stanza-number {
+.chapter3-poem-decoration {
 
-    margin-bottom:
-        25px;
+    margin:
+        0 auto
+        20px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        0.95rem;
+        1.4rem;
+
+    color:
+        rgba(
+            255,
+            190,
+            225,
+            0.65
+        );
+
+}
+
+
+/* ==========================================================
+   POEM NUMBER
+   ========================================================== */
+
+.chapter3-poem-number {
+
+    display:
+        inline-block;
+
+    margin-bottom:
+        18px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1rem;
 
     font-style:
         italic;
@@ -1192,15 +798,13 @@
             255,
             195,
             225,
-            0.62
+            0.65
         );
 
 }
 
 
-/* Divider below number */
-
-.chapter3-stanza-number::after {
+.chapter3-poem-number::after {
 
     content:
         "";
@@ -1209,27 +813,63 @@
         block;
 
     width:
-        45px;
+        35px;
 
     height:
         1px;
 
     margin:
-        13px
-        auto
+        10px auto
         0;
 
     background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(
-                255,
-                195,
-                225,
-                0.5
-            ),
-            transparent
+        rgba(
+            255,
+            195,
+            225,
+            0.3
+        );
+
+}
+
+
+/* ==========================================================
+   POEM TITLE
+   ========================================================== */
+
+.chapter3-poem h3 {
+
+    margin:
+        0 0
+        35px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            2rem,
+            4vw,
+            2.8rem
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        1.15;
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 0 20px
+        rgba(
+            255,
+            185,
+            220,
+            0.12
         );
 
 }
@@ -1237,12 +877,24 @@
 
 /* ==========================================================
    POEM TEXT
-========================================================== */
+   ========================================================== */
 
-.chapter3-stanza p {
+.chapter3-poem-text {
+
+    max-width:
+        560px;
 
     margin:
-        0;
+        0 auto;
+
+}
+
+
+.chapter3-poem-text p {
+
+    margin:
+        0 0
+        8px;
 
     font-family:
         "Cormorant Garamond",
@@ -1252,14 +904,14 @@
         clamp(
             1.3rem,
             2.5vw,
-            1.65rem
+            1.6rem
         );
 
     font-weight:
         400;
 
     line-height:
-        2.05;
+        1.75;
 
     letter-spacing:
         0.015em;
@@ -1267,47 +919,67 @@
     color:
         rgba(
             255,
-            246,
-            249,
-            0.93
+            245,
+            248,
+            0.92
+        );
+
+}
+
+
+.chapter3-poem-text p:last-child {
+
+    margin-top:
+        22px;
+
+}
+
+
+/* ==========================================================
+   EMPHASIZED WORD
+   ========================================================== */
+
+.chapter3-poem-text em {
+
+    font-style:
+        italic;
+
+    color:
+        #ffd6e9;
+
+    text-shadow:
+        0 0 18px
+        rgba(
+            255,
+            180,
+            220,
+            0.25
         );
 
 }
 
 
 /* ==========================================================
-   FINAL STANZA
-========================================================== */
+   SECONDARY POEM
+   ========================================================== */
 
-.chapter3-final-stanza {
-
-    margin-top:
-        25px;
-
-    padding-top:
-        75px;
-
-    padding-bottom:
-        75px;
-
-    border-color:
-        rgba(
-            255,
-            195,
-            225,
-            0.28
-        );
+.chapter3-poem-secondary {
 
     background:
-        radial-gradient(
-            circle at center,
+        linear-gradient(
+            145deg,
+            rgba(
+                190,
+                145,
+                230,
+                0.07
+            ),
             rgba(
                 255,
-                180,
-                220,
-                0.12
-            ),
-            transparent 70%
+                190,
+                225,
+                0.025
+            )
         );
 
 }
@@ -1315,137 +987,19 @@
 
 /* ==========================================================
    ENDING
-========================================================== */
+   ========================================================== */
 
 .chapter3-ending {
 
+    max-width:
+        650px;
+
     margin:
-        135px
-        auto
+        120px auto
         0;
 
-    text-align:
-        center;
-
-}
-
-
-.chapter3-divider {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.5rem;
-
-    letter-spacing:
-        0.35em;
-
-    color:
-        rgba(
-            255,
-            195,
-            225,
-            0.72
-        );
-
-}
-
-
-/* ==========================================================
-   ENDING TEXT
-========================================================== */
-
-.chapter3-ending-text {
-
-    max-width:
-        620px;
-
-    margin:
-        38px
-        auto
-        20px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.5rem;
-
-    font-style:
-        italic;
-
-    line-height:
-        1.85;
-
-    color:
-        rgba(
-            255,
-            230,
-            240,
-            0.74
-        );
-
-}
-
-
-/* ==========================================================
-   ENDING HIGHLIGHT
-========================================================== */
-
-.chapter3-ending-highlight {
-
-    max-width:
-        700px;
-
-    margin:
-        0
-        auto
-        35px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            2.2rem,
-            5vw,
-            3.5rem
-        );
-
-    line-height:
-        1.25;
-
-    color:
-        #fff;
-
-    text-shadow:
-        0 0 30px
-        rgba(
-            255,
-            180,
-            220,
-            0.28
-        );
-
-}
-
-
-/* ==========================================================
-   CONTINUE SECTION
-========================================================== */
-
-.chapter3-continue-section {
-
-    margin-top:
-        125px;
-
     padding:
-        75px
-        0
+        60px
         30px;
 
     text-align:
@@ -1460,32 +1014,115 @@
             0.14
         );
 
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            210,
+            230,
+            0.10
+        );
+
 }
 
 
-.chapter3-continue-section p {
+/* ==========================================================
+   ENDING SYMBOL
+   ========================================================== */
 
-    margin:
-        0
-        0
-        30px;
+.chapter3-ending-symbol {
+
+    margin-bottom:
+        18px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.4rem;
+        2rem;
+
+    color:
+        rgba(
+            255,
+            190,
+            220,
+            0.75
+        );
+
+    text-shadow:
+        0 0 20px
+        rgba(
+            255,
+            170,
+            215,
+            0.25
+        );
+
+}
+
+
+/* ==========================================================
+   ENDING TITLE
+   ========================================================== */
+
+.chapter3-ending h3 {
+
+    margin:
+        0 0
+        20px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            2.2rem,
+            5vw,
+            3.3rem
+        );
+
+    font-weight:
+        400;
 
     font-style:
         italic;
 
     color:
+        #ffffff;
+
+}
+
+
+/* ==========================================================
+   ENDING TEXT
+   ========================================================== */
+
+.chapter3-ending p {
+
+    max-width:
+        520px;
+
+    margin:
+        0 auto;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.35rem;
+
+    line-height:
+        1.8;
+
+    color:
         rgba(
             255,
-            225,
-            238,
-            0.76
+            230,
+            240,
+            0.72
         );
 
 }
@@ -1493,16 +1130,20 @@
 
 /* ==========================================================
    CONTINUE BUTTON
-========================================================== */
+   ========================================================== */
 
 .chapter3-continue {
 
-    position:
-        relative;
+    display:
+        block;
+
+    margin:
+        70px auto
+        0;
 
     padding:
-        16px
-        34px;
+        15px
+        32px;
 
     border:
         1px solid
@@ -1510,34 +1151,25 @@
             255,
             200,
             225,
-            0.42
+            0.4
         );
 
     border-radius:
         50px;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(
-                255,
-                190,
-                225,
-                0.08
-            ),
-            rgba(
-                190,
-                140,
-                220,
-                0.07
-            )
+        rgba(
+            255,
+            255,
+            255,
+            0.04
         );
 
     color:
         rgba(
             255,
-            240,
-            247,
+            235,
+            245,
             0.95
         );
 
@@ -1548,16 +1180,16 @@
     font-size:
         0.85rem;
 
-    font-weight:
-        400;
-
     letter-spacing:
-        0.06em;
+        0.05em;
 
     cursor:
         pointer;
 
     backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
         blur(10px);
 
     box-shadow:
@@ -1578,73 +1210,25 @@
 }
 
 
-/* Button glow */
-
-.chapter3-continue::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    inset:
-        -5px;
-
-    border-radius:
-        inherit;
-
-    background:
-        rgba(
-            255,
-            190,
-            225,
-            0.10
-        );
-
-    filter:
-        blur(15px);
-
-    opacity:
-        0;
-
-    z-index:
-        -1;
-
-    transition:
-        opacity 0.4s ease;
-
-}
-
-
 .chapter3-continue:hover {
 
     transform:
         translateY(-4px);
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(
-                255,
-                190,
-                225,
-                0.14
-            ),
-            rgba(
-                190,
-                140,
-                220,
-                0.12
-            )
+        rgba(
+            255,
+            190,
+            225,
+            0.12
         );
 
     border-color:
         rgba(
             255,
-            210,
-            235,
-            0.72
+            205,
+            230,
+            0.7
         );
 
     box-shadow:
@@ -1659,27 +1243,107 @@
 }
 
 
-.chapter3-continue:hover::before {
-
-    opacity:
-        1;
-
-}
-
-
 .chapter3-continue:active {
 
     transform:
-        translateY(0);
+        translateY(-1px);
 
 }
 
 
 /* ==========================================================
-   RESPONSIVE — TABLET
-========================================================== */
+   SCROLLBAR
+   ========================================================== */
+
+#chapter3::-webkit-scrollbar {
+
+    width:
+        8px;
+
+}
+
+
+#chapter3::-webkit-scrollbar-track {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.025
+        );
+
+}
+
+
+#chapter3::-webkit-scrollbar-thumb {
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(
+                255,
+                190,
+                220,
+                0.4
+            ),
+            rgba(
+                190,
+                140,
+                220,
+                0.4
+            )
+        );
+
+    border-radius:
+        10px;
+
+}
+
+
+#chapter3::-webkit-scrollbar-thumb:hover {
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(
+                255,
+                190,
+                220,
+                0.6
+            ),
+            rgba(
+                190,
+                140,
+                220,
+                0.6
+            )
+        );
+
+}
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
 
 @media (max-width: 768px) {
+
+    #chapter3 {
+
+        height:
+            100vh;
+
+        min-height:
+            100vh;
+
+        overflow-x:
+            hidden;
+
+        overflow-y:
+            auto;
+
+    }
 
 
     .chapter3-wrapper {
@@ -1703,43 +1367,14 @@
     }
 
 
-    .chapter3-intro h2 {
-
-        font-size:
-            clamp(
-                3.8rem,
-                12vw,
-                5.5rem
-            );
-
-    }
-
-
-    .chapter3-poem-intro {
-
-        padding:
-            40px
-            30px;
-
-        margin-bottom:
-            75px;
-
-    }
-
-
-    .chapter3-stanza {
-
-        padding:
-            48px
-            35px;
-
-    }
-
-
     .chapter3-poem {
 
-        gap:
-            45px;
+        padding:
+            50px
+            40px;
+
+        margin-bottom:
+            50px;
 
     }
 
@@ -1747,15 +1382,22 @@
     .chapter3-ending {
 
         margin-top:
-            95px;
+            80px;
+
+        padding:
+            50px
+            20px;
 
     }
 
 
-    .chapter3-continue-section {
+    .chapter3-moon {
 
-        margin-top:
-            90px;
+        width:
+            170px;
+
+        height:
+            170px;
 
     }
 
@@ -1763,11 +1405,10 @@
 
 
 /* ==========================================================
-   RESPONSIVE — MOBILE
-========================================================== */
+   MOBILE
+   ========================================================== */
 
 @media (max-width: 480px) {
-
 
     .chapter3-wrapper {
 
@@ -1777,7 +1418,23 @@
         padding:
             65px
             0
-            90px;
+            100px;
+
+    }
+
+
+    .chapter3-intro h2 {
+
+        font-size:
+            3.8rem;
+
+    }
+
+
+    .chapter3-intro > p {
+
+        font-size:
+            1.1rem;
 
     }
 
@@ -1788,24 +1445,63 @@
             0.6rem;
 
         letter-spacing:
-            0.22em;
+            0.2em;
+
+    }
+
+
+    .chapter3-poem {
 
         padding:
-            7px
-            13px;
+            45px
+            20px;
+
+        border-radius:
+            14px;
 
     }
 
 
-    .chapter3-intro h2 {
+    .chapter3-poem h3 {
 
         font-size:
-            3.7rem;
+            2rem;
+
+        margin-bottom:
+            28px;
 
     }
 
 
-    .chapter3-subtitle {
+    .chapter3-poem-text p {
+
+        font-size:
+            1.2rem;
+
+        line-height:
+            1.8;
+
+    }
+
+
+    .chapter3-ending {
+
+        padding:
+            45px
+            15px;
+
+    }
+
+
+    .chapter3-ending h3 {
+
+        font-size:
+            2.2rem;
+
+    }
+
+
+    .chapter3-ending p {
 
         font-size:
             1.15rem;
@@ -1813,124 +1509,35 @@
     }
 
 
-    .chapter3-poem-intro {
-
-        padding:
-            35px
-            20px;
-
-        border-radius:
-            14px;
-
-    }
-
-
-    .chapter3-poem-intro p {
-
-        font-size:
-            1.2rem;
-
-        line-height:
-            1.75;
-
-    }
-
-
-    .chapter3-stanza {
-
-        padding:
-            42px
-            20px;
-
-        border-radius:
-            14px;
-
-    }
-
-
-    .chapter3-stanza p {
-
-        font-size:
-            1.2rem;
-
-        line-height:
-            1.85;
-
-    }
-
-
-    .chapter3-stanza-number {
-
-        margin-bottom:
-            18px;
-
-    }
-
-
-    .chapter3-ending {
-
-        margin-top:
-            80px;
-
-    }
-
-
-    .chapter3-ending-text {
-
-        font-size:
-            1.25rem;
-
-    }
-
-
-    .chapter3-ending-highlight {
-
-        font-size:
-            2rem;
-
-    }
-
-
-    .chapter3-continue-section {
-
-        margin-top:
-            75px;
-
-        padding-top:
-            55px;
-
-    }
-
-
     .chapter3-continue {
 
-        padding:
-            14px
-            25px;
+        width:
+            100%;
 
-        font-size:
-            0.78rem;
-
-    }
-
-
-    .chapter3-heart-1 {
-
-        left:
-            2%;
+        max-width:
+            280px;
 
     }
 
 
-    .chapter3-heart-2 {
+    .chapter3-moon {
+
+        width:
+            130px;
+
+        height:
+            130px;
+
+        top:
+            50px;
 
         right:
-            3%;
+            -55px;
 
     }
 
 
-    .chapter3-heart-3 {
+    .chapter3-star-1 {
 
         left:
             3%;
@@ -1938,10 +1545,26 @@
     }
 
 
-    .chapter3-heart-4 {
+    .chapter3-star-2 {
 
         right:
             4%;
+
+    }
+
+
+    .chapter3-star-3 {
+
+        left:
+            5%;
+
+    }
+
+
+    .chapter3-star-4 {
+
+        right:
+            6%;
 
     }
 
@@ -1950,15 +1573,12 @@
 
 /* ==========================================================
    REDUCED MOTION
-========================================================== */
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-
     .chapter3-glow,
-    .chapter3-heart,
-    .chapter3-intro,
-    .chapter3-stanza {
+    .chapter3-star {
 
         animation:
             none;
@@ -1966,12 +1586,9 @@
     }
 
 
-    .chapter3-stanza {
+    .chapter3-poem {
 
-        opacity:
-            1;
-
-        transform:
+        transition:
             none;
 
     }
