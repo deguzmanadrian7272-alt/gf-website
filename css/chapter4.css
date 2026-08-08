@@ -42,34 +42,38 @@
 
     display: none;
 
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            rgba(255, 190, 145, 0.16),
-            transparent 30%
+         background:
+            radial-gradient(
+            circle at 50% 5%,
+            rgba(255, 185, 220, 0.16),
+            transparent 28%
         ),
 
         radial-gradient(
-            circle at 10% 55%,
-            rgba(220, 145, 155, 0.12),
-            transparent 32%
+            circle at 10% 45%,
+            rgba(180, 125, 225, 0.14),
+            transparent 30%
         ),
 
         radial-gradient(
             circle at 90% 75%,
-            rgba(190, 120, 145, 0.10),
-            transparent 30%
+            rgba(255, 170, 215, 0.12),
+            transparent 28%
         ),
 
         linear-gradient(
             180deg,
-            #1a0e13 0%,
-            #241219 38%,
-            #2d171d 68%,
-            #12090d 100%
+            #140b1c 0%,
+            #211126 35%,
+            #29142d 68%,
+            #100812 100%
         );
 
-    color: #fff;
+    color: #ffffff;
+
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
 
 }
 
