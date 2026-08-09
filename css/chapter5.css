@@ -1,9 +1,11 @@
 /* ==========================================================
    CHAPTER V — MINI GAMES
    Project : Our Story
-   File    : chapter5.css
    Purpose : Interactive Games Chapter
    Theme   : Dreamy Violet / Romantic / Playful
+
+   IMPORTANT:
+   This stylesheet matches the CURRENT Chapter 5 HTML classes.
    ========================================================== */
 
 
@@ -12,72 +14,44 @@
    ========================================================== */
 
 #chapter5 {
-
     position: relative;
-
     width: 100%;
-
     min-height: 100vh;
-
     height: auto;
-
     overflow-x: hidden;
-
     overflow-y: visible;
-
     box-sizing: border-box;
-
     display: none;
-
-    color: #ffffff;
+    color: #fff;
 
     background:
         radial-gradient(
-            circle at 50% 8%,
-            rgba(190, 150, 255, 0.20),
+            circle at 50% 5%,
+            rgba(190, 150, 255, 0.22),
             transparent 28%
         ),
-
         radial-gradient(
-            circle at 5% 45%,
+            circle at 5% 42%,
             rgba(130, 95, 210, 0.18),
             transparent 30%
         ),
-
         radial-gradient(
             circle at 95% 65%,
             rgba(220, 150, 235, 0.14),
             transparent 32%
         ),
-
-        radial-gradient(
-            circle at 45% 100%,
-            rgba(100, 65, 170, 0.20),
-            transparent 35%
-        ),
-
         linear-gradient(
             180deg,
             #130c24 0%,
-            #1c1030 28%,
-            #24143c 55%,
-            #1b102f 78%,
+            #1c1030 30%,
+            #24143c 58%,
+            #1b102f 80%,
             #0d0719 100%
         );
 }
 
-
-/*
-    Chapter 5 is shown through JavaScript.
-*/
-
 #chapter5.active {
-
     display: block;
-
-    min-height: 100vh;
-
-    height: auto;
 }
 
 
@@ -86,356 +60,50 @@
    ========================================================== */
 
 .chapter5-background {
-
     position: absolute;
-
     inset: 0;
-
     width: 100%;
-
     min-height: 100%;
-
     pointer-events: none;
-
     overflow: hidden;
-
     z-index: 0;
 }
 
-
-/* ==========================================================
-   BACKGROUND GLOWS
-   ========================================================== */
-
-.chapter5-glow {
-
+.chapter5-background::before,
+.chapter5-background::after {
+    content: "";
     position: absolute;
-
     border-radius: 50%;
-
-    filter: blur(100px);
-
-    opacity: 0.45;
-
     pointer-events: none;
-
-    animation:
-        chapter5GlowFloat
-        12s
-        ease-in-out
-        infinite
-        alternate;
+    filter: blur(90px);
 }
 
-
-.chapter5-glow-1 {
-
-    width: 480px;
-
-    height: 480px;
-
-    top: 3%;
-
-    left: -190px;
-
-    background:
-        rgba(
-            150,
-            105,
-            255,
-            0.24
-        );
+.chapter5-background::before {
+    width: 460px;
+    height: 460px;
+    top: 2%;
+    left: -180px;
+    background: rgba(150, 105, 255, 0.22);
+    animation: chapter5GlowFloat 12s ease-in-out infinite alternate;
 }
 
-
-.chapter5-glow-2 {
-
+.chapter5-background::after {
     width: 430px;
-
     height: 430px;
-
-    top: 38%;
-
     right: -170px;
-
-    background:
-        rgba(
-            215,
-            130,
-            245,
-            0.20
-        );
-
-    animation-delay: -4s;
+    top: 38%;
+    background: rgba(215, 130, 245, 0.18);
+    animation: chapter5GlowFloat 12s ease-in-out -4s infinite alternate;
 }
-
-
-.chapter5-glow-3 {
-
-    width: 500px;
-
-    height: 500px;
-
-    left: 30%;
-
-    bottom: -250px;
-
-    background:
-        rgba(
-            110,
-            80,
-            210,
-            0.18
-        );
-
-    animation-delay: -7s;
-}
-
 
 @keyframes chapter5GlowFloat {
-
     from {
-
-        transform:
-            translate3d(
-                0,
-                0,
-                0
-            )
-            scale(1);
-
+        transform: translate3d(0, 0, 0) scale(1);
     }
 
     to {
-
-        transform:
-            translate3d(
-                35px,
-                -30px,
-                0
-            )
-            scale(1.08);
-
+        transform: translate3d(35px, -30px, 0) scale(1.08);
     }
-
-}
-
-
-/* ==========================================================
-   FLOATING STARS
-   ========================================================== */
-
-.chapter5-star {
-
-    position: absolute;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    color:
-        rgba(
-            225,
-            205,
-            255,
-            0.65
-        );
-
-    text-shadow:
-        0 0 15px
-        rgba(
-            190,
-            150,
-            255,
-            0.55
-        );
-
-    animation:
-        chapter5StarFloat
-        7s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-.chapter5-star-1 {
-
-    top: 10%;
-
-    left: 8%;
-
-    font-size: 1.5rem;
-}
-
-
-.chapter5-star-2 {
-
-    top: 22%;
-
-    right: 9%;
-
-    font-size: 1rem;
-
-    animation-delay: -2s;
-}
-
-
-.chapter5-star-3 {
-
-    top: 48%;
-
-    left: 5%;
-
-    font-size: 1.15rem;
-
-    animation-delay: -4s;
-}
-
-
-.chapter5-star-4 {
-
-    top: 67%;
-
-    right: 7%;
-
-    font-size: 1.7rem;
-
-    animation-delay: -1s;
-}
-
-
-.chapter5-star-5 {
-
-    bottom: 15%;
-
-    left: 13%;
-
-    font-size: 0.9rem;
-
-    animation-delay: -5s;
-}
-
-
-@keyframes chapter5StarFloat {
-
-    from {
-
-        opacity: 0.25;
-
-        transform:
-            translateY(12px)
-            rotate(0deg);
-
-    }
-
-    to {
-
-        opacity: 0.8;
-
-        transform:
-            translateY(-18px)
-            rotate(15deg);
-
-    }
-
-}
-
-
-/* ==========================================================
-   FLOATING HEARTS
-   ========================================================== */
-
-.chapter5-heart {
-
-    position: absolute;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    color:
-        rgba(
-            239,
-            190,
-            255,
-            0.48
-        );
-
-    text-shadow:
-        0 0 18px
-        rgba(
-            210,
-            150,
-            255,
-            0.4
-        );
-
-    animation:
-        chapter5HeartFloat
-        9s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-
-.chapter5-heart-1 {
-
-    top: 31%;
-
-    left: 7%;
-
-    font-size: 1.3rem;
-}
-
-
-.chapter5-heart-2 {
-
-    top: 54%;
-
-    right: 6%;
-
-    font-size: 1.7rem;
-
-    animation-delay: -3s;
-}
-
-
-.chapter5-heart-3 {
-
-    bottom: 10%;
-
-    left: 8%;
-
-    font-size: 1rem;
-
-    animation-delay: -6s;
-}
-
-
-@keyframes chapter5HeartFloat {
-
-    from {
-
-        opacity: 0.15;
-
-        transform:
-            translateY(14px)
-            rotate(-8deg);
-
-    }
-
-    to {
-
-        opacity: 0.65;
-
-        transform:
-            translateY(-20px)
-            rotate(8deg);
-
-    }
-
 }
 
 
@@ -444,24 +112,11 @@
    ========================================================== */
 
 .chapter5-wrapper {
-
     position: relative;
-
     z-index: 5;
-
-    width:
-        min(
-            1000px,
-            calc(100% - 40px)
-        );
-
+    width: min(1000px, calc(100% - 40px));
     margin: 0 auto;
-
-    padding:
-        100px
-        0
-        180px;
-
+    padding: 100px 0 180px;
     box-sizing: border-box;
 }
 
@@ -471,198 +126,94 @@
    ========================================================== */
 
 .chapter5-intro {
-
     text-align: center;
-
-    margin-bottom: 60px;
+    margin-bottom: 55px;
 }
-
 
 .chapter5-label {
-
     display: inline-block;
-
     margin-bottom: 18px;
+    padding: 7px 18px;
 
-    padding:
-        7px
-        18px;
-
-    border:
-        1px solid
-        rgba(
-            215,
-            185,
-            255,
-            0.35
-        );
-
+    border: 1px solid rgba(215, 185, 255, 0.35);
     border-radius: 50px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.045
-        );
-
+    background: rgba(255, 255, 255, 0.045);
     backdrop-filter: blur(10px);
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     font-size: 0.7rem;
-
     letter-spacing: 0.3em;
-
     text-transform: uppercase;
-
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.9
-        );
+    color: rgba(235, 220, 255, 0.9);
 }
 
-
 .chapter5-intro h2 {
-
     margin: 0;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            3.5rem,
-            9vw,
-            6.5rem
-        );
-
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(3.2rem, 8vw, 6rem);
     font-weight: 400;
-
     line-height: 0.95;
 
     color: #f8f1ff;
 
     text-shadow:
-        0 0 35px
-        rgba(
-            190,
-            150,
-            255,
-            0.22
-        );
+        0 0 35px rgba(190, 150, 255, 0.22);
 }
 
-
 .chapter5-subtitle {
-
     max-width: 620px;
+    margin: 26px auto 0;
 
-    margin:
-        28px
-        auto
-        0;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
+    font-family: "Cormorant Garamond", serif;
     font-size: 1.35rem;
-
     font-style: italic;
+    line-height: 1.7;
 
-    line-height: 1.75;
-
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.88
-        );
+    color: rgba(235, 220, 255, 0.88);
 }
 
 
 /* ==========================================================
    GAME SELECTOR
-   Matches current HTML:
+   Matches:
    .chapter5-game-selector
    .chapter5-game-select
    ========================================================== */
 
 .chapter5-game-selector {
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: stretch;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
 
     width: 100%;
-
-    margin:
-        0
-        auto
-        45px;
+    margin: 0 auto 45px;
 
     position: relative;
-
     z-index: 20;
 }
 
-
 .chapter5-game-select {
+    width: 100%;
+    min-height: 120px;
+    padding: 20px 18px;
 
-    flex:
-        1
-        1
-        180px;
+    border: 1px solid rgba(215, 185, 255, 0.25);
+    border-radius: 18px;
 
-    max-width: 230px;
-
-    min-height: 90px;
-
-    padding:
-        14px
-        18px;
-
-    border:
-        1px solid
-        rgba(
-            215,
-            185,
-            255,
-            0.28
-        );
-
-    border-radius: 16px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.045
-        );
-
+    background: rgba(255, 255, 255, 0.045);
     color: #f8f1ff;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
 
     transition:
         transform 0.3s ease,
@@ -671,114 +222,49 @@
         box-shadow 0.3s ease;
 }
 
-
 .chapter5-game-select:hover {
+    transform: translateY(-4px);
 
-    transform:
-        translateY(-4px);
-
-    background:
-        rgba(
-            190,
-            150,
-            255,
-            0.10
-        );
-
-    border-color:
-        rgba(
-            225,
-            205,
-            255,
-            0.55
-        );
+    background: rgba(190, 150, 255, 0.10);
+    border-color: rgba(225, 205, 255, 0.55);
 
     box-shadow:
-        0 12px 35px
-        rgba(
-            100,
-            60,
-            170,
-            0.20
-        );
+        0 12px 35px rgba(100, 60, 170, 0.20);
 }
-
 
 .chapter5-game-select.active {
-
-    background:
-        rgba(
-            185,
-            145,
-            255,
-            0.15
-        );
-
-    border-color:
-        rgba(
-            225,
-            205,
-            255,
-            0.7
-        );
+    background: rgba(185, 145, 255, 0.15);
+    border-color: rgba(225, 205, 255, 0.70);
 
     box-shadow:
-        0 12px 40px
-        rgba(
-            110,
-            70,
-            190,
-            0.22
-        );
+        0 12px 40px rgba(110, 70, 190, 0.22);
 }
-
 
 .chapter5-game-icon {
-
     display: block;
+    margin-bottom: 8px;
 
-    margin-bottom: 5px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.5rem;
-
-    color:
-        #f2d9ff;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.7rem;
+    line-height: 1;
 }
 
-
 .chapter5-game-title {
-
     display: block;
 
     font-size: 0.78rem;
-
     font-weight: 500;
-
     letter-spacing: 0.04em;
-
-    margin-bottom: 5px;
 }
 
-
 .chapter5-game-description {
-
     display: block;
+    margin-top: 6px;
 
-    font-size: 0.65rem;
-
+    font-size: 0.68rem;
     line-height: 1.4;
 
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.62
-        );
+    color: rgba(235, 220, 255, 0.65);
 }
 
 
@@ -787,57 +273,30 @@
    ========================================================== */
 
 .chapter5-game-area {
-
     position: relative;
-
     width: 100%;
 }
-
-
-/* ==========================================================
-   INDIVIDUAL GAME
-   ========================================================== */
 
 .chapter5-game {
-
     display: none;
-
     width: 100%;
 }
 
-
 .chapter5-game.active {
-
     display: block;
-
-    animation:
-        chapter5GameReveal
-        0.6s
-        ease
-        forwards;
+    animation: chapter5GameReveal 0.6s ease forwards;
 }
 
-
 @keyframes chapter5GameReveal {
-
     from {
-
         opacity: 0;
-
-        transform:
-            translateY(20px);
-
+        transform: translateY(20px);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            translateY(0);
-
+        transform: translateY(0);
     }
-
 }
 
 
@@ -846,159 +305,109 @@
    ========================================================== */
 
 .chapter5-game-header {
-
     text-align: center;
-
-    margin-bottom: 35px;
+    margin-bottom: 28px;
 }
-
 
 .chapter5-game-number {
-
     display: block;
-
     margin-bottom: 8px;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.15rem;
-
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.1rem;
     letter-spacing: 0.15em;
 
-    color:
-        rgba(
-            220,
-            195,
-            255,
-            0.7
-        );
+    color: rgba(220, 195, 255, 0.70);
 }
 
-
 .chapter5-game-header h3 {
-
     margin: 0;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            2rem,
-            5vw,
-            3.2rem
-        );
-
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 400;
 
     color: #faf5ff;
 }
 
-
 .chapter5-game-header p {
-
     max-width: 600px;
+    margin: 10px auto 0;
 
-    margin:
-        12px
-        auto
-        0;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     font-size: 0.82rem;
-
     line-height: 1.7;
 
-    color:
-        rgba(
-            230,
-            215,
-            245,
-            0.72
-        );
+    color: rgba(230, 215, 245, 0.72);
 }
 
 
 /* ==========================================================
-   FIND MY HEARTS
-   Matches current HTML:
-   .chapter5-heart-board
+   GAME 1 — FIND MY HEARTS
    ========================================================== */
 
 .chapter5-heart-board {
-
     position: relative;
 
     width: 100%;
-
-    min-height: 390px;
+    height: 390px;
 
     overflow: hidden;
 
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.14
-        );
-
-    border-radius: 20px;
+    border: 1px solid rgba(220, 195, 255, 0.16);
+    border-radius: 22px;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(
-                150,
-                105,
-                220,
-                0.10
-            ),
+            rgba(150, 105, 220, 0.12),
             transparent 65%
-        );
+        ),
+        rgba(255, 255, 255, 0.025);
+
+    box-shadow:
+        inset 0 0 60px rgba(150, 105, 255, 0.04),
+        0 20px 60px rgba(0, 0, 0, 0.16);
 }
 
+.chapter5-heart-board::before {
+    content: "Find all five hidden hearts ♡";
 
-/* ==========================================================
-   HIDDEN HEART
-   ========================================================== */
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.1rem;
+    font-style: italic;
+
+    color: rgba(235, 220, 255, 0.16);
+}
 
 .chapter5-hunt-heart {
-
     position: absolute;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 45px;
-
     height: 45px;
-
     padding: 0;
 
     border: none;
-
     background: transparent;
 
-    color:
-        #f2d9ff;
-
+    color: #f2d9ff;
     font-size: 1.8rem;
 
     cursor: pointer;
-
-    opacity: 0.9;
-
+    opacity: 0.90;
     z-index: 15;
 
     transition:
@@ -1007,101 +416,77 @@
         filter 0.25s ease;
 }
 
-
 .chapter5-hunt-heart:hover {
-
-    transform:
-        scale(1.35);
+    transform: scale(1.35);
 
     filter:
         drop-shadow(
-            0 0 12px
-            rgba(
-                220,
-                170,
-                255,
-                0.8
-            )
+            0 0 12px rgba(220, 170, 255, 0.8)
         );
 }
 
-
 .chapter5-hunt-heart.found {
-
     opacity: 0;
-
-    transform:
-        scale(1.8);
-
+    transform: scale(1.8);
     pointer-events: none;
+}
+
+.chapter5-heart-board.heart-found {
+    animation: chapter5HeartBoardPulse 0.25s ease;
+}
+
+@keyframes chapter5HeartBoardPulse {
+    50% {
+        box-shadow:
+            inset 0 0 70px rgba(210, 160, 255, 0.18);
+    }
 }
 
 
 /* ==========================================================
-   MEMORY GAME
-   Matches current HTML:
-   .chapter5-memory-board
+   GAME 2 — MEMORY
    ========================================================== */
 
 .chapter5-memory-board {
-
     display: grid;
 
     grid-template-columns:
-        repeat(
-            4,
-            minmax(
-                70px,
-                1fr
-            )
-        );
+        repeat(4, minmax(70px, 1fr));
 
     gap: 14px;
 
+    width: 100%;
     max-width: 620px;
 
-    margin:
-        0
-        auto;
+    margin: 0 auto;
 }
 
-
 .chapter5-memory-card {
-
     position: relative;
 
     width: 100%;
-
     aspect-ratio: 1 / 1;
-
     min-height: 90px;
 
     padding: 0;
 
     border: none;
-
     background: transparent;
 
     cursor: pointer;
-
     perspective: 900px;
 }
 
-
 .chapter5-memory-card-inner {
-
     position: relative;
 
     width: 100%;
-
     height: 100%;
 
-    transform-style:
-        preserve-3d;
+    transform-style: preserve-3d;
 
     transition:
-        transform 0.55s
-        cubic-bezier(
+        transform 0.55s cubic-bezier(
             0.2,
             0.75,
             0.25,
@@ -1109,266 +494,142 @@
         );
 }
 
-
 .chapter5-memory-card.flipped
 .chapter5-memory-card-inner {
-
-    transform:
-        rotateY(180deg);
+    transform: rotateY(180deg);
 }
-
 
 .chapter5-memory-card-front,
 .chapter5-memory-card-back {
-
     position: absolute;
-
     inset: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.25
-        );
-
+    border: 1px solid rgba(220, 195, 255, 0.25);
     border-radius: 16px;
 
-    backface-visibility:
-        hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 
-    -webkit-backface-visibility:
-        hidden;
+    box-sizing: border-box;
 }
 
-
 .chapter5-memory-card-front {
-
     background:
         linear-gradient(
             145deg,
-            rgba(
-                185,
-                145,
-                255,
-                0.16
-            ),
-            rgba(
-                110,
-                75,
-                170,
-                0.10
-            )
+            rgba(185, 145, 255, 0.16),
+            rgba(110, 75, 170, 0.10)
         );
 
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.9
-        );
+    color: rgba(235, 220, 255, 0.90);
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
+    font-family: "Cormorant Garamond", serif;
     font-size: 1.8rem;
 }
 
-
 .chapter5-memory-card-back {
+    transform: rotateY(180deg);
 
-    transform:
-        rotateY(180deg);
-
-    background:
-        rgba(
-            255,
-            247,
-            255,
-            0.92
-        );
+    background: rgba(255, 247, 255, 0.94);
 
     color: #6f477f;
 
+    font-family: "Cormorant Garamond", serif;
     font-size: 2rem;
 }
 
-
 .chapter5-memory-card:hover
 .chapter5-memory-card-front {
-
-    border-color:
-        rgba(
-            230,
-            210,
-            255,
-            0.65
-        );
+    border-color: rgba(230, 210, 255, 0.65);
 
     box-shadow:
-        0 8px 25px
-        rgba(
-            130,
-            85,
-            210,
-            0.18
-        );
+        0 8px 25px rgba(130, 85, 210, 0.18);
 }
-
 
 .chapter5-memory-card.matched
 .chapter5-memory-card-back {
-
     box-shadow:
-        inset
-        0 0 0 2px
-        rgba(
-            190,
-            145,
-            255,
-            0.45
-        );
+        inset 0 0 0 2px rgba(190, 145, 255, 0.45);
 }
 
 
 /* ==========================================================
-   QUIZ
-   Matches current HTML + JS:
-   .chapter5-quiz-container
-   .chapter5-quiz-answers
-   .chapter5-quiz-answer
+   GAME 3 — QUIZ
    ========================================================== */
 
 .chapter5-quiz-container {
-
+    width: 100%;
     max-width: 700px;
 
-    margin:
-        0
-        auto;
-}
+    margin: 0 auto;
+    padding: 35px;
 
+    box-sizing: border-box;
+
+    border: 1px solid rgba(220, 195, 255, 0.20);
+    border-radius: 24px;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.20);
+}
 
 .chapter5-quiz-progress {
-
-    width: 100%;
-
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 
     text-align: center;
 
-    font-family:
-        "Poppins",
-        sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 
-    font-size: 0.72rem;
-
-    letter-spacing: 0.08em;
-
-    color:
-        rgba(
-            230,
-            215,
-            250,
-            0.7
-        );
+    color: rgba(225, 210, 245, 0.60);
 }
-
 
 .chapter5-quiz-question {
-
-    margin:
-        0
-        0
-        30px;
+    margin: 0 0 28px;
 
     text-align: center;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            1.5rem,
-            4vw,
-            2.1rem
-        );
-
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
     font-weight: 400;
+    line-height: 1.4;
 
-    line-height: 1.45;
-
-    color:
-        #fff7ff;
+    color: #fff7ff;
 }
 
-
 .chapter5-quiz-answers {
-
     display: grid;
 
     grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
+        repeat(2, minmax(0, 1fr));
 
     gap: 14px;
 }
 
-
 .chapter5-quiz-answer {
-
     width: 100%;
-
     min-height: 65px;
+    padding: 14px 18px;
 
-    padding:
-        14px
-        18px;
-
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.25
-        );
-
+    border: 1px solid rgba(220, 195, 255, 0.25);
     border-radius: 15px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.045
-        );
+    background: rgba(255, 255, 255, 0.045);
 
-    color:
-        #f5ecff;
+    color: #f5ecff;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     font-size: 0.75rem;
-
     line-height: 1.5;
 
     cursor: pointer;
@@ -1379,130 +640,46 @@
         border-color 0.25s ease;
 }
 
+.chapter5-quiz-answer:hover:not(:disabled) {
+    transform: translateY(-2px);
 
-.chapter5-quiz-answer:hover {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        rgba(
-            190,
-            150,
-            255,
-            0.12
-        );
-
-    border-color:
-        rgba(
-            230,
-            210,
-            255,
-            0.6
-        );
+    background: rgba(190, 150, 255, 0.12);
+    border-color: rgba(230, 210, 255, 0.60);
 }
-
 
 .chapter5-quiz-answer.correct {
-
-    background:
-        rgba(
-            150,
-            220,
-            180,
-            0.15
-        );
-
-    border-color:
-        rgba(
-            170,
-            240,
-            200,
-            0.55
-        );
+    background: rgba(150, 220, 180, 0.15);
+    border-color: rgba(170, 240, 200, 0.55);
 }
-
 
 .chapter5-quiz-answer.wrong {
-
-    background:
-        rgba(
-            255,
-            130,
-            160,
-            0.13
-        );
-
-    border-color:
-        rgba(
-            255,
-            170,
-            190,
-            0.5
-        );
+    background: rgba(255, 130, 160, 0.13);
+    border-color: rgba(255, 170, 190, 0.50);
 }
 
-
 .chapter5-quiz-answer:disabled {
-
     cursor: default;
 }
 
-
-/* ==========================================================
-   QUIZ FEEDBACK
-   ========================================================== */
-
 .chapter5-quiz-feedback {
-
-    min-height: 30px;
-
-    margin:
-        24px
-        auto
-        0;
+    min-height: 28px;
+    margin: 20px 0 0;
 
     text-align: center;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
+    font-family: "Cormorant Garamond", serif;
     font-size: 1.2rem;
-
     font-style: italic;
 
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.9
-        );
+    color: rgba(235, 220, 255, 0.90);
 }
-
 
 .chapter5-quiz-feedback.correct {
-
-    color:
-        rgba(
-            190,
-            255,
-            215,
-            0.95
-        );
+    color: rgba(190, 245, 210, 0.95);
 }
 
-
 .chapter5-quiz-feedback.wrong {
-
-    color:
-        rgba(
-            255,
-            190,
-            205,
-            0.95
-        );
+    color: rgba(255, 190, 205, 0.95);
 }
 
 
@@ -1511,127 +688,107 @@
    ========================================================== */
 
 .chapter5-game-status {
-
     display: flex;
-
-    justify-content: space-between;
-
     align-items: center;
+    justify-content: space-between;
 
     gap: 15px;
 
-    margin-top: 25px;
+    width: 100%;
+    max-width: 620px;
 
-    padding:
-        12px
-        18px;
+    margin: 20px auto 25px;
+    padding: 12px 18px;
 
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.16
-        );
+    box-sizing: border-box;
 
+    border: 1px solid rgba(220, 195, 255, 0.16);
     border-radius: 14px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.035
-        );
+    background: rgba(255, 255, 255, 0.035);
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     font-size: 0.75rem;
 
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.75
-        );
+    color: rgba(235, 220, 255, 0.75);
+}
+
+.chapter5-game-status strong {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+
+    color: #f7efff;
 }
 
 
-.chapter5-game-status strong {
+/* ==========================================================
+   GAME MESSAGE
+   Created dynamically by chapter5.js
+   ========================================================== */
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+.chapter5-game-message {
+    min-height: 28px;
 
-    font-size: 1.35rem;
+    margin: 20px auto;
 
-    font-weight: 500;
+    text-align: center;
 
-    color:
-        #f7efff;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.2rem;
+    font-style: italic;
+
+    color: rgba(235, 220, 255, 0.90);
+
+    animation:
+        chapter5MessageReveal
+        0.45s
+        ease
+        forwards;
+}
+
+@keyframes chapter5MessageReveal {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
 /* ==========================================================
    GAME BUTTONS
-   Matches current HTML:
+   Matches:
    .chapter5-game-button
    ========================================================== */
 
 .chapter5-game-button {
-
-    display: block;
-
-    margin:
-        20px
-        auto
-        0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     min-height: 44px;
+    padding: 11px 22px;
 
-    padding:
-        11px
-        24px;
-
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.45
-        );
-
+    border: 1px solid rgba(220, 195, 255, 0.45);
     border-radius: 50px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.07
-        );
+    background: rgba(255, 255, 255, 0.07);
 
-    color:
-        #f8f1ff;
+    color: #f8f1ff;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     font-size: 0.75rem;
-
     letter-spacing: 0.04em;
 
     cursor: pointer;
 
-    position: relative;
-
-    z-index: 20;
+    display: flex;
+    margin: 0 auto;
 
     transition:
         transform 0.3s ease,
@@ -1640,927 +797,205 @@
         box-shadow 0.3s ease;
 }
 
-
 .chapter5-game-button:hover {
+    transform: translateY(-3px);
 
-    transform:
-        translateY(-3px);
-
-    background:
-        rgba(
-            190,
-            150,
-            255,
-            0.15
-        );
-
-    border-color:
-        rgba(
-            235,
-            220,
-            255,
-            0.75
-        );
+    background: rgba(190, 150, 255, 0.15);
+    border-color: rgba(235, 220, 255, 0.75);
 
     box-shadow:
-        0 10px 30px
-        rgba(
-            130,
-            85,
-            210,
-            0.20
-        );
+        0 10px 30px rgba(130, 85, 210, 0.20);
 }
-
 
 .chapter5-game-button:active {
-
-    transform:
-        translateY(0);
-}
-
-
-.chapter5-game-button:disabled {
-
-    opacity: 0.35;
-
-    cursor:
-        not-allowed;
-
-    transform: none;
-
-    box-shadow: none;
-}
-
-
-/* ==========================================================
-   GAME MESSAGE
-   ========================================================== */
-
-.chapter5-game-message {
-
-    min-height: 28px;
-
-    margin:
-        20px
-        auto;
-
-    text-align: center;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.2rem;
-
-    font-style: italic;
-
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.9
-        );
+    transform: translateY(0);
 }
 
 
 /* ==========================================================
    COMPLETION
-   Matches current HTML:
-   .chapter5-completion
    ========================================================== */
 
 .chapter5-completion {
+    max-width: 650px;
 
-    max-width: 600px;
+    margin: 70px auto 0;
+    padding: 45px 30px;
 
-    margin:
-        70px
-        auto
-        0;
-
-    padding:
-        30px
-        25px;
+    box-sizing: border-box;
 
     text-align: center;
 
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.25
-        );
-
-    border-radius: 20px;
+    border: 1px solid rgba(220, 195, 255, 0.25);
+    border-radius: 24px;
 
     background:
-        rgba(
-            190,
-            145,
-            255,
-            0.08
-        );
+        rgba(190, 145, 255, 0.08);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.18);
 
     animation:
-        chapter5CompleteReveal
+        chapter5CompletionReveal
         0.7s
         ease
         forwards;
 }
 
-
 .chapter5-completion[hidden] {
-
     display: none;
 }
 
-
-.chapter5-completion.show {
-
+.chapter5-completion:not([hidden]) {
     display: block;
 }
 
-
 .chapter5-completion-symbol {
-
     margin-bottom: 10px;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.4rem;
 
-    font-size: 2rem;
-
-    color:
-        #e1c6ff;
+    color: #e1c6ff;
 }
-
 
 .chapter5-completion h3 {
+    margin: 0 0 15px;
 
-    margin:
-        0
-        0
-        10px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 2rem;
-
+    font-family: "Cormorant Garamond", serif;
+    font-size: 2.2rem;
     font-weight: 400;
 
-    color:
-        #fff5ff;
+    color: #fff5ff;
 }
-
 
 .chapter5-completion p {
+    max-width: 560px;
+    margin: 10px auto 0;
 
-    margin:
-        8px
-        0;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
+    font-family: "Poppins", sans-serif;
     font-size: 0.78rem;
+    line-height: 1.8;
 
-    line-height: 1.7;
-
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.75
-        );
+    color: rgba(235, 220, 255, 0.75);
 }
 
+.chapter5-completion.show {
+    display: block;
+}
 
-@keyframes chapter5CompleteReveal {
-
+@keyframes chapter5CompletionReveal {
     from {
-
         opacity: 0;
-
-        transform:
-            translateY(15px)
-            scale(0.97);
-
+        transform: translateY(15px) scale(0.97);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
+        transform: translateY(0) scale(1);
     }
-
 }
 
 
 /* ==========================================================
-   CHAPTER 5 ENDING
+   ENDING
    ========================================================== */
 
 .chapter5-ending {
-
     max-width: 700px;
 
-    margin:
-        110px
-        auto
-        0;
+    margin: 100px auto 0;
 
     text-align: center;
 }
 
-
 .chapter5-ending-symbol {
+    margin: 15px 0;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
+    font-family: "Cormorant Garamond", serif;
     font-size: 2rem;
 
-    color:
-        rgba(
-            220,
-            185,
-            255,
-            0.85
-        );
+    color: rgba(225, 198, 255, 0.80);
 }
-
 
 .chapter5-ending p {
-
-    max-width: 580px;
-
-    margin:
-        20px
-        auto
-        15px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.3rem;
-
-    font-style: italic;
-
-    line-height: 1.8;
-
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.84
-        );
-}
-
-
-.chapter5-ending h3 {
-
     margin: 0;
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.7;
 
-    font-size:
-        clamp(
-            2rem,
-            5vw,
-            3rem
-        );
+    color: rgba(235, 220, 255, 0.78);
+}
 
+.chapter5-ending h3 {
+    margin: 10px 0;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     font-weight: 400;
 
-    color:
-        #fff5ff;
+    color: #faf3ff;
 }
 
 
 /* ==========================================================
-   CONTINUE SECTION
+   CONTINUE TO CHAPTER VI
    ========================================================== */
 
 .chapter5-continue-section {
-
-    margin-top: 100px;
-
-    padding:
-        65px
-        0
-        20px;
+    margin-top: 70px;
 
     text-align: center;
-
-    border-top:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.18
-        );
-
-    position: relative;
-
-    z-index: 30;
 }
-
 
 .chapter5-continue-section p {
+    margin-bottom: 18px;
 
-    margin:
-        0
-        auto
-        28px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.3rem;
-
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.25rem;
     font-style: italic;
 
-    color:
-        rgba(
-            235,
-            220,
-            255,
-            0.85
-        );
+    color: rgba(235, 220, 255, 0.78);
 }
 
-
 .chapter5-continue {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
-    padding:
-        15px
-        32px;
+    min-height: 50px;
+    padding: 13px 28px;
 
-    border:
-        1px solid
-        rgba(
-            220,
-            195,
-            255,
-            0.55
-        );
-
+    border: 1px solid rgba(225, 205, 255, 0.55);
     border-radius: 50px;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.08
-        );
+    background: rgba(185, 145, 255, 0.13);
 
-    color:
-        #f8f1ff;
+    color: #faf3ff;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 0.82rem;
-
-    letter-spacing: 0.05em;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
 
     cursor: pointer;
 
-    position: relative;
-
-    z-index: 50;
-
     transition:
-        transform 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
-
 
 .chapter5-continue:hover {
+    transform: translateY(-3px);
 
-    transform:
-        translateY(-4px);
-
-    background:
-        rgba(
-            190,
-            150,
-            255,
-            0.16
-        );
-
-    border-color:
-        rgba(
-            230,
-            210,
-            255,
-            0.8
-        );
+    background: rgba(195, 155, 255, 0.22);
+    border-color: rgba(235, 220, 255, 0.80);
 
     box-shadow:
-        0 12px 40px
-        rgba(
-            160,
-            105,
-            230,
-            0.18
-        );
-}
-
-
-.chapter5-continue:active {
-
-    transform:
-        translateY(0);
-}
-
-
-/* ==========================================================
-   TABLET
-   ========================================================== */
-
-@media (max-width: 768px) {
-
-    #chapter5 {
-
-        min-height: 100vh;
-
-        height: auto;
-    }
-
-
-    .chapter5-wrapper {
-
-        width:
-            calc(100% - 30px);
-
-        padding:
-            75px
-            0
-            140px;
-    }
-
-
-    .chapter5-intro {
-
-        margin-bottom: 45px;
-    }
-
-
-    .chapter5-game-selector {
-
-        gap: 8px;
-    }
-
-
-    .chapter5-game-select {
-
-        flex:
-            1
-            1
-            145px;
-
-        max-width: none;
-
-        min-height: 80px;
-
-        padding:
-            10px
-            12px;
-    }
-
-
-    .chapter5-heart-board {
-
-        min-height: 360px;
-    }
-
-
-    .chapter5-memory-board {
-
-        gap: 10px;
-    }
-
-
-    .chapter5-memory-card {
-
-        min-height: 75px;
-    }
-
-
-    .chapter5-ending {
-
-        margin-top: 85px;
-    }
-
-
-    .chapter5-continue-section {
-
-        margin-top: 80px;
-    }
-
-}
-
-
-/* ==========================================================
-   MOBILE
-   ========================================================== */
-
-@media (max-width: 480px) {
-
-    #chapter5 {
-
-        min-height: 100vh;
-
-        height: auto;
-
-        overflow-x: hidden;
-
-        overflow-y: visible;
-    }
-
-
-    .chapter5-wrapper {
-
-        width:
-            calc(100% - 22px);
-
-        padding:
-            60px
-            0
-            110px;
-    }
-
-
-    /* INTRO */
-
-    .chapter5-intro h2 {
-
-        font-size: 3.25rem;
-    }
-
-
-    .chapter5-subtitle {
-
-        font-size: 1.15rem;
-    }
-
-
-    /* GAME SELECTOR */
-
-    .chapter5-game-selector {
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(
-                3,
-                1fr
-            );
-
-        gap: 6px;
-
-        margin-bottom: 30px;
-    }
-
-
-    .chapter5-game-select {
-
-        min-width: 0;
-
-        min-height: 75px;
-
-        padding:
-            8px
-            4px;
-
-        border-radius: 11px;
-    }
-
-
-    .chapter5-game-icon {
-
-        font-size: 1.05rem;
-
-        margin-bottom: 3px;
-    }
-
-
-    .chapter5-game-title {
-
-        font-size: 0.57rem;
-
-        letter-spacing: 0;
-    }
-
-
-    .chapter5-game-description {
-
-        font-size: 0.48rem;
-
-        line-height: 1.3;
-    }
-
-
-    /* GAME HEADER */
-
-    .chapter5-game-header {
-
-        margin-bottom: 25px;
-    }
-
-
-    .chapter5-game-number {
-
-        font-size: 1rem;
-    }
-
-
-    .chapter5-game-header h3 {
-
-        font-size: 2rem;
-    }
-
-
-    .chapter5-game-header p {
-
-        font-size: 0.72rem;
-    }
-
-
-    /* STATUS */
-
-    .chapter5-game-status {
-
-        gap: 5px;
-
-        padding:
-            9px
-            7px;
-    }
-
-
-    .chapter5-game-status strong {
-
-        font-size: 1.05rem;
-    }
-
-
-    /* GAME BUTTON */
-
-    .chapter5-game-button {
-
-        min-height: 40px;
-
-        padding:
-            9px
-            15px;
-
-        font-size: 0.65rem;
-    }
-
-
-    /* HEART HUNT */
-
-    .chapter5-heart-board {
-
-        min-height: 320px;
-
-        border-radius: 15px;
-    }
-
-
-    .chapter5-hunt-heart {
-
-        width: 40px;
-
-        height: 40px;
-
-        font-size: 1.55rem;
-    }
-
-
-    /* MEMORY */
-
-    .chapter5-memory-board {
-
-        grid-template-columns:
-            repeat(
-                4,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-
-        gap: 7px;
-    }
-
-
-    .chapter5-memory-card {
-
-        min-height: 0;
-    }
-
-
-    .chapter5-memory-card-front {
-
-        font-size: 1.4rem;
-
-        border-radius: 11px;
-    }
-
-
-    .chapter5-memory-card-back {
-
-        font-size: 1.55rem;
-
-        border-radius: 11px;
-    }
-
-
-    /* QUIZ */
-
-    .chapter5-quiz-question {
-
-        font-size: 1.45rem;
-    }
-
-
-    .chapter5-quiz-answers {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 9px;
-    }
-
-
-    .chapter5-quiz-answer {
-
-        min-height: 55px;
-
-        padding:
-            11px
-            12px;
-
-        font-size: 0.68rem;
-    }
-
-
-    /* COMPLETION */
-
-    .chapter5-completion {
-
-        margin-top: 25px;
-
-        padding:
-            22px
-            16px;
-    }
-
-
-    /* ENDING */
-
-    .chapter5-ending {
-
-        margin-top: 70px;
-    }
-
-
-    .chapter5-ending h3 {
-
-        font-size: 2.15rem;
-    }
-
-
-    .chapter5-ending p {
-
-        font-size: 1.15rem;
-    }
-
-
-    /* CONTINUE */
-
-    .chapter5-continue-section {
-
-        margin-top: 70px;
-
-        padding-top: 50px;
-    }
-
-
-    .chapter5-continue {
-
-        padding:
-            13px
-            25px;
-
-        font-size: 0.72rem;
-    }
-
-
-    /* DECORATIONS */
-
-    .chapter5-heart-1 {
-
-        left: 2%;
-    }
-
-
-    .chapter5-heart-2 {
-
-        right: 2%;
-    }
-
-
-    .chapter5-heart-3 {
-
-        left: 4%;
-    }
-
-
-    .chapter5-star-1 {
-
-        left: 3%;
-    }
-
-
-    .chapter5-star-2 {
-
-        right: 3%;
-    }
-
-}
-
-
-/* ==========================================================
-   EXTRA SMALL DEVICES
-   ========================================================== */
-
-@media (max-width: 360px) {
-
-    .chapter5-wrapper {
-
-        width:
-            calc(100% - 16px);
-    }
-
-
-    .chapter5-game-title {
-
-        font-size: 0.52rem;
-    }
-
-
-    .chapter5-game-description {
-
-        display: none;
-    }
-
-
-    .chapter5-memory-board {
-
-        gap: 5px;
-    }
-
-
-    .chapter5-memory-card-front,
-    .chapter5-memory-card-back {
-
-        border-radius: 8px;
-    }
-
+        0 12px 35px rgba(130, 85, 210, 0.22);
 }
 
 
@@ -2569,22 +1004,195 @@
    ========================================================== */
 
 .chapter5-game-select:focus-visible,
-.chapter5-game-button:focus-visible,
-.chapter5-quiz-answer:focus-visible,
 .chapter5-hunt-heart:focus-visible,
 .chapter5-memory-card:focus-visible,
+.chapter5-quiz-answer:focus-visible,
+.chapter5-game-button:focus-visible,
 .chapter5-continue:focus-visible {
+    outline: 2px solid rgba(235, 220, 255, 0.90);
+    outline-offset: 4px;
+}
 
-    outline:
-        2px solid
-        rgba(
-            230,
-            210,
-            255,
-            0.9
-        );
 
-    outline-offset: 3px;
+/* ==========================================================
+   RESPONSIVE — TABLET
+   ========================================================== */
+
+@media (max-width: 800px) {
+
+    .chapter5-wrapper {
+        width: min(100% - 28px, 680px);
+        padding-top: 75px;
+        padding-bottom: 130px;
+    }
+
+    .chapter5-game-selector {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+    }
+
+    .chapter5-game-select {
+        min-height: 95px;
+    }
+
+    .chapter5-heart-board {
+        height: 350px;
+    }
+
+    .chapter5-memory-board {
+        grid-template-columns:
+            repeat(3, minmax(70px, 1fr));
+
+        max-width: 500px;
+    }
+
+    .chapter5-quiz-container {
+        padding: 28px 22px;
+    }
+}
+
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+   ========================================================== */
+
+@media (max-width: 520px) {
+
+    .chapter5-wrapper {
+        width: calc(100% - 22px);
+        padding-top: 55px;
+        padding-bottom: 100px;
+    }
+
+    .chapter5-intro {
+        margin-bottom: 40px;
+    }
+
+    .chapter5-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+    }
+
+    .chapter5-intro h2 {
+        font-size: clamp(2.8rem, 14vw, 4.2rem);
+    }
+
+    .chapter5-subtitle {
+        font-size: 1.15rem;
+        line-height: 1.6;
+    }
+
+    .chapter5-game-selector {
+        gap: 10px;
+        margin-bottom: 35px;
+    }
+
+    .chapter5-game-select {
+        min-height: 90px;
+        padding: 15px;
+    }
+
+    .chapter5-game-icon {
+        font-size: 1.45rem;
+    }
+
+    .chapter5-game-title {
+        font-size: 0.72rem;
+    }
+
+    .chapter5-game-description {
+        font-size: 0.62rem;
+    }
+
+    .chapter5-game-header {
+        margin-bottom: 22px;
+    }
+
+    .chapter5-game-header h3 {
+        font-size: 2rem;
+    }
+
+    .chapter5-game-header p {
+        font-size: 0.72rem;
+    }
+
+    .chapter5-heart-board {
+        height: 300px;
+        border-radius: 18px;
+    }
+
+    .chapter5-hunt-heart {
+        width: 40px;
+        height: 40px;
+        font-size: 1.55rem;
+    }
+
+    .chapter5-memory-board {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap: 9px;
+    }
+
+    .chapter5-memory-card {
+        min-height: 72px;
+    }
+
+    .chapter5-memory-card-front {
+        font-size: 1.5rem;
+    }
+
+    .chapter5-memory-card-back {
+        font-size: 1.65rem;
+    }
+
+    .chapter5-quiz-container {
+        padding: 25px 16px;
+        border-radius: 20px;
+    }
+
+    .chapter5-quiz-answers {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .chapter5-quiz-answer {
+        min-height: 56px;
+    }
+
+    .chapter5-game-status {
+        font-size: 0.68rem;
+    }
+
+    .chapter5-game-status strong {
+        font-size: 1.15rem;
+    }
+
+    .chapter5-completion {
+        margin-top: 55px;
+        padding: 35px 20px;
+    }
+
+    .chapter5-completion h3 {
+        font-size: 1.9rem;
+    }
+
+    .chapter5-ending {
+        margin-top: 70px;
+    }
+
+    .chapter5-ending p {
+        font-size: 1.1rem;
+    }
+
+    .chapter5-continue-section {
+        margin-top: 55px;
+    }
+
+    .chapter5-continue {
+        width: 100%;
+        max-width: 320px;
+    }
 }
 
 
@@ -2594,22 +1202,20 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    .chapter5-glow,
-    .chapter5-star,
-    .chapter5-heart,
-    .chapter5-game {
-
+    .chapter5-background::before,
+    .chapter5-background::after,
+    .chapter5-game.active,
+    .chapter5-completion,
+    .chapter5-game-message {
         animation: none;
     }
 
-
     .chapter5-game-select,
-    .chapter5-game-button,
-    .chapter5-continue,
+    .chapter5-hunt-heart,
     .chapter5-memory-card-inner,
-    .chapter5-hunt-heart {
-
+    .chapter5-quiz-answer,
+    .chapter5-game-button,
+    .chapter5-continue {
         transition: none;
     }
-
 }
