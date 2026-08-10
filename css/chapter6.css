@@ -7,26 +7,6 @@
 
 
 /* ==========================================================
-   CHAPTER VI VISIBILITY
-========================================================== */
-
-/*
-   Chapter VI should NOT appear when the website first loads.
-
-   JavaScript should add the "active" class when navigating
-   into Chapter VI.
-*/
-
-#chapter6 {
-    display: none;
-}
-
-#chapter6.active {
-    display: block;
-}
-
-
-/* ==========================================================
    CHAPTER VI ROOT
 ========================================================== */
 
@@ -34,11 +14,24 @@
 
     position: relative;
 
-    min-height: 100vh;
-
     width: 100%;
 
-    overflow: hidden;
+    min-height: 100vh;
+
+    height: auto;
+
+    /*
+        IMPORTANT:
+        Chapter VI must be hidden until navigation
+        activates it.
+    */
+    display: none;
+
+    overflow-x: hidden;
+
+    overflow-y: visible;
+
+    box-sizing: border-box;
 
     background:
         radial-gradient(
@@ -70,6 +63,25 @@
     color: #fff;
 
     isolation: isolate;
+
+}
+
+
+/* ==========================================================
+   CHAPTER VI ACTIVE STATE
+   IMPORTANT — DO NOT REMOVE
+========================================================== */
+
+#chapter6.active {
+
+    display: block;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    height: auto;
+
 }
 
 
@@ -92,6 +104,7 @@
     pointer-events: none;
 
     z-index: 0;
+
 }
 
 
@@ -130,6 +143,7 @@
     filter: blur(10px);
 
     opacity: 0.9;
+
 }
 
 
@@ -159,6 +173,7 @@
         );
 
     filter: blur(25px);
+
 }
 
 
@@ -201,6 +216,7 @@
         rgba(255, 127, 206, 0.18);
 
     opacity: 0.92;
+
 }
 
 
@@ -237,6 +253,7 @@
 
         -8px 55px 0
         rgba(178, 125, 193, 0.10);
+
 }
 
 
@@ -260,12 +277,16 @@
         3s
         ease-in-out
         infinite;
+
 }
 
 
 .chapter6-sky-star-1 {
+
     top: 15%;
+
     left: 12%;
+
 }
 
 
@@ -276,6 +297,7 @@
     left: 34%;
 
     animation-delay: 0.8s;
+
 }
 
 
@@ -286,6 +308,7 @@
     left: 55%;
 
     animation-delay: 1.4s;
+
 }
 
 
@@ -296,6 +319,7 @@
     right: 26%;
 
     animation-delay: 0.4s;
+
 }
 
 
@@ -306,6 +330,7 @@
     left: 8%;
 
     animation-delay: 1.8s;
+
 }
 
 
@@ -316,6 +341,7 @@
     right: 12%;
 
     animation-delay: 1.1s;
+
 }
 
 
@@ -326,6 +352,7 @@
     left: 20%;
 
     animation-delay: 2s;
+
 }
 
 
@@ -336,6 +363,7 @@
     right: 28%;
 
     animation-delay: 0.6s;
+
 }
 
 
@@ -363,6 +391,7 @@
         chapter6FlowerFall
         linear
         infinite;
+
 }
 
 
@@ -377,6 +406,7 @@
     animation-duration: 12s;
 
     animation-delay: -2s;
+
 }
 
 
@@ -389,6 +419,7 @@
     animation-delay: -8s;
 
     font-size: 0.95rem;
+
 }
 
 
@@ -399,6 +430,7 @@
     animation-duration: 13s;
 
     animation-delay: -5s;
+
 }
 
 
@@ -411,6 +443,7 @@
     animation-delay: -11s;
 
     font-size: 1rem;
+
 }
 
 
@@ -421,6 +454,7 @@
     animation-duration: 14s;
 
     animation-delay: -4s;
+
 }
 
 
@@ -433,6 +467,7 @@
     animation-delay: -9s;
 
     font-size: 0.9rem;
+
 }
 
 
@@ -443,6 +478,7 @@
     animation-duration: 13s;
 
     animation-delay: -6s;
+
 }
 
 
@@ -455,6 +491,7 @@
     animation-delay: -13s;
 
     font-size: 1rem;
+
 }
 
 
@@ -479,6 +516,7 @@
         100px
         0
         120px;
+
 }
 
 
@@ -495,6 +533,7 @@
     margin: 0 auto 70px;
 
     text-align: center;
+
 }
 
 
@@ -533,6 +572,7 @@
     letter-spacing: 0.2em;
 
     text-transform: uppercase;
+
 }
 
 
@@ -570,6 +610,7 @@
 
         0 0 40px
         rgba(187, 115, 255, 0.22);
+
 }
 
 
@@ -595,6 +636,7 @@
     font-weight: 300;
 
     line-height: 1.9;
+
 }
 
 
@@ -612,6 +654,7 @@
     font-size: 0.9rem;
 
     letter-spacing: 0.4em;
+
 }
 
 
@@ -642,6 +685,7 @@
 
     color:
         rgba(255, 220, 244, 0.75);
+
 }
 
 
@@ -650,6 +694,7 @@
     color: #ffd0ef;
 
     font-weight: 500;
+
 }
 
 
@@ -674,6 +719,7 @@
 
     background:
         rgba(255, 255, 255, 0.08);
+
 }
 
 
@@ -703,6 +749,7 @@
     transition:
         width 0.6s
         ease;
+
 }
 
 
@@ -745,6 +792,7 @@
 
         0 20px 70px
         rgba(7, 3, 20, 0.25);
+
 }
 
 
@@ -770,6 +818,7 @@
         );
 
     pointer-events: none;
+
 }
 
 
@@ -837,6 +886,7 @@
         3s
         ease-in-out
         infinite;
+
 }
 
 
@@ -864,6 +914,7 @@
 
         0 0 45px
         #d990ff;
+
 }
 
 
@@ -878,6 +929,7 @@
         rgba(255, 209, 244, 0.9);
 
     outline-offset: 7px;
+
 }
 
 
@@ -894,6 +946,7 @@
         both;
 
     pointer-events: none;
+
 }
 
 
@@ -915,6 +968,7 @@
         0.8s
         ease
         forwards;
+
 }
 
 
@@ -949,6 +1003,7 @@
     white-space: nowrap;
 
     pointer-events: none;
+
 }
 
 
@@ -1022,6 +1077,7 @@
         transform 0.4s ease,
 
         visibility 0.4s ease;
+
 }
 
 
@@ -1041,6 +1097,7 @@
             -50%
         )
         scale(1);
+
 }
 
 
@@ -1062,6 +1119,7 @@
     text-shadow:
         0 0 15px
         rgba(255, 174, 228, 0.75);
+
 }
 
 
@@ -1090,6 +1148,7 @@
     font-weight: 500;
 
     line-height: 1.45;
+
 }
 
 
@@ -1111,6 +1170,7 @@
     font-size: 0.65rem;
 
     letter-spacing: 0.12em;
+
 }
 
 
@@ -1132,6 +1192,7 @@
 
     background:
         rgba(255, 255, 255, 0.08);
+
 }
 
 
@@ -1149,6 +1210,7 @@
             #d28aff,
             #ff9bd6
         );
+
 }
 
 
@@ -1208,6 +1270,7 @@
         opacity 0.8s ease,
 
         transform 0.8s ease;
+
 }
 
 
@@ -1217,6 +1280,7 @@
 
     transform:
         translateY(0);
+
 }
 
 
@@ -1248,6 +1312,7 @@
         2.5s
         ease-in-out
         infinite;
+
 }
 
 
@@ -1274,6 +1339,7 @@
         );
 
     font-weight: 500;
+
 }
 
 
@@ -1302,6 +1368,7 @@
     font-weight: 300;
 
     line-height: 1.9;
+
 }
 
 
@@ -1324,6 +1391,7 @@
             3vw,
             2rem
         ) !important;
+
 }
 
 
@@ -1341,6 +1409,7 @@
         0;
 
     text-align: center;
+
 }
 
 
@@ -1354,6 +1423,7 @@
     text-shadow:
         0 0 15px
         rgba(255, 181, 232, 0.65);
+
 }
 
 
@@ -1374,6 +1444,7 @@
     font-size: 0.9rem;
 
     line-height: 1.8;
+
 }
 
 
@@ -1399,6 +1470,7 @@
         );
 
     font-weight: 500;
+
 }
 
 
@@ -1416,6 +1488,7 @@
         0;
 
     text-align: center;
+
 }
 
 
@@ -1431,6 +1504,7 @@
         sans-serif;
 
     font-size: 0.82rem;
+
 }
 
 
@@ -1497,6 +1571,7 @@
         border-color 0.3s ease,
 
         box-shadow 0.3s ease;
+
 }
 
 
@@ -1523,6 +1598,7 @@
 
         0 0 25px
         rgba(255, 145, 214, 0.16);
+
 }
 
 
@@ -1533,6 +1609,7 @@
         rgba(255, 215, 244, 0.9);
 
     outline-offset: 5px;
+
 }
 
 
@@ -1543,6 +1620,7 @@
 #chapter6Completion[hidden] {
 
     display: none;
+
 }
 
 
@@ -1559,6 +1637,7 @@
 
         transform:
             scale(0.8);
+
     }
 
     50% {
@@ -1567,7 +1646,9 @@
 
         transform:
             scale(1.25);
+
     }
+
 }
 
 
@@ -1584,6 +1665,7 @@
 
         transform:
             scale(0.9);
+
     }
 
     50% {
@@ -1592,7 +1674,9 @@
 
         transform:
             scale(1.08);
+
     }
+
 }
 
 
@@ -1609,6 +1693,7 @@
 
         filter:
             brightness(1);
+
     }
 
     50% {
@@ -1618,6 +1703,7 @@
 
         filter:
             brightness(1.8);
+
     }
 
     100% {
@@ -1627,7 +1713,9 @@
 
         filter:
             brightness(1.2);
+
     }
+
 }
 
 
@@ -1643,6 +1731,7 @@
 
         transform:
             scale(1);
+
     }
 
     50% {
@@ -1654,6 +1743,7 @@
 
         filter:
             brightness(1.7);
+
     }
 
     100% {
@@ -1662,7 +1752,9 @@
 
         transform:
             scale(0);
+
     }
+
 }
 
 
@@ -1679,6 +1771,7 @@
             scale(1);
 
         opacity: 0.8;
+
     }
 
     50% {
@@ -1687,7 +1780,9 @@
             scale(1.18);
 
         opacity: 1;
+
     }
+
 }
 
 
@@ -1708,11 +1803,13 @@
             rotate(0deg);
 
         opacity: 0;
+
     }
 
     10% {
 
         opacity: 0.65;
+
     }
 
     35% {
@@ -1724,6 +1821,7 @@
                 0
             )
             rotate(100deg);
+
     }
 
     65% {
@@ -1735,11 +1833,13 @@
                 0
             )
             rotate(210deg);
+
     }
 
     90% {
 
         opacity: 0.45;
+
     }
 
     100% {
@@ -1753,7 +1853,9 @@
             rotate(330deg);
 
         opacity: 0;
+
     }
+
 }
 
 
@@ -1772,6 +1874,7 @@
             );
 
         padding-top: 80px;
+
     }
 
 
@@ -1782,6 +1885,7 @@
         height: 95px;
 
         right: 7%;
+
     }
 
 
@@ -1790,6 +1894,7 @@
         min-height: 620px;
 
         border-radius: 30px;
+
     }
 
 
@@ -1800,7 +1905,9 @@
         height: 52px;
 
         font-size: 1.8rem;
+
     }
+
 }
 
 
@@ -1813,6 +1920,7 @@
     #chapter6 {
 
         min-height: 100vh;
+
     }
 
 
@@ -1825,12 +1933,14 @@
             70px
             0
             90px;
+
     }
 
 
     .chapter6-intro {
 
         margin-bottom: 45px;
+
     }
 
 
@@ -1842,6 +1952,7 @@
                 12vw,
                 3.6rem
             );
+
     }
 
 
@@ -1853,6 +1964,7 @@
         font-size: 0.82rem;
 
         line-height: 1.75;
+
     }
 
 
@@ -1865,6 +1977,7 @@
         top: 4%;
 
         right: 7%;
+
     }
 
 
@@ -1875,6 +1988,7 @@
 
         transform-origin:
             top left;
+
     }
 
 
@@ -1883,6 +1997,7 @@
         min-height: 600px;
 
         border-radius: 24px;
+
     }
 
 
@@ -1893,12 +2008,14 @@
         height: 46px;
 
         font-size: 1.65rem;
+
     }
 
 
     .chapter6-star-number {
 
         display: none;
+
     }
 
 
@@ -1912,12 +2029,14 @@
             22px;
 
         border-radius: 20px;
+
     }
 
 
     #chapter6MessageText {
 
         font-size: 1.35rem;
+
     }
 
 
@@ -1930,12 +2049,14 @@
             22px;
 
         border-radius: 25px;
+
     }
 
 
     .chapter6-completion h3 {
 
         font-size: 2.2rem;
+
     }
 
 
@@ -1944,24 +2065,28 @@
         font-size: 0.8rem;
 
         line-height: 1.8;
+
     }
 
 
     .chapter6-ending {
 
         margin-top: 65px;
+
     }
 
 
     .chapter6-ending h3 {
 
         font-size: 2rem;
+
     }
 
 
     .chapter6-continue-section {
 
         margin-top: 60px;
+
     }
 
 
@@ -1970,7 +2095,9 @@
         width: 100%;
 
         min-width: 0;
+
     }
+
 }
 
 
@@ -1984,12 +2111,14 @@
 
         width:
             calc(100% - 18px);
+
     }
 
 
     .chapter6-constellation {
 
         min-height: 540px;
+
     }
 
 
@@ -2000,6 +2129,7 @@
         height: 42px;
 
         font-size: 1.5rem;
+
     }
 
 
@@ -2008,13 +2138,16 @@
         padding:
             22px
             18px;
+
     }
 
 
     #chapter6MessageText {
 
         font-size: 1.2rem;
+
     }
+
 }
 
 
@@ -2033,6 +2166,7 @@
     .chapter6-completion-symbol {
 
         animation: none;
+
     }
 
 
@@ -2047,5 +2181,7 @@
     .chapter6-continue {
 
         transition: none;
+
     }
+
 }
