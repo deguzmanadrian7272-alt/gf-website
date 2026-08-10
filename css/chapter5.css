@@ -61,6 +61,7 @@
         );
 }
 
+
 #chapter5.active {
     display: block;
     min-height: 100vh;
@@ -111,6 +112,7 @@
         alternate;
 }
 
+
 .chapter5-glow-1 {
     width: 480px;
     height: 480px;
@@ -126,6 +128,7 @@
             0.24
         );
 }
+
 
 .chapter5-glow-2 {
     width: 430px;
@@ -145,6 +148,7 @@
     animation-delay: -4s;
 }
 
+
 .chapter5-glow-3 {
     width: 500px;
     height: 500px;
@@ -162,6 +166,7 @@
 
     animation-delay: -7s;
 }
+
 
 @keyframes chapter5GlowFloat {
 
@@ -202,6 +207,7 @@
         serif;
 }
 
+
 .chapter5-star {
     color:
         rgba(
@@ -228,11 +234,13 @@
         alternate;
 }
 
+
 .chapter5-star-1 {
     top: 10%;
     left: 8%;
     font-size: 1.5rem;
 }
+
 
 .chapter5-star-2 {
     top: 22%;
@@ -241,12 +249,14 @@
     animation-delay: -2s;
 }
 
+
 .chapter5-star-3 {
     top: 48%;
     left: 5%;
     font-size: 1.15rem;
     animation-delay: -4s;
 }
+
 
 .chapter5-star-4 {
     top: 67%;
@@ -255,12 +265,14 @@
     animation-delay: -1s;
 }
 
+
 .chapter5-star-5 {
     bottom: 15%;
     left: 13%;
     font-size: 0.9rem;
     animation-delay: -5s;
 }
+
 
 @keyframes chapter5StarFloat {
 
@@ -280,6 +292,7 @@
             rotate(15deg);
     }
 }
+
 
 .chapter5-heart {
     color:
@@ -307,11 +320,13 @@
         alternate;
 }
 
+
 .chapter5-heart-1 {
     top: 31%;
     left: 7%;
     font-size: 1.3rem;
 }
+
 
 .chapter5-heart-2 {
     top: 54%;
@@ -320,12 +335,14 @@
     animation-delay: -3s;
 }
 
+
 .chapter5-heart-3 {
     bottom: 10%;
     left: 8%;
     font-size: 1rem;
     animation-delay: -6s;
 }
+
 
 @keyframes chapter5HeartFloat {
 
@@ -383,6 +400,7 @@
     margin-bottom: 60px;
 }
 
+
 .chapter5-label {
     display: inline-block;
 
@@ -432,6 +450,7 @@
         );
 }
 
+
 .chapter5-intro h2 {
     margin: 0;
 
@@ -461,6 +480,7 @@
             0.22
         );
 }
+
 
 .chapter5-subtitle {
     max-width: 620px;
@@ -520,6 +540,7 @@
     z-index: 20;
 }
 
+
 .chapter5-game-select {
     position: relative;
 
@@ -571,6 +592,7 @@
         box-shadow 0.3s ease;
 }
 
+
 .chapter5-game-select:hover {
     transform:
         translateY(-4px);
@@ -601,6 +623,7 @@
         );
 }
 
+
 .chapter5-game-select.active {
     background:
         rgba(
@@ -628,6 +651,7 @@
         );
 }
 
+
 .chapter5-game-icon {
     display: block;
 
@@ -640,6 +664,7 @@
     color:
         #e6cfff;
 }
+
 
 .chapter5-game-title {
     display: block;
@@ -654,6 +679,7 @@
 
     color: #fff7ff;
 }
+
 
 .chapter5-game-description {
     display: block;
@@ -697,6 +723,7 @@
     width: 100%;
 }
 
+
 .chapter5-game.active {
     display: block;
 
@@ -706,6 +733,7 @@
         ease
         forwards;
 }
+
 
 @keyframes chapter5GameReveal {
 
@@ -735,6 +763,7 @@
     margin-bottom: 35px;
 }
 
+
 .chapter5-game-number {
     display: block;
 
@@ -757,6 +786,7 @@
         );
 }
 
+
 .chapter5-game-header h3 {
     margin: 0;
 
@@ -775,6 +805,7 @@
 
     color: #faf5ff;
 }
+
 
 .chapter5-game-header p {
     max-width: 600px;
@@ -843,6 +874,7 @@
         );
 }
 
+
 .chapter5-hunt-heart {
     position: absolute;
 
@@ -880,6 +912,7 @@
         filter 0.25s ease;
 }
 
+
 .chapter5-hunt-heart:hover {
     transform:
         scale(1.35);
@@ -896,6 +929,7 @@
         );
 }
 
+
 .chapter5-hunt-heart.found {
     opacity: 0;
 
@@ -904,6 +938,7 @@
 
     pointer-events: none;
 }
+
 
 .chapter5-heart-board.completed {
     box-shadow:
@@ -915,218 +950,6 @@
             255,
             0.10
         );
-}
-
-
-/* ==========================================================
-   GAME 1 COMPLETION MESSAGE
-   "You found every little heart. ♡"
-   ========================================================== */
-
-.chapter5-game[data-game-panel="heart"]
-.chapter5-game-message {
-
-    position: relative;
-
-    width:
-        min(
-            680px,
-            calc(100% - 30px)
-        );
-
-    margin:
-        28px
-        auto
-        0;
-
-    padding:
-        25px
-        30px;
-
-    box-sizing: border-box;
-
-    text-align: center;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            190,
-            225,
-            0.55
-        );
-
-    border-radius: 22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(
-                255,
-                170,
-                220,
-                0.13
-            ),
-            rgba(
-                180,
-                120,
-                245,
-                0.12
-            )
-        );
-
-    backdrop-filter:
-        blur(16px);
-
-    -webkit-backdrop-filter:
-        blur(16px);
-
-    box-shadow:
-        0 15px 45px
-        rgba(
-            70,
-            25,
-            100,
-            0.28
-        ),
-
-        inset
-        0 1px 0
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            1.35rem,
-            3vw,
-            1.8rem
-        );
-
-    font-style: italic;
-
-    line-height: 1.4;
-
-    letter-spacing: 0.02em;
-
-    color:
-        #fff3fb;
-
-    opacity: 0;
-
-    transform:
-        translateY(15px)
-        scale(0.97);
-
-    animation:
-        chapter5GameMessageReveal
-        0.7s
-        cubic-bezier(
-            0.22,
-            1,
-            0.36,
-            1
-        )
-        forwards;
-}
-
-
-/* Decorative heart glow */
-
-.chapter5-game[data-game-panel="heart"]
-.chapter5-game-message::before {
-
-    content: "♡";
-
-    position: absolute;
-
-    top: -18px;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 38px;
-    height: 38px;
-
-    border:
-        1px solid
-        rgba(
-            255,
-            190,
-            225,
-            0.5
-        );
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            55,
-            25,
-            75,
-            0.95
-        );
-
-    color:
-        #ffc4e4;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.35rem;
-
-    box-shadow:
-        0 0 25px
-        rgba(
-            255,
-            150,
-            215,
-            0.35
-        );
-}
-
-
-/* Soft inner shine */
-
-.chapter5-game[data-game-panel="heart"]
-.chapter5-game-message::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    border-radius: inherit;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(
-                255,
-                205,
-                230,
-                0.16
-            ),
-            transparent 55%
-        );
-
-    pointer-events: none;
 }
 
 
@@ -1160,9 +983,9 @@
 }
 
 
-/* ==========================================================
+/* ----------------------------------------------------------
    MEMORY CARD
-   ========================================================== */
+   ---------------------------------------------------------- */
 
 .chapter5-memory-card {
     position: relative;
@@ -1188,6 +1011,11 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+
+/* ----------------------------------------------------------
+   INNER CARD
+   ---------------------------------------------------------- */
+
 .chapter5-memory-card-inner {
     position: relative;
 
@@ -1210,6 +1038,11 @@
         );
 }
 
+
+/* ----------------------------------------------------------
+   FLIP
+   ---------------------------------------------------------- */
+
 .chapter5-memory-card.flipped
 .chapter5-memory-card-inner {
 
@@ -1219,6 +1052,11 @@
     -webkit-transform:
         rotateY(180deg);
 }
+
+
+/* ----------------------------------------------------------
+   FRONT + BACK
+   ---------------------------------------------------------- */
 
 .chapter5-memory-card-front,
 .chapter5-memory-card-back {
@@ -1257,6 +1095,11 @@
 
     -webkit-transform-style: preserve-3d;
 }
+
+
+/* ----------------------------------------------------------
+   CARD FRONT
+   ---------------------------------------------------------- */
 
 .chapter5-memory-card-front {
 
@@ -1304,6 +1147,11 @@
         );
 }
 
+
+/* ----------------------------------------------------------
+   CARD BACK
+   ---------------------------------------------------------- */
+
 .chapter5-memory-card-back {
 
     transform:
@@ -1349,6 +1197,11 @@
         );
 }
 
+
+/* ----------------------------------------------------------
+   MEMORY HOVER
+   ---------------------------------------------------------- */
+
 .chapter5-memory-card:hover
 .chapter5-memory-card-front {
 
@@ -1370,14 +1223,21 @@
         );
 }
 
+
 .chapter5-memory-card:active {
     transform:
         scale(0.97);
 }
 
+
+/* ----------------------------------------------------------
+   MATCHED CARD
+   ---------------------------------------------------------- */
+
 .chapter5-memory-card.matched {
     cursor: default;
 }
+
 
 .chapter5-memory-card.matched
 .chapter5-memory-card-back {
@@ -1407,259 +1267,6 @@
             255,
             0.15
         );
-}
-
-
-/* ==========================================================
-   GAME 2 COMPLETION MESSAGE
-   "You remembered every little piece of us. ♡"
-   ========================================================== */
-
-.chapter5-game[data-game-panel="memory"]
-.chapter5-game-message {
-
-    position: relative;
-
-    width:
-        min(
-            680px,
-            calc(100% - 30px)
-        );
-
-    margin:
-        30px
-        auto
-        0;
-
-    padding:
-        28px
-        32px;
-
-    box-sizing: border-box;
-
-    text-align: center;
-
-    border:
-        1px solid
-        rgba(
-            215,
-            190,
-            255,
-            0.55
-        );
-
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(
-                205,
-                175,
-                255,
-                0.15
-            ),
-            rgba(
-                125,
-                90,
-                190,
-                0.10
-            )
-        );
-
-    backdrop-filter:
-        blur(17px);
-
-    -webkit-backdrop-filter:
-        blur(17px);
-
-    box-shadow:
-        0 16px 48px
-        rgba(
-            55,
-            25,
-            90,
-            0.30
-        ),
-
-        inset
-        0 1px 0
-        rgba(
-            255,
-            255,
-            255,
-            0.12
-        );
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            1.3rem,
-            3vw,
-            1.75rem
-        );
-
-    font-style: italic;
-
-    line-height: 1.45;
-
-    letter-spacing: 0.015em;
-
-    color:
-        #f8efff;
-
-    opacity: 0;
-
-    transform:
-        translateY(15px)
-        scale(0.97);
-
-    animation:
-        chapter5GameMessageReveal
-        0.7s
-        cubic-bezier(
-            0.22,
-            1,
-            0.36,
-            1
-        )
-        forwards;
-}
-
-
-/* Memory symbol */
-
-.chapter5-game[data-game-panel="memory"]
-.chapter5-game-message::before {
-
-    content: "✦";
-
-    position: absolute;
-
-    top: -18px;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 38px;
-    height: 38px;
-
-    border:
-        1px solid
-        rgba(
-            215,
-            190,
-            255,
-            0.55
-        );
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            45,
-            25,
-            70,
-            0.96
-        );
-
-    color:
-        #e4c8ff;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1.25rem;
-
-    box-shadow:
-        0 0 25px
-        rgba(
-            195,
-            150,
-            255,
-            0.35
-        );
-}
-
-
-/* Memory message glow */
-
-.chapter5-game[data-game-panel="memory"]
-.chapter5-game-message::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    border-radius: inherit;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(
-                220,
-                195,
-                255,
-                0.17
-            ),
-            transparent 55%
-        );
-
-    pointer-events: none;
-}
-
-
-/* ==========================================================
-   SHARED GAME MESSAGE ANIMATION
-   ========================================================== */
-
-@keyframes chapter5GameMessageReveal {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translateY(18px)
-            scale(0.96);
-
-        filter:
-            blur(4px);
-    }
-
-    70% {
-        opacity: 1;
-
-        transform:
-            translateY(-2px)
-            scale(1.01);
-
-        filter:
-            blur(0);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-
-        filter:
-            blur(0);
-    }
 }
 
 
@@ -1724,6 +1331,7 @@
             0.72
         );
 }
+
 
 .chapter5-game-status strong {
     color:
@@ -1798,6 +1406,7 @@
         box-shadow 0.3s ease;
 }
 
+
 .chapter5-game-button:hover {
 
     transform:
@@ -1829,10 +1438,12 @@
         );
 }
 
+
 .chapter5-game-button:active {
     transform:
         translateY(0);
 }
+
 
 .chapter5-game-button:disabled {
     opacity: 0.4;
@@ -1887,6 +1498,11 @@
         blur(15px);
 }
 
+
+/* ----------------------------------------------------------
+   QUIZ PROGRESS
+   ---------------------------------------------------------- */
+
 .chapter5-quiz-progress {
 
     width: 100%;
@@ -1927,6 +1543,11 @@
     text-align: center;
 }
 
+
+/* ----------------------------------------------------------
+   QUIZ QUESTION
+   ---------------------------------------------------------- */
+
 .chapter5-quiz-question {
 
     margin:
@@ -1955,6 +1576,11 @@
         #fff7ff;
 }
 
+
+/* ----------------------------------------------------------
+   QUIZ ANSWERS
+   ---------------------------------------------------------- */
+
 .chapter5-quiz-answers {
 
     display: grid;
@@ -1972,6 +1598,11 @@
 
     width: 100%;
 }
+
+
+/* ----------------------------------------------------------
+   GENERATED QUIZ OPTIONS
+   ---------------------------------------------------------- */
 
 .chapter5-quiz-answer,
 .chapter5-quiz-option {
@@ -2024,6 +1655,7 @@
         border-color 0.25s ease;
 }
 
+
 .chapter5-quiz-answer:hover,
 .chapter5-quiz-option:hover {
 
@@ -2047,6 +1679,7 @@
         );
 }
 
+
 .chapter5-quiz-answer.correct,
 .chapter5-quiz-option.correct {
 
@@ -2066,6 +1699,7 @@
             0.55
         );
 }
+
 
 .chapter5-quiz-answer.wrong,
 .chapter5-quiz-option.wrong {
@@ -2087,11 +1721,17 @@
         );
 }
 
+
 .chapter5-quiz-answer:disabled,
 .chapter5-quiz-option:disabled {
 
     cursor: default;
 }
+
+
+/* ----------------------------------------------------------
+   QUIZ FEEDBACK
+   ---------------------------------------------------------- */
 
 .chapter5-quiz-feedback {
 
@@ -2123,28 +1763,37 @@
 
 
 /* ==========================================================
-   GAME COMPLETION
+   GAME 1 + GAME 2 COMPLETION MESSAGE
+   IMPORTANT:
+   These are the messages generated by chapter5.js:
+   
+   Game 1:
+   "You found every little heart. ♡"
+   
+   Game 2:
+   "You remembered every little piece of us. ♡"
+   
+   ONLY THESE COMPLETION MESSAGES ARE BEING IMPROVED.
    ========================================================== */
 
-.chapter5-completion {
+.chapter5-game-message {
 
-    position: relative;
+    display: block;
 
     width:
         min(
-            650px,
-            calc(100% - 20px)
+            100%,
+            620px
         );
 
     margin:
-        55px
+        24px
         auto
         0;
 
     padding:
-        42px
-        35px
-        38px;
+        18px
+        24px;
 
     box-sizing: border-box;
 
@@ -2154,303 +1803,314 @@
         1px solid
         rgba(
             225,
-            200,
+            195,
             255,
-            0.38
+            0.42
         );
 
-    border-radius: 26px;
+    border-radius: 18px;
 
     background:
         linear-gradient(
-            145deg,
+            135deg,
             rgba(
                 205,
                 165,
                 255,
-                0.13
+                0.14
             ),
             rgba(
-                120,
-                75,
-                175,
+                255,
+                190,
+                235,
                 0.08
             )
         );
 
     backdrop-filter:
-        blur(18px);
+        blur(12px);
 
     -webkit-backdrop-filter:
-        blur(18px);
+        blur(12px);
 
     box-shadow:
-        0 18px 55px
+        0 10px 35px
         rgba(
-            45,
-            20,
-            80,
-            0.28
+            120,
+            75,
+            190,
+            0.16
         ),
 
         inset
-        0 1px 0
+        0 0 25px
         rgba(
             255,
             255,
             255,
-            0.10
+            0.025
         );
 
-    overflow: hidden;
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            1.2rem,
+            3vw,
+            1.55rem
+        );
+
+    font-style: italic;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    letter-spacing:
+        0.02em;
+
+    color:
+        #fff5ff;
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            220,
+            175,
+            255,
+            0.35
+        );
+
+    opacity: 0;
+
+    transform:
+        translateY(12px)
+        scale(0.97);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+
+/* ==========================================================
+   GAME COMPLETION MESSAGE — ACTIVE
+   ========================================================== */
+
+.chapter5-game-message.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    box-shadow:
+        0 12px 40px
+        rgba(
+            135,
+            80,
+            210,
+            0.22
+        ),
+
+        0 0 28px
+        rgba(
+            210,
+            160,
+            255,
+            0.10
+        ),
+
+        inset
+        0 0 25px
+        rgba(
+            255,
+            255,
+            255,
+            0.035
+        );
+}
+
+
+/* ==========================================================
+   COMPLETION MESSAGE HEART
+   Adds a separate glowing heart underneath.
+   ========================================================== */
+
+.chapter5-game-message::after {
+
+    content:
+        "♡";
+
+    display: block;
+
+    margin-top:
+        7px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.15rem;
+
+    font-style: normal;
+
+    color:
+        rgba(
+            239,
+            190,
+            255,
+            0.9
+        );
+
+    text-shadow:
+        0 0 12px
+        rgba(
+            220,
+            160,
+            255,
+            0.65
+        );
+}
+
+
+/* ==========================================================
+   COMPLETION
+   ========================================================== */
+
+.chapter5-completion {
+
+    max-width: 650px;
+
+    margin:
+        55px
+        auto
+        0;
+
+    padding:
+        35px
+        28px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        rgba(
+            220,
+            195,
+            255,
+            0.25
+        );
+
+    border-radius: 22px;
+
+    background:
+        rgba(
+            190,
+            145,
+            255,
+            0.08
+        );
 
     animation:
         chapter5CompletionReveal
-        0.8s
-        cubic-bezier(
-            0.22,
-            1,
-            0.36,
-            1
-        )
+        0.7s
+        ease
         forwards;
 }
 
-.chapter5-completion::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 230px;
-    height: 230px;
-
-    top: -120px;
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            210,
-            165,
-            255,
-            0.18
-        );
-
-    filter: blur(45px);
-
-    pointer-events: none;
-}
-
-.chapter5-completion::after {
-
-    content: "";
-
-    position: absolute;
-
-    left: 50%;
-
-    bottom: 17px;
-
-    width: 70px;
-
-    height: 1px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(
-                225,
-                200,
-                255,
-                0.6
-            ),
-            transparent
-        );
-
-    opacity: 0.7;
-}
 
 .chapter5-completion[hidden] {
     display: none;
 }
 
+
 .chapter5-completion-symbol {
 
-    position: relative;
-
-    z-index: 2;
-
-    display: block;
-
-    margin:
-        0
-        0
-        15px;
+    margin-bottom: 10px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        clamp(
-            2.7rem,
-            7vw,
-            4rem
-        );
-
-    line-height: 1;
+    font-size: 2.3rem;
 
     color:
-        #f0d9ff;
-
-    text-shadow:
-        0 0 10px
-        rgba(
-            225,
-            185,
-            255,
-            0.55
-        ),
-
-        0 0 28px
-        rgba(
-            195,
-            135,
-            255,
-            0.35
-        );
-
-    animation:
-        chapter5CompletionHeart
-        2.8s
-        ease-in-out
-        infinite;
+        #e1c6ff;
 }
+
 
 .chapter5-completion h3 {
 
-    position: relative;
-
-    z-index: 2;
-
     margin:
         0
         0
-        14px;
+        10px;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size:
-        clamp(
-            1.8rem,
-            5vw,
-            2.6rem
-        );
+    font-size: 2rem;
 
     font-weight: 400;
 
-    line-height: 1.15;
-
     color:
-        #fff7ff;
-
-    text-shadow:
-        0 0 20px
-        rgba(
-            210,
-            170,
-            255,
-            0.18
-        );
+        #fff5ff;
 }
+
 
 .chapter5-completion p {
 
-    position: relative;
-
-    z-index: 2;
-
-    max-width: 500px;
-
     margin:
-        0
+        8px
         auto;
+
+    max-width: 560px;
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size:
-        0.82rem;
+    font-size: 0.78rem;
 
-    line-height: 1.85;
-
-    letter-spacing: 0.015em;
+    line-height: 1.7;
 
     color:
         rgba(
-            242,
-            230,
+            235,
+            220,
             255,
-            0.82
+            0.75
         );
 }
 
-@keyframes chapter5CompletionHeart {
-
-    0%,
-    100% {
-
-        transform:
-            scale(1);
-
-        opacity: 0.9;
-    }
-
-    50% {
-
-        transform:
-            scale(1.08);
-
-        opacity: 1;
-    }
-}
 
 @keyframes chapter5CompletionReveal {
 
     from {
-
         opacity: 0;
 
         transform:
-            translateY(25px)
-            scale(0.96);
-
-        filter:
-            blur(4px);
+            translateY(15px)
+            scale(0.97);
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
-
-        filter:
-            blur(0);
     }
 }
 
@@ -2471,6 +2131,7 @@
     text-align: center;
 }
 
+
 .chapter5-ending-symbol {
 
     font-family:
@@ -2487,6 +2148,7 @@
             0.85
         );
 }
+
 
 .chapter5-ending p {
 
@@ -2514,6 +2176,7 @@
             0.84
         );
 }
+
 
 .chapter5-ending h3 {
 
@@ -2570,6 +2233,7 @@
     z-index: 30;
 }
 
+
 .chapter5-continue-section p {
 
     margin:
@@ -2593,6 +2257,7 @@
             0.85
         );
 }
+
 
 .chapter5-continue {
 
@@ -2649,6 +2314,7 @@
         box-shadow 0.35s ease;
 }
 
+
 .chapter5-continue:hover {
 
     transform:
@@ -2679,6 +2345,7 @@
             0.18
         );
 }
+
 
 .chapter5-continue:active {
     transform:
@@ -2728,13 +2395,17 @@
             140px;
     }
 
+
     .chapter5-intro {
         margin-bottom: 45px;
     }
 
+
     .chapter5-game-selector {
+
         gap: 8px;
     }
+
 
     .chapter5-game-select {
 
@@ -2745,25 +2416,31 @@
             8px;
     }
 
+
     .chapter5-game-title {
         font-size: 1rem;
     }
+
 
     .chapter5-game-description {
         font-size: 0.58rem;
     }
 
+
     .chapter5-heart-board {
         height: 360px;
     }
+
 
     .chapter5-memory-board {
         gap: 10px;
     }
 
+
     .chapter5-memory-card {
         min-height: 75px;
     }
+
 
     .chapter5-quiz-container {
         padding:
@@ -2771,31 +2448,28 @@
             18px;
     }
 
-    .chapter5-completion {
 
-        padding:
-            38px
-            28px
-            35px;
-    }
+    /* GAME COMPLETION MESSAGE */
 
-    /* GAME MESSAGE TABLET */
-
-    .chapter5-game[data-game-panel="heart"]
-    .chapter5-game-message,
-
-    .chapter5-game[data-game-panel="memory"]
     .chapter5-game-message {
 
         width:
-            calc(100% - 20px);
+            min(
+                100%,
+                560px
+            );
+
+        margin-top:
+            20px;
 
         padding:
-            24px
-            22px;
+            17px
+            20px;
 
-        font-size: 1.45rem;
+        font-size:
+            1.3rem;
     }
+
 }
 
 
@@ -2816,6 +2490,7 @@
         overflow-y: visible;
     }
 
+
     .chapter5-wrapper {
 
         width:
@@ -2831,10 +2506,13 @@
     /* INTRO */
 
     .chapter5-intro h2 {
+
         font-size: 3.25rem;
     }
 
+
     .chapter5-subtitle {
+
         font-size: 1.15rem;
     }
 
@@ -2854,6 +2532,7 @@
         margin-bottom: 30px;
     }
 
+
     .chapter5-game-select {
 
         min-width: 0;
@@ -2867,12 +2546,14 @@
         border-radius: 12px;
     }
 
+
     .chapter5-game-icon {
 
         font-size: 1.05rem;
 
         margin-bottom: 4px;
     }
+
 
     .chapter5-game-title {
 
@@ -2881,7 +2562,9 @@
         line-height: 1.1;
     }
 
+
     .chapter5-game-description {
+
         display: none;
     }
 
@@ -2889,18 +2572,25 @@
     /* GAME HEADER */
 
     .chapter5-game-header {
+
         margin-bottom: 25px;
     }
 
+
     .chapter5-game-number {
+
         font-size: 1rem;
     }
 
+
     .chapter5-game-header h3 {
+
         font-size: 2rem;
     }
 
+
     .chapter5-game-header p {
+
         font-size: 0.72rem;
     }
 
@@ -2914,6 +2604,7 @@
         border-radius: 15px;
     }
 
+
     .chapter5-hunt-heart {
 
         width: 40px;
@@ -2921,49 +2612,6 @@
         height: 40px;
 
         font-size: 1.55rem;
-    }
-
-
-    /* ======================================================
-       GAME 1 + GAME 2 COMPLETION MESSAGES — MOBILE
-       ====================================================== */
-
-    .chapter5-game[data-game-panel="heart"]
-    .chapter5-game-message,
-
-    .chapter5-game[data-game-panel="memory"]
-    .chapter5-game-message {
-
-        width:
-            calc(100% - 10px);
-
-        margin-top: 27px;
-
-        padding:
-            24px
-            16px
-            22px;
-
-        border-radius: 19px;
-
-        font-size: 1.25rem;
-
-        line-height: 1.5;
-    }
-
-    .chapter5-game[data-game-panel="heart"]
-    .chapter5-game-message::before,
-
-    .chapter5-game[data-game-panel="memory"]
-    .chapter5-game-message::before {
-
-        width: 34px;
-
-        height: 34px;
-
-        top: -17px;
-
-        font-size: 1.1rem;
     }
 
 
@@ -2985,6 +2633,7 @@
         max-width: 100%;
     }
 
+
     .chapter5-memory-card {
 
         min-height: 0;
@@ -2992,17 +2641,22 @@
         aspect-ratio: 1 / 1;
     }
 
+
     .chapter5-memory-card-front,
     .chapter5-memory-card-back {
 
         border-radius: 10px;
     }
 
+
     .chapter5-memory-card-front {
+
         font-size: 1.35rem;
     }
 
+
     .chapter5-memory-card-back {
+
         font-size: 1.55rem;
     }
 
@@ -3020,7 +2674,9 @@
         font-size: 0.65rem;
     }
 
+
     .chapter5-game-status strong {
+
         font-size: 1.05rem;
     }
 
@@ -3050,9 +2706,12 @@
         border-radius: 17px;
     }
 
+
     .chapter5-quiz-question {
+
         font-size: 1.45rem;
     }
+
 
     .chapter5-quiz-answers {
 
@@ -3061,6 +2720,7 @@
 
         gap: 9px;
     }
+
 
     .chapter5-quiz-answer,
     .chapter5-quiz-option {
@@ -3075,58 +2735,71 @@
     }
 
 
+    /* ======================================================
+       GAME COMPLETION MESSAGE — MOBILE
+       ====================================================== */
+
+    .chapter5-game-message {
+
+        width:
+            calc(100% - 10px);
+
+        margin-top:
+            18px;
+
+        padding:
+            15px
+            16px;
+
+        border-radius:
+            15px;
+
+        font-size:
+            1.08rem;
+
+        line-height:
+            1.5;
+    }
+
+
+    .chapter5-game-message::after {
+
+        margin-top:
+            5px;
+
+        font-size:
+            1rem;
+    }
+
+
     /* COMPLETION */
 
     .chapter5-completion {
 
-        width:
-            calc(100% - 8px);
-
-        margin-top: 30px;
+        margin-top: 25px;
 
         padding:
-            32px
-            18px
-            34px;
-
-        border-radius: 22px;
-    }
-
-    .chapter5-completion-symbol {
-
-        margin-bottom: 12px;
-
-        font-size: 3rem;
-    }
-
-    .chapter5-completion h3 {
-
-        margin-bottom: 12px;
-
-        font-size: 1.75rem;
-
-        line-height: 1.2;
-    }
-
-    .chapter5-completion p {
-
-        font-size: 0.72rem;
-
-        line-height: 1.75;
+            22px
+            16px;
     }
 
 
     /* ENDING */
 
     .chapter5-ending {
+
         margin-top: 70px;
     }
 
+
     .chapter5-ending h3 {
+
         font-size: 2.15rem;
     }
 
+
     .chapter5-ending p {
+
         font-size: 1.15rem;
     }
 
@@ -3140,6 +2813,7 @@
         padding-top: 50px;
     }
 
+
     .chapter5-continue {
 
         padding:
@@ -3148,6 +2822,7 @@
 
         font-size: 0.72rem;
     }
+
 }
 
 
@@ -3163,84 +2838,63 @@
             calc(100% - 16px);
     }
 
+
     .chapter5-game-title {
+
         font-size: 0.58rem;
     }
 
+
     .chapter5-memory-board {
+
         gap: 5px;
     }
 
+
     .chapter5-memory-card-front,
     .chapter5-memory-card-back {
+
         border-radius: 8px;
     }
 
+
     .chapter5-memory-card-front {
+
         font-size: 1.15rem;
     }
 
+
     .chapter5-memory-card-back {
+
         font-size: 1.35rem;
     }
 
 
-    /* GAME MESSAGE EXTRA SMALL */
+    /* GAME COMPLETION MESSAGE */
 
-    .chapter5-game[data-game-panel="heart"]
-    .chapter5-game-message,
-
-    .chapter5-game[data-game-panel="memory"]
     .chapter5-game-message {
 
         width:
-            calc(100% - 4px);
+            calc(100% - 6px);
 
         padding:
-            22px
-            12px
-            20px;
+            13px
+            12px;
 
-        font-size: 1.08rem;
+        font-size:
+            1rem;
 
-        border-radius: 17px;
-    }
-
-    .chapter5-game[data-game-panel="heart"]
-    .chapter5-game-message::before,
-
-    .chapter5-game[data-game-panel="memory"]
-    .chapter5-game-message::before {
-
-        width: 31px;
-
-        height: 31px;
-
-        top: -16px;
-
-        font-size: 1rem;
+        border-radius:
+            13px;
     }
 
 
-    .chapter5-completion {
+    .chapter5-game-message::after {
 
-        padding:
-            28px
-            14px
-            31px;
+        font-size:
+            0.95rem;
     }
 
-    .chapter5-completion-symbol {
-        font-size: 2.7rem;
-    }
-
-    .chapter5-completion h3 {
-        font-size: 1.55rem;
-    }
-
-    .chapter5-completion p {
-        font-size: 0.67rem;
-    }
 }
 
 
@@ -3253,19 +2907,20 @@
     .chapter5-glow,
     .chapter5-star,
     .chapter5-heart,
-    .chapter5-game,
-    .chapter5-completion-symbol,
-    .chapter5-game-message {
+    .chapter5-game {
 
         animation: none;
     }
+
 
     .chapter5-game-select,
     .chapter5-game-button,
     .chapter5-continue,
     .chapter5-memory-card-inner,
-    .chapter5-hunt-heart {
+    .chapter5-hunt-heart,
+    .chapter5-game-message {
 
         transition: none;
     }
+
 }
