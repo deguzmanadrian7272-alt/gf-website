@@ -3,13 +3,13 @@
    Project : Our Story
    File    : chapter5.js
    Purpose : Interactive Mini Games
-   ========================================================== */
+========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        CHAPTER 5 ELEMENTS
-       ====================================================== */
+    ====================================================== */
 
     const chapter5 =
         document.getElementById("chapter5");
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME 1 ELEMENTS — FIND MY HEARTS
-       ====================================================== */
+    ====================================================== */
 
     const heartBoard =
         document.getElementById(
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME 2 ELEMENTS — MEMORY OF US
-       ====================================================== */
+    ====================================================== */
 
     const memoryBoard =
         document.getElementById(
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME 3 ELEMENTS — QUIZ
-       ====================================================== */
+    ====================================================== */
 
     const quizProgress =
         document.getElementById(
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        COMPLETION / CONTINUE
-       ====================================================== */
+    ====================================================== */
 
     const completion =
         document.getElementById(
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        CHAPTER 5 STATE
-       ====================================================== */
+    ====================================================== */
 
     const state = {
 
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        MEMORY GAME VARIABLES
-       ====================================================== */
+    ====================================================== */
 
     const memorySymbols = [
 
@@ -184,10 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        MEMORY CARD STYLE FALLBACK
-       
-       This ensures the flip works even if the CSS
-       does not contain the required 3D rules.
-       ====================================================== */
+    ====================================================== */
 
     function setupMemoryCardStyles() {
 
@@ -213,49 +210,27 @@ document.addEventListener("DOMContentLoaded", () => {
         style.textContent = `
 
             .chapter5-memory-board {
-
                 perspective: 1000px;
-
             }
-
 
             .chapter5-memory-card {
-
                 position: relative;
-
                 perspective: 1000px;
-
                 cursor: pointer;
-
                 border: none;
-
                 padding: 0;
-
                 background: transparent;
-
                 transform-style: preserve-3d;
-
-                -webkit-transform-style:
-                    preserve-3d;
-
+                -webkit-transform-style: preserve-3d;
             }
 
-
             .chapter5-memory-card-inner {
-
                 position: relative;
-
                 width: 100%;
-
                 height: 100%;
-
                 min-height: 100px;
-
                 transform-style: preserve-3d;
-
-                -webkit-transform-style:
-                    preserve-3d;
-
+                -webkit-transform-style: preserve-3d;
                 transition:
                     transform 0.6s
                     cubic-bezier(
@@ -264,72 +239,40 @@ document.addEventListener("DOMContentLoaded", () => {
                         0.2,
                         1
                     );
-
             }
-
 
             .chapter5-memory-card.flipped
             .chapter5-memory-card-inner {
-
-                transform:
-                    rotateY(180deg);
-
+                transform: rotateY(180deg);
             }
-
 
             .chapter5-memory-card-front,
-
             .chapter5-memory-card-back {
-
                 position: absolute;
-
                 inset: 0;
-
                 width: 100%;
-
                 height: 100%;
-
                 display: flex;
-
                 align-items: center;
-
                 justify-content: center;
-
                 backface-visibility: hidden;
-
-                -webkit-backface-visibility:
-                    hidden;
-
+                -webkit-backface-visibility: hidden;
                 border-radius: inherit;
-
             }
-
 
             .chapter5-memory-card-front {
-
-                transform:
-                    rotateY(0deg);
-
+                transform: rotateY(0deg);
             }
-
 
             .chapter5-memory-card-back {
-
-                transform:
-                    rotateY(180deg);
-
+                transform: rotateY(180deg);
             }
-
 
             .chapter5-memory-card.matched {
-
                 cursor: default;
-
             }
 
-
             .chapter5-memory-card:focus-visible {
-
                 outline: 3px solid
                     rgba(
                         255,
@@ -339,7 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
                 outline-offset: 4px;
-
             }
 
         `;
@@ -357,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME 1 — FIND MY HEARTS
-       ====================================================== */
+    ====================================================== */
 
     function createHeartHunt() {
 
@@ -378,10 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         updateHeartCount();
 
-
-        /*
-            Create five hidden hearts.
-        */
 
         for (
             let i = 0;
@@ -412,13 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 `Hidden heart ${i + 1}`
             );
 
-
-            /*
-                Random positions.
-
-                Keep hearts away from
-                extreme edges.
-            */
 
             const left =
                 Math.floor(
@@ -470,10 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateHeartCount();
 
 
-                    /*
-                        Small feedback effect.
-                    */
-
                     heartBoard.classList.add(
                         "heart-found"
                     );
@@ -492,10 +419,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    /*
-                        Game complete.
-                    */
-
                     if (
                         state.heartsFound ===
                         state.totalHearts
@@ -506,11 +429,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                         showGameMessage(
-
                             heartBoard,
-
                             "You found every little heart. ♡"
-
                         );
 
 
@@ -548,7 +468,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME 2 — MEMORY OF US
-       ====================================================== */
+    ====================================================== */
 
     function createMemoryGame() {
 
@@ -559,24 +479,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-            Make sure the styles exist
-            before creating cards.
-        */
-
         setupMemoryCardStyles();
 
 
-        /*
-            Reset board.
-        */
-
         memoryBoard.innerHTML = "";
 
-
-        /*
-            Reset game state.
-        */
 
         state.memoryMatches = 0;
 
@@ -593,10 +500,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateMemoryCount();
 
 
-        /*
-            Remove previous game message.
-        */
-
         const oldMessage =
             memoryBoard.parentElement
                 ?.querySelector(
@@ -611,11 +514,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-            Duplicate each symbol
-            to create matching pairs.
-        */
-
         const cards = [
 
             ...memorySymbols,
@@ -625,16 +523,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ];
 
 
-        /*
-            Shuffle the cards.
-        */
-
         shuffleArray(cards);
 
-
-        /*
-            Create all cards.
-        */
 
         cards.forEach(
             (symbol, index) => {
@@ -644,10 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         "button"
                     );
 
-
-                /*
-                    Basic button settings.
-                */
 
                 card.type =
                     "button";
@@ -677,10 +563,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                /*
-                    Create card inner wrapper.
-                */
-
                 const inner =
                     document.createElement(
                         "span"
@@ -690,10 +572,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 inner.className =
                     "chapter5-memory-card-inner";
 
-
-                /*
-                    Front of card.
-                */
 
                 const front =
                     document.createElement(
@@ -709,10 +587,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "♡";
 
 
-                /*
-                    Back of card.
-                */
-
                 const back =
                     document.createElement(
                         "span"
@@ -726,11 +600,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 back.innerHTML =
                     symbol;
 
-
-                /*
-                    Put front and back
-                    inside the inner wrapper.
-                */
 
                 inner.appendChild(
                     front
@@ -752,10 +621,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                /*
-                    CLICK EVENT
-                */
-
                 card.addEventListener(
                     "click",
                     () => {
@@ -768,19 +633,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
-                /*
-                    KEYBOARD ACCESSIBILITY
-                */
-
                 card.addEventListener(
                     "keydown",
                     (event) => {
 
                         if (
-                            event.key ===
-                            "Enter" ||
-                            event.key ===
-                            " "
+                            event.key === "Enter" ||
+                            event.key === " "
                         ) {
 
                             event.preventDefault();
@@ -802,14 +661,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        HANDLE MEMORY CARD
-       ====================================================== */
+    ====================================================== */
 
     function handleMemoryCard(card) {
-
-        /*
-            Don't allow clicks while
-            two cards are being checked.
-        */
 
         if (memoryLock) {
 
@@ -817,10 +671,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            Don't click the same card twice.
-        */
 
         if (
             card ===
@@ -831,11 +681,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            Don't click an already
-            matched card.
-        */
 
         if (
             card.classList.contains(
@@ -848,11 +693,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-            Don't allow an already flipped
-            card to be clicked again.
-        */
-
         if (
             card.classList.contains(
                 "flipped"
@@ -863,10 +703,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            FLIP CARD
-        */
 
         card.classList.add(
             "flipped"
@@ -885,10 +721,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /*
-            First card.
-        */
-
         if (!memoryFirstCard) {
 
             memoryFirstCard =
@@ -899,20 +731,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-            Second card.
-        */
-
         memorySecondCard =
             card;
 
 
-        /*
-            Lock the board while
-            checking the pair.
-        */
-
-        memoryLock = true;
+        memoryLock =
+            true;
 
 
         const firstValue =
@@ -923,10 +747,6 @@ document.addEventListener("DOMContentLoaded", () => {
             memorySecondCard.dataset.value;
 
 
-        /*
-            MATCH
-        */
-
         if (
             firstValue ===
             secondValue
@@ -934,10 +754,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(
                 () => {
-
-                    /*
-                        Keep both cards open.
-                    */
 
                     memoryFirstCard.classList.add(
                         "matched"
@@ -967,20 +783,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     updateMemoryCount();
 
 
-                    /*
-                        Check if every pair
-                        has been matched.
-                    */
-
                     const completed =
                         state.memoryMatches ===
                         state.totalMemoryPairs;
 
-
-                    /*
-                        Reset turn before
-                        checking completion.
-                    */
 
                     resetMemoryTurn();
 
@@ -992,11 +798,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                         showGameMessage(
-
                             memoryBoard,
-
                             "You remembered every little piece of us. ♡"
-
                         );
 
 
@@ -1012,19 +815,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            WRONG PAIR
-        */
-
         else {
 
             setTimeout(
                 () => {
 
-                    if (
-                        memoryFirstCard
-                    ) {
+                    if (memoryFirstCard) {
 
                         memoryFirstCard.classList.remove(
                             "flipped"
@@ -1045,9 +841,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
 
-                    if (
-                        memorySecondCard
-                    ) {
+                    if (memorySecondCard) {
 
                         memorySecondCard.classList.remove(
                             "flipped"
@@ -1083,7 +877,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        RESET MEMORY TURN
-       ====================================================== */
+    ====================================================== */
 
     function resetMemoryTurn() {
 
@@ -1103,7 +897,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        UPDATE MEMORY COUNTER
-       ====================================================== */
+    ====================================================== */
 
     function updateMemoryCount() {
 
@@ -1121,8 +915,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       GAME 3 — HOW WELL DO YOU KNOW ME?
-       ====================================================== */
+       GAME 3 — QUIZ
+    ====================================================== */
 
     const quizQuestions = [
 
@@ -1133,11 +927,8 @@ document.addEventListener("DOMContentLoaded", () => {
             answers: [
 
                 "Chapter III",
-
                 "Chapter IV",
-
                 "Chapter V",
-
                 "Chapter VI"
 
             ],
@@ -1154,11 +945,8 @@ document.addEventListener("DOMContentLoaded", () => {
             answers: [
 
                 "One",
-
                 "Two",
-
                 "Three",
-
                 "Five"
 
             ],
@@ -1175,11 +963,8 @@ document.addEventListener("DOMContentLoaded", () => {
             answers: [
 
                 "Stars",
-
                 "Hearts",
-
                 "Letters",
-
                 "Flowers"
 
             ],
@@ -1196,11 +981,8 @@ document.addEventListener("DOMContentLoaded", () => {
             answers: [
 
                 "Pictures",
-
                 "Numbers",
-
                 "Hearts",
-
                 "Pairs"
 
             ],
@@ -1217,11 +999,8 @@ document.addEventListener("DOMContentLoaded", () => {
             answers: [
 
                 "Winning",
-
                 "The score",
-
                 "Spending time together",
-
                 "Finishing quickly"
 
             ],
@@ -1278,10 +1057,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            Update progress.
-        */
 
         if (quizProgress) {
 
@@ -1389,10 +1164,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-            Prevent multiple answers.
-        */
-
         const allButtons =
             quizAnswers.querySelectorAll(
                 ".chapter5-quiz-answer"
@@ -1408,10 +1179,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-
-        /*
-            Correct answer.
-        */
 
         if (
             selectedIndex ===
@@ -1440,22 +1207,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            Wrong answer.
-        */
-
         else {
 
             selectedButton.classList.add(
                 "wrong"
             );
 
-
-            /*
-                Highlight actual
-                correct answer.
-            */
 
             allButtons.forEach(
                 (button, index) => {
@@ -1489,10 +1246,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            Show Next / Result button.
-        */
 
         if (quizNext) {
 
@@ -1628,7 +1381,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME SELECTOR
-       ====================================================== */
+    ====================================================== */
 
     gameSelectors.forEach(
         selector => {
@@ -1656,10 +1409,6 @@ document.addEventListener("DOMContentLoaded", () => {
         gameName
     ) {
 
-        /*
-            Update selected tab.
-        */
-
         gameSelectors.forEach(
             selector => {
 
@@ -1677,10 +1426,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        /*
-            Update game panels.
-        */
-
         gamePanels.forEach(
             panel => {
 
@@ -1697,10 +1442,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-
-        /*
-            Start Game 1 when needed.
-        */
 
         if (
             gameName ===
@@ -1721,10 +1462,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-            Start Game 2 when needed.
-        */
-
         if (
             gameName ===
             "memory"
@@ -1742,10 +1479,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        /*
-            Start Game 3 when needed.
-        */
 
         if (
             gameName ===
@@ -1769,7 +1502,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        GAME MESSAGE HELPER
-       ====================================================== */
+    ====================================================== */
 
     function showGameMessage(
         board,
@@ -1822,7 +1555,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        CHECK ALL GAMES
-       ====================================================== */
+    ====================================================== */
 
     function checkAllGamesComplete() {
 
@@ -1884,7 +1617,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        RESET BUTTONS
-       ====================================================== */
+    ====================================================== */
 
     if (heartReset) {
 
@@ -1930,7 +1663,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        ARRAY SHUFFLE
-       ====================================================== */
+    ====================================================== */
 
     function shuffleArray(
         array
@@ -1972,102 +1705,350 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       CHAPTER 5 CONTINUE BUTTON
-       ====================================================== */
+       CHAPTER 5 → CHAPTER 6 NAVIGATION
+       
+       IMPORTANT:
+       This is intentionally handled locally here.
+       We do NOT modify transition.js or app.js.
+    ====================================================== */
 
     if (chapter5Continue) {
 
         chapter5Continue.addEventListener(
             "click",
-            () => {
+            handleChapter5Continue
+        );
+
+    }
+
+
+    function handleChapter5Continue(event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+
+        const chapter6 =
+            document.getElementById(
+                "chapter6"
+            );
+
+
+        /*
+            Chapter 6 must exist.
+        */
+
+        if (!chapter6) {
+
+            console.error(
+                "Chapter 6 was not found. Make sure <main id=\"chapter6\"> exists in index.html."
+            );
+
+            return;
+
+        }
+
+
+        /*
+            Prevent double clicks.
+        */
+
+        if (
+            chapter5Continue.dataset.transitioning ===
+            "true"
+        ) {
+
+            return;
+
+        }
+
+
+        chapter5Continue.dataset.transitioning =
+            "true";
+
+
+        /*
+            ------------------------------------------------
+            FIRST OPTION:
+            Use the existing global navigation system.
+            ------------------------------------------------
+        */
+
+        if (
+            typeof window.goToChapter ===
+            "function"
+        ) {
+
+            try {
+
+                window.goToChapter(6);
 
                 /*
-                    Existing global navigation
-                    systems first.
+                    Give the global system a chance
+                    to perform its own transition.
                 */
 
-                if (
-                    typeof window.goToChapter ===
-                    "function"
-                ) {
+                setTimeout(
+                    () => {
 
-                    window.goToChapter(6);
+                        verifyChapter6Visible();
 
-                    return;
+                    },
 
-                }
-
-
-                if (
-                    typeof window.showChapter ===
-                    "function"
-                ) {
-
-                    window.showChapter(6);
-
-                    return;
-
-                }
+                    700
+                );
 
 
-                /*
-                    Fallback:
-                    Look for Chapter VI.
-                */
+                setTimeout(
+                    () => {
 
-                const chapter6 =
-                    document.getElementById(
-                        "chapter6"
-                    );
+                        chapter5Continue.dataset.transitioning =
+                            "false";
 
+                    },
 
-                if (chapter6) {
-
-                    document
-                        .querySelectorAll(
-                            "main[id^='chapter']"
-                        )
-                        .forEach(
-                            chapter => {
-
-                                chapter.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
+                    1200
+                );
 
 
-                    chapter6.classList.add(
-                        "active"
-                    );
+                return;
 
+            }
 
-                    window.scrollTo({
+            catch (error) {
 
-                        top:
-                            0,
-
-                        behavior:
-                            "smooth"
-
-                    });
-
-
-                    return;
-
-                }
-
-
-                /*
-                    Chapter VI doesn't exist yet.
-                */
-
-                console.info(
-                    "Chapter VI has not been added yet."
+                console.warn(
+                    "goToChapter(6) failed. Using direct Chapter 6 navigation.",
+                    error
                 );
 
             }
+
+        }
+
+
+        /*
+            ------------------------------------------------
+            SECOND OPTION:
+            Use showChapter if it exists.
+            ------------------------------------------------
+        */
+
+        if (
+            typeof window.showChapter ===
+            "function"
+        ) {
+
+            try {
+
+                window.showChapter(6);
+
+
+                setTimeout(
+                    () => {
+
+                        verifyChapter6Visible();
+
+                    },
+
+                    700
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        chapter5Continue.dataset.transitioning =
+                            "false";
+
+                    },
+
+                    1200
+                );
+
+
+                return;
+
+            }
+
+            catch (error) {
+
+                console.warn(
+                    "showChapter(6) failed. Using direct Chapter 6 navigation.",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /*
+            ------------------------------------------------
+            FINAL FALLBACK:
+            Directly activate Chapter 6.
+            ------------------------------------------------
+        */
+
+        activateChapter6Directly();
+
+
+        chapter5Continue.dataset.transitioning =
+            "false";
+
+    }
+
+
+    /* ======================================================
+       VERIFY CHAPTER 6
+    ====================================================== */
+
+    function verifyChapter6Visible() {
+
+        const chapter6 =
+            document.getElementById(
+                "chapter6"
+            );
+
+
+        if (!chapter6) {
+
+            return;
+
+        }
+
+
+        const isVisible =
+            chapter6.classList.contains(
+                "active"
+            );
+
+
+        /*
+            If the global system didn't make
+            Chapter 6 active, force the fallback.
+        */
+
+        if (!isVisible) {
+
+            activateChapter6Directly();
+
+        }
+
+    }
+
+
+    /* ======================================================
+       DIRECT CHAPTER 6 ACTIVATION
+    ====================================================== */
+
+    function activateChapter6Directly() {
+
+        const chapter6 =
+            document.getElementById(
+                "chapter6"
+            );
+
+
+        if (!chapter6) {
+
+            console.error(
+                "Cannot activate Chapter 6 because #chapter6 does not exist."
+            );
+
+            return;
+
+        }
+
+
+        /*
+            Hide every chapter.
+        */
+
+        const allChapters =
+            document.querySelectorAll(
+                "main[id^='chapter']"
+            );
+
+
+        allChapters.forEach(
+            chapter => {
+
+                chapter.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /*
+            Activate Chapter 6.
+        */
+
+        chapter6.classList.add(
+            "active"
+        );
+
+
+        /*
+            Keep chapter6 visible even if
+            another global class system exists.
+        */
+
+        chapter6.removeAttribute(
+            "hidden"
+        );
+
+
+        /*
+            Reset scroll position.
+        */
+
+        window.scrollTo({
+
+            top: 0,
+
+            left: 0,
+
+            behavior: "smooth"
+
+        });
+
+
+        /*
+            Update common current-chapter
+            variables if your app uses them.
+        */
+
+        document.body.dataset.chapter =
+            "6";
+
+
+        document.documentElement.dataset.chapter =
+            "6";
+
+
+        /*
+            Dispatch an event so other scripts
+            can react without us modifying them.
+        */
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "chapterchange",
+                {
+                    detail: {
+                        chapter: 6
+                    }
+                }
+            )
+        );
+
+
+        console.log(
+            "Chapter V → Chapter VI navigation completed."
         );
 
     }
@@ -2075,20 +2056,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        INITIALIZE
-       ====================================================== */
-
-    /*
-        Start Game 1 immediately because
-        it is active by default.
-    */
+    ====================================================== */
 
     createHeartHunt();
 
-
-    /*
-        Make sure the correct game
-        panel is active.
-    */
 
     switchGame(
         "heart"
