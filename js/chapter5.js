@@ -2,510 +2,289 @@
    CHAPTER V — MINI GAMES
    Project : Our Story
    File    : chapter5.js
-   Purpose : Mini Games
+   Purpose : Mini Games + Chapter VI Navigation
    ========================================================== */
 
 
 /* ==========================================================
-   CHAPTER 5 ELEMENTS
+   CHAPTER V INITIALIZATION
 ========================================================== */
 
-const chapter5 =
-    document.getElementById("chapter5");
+document.addEventListener("DOMContentLoaded", () => {
+
+    const chapter5 = document.getElementById("chapter5");
+
+    if (!chapter5) {
+        return;
+    }
 
 
-const chapter5GameSelectors =
-    document.querySelectorAll(
+    /* ======================================================
+       GAME SELECTORS
+    ====================================================== */
+
+    const gameSelectors = document.querySelectorAll(
         ".chapter5-game-select"
     );
 
-
-const chapter5Games =
-    document.querySelectorAll(
+    const gamePanels = document.querySelectorAll(
         ".chapter5-game"
     );
 
 
-const chapter5Continue =
-    document.getElementById(
-        "chapter5Continue"
-    );
+    /* ======================================================
+       GAME STATE
+    ====================================================== */
+
+    let currentGame = "heart";
 
 
-/* ==========================================================
-   GAME 1 — FIND MY HEARTS
-========================================================== */
+    /* ======================================================
+       GAME 1 — FIND THE HEARTS
+    ====================================================== */
 
-const heartBoard =
-    document.getElementById(
+    const heartBoard = document.getElementById(
         "chapter5HeartBoard"
     );
 
-
-const heartCount =
-    document.getElementById(
+    const heartCount = document.getElementById(
         "chapter5HeartCount"
     );
 
-
-const heartReset =
-    document.getElementById(
+    const heartReset = document.getElementById(
         "chapter5HeartReset"
     );
 
 
-/* ==========================================================
-   GAME 2 — MEMORY
-========================================================== */
+    const TOTAL_HEARTS = 5;
 
-const memoryBoard =
-    document.getElementById(
-        "chapter5MemoryBoard"
-    );
+    let foundHearts = 0;
 
 
-const memoryMatches =
-    document.getElementById(
-        "chapter5MemoryMatches"
-    );
+    /* ======================================================
+       CREATE HEART GAME
+    ====================================================== */
 
+    function createHeartGame() {
 
-const memoryReset =
-    document.getElementById(
-        "chapter5MemoryReset"
-    );
+        if (!heartBoard) {
+            return;
+        }
 
+        heartBoard.innerHTML = "";
 
-/* ==========================================================
-   GAME 3 — QUIZ
-========================================================== */
+        foundHearts = 0;
 
-const quizContainer =
-    document.getElementById(
-        "chapter5QuizContainer"
-    );
+        updateHeartCount();
 
 
-const quizProgress =
-    document.getElementById(
-        "chapter5QuizProgress"
-    );
+        const positions = [
+            { top: "15%", left: "18%" },
+            { top: "30%", left: "72%" },
+            { top: "55%", left: "40%" },
+            { top: "70%", left: "80%" },
+            { top: "78%", left: "20%" }
+        ];
 
 
-const quizQuestion =
-    document.getElementById(
-        "chapter5QuizQuestion"
-    );
+        positions.forEach((position, index) => {
 
+            const heart = document.createElement("button");
 
-const quizAnswers =
-    document.getElementById(
-        "chapter5QuizAnswers"
-    );
+            heart.type = "button";
 
+            heart.className = "chapter5-hidden-heart";
 
-const quizFeedback =
-    document.getElementById(
-        "chapter5QuizFeedback"
-    );
+            heart.innerHTML = "♥";
 
-
-const quizNext =
-    document.getElementById(
-        "chapter5QuizNext"
-    );
-
-
-/* ==========================================================
-   COMPLETION
-========================================================== */
-
-const completion =
-    document.getElementById(
-        "chapter5Completion"
-    );
-
-
-/* ==========================================================
-   GAME STATE
-========================================================== */
-
-const state = {
-
-    currentGame: "heart",
-
-    heartsFound: 0,
-
-    totalHearts: 5,
-
-    memoryMatches: 0,
-
-    totalMemoryPairs: 6,
-
-    quizIndex: 0,
-
-    quizScore: 0,
-
-    heartCompleted: false,
-
-    memoryCompleted: false,
-
-    quizCompleted: false
-
-};
-
-
-/* ==========================================================
-   GAME SELECTOR
-========================================================== */
-
-chapter5GameSelectors.forEach(
-    selector => {
-
-        selector.addEventListener(
-            "click",
-            () => {
-
-                const selectedGame =
-                    selector.dataset.game;
-
-
-                if (!selectedGame) {
-                    return;
-                }
-
-
-                state.currentGame =
-                    selectedGame;
-
-
-                /*
-                    Remove active state
-                    from all selectors.
-                */
-
-                chapter5GameSelectors.forEach(
-                    item => {
-
-                        item.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-
-                /*
-                    Activate selected selector.
-                */
-
-                selector.classList.add(
-                    "active"
-                );
-
-
-                /*
-                    Hide all game panels.
-                */
-
-                chapter5Games.forEach(
-                    game => {
-
-                        game.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
-
-
-                /*
-                    Show selected game panel.
-                */
-
-                const selectedPanel =
-                    document.querySelector(
-                        `[data-game-panel="${selectedGame}"]`
-                    );
-
-
-                if (selectedPanel) {
-
-                    selectedPanel.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* ==========================================================
-   GAME 1 — FIND MY HEARTS
-========================================================== */
-
-function createHeartHunt() {
-
-    if (!heartBoard) {
-        return;
-    }
-
-
-    heartBoard.innerHTML = "";
-
-
-    state.heartsFound = 0;
-
-    state.heartCompleted = false;
-
-
-    updateHeartCount();
-
-
-    /*
-        Create five hidden hearts.
-    */
-
-    for (
-        let i = 0;
-        i < state.totalHearts;
-        i++
-    ) {
-
-        const heart =
-            document.createElement(
-                "button"
+            heart.setAttribute(
+                "aria-label",
+                `Hidden heart ${index + 1}`
             );
 
 
-        heart.type = "button";
+            heart.style.top = position.top;
+
+            heart.style.left = position.left;
 
 
-        heart.className =
-            "chapter5-hunt-heart";
+            heart.addEventListener("click", () => {
 
-
-        heart.innerHTML = "♥";
-
-
-        heart.setAttribute(
-            "aria-label",
-            `Hidden heart ${i + 1}`
-        );
-
-
-        /*
-            Random position.
-        */
-
-        const left =
-            Math.floor(
-                Math.random() * 82
-            ) + 5;
-
-
-        const top =
-            Math.floor(
-                Math.random() * 78
-            ) + 5;
-
-
-        heart.style.left =
-            `${left}%`;
-
-
-        heart.style.top =
-            `${top}%`;
-
-
-        /*
-            Random animation delay.
-        */
-
-        heart.style.animationDelay =
-            `${Math.random() * 1.5}s`;
-
-
-        /*
-            Heart click.
-        */
-
-        heart.addEventListener(
-            "click",
-            () => {
-
-                if (
-                    heart.classList.contains(
-                        "found"
-                    )
-                ) {
-
+                if (heart.classList.contains("found")) {
                     return;
-
                 }
 
 
-                heart.classList.add(
-                    "found"
-                );
+                heart.classList.add("found");
 
-
-                state.heartsFound++;
-
+                foundHearts++;
 
                 updateHeartCount();
 
 
-                /*
-                    Check completion.
-                */
+                if (foundHearts === TOTAL_HEARTS) {
 
-                if (
-                    state.heartsFound >=
-                    state.totalHearts
-                ) {
-
-                    state.heartCompleted =
-                        true;
-
-
-                    showGameMessage(
-                        heartBoard,
-                        "You found all my hearts. ♥"
-                    );
-
-
-                    checkAllGamesComplete();
+                    completeHeartGame();
 
                 }
 
-            }
+            });
+
+
+            heartBoard.appendChild(heart);
+
+        });
+
+    }
+
+
+    /* ======================================================
+       UPDATE HEART COUNT
+    ====================================================== */
+
+    function updateHeartCount() {
+
+        if (!heartCount) {
+            return;
+        }
+
+        heartCount.textContent =
+            `${foundHearts} / ${TOTAL_HEARTS}`;
+
+    }
+
+
+    /* ======================================================
+       HEART GAME COMPLETE
+    ====================================================== */
+
+    function completeHeartGame() {
+
+        if (!heartBoard) {
+            return;
+        }
+
+
+        heartBoard.classList.add(
+            "chapter5-game-complete"
         );
 
+    }
 
-        heartBoard.appendChild(
-            heart
+
+    /* ======================================================
+       HEART RESET
+    ====================================================== */
+
+    if (heartReset) {
+
+        heartReset.addEventListener(
+            "click",
+            createHeartGame
         );
 
     }
 
-}
 
 
-/* ==========================================================
-   UPDATE HEART COUNT
-========================================================== */
+    /* ======================================================
+       GAME 2 — MEMORY MATCHING
+    ====================================================== */
 
-function updateHeartCount() {
+    const memoryBoard = document.getElementById(
+        "chapter5MemoryBoard"
+    );
 
-    if (!heartCount) {
-        return;
-    }
+    const memoryMatches = document.getElementById(
+        "chapter5MemoryMatches"
+    );
 
-
-    heartCount.textContent =
-        `${state.heartsFound} / ${state.totalHearts}`;
-
-}
-
-
-/* ==========================================================
-   GAME 2 — MEMORY MATCHING
-========================================================== */
-
-const memorySymbols = [
-
-    "♥",
-    "♡",
-    "✦",
-    "✧",
-    "❀",
-    "✿"
-
-];
-
-
-let memoryFirstCard = null;
-
-let memorySecondCard = null;
-
-let memoryLock = false;
-
-
-/* ==========================================================
-   CREATE MEMORY GAME
-========================================================== */
-
-function createMemoryGame() {
-
-    if (!memoryBoard) {
-        return;
-    }
-
-
-    memoryBoard.innerHTML = "";
-
-
-    state.memoryMatches = 0;
-
-    state.memoryCompleted = false;
-
-
-    memoryFirstCard = null;
-
-    memorySecondCard = null;
-
-    memoryLock = false;
-
-
-    updateMemoryCount();
-
-
-    /*
-        Create two cards for each symbol.
-    */
-
-    const cards = [
-
-        ...memorySymbols,
-
-        ...memorySymbols
-
-    ];
-
-
-    /*
-        Shuffle cards.
-    */
-
-    cards.sort(
-        () =>
-            Math.random() - 0.5
+    const memoryReset = document.getElementById(
+        "chapter5MemoryReset"
     );
 
 
-    cards.forEach(
-        (symbol, index) => {
+    const memorySymbols = [
+        "♥",
+        "♡",
+        "✦",
+        "✧",
+        "✿",
+        "❀"
+    ];
 
-            const card =
-                document.createElement(
-                    "button"
-                );
 
+    let memoryCards = [];
+
+    let firstCard = null;
+
+    let secondCard = null;
+
+    let lockBoard = false;
+
+    let matchedPairs = 0;
+
+
+    /* ======================================================
+       CREATE MEMORY GAME
+    ====================================================== */
+
+    function createMemoryGame() {
+
+        if (!memoryBoard) {
+            return;
+        }
+
+
+        memoryBoard.innerHTML = "";
+
+        memoryCards = [];
+
+        firstCard = null;
+
+        secondCard = null;
+
+        lockBoard = false;
+
+        matchedPairs = 0;
+
+
+        updateMemoryMatches();
+
+
+        const cards = [
+            ...memorySymbols,
+            ...memorySymbols
+        ];
+
+
+        shuffleArray(cards);
+
+
+        cards.forEach((symbol, index) => {
+
+            const card = document.createElement("button");
 
             card.type = "button";
-
 
             card.className =
                 "chapter5-memory-card";
 
 
-            card.dataset.symbol =
-                symbol;
+            card.dataset.symbol = symbol;
+
+
+            card.innerHTML = `
+
+                <span class="chapter5-memory-card-front">
+                    ?
+                </span>
+
+                <span class="chapter5-memory-card-back">
+                    ${symbol}
+                </span>
+
+            `;
 
 
             card.setAttribute(
@@ -514,949 +293,824 @@ function createMemoryGame() {
             );
 
 
-            card.innerHTML = `
-
-                <span class="chapter5-memory-card-inner">
-
-                    <span class="chapter5-memory-card-front">
-                        ?
-                    </span>
-
-                    <span class="chapter5-memory-card-back">
-                        ${symbol}
-                    </span>
-
-                </span>
-
-            `;
-
-
             card.addEventListener(
                 "click",
-                () => {
-
-                    handleMemoryCardClick(
-                        card
-                    );
-
-                }
+                () => flipMemoryCard(card)
             );
 
 
-            memoryBoard.appendChild(
-                card
-            );
+            memoryBoard.appendChild(card);
+
+            memoryCards.push(card);
+
+        });
+
+    }
+
+
+    /* ======================================================
+       SHUFFLE ARRAY
+    ====================================================== */
+
+    function shuffleArray(array) {
+
+        for (
+            let i = array.length - 1;
+            i > 0;
+            i--
+        ) {
+
+            const randomIndex =
+                Math.floor(
+                    Math.random() * (i + 1)
+                );
+
+
+            [
+                array[i],
+                array[randomIndex]
+            ] = [
+                array[randomIndex],
+                array[i]
+            ];
 
         }
-    );
-
-}
-
-
-/* ==========================================================
-   MEMORY CARD CLICK
-========================================================== */
-
-function handleMemoryCardClick(
-    card
-) {
-
-    if (
-        memoryLock ||
-        card.classList.contains("flipped") ||
-        card.classList.contains("matched")
-    ) {
-
-        return;
 
     }
 
 
-    card.classList.add(
-        "flipped"
-    );
+    /* ======================================================
+       FLIP MEMORY CARD
+    ====================================================== */
+
+    function flipMemoryCard(card) {
+
+        if (
+            lockBoard ||
+            card === firstCard ||
+            card.classList.contains("matched")
+        ) {
+
+            return;
+
+        }
 
 
-    if (!memoryFirstCard) {
+        card.classList.add("flipped");
 
-        memoryFirstCard =
-            card;
 
-        return;
+        if (!firstCard) {
+
+            firstCard = card;
+
+            return;
+
+        }
+
+
+        secondCard = card;
+
+        checkMemoryMatch();
 
     }
 
 
-    memorySecondCard =
-        card;
+    /* ======================================================
+       CHECK MEMORY MATCH
+    ====================================================== */
+
+    function checkMemoryMatch() {
+
+        const isMatch =
+            firstCard.dataset.symbol ===
+            secondCard.dataset.symbol;
 
 
-    memoryLock = true;
+        if (isMatch) {
+
+            disableMatchedCards();
+
+        } else {
+
+            unflipCards();
+
+        }
+
+    }
 
 
-    const firstSymbol =
-        memoryFirstCard.dataset.symbol;
+    /* ======================================================
+       MATCHED CARDS
+    ====================================================== */
+
+    function disableMatchedCards() {
+
+        firstCard.classList.add("matched");
+
+        secondCard.classList.add("matched");
 
 
-    const secondSymbol =
-        memorySecondCard.dataset.symbol;
+        matchedPairs++;
+
+        updateMemoryMatches();
 
 
-    /*
-        Match.
-    */
-
-    if (
-        firstSymbol ===
-        secondSymbol
-    ) {
-
-        memoryFirstCard.classList.add(
-            "matched"
-        );
-
-
-        memorySecondCard.classList.add(
-            "matched"
-        );
-
-
-        state.memoryMatches++;
-
-
-        updateMemoryCount();
-
-
-        memoryFirstCard = null;
-
-        memorySecondCard = null;
-
-        memoryLock = false;
+        resetMemorySelection();
 
 
         if (
-            state.memoryMatches >=
-            state.totalMemoryPairs
+            matchedPairs === memorySymbols.length
         ) {
 
-            state.memoryCompleted =
-                true;
-
-
-            showGameMessage(
-                memoryBoard,
-                "You remembered all our little pieces. ♡"
-            );
-
-
-            checkAllGamesComplete();
+            completeMemoryGame();
 
         }
 
-
-        return;
-
     }
 
 
-    /*
-        Not a match.
-    */
+    /* ======================================================
+       UNFLIP CARDS
+    ====================================================== */
 
-    setTimeout(
-        () => {
+    function unflipCards() {
 
-            memoryFirstCard.classList.remove(
-                "flipped"
-            );
+        lockBoard = true;
 
 
-            memorySecondCard.classList.remove(
-                "flipped"
-            );
+        setTimeout(() => {
 
-
-            memoryFirstCard = null;
-
-            memorySecondCard = null;
-
-            memoryLock = false;
-
-        },
-        850
-    );
-
-}
-
-
-/* ==========================================================
-   UPDATE MEMORY COUNT
-========================================================== */
-
-function updateMemoryCount() {
-
-    if (!memoryMatches) {
-        return;
-    }
-
-
-    memoryMatches.textContent =
-        `${state.memoryMatches} / ${state.totalMemoryPairs}`;
-
-}
-
-
-/* ==========================================================
-   GAME 3 — QUIZ
-========================================================== */
-
-const quizQuestions = [
-
-    {
-
-        question:
-            "Who said good night first?",
-
-        answers: [
-
-            "Me",
-
-            "You",
-
-            "We both did",
-
-            "Nobody"
-
-        ],
-
-        correct: 1
-
-    },
-
-    {
-
-        question:
-            "What do I like most about our conversations?",
-
-        answers: [
-
-            "How random they can be",
-
-            "How short they are",
-
-            "Nothing",
-
-            "That they never happen"
-
-        ],
-
-        correct: 0
-
-    },
-
-    {
-
-        question:
-            "What kind of moments do I remember most?",
-
-        answers: [
-
-            "The little ones",
-
-            "Only huge events",
-
-            "Only serious conversations",
-
-            "None"
-
-        ],
-
-        correct: 0
-
-    },
-
-    {
-
-        question:
-            "What chapter are we currently playing?",
-
-        answers: [
-
-            "Chapter II",
-
-            "Chapter III",
-
-            "Chapter IV",
-
-            "Chapter V"
-
-        ],
-
-        correct: 3
-
-    },
-
-    {
-
-        question:
-            "What is this whole story really about?",
-
-        answers: [
-
-            "A school project",
-
-            "A random website",
-
-            "Us",
-
-            "A game"
-
-        ],
-
-        correct: 2
-
-    }
-
-];
-
-
-/* ==========================================================
-   START QUIZ
-========================================================== */
-
-function startQuiz() {
-
-    state.quizIndex = 0;
-
-    state.quizScore = 0;
-
-    state.quizCompleted = false;
-
-
-    renderQuizQuestion();
-
-}
-
-
-/* ==========================================================
-   RENDER QUIZ QUESTION
-========================================================== */
-
-function renderQuizQuestion() {
-
-    if (
-        !quizQuestion ||
-        !quizAnswers ||
-        !quizProgress
-    ) {
-
-        return;
-
-    }
-
-
-    const current =
-        quizQuestions[
-            state.quizIndex
-        ];
-
-
-    if (!current) {
-
-        finishQuiz();
-
-        return;
-
-    }
-
-
-    quizProgress.textContent =
-        `Question ${state.quizIndex + 1} / ${quizQuestions.length}`;
-
-
-    quizQuestion.textContent =
-        current.question;
-
-
-    quizAnswers.innerHTML = "";
-
-
-    if (quizFeedback) {
-
-        quizFeedback.textContent = "";
-
-        quizFeedback.className =
-            "chapter5-quiz-feedback";
-
-    }
-
-
-    if (quizNext) {
-
-        quizNext.hidden = true;
-
-    }
-
-
-    current.answers.forEach(
-        (answer, index) => {
-
-            const button =
-                document.createElement(
-                    "button"
+            if (firstCard) {
+                firstCard.classList.remove(
+                    "flipped"
                 );
-
-
-            button.type = "button";
-
-
-            button.className =
-                "chapter5-quiz-answer";
-
-
-            button.textContent =
-                answer;
-
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    answerQuiz(
-                        index
-                    );
-
-                }
-            );
-
-
-            quizAnswers.appendChild(
-                button
-            );
-
-        }
-    );
-
-}
-
-
-/* ==========================================================
-   ANSWER QUIZ
-========================================================== */
-
-function answerQuiz(
-    selectedIndex
-) {
-
-    const current =
-        quizQuestions[
-            state.quizIndex
-        ];
-
-
-    if (!current) {
-        return;
-    }
-
-
-    const answerButtons =
-        quizAnswers.querySelectorAll(
-            ".chapter5-quiz-answer"
-        );
-
-
-    answerButtons.forEach(
-        button => {
-
-            button.disabled = true;
-
-        }
-    );
-
-
-    const correct =
-        selectedIndex ===
-        current.correct;
-
-
-    if (correct) {
-
-        state.quizScore++;
-
-
-        answerButtons[
-            selectedIndex
-        ].classList.add(
-            "correct"
-        );
-
-
-        if (quizFeedback) {
-
-            quizFeedback.textContent =
-                "That's right. ♥";
-
-
-            quizFeedback.classList.add(
-                "correct"
-            );
-
-        }
-
-    } else {
-
-        answerButtons[
-            selectedIndex
-        ].classList.add(
-            "wrong"
-        );
-
-
-        answerButtons[
-            current.correct
-        ].classList.add(
-            "correct"
-        );
-
-
-        if (quizFeedback) {
-
-            quizFeedback.textContent =
-                "Almost. But you know me better than that. ♡";
-
-
-            quizFeedback.classList.add(
-                "wrong"
-            );
-
-        }
-
-    }
-
-
-    if (quizNext) {
-
-        quizNext.hidden = false;
-
-    }
-
-}
-
-
-/* ==========================================================
-   NEXT QUIZ QUESTION
-========================================================== */
-
-if (quizNext) {
-
-    quizNext.addEventListener(
-        "click",
-        () => {
-
-            state.quizIndex++;
-
-
-            if (
-                state.quizIndex >=
-                quizQuestions.length
-            ) {
-
-                finishQuiz();
-
-                return;
-
             }
 
 
-            renderQuizQuestion();
+            if (secondCard) {
+                secondCard.classList.remove(
+                    "flipped"
+                );
+            }
 
+
+            resetMemorySelection();
+
+        }, 800);
+
+    }
+
+
+    /* ======================================================
+       RESET MEMORY SELECTION
+    ====================================================== */
+
+    function resetMemorySelection() {
+
+        firstCard = null;
+
+        secondCard = null;
+
+        lockBoard = false;
+
+    }
+
+
+    /* ======================================================
+       UPDATE MEMORY MATCHES
+    ====================================================== */
+
+    function updateMemoryMatches() {
+
+        if (!memoryMatches) {
+            return;
         }
+
+
+        memoryMatches.textContent =
+            `${matchedPairs} / ${memorySymbols.length}`;
+
+    }
+
+
+    /* ======================================================
+       MEMORY COMPLETE
+    ====================================================== */
+
+    function completeMemoryGame() {
+
+        if (!memoryBoard) {
+            return;
+        }
+
+
+        memoryBoard.classList.add(
+            "chapter5-game-complete"
+        );
+
+    }
+
+
+    /* ======================================================
+       MEMORY RESET
+    ====================================================== */
+
+    if (memoryReset) {
+
+        memoryReset.addEventListener(
+            "click",
+            createMemoryGame
+        );
+
+    }
+
+
+
+    /* ======================================================
+       GAME 3 — QUIZ
+    ====================================================== */
+
+    const quizQuestion = document.getElementById(
+        "chapter5QuizQuestion"
     );
 
-}
+    const quizAnswers = document.getElementById(
+        "chapter5QuizAnswers"
+    );
+
+    const quizFeedback = document.getElementById(
+        "chapter5QuizFeedback"
+    );
+
+    const quizProgress = document.getElementById(
+        "chapter5QuizProgress"
+    );
+
+    const quizNext = document.getElementById(
+        "chapter5QuizNext"
+    );
 
 
-/* ==========================================================
-   FINISH QUIZ
-========================================================== */
+    const quizQuestions = [
 
-function finishQuiz() {
+        {
+            question:
+                "Who said 'good night' first?",
 
-    state.quizCompleted = true;
+            answers: [
+                "Me",
+                "You",
+                "We both did",
+                "I don't remember"
+            ],
+
+            correct: 0
+        },
+
+        {
+            question:
+                "What do I enjoy most about our conversations?",
+
+            answers: [
+                "How random they can be",
+                "How short they are",
+                "Nothing",
+                "Only the serious ones"
+            ],
+
+            correct: 0
+        },
+
+        {
+            question:
+                "What slowly became important to me?",
+
+            answers: [
+                "Our little moments",
+                "The weather",
+                "Video games",
+                "Nothing at all"
+            ],
+
+            correct: 0
+        }
+
+    ];
 
 
-    if (quizProgress) {
+    let currentQuestion = 0;
 
-        quizProgress.textContent =
-            "Quiz Complete";
-
-    }
+    let quizScore = 0;
 
 
-    if (quizQuestion) {
+    /* ======================================================
+       LOAD QUIZ QUESTION
+    ====================================================== */
+
+    function loadQuizQuestion() {
+
+        if (
+            !quizQuestion ||
+            !quizAnswers
+        ) {
+
+            return;
+
+        }
+
+
+        const question =
+            quizQuestions[currentQuestion];
+
 
         quizQuestion.textContent =
-            `You got ${state.quizScore} out of ${quizQuestions.length}. ♥`;
-
-    }
+            question.question;
 
 
-    if (quizAnswers) {
+        quizProgress.textContent =
+            `Question ${currentQuestion + 1} / ${quizQuestions.length}`;
+
 
         quizAnswers.innerHTML = "";
 
+
+        if (quizFeedback) {
+
+            quizFeedback.textContent = "";
+
+            quizFeedback.className =
+                "chapter5-quiz-feedback";
+
+        }
+
+
+        if (quizNext) {
+
+            quizNext.hidden = true;
+
+        }
+
+
+        question.answers.forEach(
+            (answer, index) => {
+
+                const button =
+                    document.createElement("button");
+
+
+                button.type = "button";
+
+                button.className =
+                    "chapter5-quiz-answer";
+
+
+                button.textContent =
+                    answer;
+
+
+                button.addEventListener(
+                    "click",
+                    () => answerQuiz(index)
+                );
+
+
+                quizAnswers.appendChild(button);
+
+            }
+        );
+
     }
 
 
-    if (quizFeedback) {
+    /* ======================================================
+       ANSWER QUIZ
+    ====================================================== */
 
-        quizFeedback.textContent =
-            "No matter the score, I hope you enjoyed this little game.";
+    function answerQuiz(answerIndex) {
+
+        const question =
+            quizQuestions[currentQuestion];
+
+
+        const answerButtons =
+            quizAnswers.querySelectorAll(
+                ".chapter5-quiz-answer"
+            );
+
+
+        answerButtons.forEach(
+            button => {
+                button.disabled = true;
+            }
+        );
+
+
+        if (
+            answerIndex ===
+            question.correct
+        ) {
+
+            quizScore++;
+
+
+            if (quizFeedback) {
+
+                quizFeedback.textContent =
+                    "That's right. ❤️";
+
+                quizFeedback.classList.add(
+                    "correct"
+                );
+
+            }
+
+        } else {
+
+            if (quizFeedback) {
+
+                quizFeedback.textContent =
+                    "Close! But I'll forgive you. ♡";
+
+                quizFeedback.classList.add(
+                    "incorrect"
+                );
+
+            }
+
+        }
+
+
+        if (quizNext) {
+
+            quizNext.hidden = false;
+
+        }
 
     }
 
+
+    /* ======================================================
+       NEXT QUIZ QUESTION
+    ====================================================== */
 
     if (quizNext) {
 
-        quizNext.hidden = true;
+        quizNext.addEventListener(
+            "click",
+            () => {
 
-    }
-
-
-    checkAllGamesComplete();
-
-}
+                currentQuestion++;
 
 
-/* ==========================================================
-   GAME MESSAGE
-========================================================== */
+                if (
+                    currentQuestion >=
+                    quizQuestions.length
+                ) {
 
-function showGameMessage(
-    board,
-    message
-) {
+                    finishQuiz();
 
-    if (!board) {
-        return;
-    }
+                    return;
+
+                }
 
 
-    let messageElement =
-        board.parentElement.querySelector(
-            ".chapter5-game-message"
-        );
+                loadQuizQuestion();
 
-
-    if (!messageElement) {
-
-        messageElement =
-            document.createElement(
-                "div"
-            );
-
-
-        messageElement.className =
-            "chapter5-game-message";
-
-
-        board.insertAdjacentElement(
-            "afterend",
-            messageElement
+            }
         );
 
     }
 
 
-    messageElement.textContent =
-        message;
+    /* ======================================================
+       FINISH QUIZ
+    ====================================================== */
+
+    function finishQuiz() {
+
+        if (quizQuestion) {
+
+            quizQuestion.textContent =
+                "You made it through! ❤️";
+
+        }
 
 
-    messageElement.classList.add(
-        "show"
-    );
+        if (quizProgress) {
 
-}
+            quizProgress.textContent =
+                `Score: ${quizScore} / ${quizQuestions.length}`;
+
+        }
 
 
-/* ==========================================================
-   CHECK ALL GAMES
-========================================================== */
+        if (quizAnswers) {
 
-function checkAllGamesComplete() {
+            quizAnswers.innerHTML = "";
 
-    if (
-        state.heartCompleted &&
-        state.memoryCompleted &&
-        state.quizCompleted
-    ) {
+        }
 
-        showCompletion();
+
+        if (quizFeedback) {
+
+            quizFeedback.textContent =
+                "Maybe now you know a little more about us.";
+
+        }
+
+
+        if (quizNext) {
+
+            quizNext.hidden = true;
+
+        }
 
     }
 
-}
 
 
-/* ==========================================================
-   SHOW COMPLETION
-========================================================== */
+    /* ======================================================
+       GAME SELECTOR
+    ====================================================== */
 
-function showCompletion() {
+    gameSelectors.forEach(button => {
 
-    if (!completion) {
-        return;
-    }
+        button.addEventListener(
+            "click",
+            () => {
 
-
-    completion.hidden = false;
-
-
-    completion.classList.add(
-        "show"
-    );
+                const selectedGame =
+                    button.dataset.game;
 
 
-    setTimeout(
-        () => {
-
-            completion.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-        },
-        300
-    );
-
-}
+                if (!selectedGame) {
+                    return;
+                }
 
 
-/* ==========================================================
-   RESET HEART GAME
-========================================================== */
-
-if (heartReset) {
-
-    heartReset.addEventListener(
-        "click",
-        () => {
-
-            createHeartHunt();
-
-        }
-    );
-
-}
+                currentGame =
+                    selectedGame;
 
 
-/* ==========================================================
-   RESET MEMORY GAME
-========================================================== */
+                gameSelectors.forEach(
+                    selector => {
 
-if (memoryReset) {
+                        selector.classList.toggle(
+                            "active",
+                            selector === button
+                        );
 
-    memoryReset.addEventListener(
-        "click",
-        () => {
-
-            createMemoryGame();
-
-        }
-    );
-
-}
-
-
-/* ==========================================================
-   CHAPTER 5 CONTINUE → CHAPTER 6
-========================================================== */
-
-if (chapter5Continue) {
-
-    chapter5Continue.addEventListener(
-        "click",
-        () => {
-
-            console.log(
-                "Chapter 5 → Chapter 6"
-            );
-
-
-            /*
-                Find Chapter VI.
-            */
-
-            const chapter6 =
-                document.getElementById(
-                    "chapter6"
+                    }
                 );
 
 
-            /*
-                Use the SAME transition
-                method that worked for
-                Chapter 4 → Chapter 5.
-            */
+                gamePanels.forEach(panel => {
 
-            if (
-                chapter6 &&
-                typeof transitionToChapter ===
-                    "function"
-            ) {
+                    panel.classList.toggle(
+                        "active",
+                        panel.dataset.gamePanel ===
+                        selectedGame
+                    );
 
-                transitionToChapter(6);
+                });
+
+            }
+        );
+
+    });
+
+
+
+    /* ======================================================
+       CHAPTER V COMPLETION
+    ====================================================== */
+
+    const chapter5Completion =
+        document.getElementById(
+            "chapter5Completion"
+        );
+
+
+    function showChapter5Completion() {
+
+        if (!chapter5Completion) {
+            return;
+        }
+
+
+        chapter5Completion.hidden = false;
+
+
+        requestAnimationFrame(() => {
+
+            chapter5Completion.classList.add(
+                "show"
+            );
+
+        });
+
+    }
+
+
+
+    /* ======================================================
+       CHAPTER V → CHAPTER VI
+       IMPORTANT NAVIGATION FIX
+    ====================================================== */
+
+    const chapter5Continue =
+        document.getElementById(
+            "chapter5Continue"
+        );
+
+
+    if (chapter5Continue) {
+
+        chapter5Continue.addEventListener(
+            "click",
+            handleChapter5Continue
+        );
+
+    }
+
+
+    function handleChapter5Continue(event) {
+
+        event.preventDefault();
+
+
+        /*
+         * Prevent accidental double clicks.
+         */
+
+        if (
+            chapter5Continue.classList.contains(
+                "is-navigating"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        chapter5Continue.classList.add(
+            "is-navigating"
+        );
+
+
+        /*
+         * Same transition-first approach
+         * used for the previous chapter
+         * navigation fixes.
+         */
+
+        if (
+            typeof window.goToChapter ===
+            "function"
+        ) {
+
+            try {
+
+                window.goToChapter(6);
 
                 return;
 
+            } catch (error) {
+
+                console.warn(
+                    "goToChapter(6) failed:",
+                    error
+                );
+
             }
 
-
-            /*
-                Direct fallback if the
-                transition function isn't
-                available.
-            */
-
-            if (chapter6) {
-
-                document
-                    .querySelectorAll(
-                        "main[id^='chapter']"
-                    )
-                    .forEach(
-                        chapter => {
-
-                            chapter.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
+        }
 
 
-                chapter6.classList.add(
+        /*
+         * Second fallback.
+         */
+
+        if (
+            typeof window.showChapter ===
+            "function"
+        ) {
+
+            try {
+
+                window.showChapter(6);
+
+                return;
+
+            } catch (error) {
+
+                console.warn(
+                    "showChapter(6) failed:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /*
+         * Final direct-navigation fallback.
+         *
+         * This makes sure Chapter VI becomes
+         * visible even if the global navigation
+         * functions are unavailable.
+         */
+
+        const chapter6 =
+            document.getElementById(
+                "chapter6"
+            );
+
+
+        if (!chapter6) {
+
+            console.error(
+                "Chapter VI (#chapter6) was not found."
+            );
+
+
+            chapter5Continue.classList.remove(
+                "is-navigating"
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+         * Hide every chapter.
+         */
+
+        document
+            .querySelectorAll("main")
+            .forEach(main => {
+
+                main.classList.remove(
                     "active"
                 );
 
+                main.style.display = "none";
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+            });
 
 
-                return;
+        /*
+         * Show Chapter VI.
+         */
 
-            }
+        chapter6.classList.add(
+            "active"
+        );
+
+        chapter6.style.display = "block";
 
 
-            /*
-                Chapter VI cannot be found.
-            */
+        /*
+         * Make sure the page starts at
+         * the beginning of Chapter VI.
+         */
 
-            console.warn(
-                "Chapter VI could not be found. Make sure <main id=\"chapter6\"> exists in index.html."
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        /*
+         * Release navigation lock after
+         * the transition has had time to finish.
+         */
+
+        setTimeout(() => {
+
+            chapter5Continue.classList.remove(
+                "is-navigating"
             );
 
-        }
-    );
+        }, 1000);
 
-}
+    }
 
 
-/* ==========================================================
-   INITIALIZE CHAPTER 5
-========================================================== */
 
-function initializeChapter5() {
+    /* ======================================================
+       INITIALIZE CHAPTER V
+    ====================================================== */
 
-    /*
-        Create games.
-    */
-
-    createHeartHunt();
+    createHeartGame();
 
     createMemoryGame();
 
-    startQuiz();
+    loadQuizQuestion();
 
 
-    /*
-        Make sure Chapter 5 starts
-        with the Heart game visible.
-    */
-
-    chapter5Games.forEach(
-        game => {
-
-            game.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    const heartGame =
-        document.getElementById(
-            "chapter5HeartGame"
-        );
-
-
-    if (heartGame) {
-
-        heartGame.classList.add(
-            "active"
-        );
-
-    }
-
-
-    chapter5GameSelectors.forEach(
-        selector => {
-
-            selector.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    const heartSelector =
-        document.getElementById(
-            "chapter5GameHeart"
-        );
-
-
-    if (heartSelector) {
-
-        heartSelector.classList.add(
-            "active"
-        );
-
-    }
-
-}
-
-
-/* ==========================================================
-   START
-========================================================== */
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeChapter5
-    );
-
-} else {
-
-    initializeChapter5();
-
-}
+});
