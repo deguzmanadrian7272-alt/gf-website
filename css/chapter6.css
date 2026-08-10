@@ -7,6 +7,26 @@
 
 
 /* ==========================================================
+   CHAPTER VI VISIBILITY
+========================================================== */
+
+/*
+   Chapter VI should NOT appear when the website first loads.
+
+   JavaScript should add the "active" class when navigating
+   into Chapter VI.
+*/
+
+#chapter6 {
+    display: none;
+}
+
+#chapter6.active {
+    display: block;
+}
+
+
+/* ==========================================================
    CHAPTER VI ROOT
 ========================================================== */
 
@@ -50,7 +70,6 @@
     color: #fff;
 
     isolation: isolate;
-
 }
 
 
@@ -73,7 +92,6 @@
     pointer-events: none;
 
     z-index: 0;
-
 }
 
 
@@ -112,7 +130,6 @@
     filter: blur(10px);
 
     opacity: 0.9;
-
 }
 
 
@@ -142,7 +159,6 @@
         );
 
     filter: blur(25px);
-
 }
 
 
@@ -185,7 +201,6 @@
         rgba(255, 127, 206, 0.18);
 
     opacity: 0.92;
-
 }
 
 
@@ -222,7 +237,6 @@
 
         -8px 55px 0
         rgba(178, 125, 193, 0.10);
-
 }
 
 
@@ -246,16 +260,12 @@
         3s
         ease-in-out
         infinite;
-
 }
 
 
 .chapter6-sky-star-1 {
-
     top: 15%;
-
     left: 12%;
-
 }
 
 
@@ -266,7 +276,6 @@
     left: 34%;
 
     animation-delay: 0.8s;
-
 }
 
 
@@ -277,7 +286,6 @@
     left: 55%;
 
     animation-delay: 1.4s;
-
 }
 
 
@@ -288,7 +296,6 @@
     right: 26%;
 
     animation-delay: 0.4s;
-
 }
 
 
@@ -299,7 +306,6 @@
     left: 8%;
 
     animation-delay: 1.8s;
-
 }
 
 
@@ -310,7 +316,6 @@
     right: 12%;
 
     animation-delay: 1.1s;
-
 }
 
 
@@ -321,7 +326,6 @@
     left: 20%;
 
     animation-delay: 2s;
-
 }
 
 
@@ -332,7 +336,6 @@
     right: 28%;
 
     animation-delay: 0.6s;
-
 }
 
 
@@ -360,7 +363,6 @@
         chapter6FlowerFall
         linear
         infinite;
-
 }
 
 
@@ -375,7 +377,6 @@
     animation-duration: 12s;
 
     animation-delay: -2s;
-
 }
 
 
@@ -388,7 +389,6 @@
     animation-delay: -8s;
 
     font-size: 0.95rem;
-
 }
 
 
@@ -399,7 +399,6 @@
     animation-duration: 13s;
 
     animation-delay: -5s;
-
 }
 
 
@@ -412,7 +411,6 @@
     animation-delay: -11s;
 
     font-size: 1rem;
-
 }
 
 
@@ -423,7 +421,6 @@
     animation-duration: 14s;
 
     animation-delay: -4s;
-
 }
 
 
@@ -436,7 +433,6 @@
     animation-delay: -9s;
 
     font-size: 0.9rem;
-
 }
 
 
@@ -447,7 +443,6 @@
     animation-duration: 13s;
 
     animation-delay: -6s;
-
 }
 
 
@@ -460,7 +455,6 @@
     animation-delay: -13s;
 
     font-size: 1rem;
-
 }
 
 
@@ -482,13 +476,9 @@
     margin: 0 auto;
 
     padding:
-
         100px
-
         0
-
         120px;
-
 }
 
 
@@ -505,7 +495,6 @@
     margin: 0 auto 70px;
 
     text-align: center;
-
 }
 
 
@@ -520,13 +509,10 @@
     margin-bottom: 18px;
 
     padding:
-
         7px
-
         18px;
 
     border:
-
         1px solid
         rgba(255, 190, 235, 0.32);
 
@@ -547,7 +533,6 @@
     letter-spacing: 0.2em;
 
     text-transform: uppercase;
-
 }
 
 
@@ -585,7 +570,6 @@
 
         0 0 40px
         rgba(187, 115, 255, 0.22);
-
 }
 
 
@@ -611,7 +595,6 @@
     font-weight: 300;
 
     line-height: 1.9;
-
 }
 
 
@@ -629,7 +612,6 @@
     font-size: 0.9rem;
 
     letter-spacing: 0.4em;
-
 }
 
 
@@ -648,11 +630,8 @@
     gap: 12px;
 
     margin:
-
         25px
-
         auto
-
         0;
 
     font-family:
@@ -663,7 +642,6 @@
 
     color:
         rgba(255, 220, 244, 0.75);
-
 }
 
 
@@ -672,7 +650,6 @@
     color: #ffd0ef;
 
     font-weight: 500;
-
 }
 
 
@@ -697,7 +674,6 @@
 
     background:
         rgba(255, 255, 255, 0.08);
-
 }
 
 
@@ -727,7 +703,6 @@
     transition:
         width 0.6s
         ease;
-
 }
 
 
@@ -746,7 +721,6 @@
     margin-top: 30px;
 
     border:
-
         1px solid
         rgba(255, 197, 238, 0.12);
 
@@ -771,7 +745,6 @@
 
         0 20px 70px
         rgba(7, 3, 20, 0.25);
-
 }
 
 
@@ -797,7 +770,6 @@
         );
 
     pointer-events: none;
-
 }
 
 
@@ -865,7 +837,6 @@
         3s
         ease-in-out
         infinite;
-
 }
 
 
@@ -893,7 +864,6 @@
 
         0 0 45px
         #d990ff;
-
 }
 
 
@@ -904,12 +874,10 @@
 .chapter6-star:focus-visible {
 
     outline:
-
         2px solid
         rgba(255, 209, 244, 0.9);
 
     outline-offset: 7px;
-
 }
 
 
@@ -926,7 +894,6 @@
         both;
 
     pointer-events: none;
-
 }
 
 
@@ -948,7 +915,6 @@
         0.8s
         ease
         forwards;
-
 }
 
 
@@ -983,7 +949,6 @@
     white-space: nowrap;
 
     pointer-events: none;
-
 }
 
 
@@ -1014,13 +979,10 @@
         scale(0.92);
 
     padding:
-
         30px
-
         34px;
 
     border:
-
         1px solid
         rgba(255, 201, 239, 0.3);
 
@@ -1060,7 +1022,6 @@
         transform 0.4s ease,
 
         visibility 0.4s ease;
-
 }
 
 
@@ -1080,7 +1041,6 @@
             -50%
         )
         scale(1);
-
 }
 
 
@@ -1102,7 +1062,6 @@
     text-shadow:
         0 0 15px
         rgba(255, 174, 228, 0.75);
-
 }
 
 
@@ -1131,7 +1090,6 @@
     font-weight: 500;
 
     line-height: 1.45;
-
 }
 
 
@@ -1153,7 +1111,6 @@
     font-size: 0.65rem;
 
     letter-spacing: 0.12em;
-
 }
 
 
@@ -1175,7 +1132,6 @@
 
     background:
         rgba(255, 255, 255, 0.08);
-
 }
 
 
@@ -1193,7 +1149,6 @@
             #d28aff,
             #ff9bd6
         );
-
 }
 
 
@@ -1211,21 +1166,15 @@
     );
 
     margin:
-
         80px
-
         auto
-
         0;
 
     padding:
-
         55px
-
         40px;
 
     border:
-
         1px solid
         rgba(255, 200, 239, 0.28);
 
@@ -1259,7 +1208,6 @@
         opacity 0.8s ease,
 
         transform 0.8s ease;
-
 }
 
 
@@ -1269,7 +1217,6 @@
 
     transform:
         translateY(0);
-
 }
 
 
@@ -1301,7 +1248,6 @@
         2.5s
         ease-in-out
         infinite;
-
 }
 
 
@@ -1328,7 +1274,6 @@
         );
 
     font-weight: 500;
-
 }
 
 
@@ -1341,11 +1286,8 @@
     max-width: 610px;
 
     margin:
-
         20px
-
         auto
-
         0;
 
     color:
@@ -1360,7 +1302,6 @@
     font-weight: 300;
 
     line-height: 1.9;
-
 }
 
 
@@ -1383,7 +1324,6 @@
             3vw,
             2rem
         ) !important;
-
 }
 
 
@@ -1396,15 +1336,11 @@
     max-width: 700px;
 
     margin:
-
         90px
-
         auto
-
         0;
 
     text-align: center;
-
 }
 
 
@@ -1418,18 +1354,14 @@
     text-shadow:
         0 0 15px
         rgba(255, 181, 232, 0.65);
-
 }
 
 
 .chapter6-ending p {
 
     margin:
-
         20px
-
         auto
-
         0;
 
     color:
@@ -1442,18 +1374,14 @@
     font-size: 0.9rem;
 
     line-height: 1.8;
-
 }
 
 
 .chapter6-ending h3 {
 
     margin:
-
         15px
-
         0
-
         0;
 
     color:
@@ -1471,7 +1399,6 @@
         );
 
     font-weight: 500;
-
 }
 
 
@@ -1484,15 +1411,11 @@
     max-width: 620px;
 
     margin:
-
         80px
-
         auto
-
         0;
 
     text-align: center;
-
 }
 
 
@@ -1508,7 +1431,6 @@
         sans-serif;
 
     font-size: 0.82rem;
-
 }
 
 
@@ -1529,13 +1451,10 @@
     min-width: 230px;
 
     padding:
-
         15px
-
         28px;
 
     border:
-
         1px solid
         rgba(255, 198, 236, 0.35);
 
@@ -1578,7 +1497,6 @@
         border-color 0.3s ease,
 
         box-shadow 0.3s ease;
-
 }
 
 
@@ -1605,19 +1523,16 @@
 
         0 0 25px
         rgba(255, 145, 214, 0.16);
-
 }
 
 
 .chapter6-continue:focus-visible {
 
     outline:
-
         2px solid
         rgba(255, 215, 244, 0.9);
 
     outline-offset: 5px;
-
 }
 
 
@@ -1628,7 +1543,6 @@
 #chapter6Completion[hidden] {
 
     display: none;
-
 }
 
 
@@ -1645,7 +1559,6 @@
 
         transform:
             scale(0.8);
-
     }
 
     50% {
@@ -1654,9 +1567,7 @@
 
         transform:
             scale(1.25);
-
     }
-
 }
 
 
@@ -1673,7 +1584,6 @@
 
         transform:
             scale(0.9);
-
     }
 
     50% {
@@ -1682,9 +1592,7 @@
 
         transform:
             scale(1.08);
-
     }
-
 }
 
 
@@ -1701,7 +1609,6 @@
 
         filter:
             brightness(1);
-
     }
 
     50% {
@@ -1711,7 +1618,6 @@
 
         filter:
             brightness(1.8);
-
     }
 
     100% {
@@ -1721,9 +1627,7 @@
 
         filter:
             brightness(1.2);
-
     }
-
 }
 
 
@@ -1739,7 +1643,6 @@
 
         transform:
             scale(1);
-
     }
 
     50% {
@@ -1751,7 +1654,6 @@
 
         filter:
             brightness(1.7);
-
     }
 
     100% {
@@ -1760,9 +1662,7 @@
 
         transform:
             scale(0);
-
     }
-
 }
 
 
@@ -1779,7 +1679,6 @@
             scale(1);
 
         opacity: 0.8;
-
     }
 
     50% {
@@ -1788,9 +1687,7 @@
             scale(1.18);
 
         opacity: 1;
-
     }
-
 }
 
 
@@ -1811,13 +1708,11 @@
             rotate(0deg);
 
         opacity: 0;
-
     }
 
     10% {
 
         opacity: 0.65;
-
     }
 
     35% {
@@ -1829,7 +1724,6 @@
                 0
             )
             rotate(100deg);
-
     }
 
     65% {
@@ -1841,13 +1735,11 @@
                 0
             )
             rotate(210deg);
-
     }
 
     90% {
 
         opacity: 0.45;
-
     }
 
     100% {
@@ -1861,9 +1753,7 @@
             rotate(330deg);
 
         opacity: 0;
-
     }
-
 }
 
 
@@ -1882,7 +1772,6 @@
             );
 
         padding-top: 80px;
-
     }
 
 
@@ -1893,7 +1782,6 @@
         height: 95px;
 
         right: 7%;
-
     }
 
 
@@ -1902,7 +1790,6 @@
         min-height: 620px;
 
         border-radius: 30px;
-
     }
 
 
@@ -1913,9 +1800,7 @@
         height: 52px;
 
         font-size: 1.8rem;
-
     }
-
 }
 
 
@@ -1928,7 +1813,6 @@
     #chapter6 {
 
         min-height: 100vh;
-
     }
 
 
@@ -1938,20 +1822,15 @@
             calc(100% - 24px);
 
         padding:
-
             70px
-
             0
-
             90px;
-
     }
 
 
     .chapter6-intro {
 
         margin-bottom: 45px;
-
     }
 
 
@@ -1963,7 +1842,6 @@
                 12vw,
                 3.6rem
             );
-
     }
 
 
@@ -1975,7 +1853,6 @@
         font-size: 0.82rem;
 
         line-height: 1.75;
-
     }
 
 
@@ -1988,7 +1865,6 @@
         top: 4%;
 
         right: 7%;
-
     }
 
 
@@ -1999,7 +1875,6 @@
 
         transform-origin:
             top left;
-
     }
 
 
@@ -2008,7 +1883,6 @@
         min-height: 600px;
 
         border-radius: 24px;
-
     }
 
 
@@ -2019,14 +1893,12 @@
         height: 46px;
 
         font-size: 1.65rem;
-
     }
 
 
     .chapter6-star-number {
 
         display: none;
-
     }
 
 
@@ -2036,20 +1908,16 @@
             calc(100% - 28px);
 
         padding:
-
             25px
-
             22px;
 
         border-radius: 20px;
-
     }
 
 
     #chapter6MessageText {
 
         font-size: 1.35rem;
-
     }
 
 
@@ -2058,20 +1926,16 @@
         margin-top: 55px;
 
         padding:
-
             40px
-
             22px;
 
         border-radius: 25px;
-
     }
 
 
     .chapter6-completion h3 {
 
         font-size: 2.2rem;
-
     }
 
 
@@ -2080,28 +1944,24 @@
         font-size: 0.8rem;
 
         line-height: 1.8;
-
     }
 
 
     .chapter6-ending {
 
         margin-top: 65px;
-
     }
 
 
     .chapter6-ending h3 {
 
         font-size: 2rem;
-
     }
 
 
     .chapter6-continue-section {
 
         margin-top: 60px;
-
     }
 
 
@@ -2110,9 +1970,7 @@
         width: 100%;
 
         min-width: 0;
-
     }
-
 }
 
 
@@ -2126,14 +1984,12 @@
 
         width:
             calc(100% - 18px);
-
     }
 
 
     .chapter6-constellation {
 
         min-height: 540px;
-
     }
 
 
@@ -2144,27 +2000,21 @@
         height: 42px;
 
         font-size: 1.5rem;
-
     }
 
 
     .chapter6-message {
 
         padding:
-
             22px
-
             18px;
-
     }
 
 
     #chapter6MessageText {
 
         font-size: 1.2rem;
-
     }
-
 }
 
 
@@ -2183,7 +2033,6 @@
     .chapter6-completion-symbol {
 
         animation: none;
-
     }
 
 
@@ -2198,7 +2047,5 @@
     .chapter6-continue {
 
         transition: none;
-
     }
-
 }
