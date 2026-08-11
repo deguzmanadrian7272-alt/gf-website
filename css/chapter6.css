@@ -121,8 +121,6 @@
     filter: blur(10px);
 
     opacity: 0.9;
-
-    pointer-events: none;
 }
 
 
@@ -149,8 +147,6 @@
         );
 
     filter: blur(25px);
-
-    pointer-events: none;
 }
 
 
@@ -179,18 +175,11 @@
         );
 
     box-shadow:
-        0 0 25px
-        rgba(255, 218, 255, 0.65),
-
-        0 0 60px
-        rgba(232, 155, 255, 0.35),
-
-        0 0 100px
-        rgba(255, 127, 206, 0.18);
+        0 0 25px rgba(255, 218, 255, 0.65),
+        0 0 60px rgba(232, 155, 255, 0.35),
+        0 0 100px rgba(255, 127, 206, 0.18);
 
     opacity: 0.92;
-
-    pointer-events: none;
 }
 
 
@@ -215,14 +204,9 @@
         rgba(178, 125, 193, 0.18);
 
     box-shadow:
-        38px 14px 0
-        rgba(178, 125, 193, 0.15),
-
-        25px 54px 0
-        rgba(178, 125, 193, 0.12),
-
-        -8px 55px 0
-        rgba(178, 125, 193, 0.10);
+        38px 14px 0 rgba(178, 125, 193, 0.15),
+        25px 54px 0 rgba(178, 125, 193, 0.12),
+        -8px 55px 0 rgba(178, 125, 193, 0.10);
 }
 
 
@@ -247,8 +231,6 @@
         3s
         ease-in-out
         infinite;
-
-    pointer-events: none;
 }
 
 
@@ -338,14 +320,11 @@
         chapter6FlowerFall
         linear
         infinite;
-
-    pointer-events: none;
 }
 
 
 .chapter6-flower-1 {
     left: 7%;
-
     animation-duration: 12s;
     animation-delay: -2s;
 }
@@ -353,17 +332,14 @@
 
 .chapter6-flower-2 {
     left: 18%;
-
     animation-duration: 15s;
     animation-delay: -8s;
-
     font-size: 0.95rem;
 }
 
 
 .chapter6-flower-3 {
     left: 30%;
-
     animation-duration: 13s;
     animation-delay: -5s;
 }
@@ -371,17 +347,14 @@
 
 .chapter6-flower-4 {
     left: 44%;
-
     animation-duration: 17s;
     animation-delay: -11s;
-
     font-size: 1rem;
 }
 
 
 .chapter6-flower-5 {
     left: 57%;
-
     animation-duration: 14s;
     animation-delay: -4s;
 }
@@ -389,17 +362,14 @@
 
 .chapter6-flower-6 {
     left: 69%;
-
     animation-duration: 16s;
     animation-delay: -9s;
-
     font-size: 0.9rem;
 }
 
 
 .chapter6-flower-7 {
     left: 82%;
-
     animation-duration: 13s;
     animation-delay: -6s;
 }
@@ -407,10 +377,8 @@
 
 .chapter6-flower-8 {
     left: 94%;
-
     animation-duration: 18s;
     animation-delay: -13s;
-
     font-size: 1rem;
 }
 
@@ -424,10 +392,11 @@
 
     z-index: 2;
 
-    width: min(
-        1200px,
-        calc(100% - 40px)
-    );
+    width:
+        min(
+            1200px,
+            calc(100% - 40px)
+        );
 
     margin: 0 auto;
 
@@ -445,11 +414,9 @@
 .chapter6-intro {
     position: relative;
 
-    z-index: 5;
-
     max-width: 760px;
 
-    margin: 0 auto 70px;
+    margin: 0 auto 55px;
 
     text-align: center;
 }
@@ -552,7 +519,7 @@
 
 
 /* ==========================================================
-   INTRO DECORATION
+   INTRO DIVIDER
    ========================================================== */
 
 .chapter6-intro-divider {
@@ -568,49 +535,111 @@
 
 
 /* ==========================================================
-   DISCOVERY HUD
+   DISCOVERY STATUS — MAIN CONTAINER
    ========================================================== */
 
 .chapter6-discovery-status {
     position: relative;
 
-    z-index: 20;
-
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    gap: 10px;
+    gap: 14px;
 
-    width: fit-content;
+    width:
+        fit-content;
 
-    min-height: 24px;
+    min-width: 250px;
 
     margin:
-        28px
+        32px
         auto
         0;
 
     padding:
-        7px
-        16px;
+        13px
+        24px;
 
     border:
         1px solid
-        rgba(255, 204, 239, 0.16);
+        rgba(255, 202, 238, 0.24);
 
     border-radius: 999px;
 
     background:
-        rgba(255, 255, 255, 0.035);
+        linear-gradient(
+            135deg,
+            rgba(255, 173, 226, 0.10),
+            rgba(188, 116, 255, 0.10)
+        );
 
     box-shadow:
-        0 0 20px
-        rgba(212, 126, 255, 0.06);
+        0 8px 30px
+        rgba(0, 0, 0, 0.18),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08),
+
+        0 0 25px
+        rgba(214, 126, 255, 0.08);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.04em;
 
     color:
-        rgba(255, 228, 247, 0.82);
+        rgba(255, 232, 249, 0.82);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   DISCOVERY STATUS — SMALL DECORATIVE DOT
+   ========================================================== */
+
+.chapter6-discovery-status::before {
+    content: "✦";
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 20px;
+    height: 20px;
+
+    color:
+        #ffd8f2;
+
+    font-size: 0.72rem;
+
+    text-shadow:
+        0 0 8px
+        rgba(255, 189, 235, 0.9);
+}
+
+
+/* ==========================================================
+   DISCOVERY LABEL
+   ========================================================== */
+
+.chapter6-discovery-label {
+    color:
+        rgba(255, 229, 247, 0.75);
 
     font-family:
         "Poppins",
@@ -620,24 +649,16 @@
 
     font-weight: 400;
 
-    line-height: 1;
-
-    letter-spacing: 0.04em;
-
-    text-align: center;
+    letter-spacing: 0.06em;
 
     white-space: nowrap;
 }
 
 
-/* ==========================================================
-   DISCOVERY LABEL
-   ========================================================== */
-
-.chapter6-discovery-status span:first-child {
-    color:
-        rgba(255, 228, 247, 0.72);
-}
+/*
+   This also supports HTML where the label is simply
+   a text node instead of .chapter6-discovery-label.
+*/
 
 
 /* ==========================================================
@@ -650,68 +671,121 @@
     align-items: center;
     justify-content: center;
 
-    min-width: 54px;
+    min-width: 58px;
+
+    padding:
+        5px
+        11px;
+
+    border:
+        1px solid
+        rgba(255, 210, 241, 0.28);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 190, 233, 0.10);
 
     color:
-        #ffd4ef !important;
+        #ffd4ef;
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size: 0.78rem;
+    font-size: 0.72rem;
 
-    font-weight: 500;
+    font-weight: 600;
 
     line-height: 1;
 
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
+
+    white-space: nowrap;
 
     text-shadow:
         0 0 10px
-        rgba(255, 157, 224, 0.35);
+        rgba(255, 174, 227, 0.5);
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08),
+
+        0 0 14px
+        rgba(255, 151, 216, 0.08);
+
+    box-sizing: border-box;
 }
 
 
 /* ==========================================================
-   PROGRESS CONTAINER
+   PROGRESS AREA
    ========================================================== */
 
 .chapter6-progress {
     position: relative;
 
-    z-index: 20;
-
     width:
         min(
-            420px,
-            90%
+            520px,
+            calc(100% - 30px)
         );
 
-    height: 6px;
+    height: 12px;
 
     margin:
-        13px
+        16px
         auto
         0;
+
+    padding: 2px;
 
     overflow: hidden;
 
     border:
         1px solid
-        rgba(255, 211, 241, 0.10);
+        rgba(255, 205, 239, 0.20);
 
     border-radius: 999px;
 
     background:
-        rgba(255, 255, 255, 0.075);
+        rgba(255, 255, 255, 0.055);
 
     box-shadow:
-        inset 0 1px 2px
-        rgba(0, 0, 0, 0.22),
+        inset 0 2px 6px
+        rgba(0, 0, 0, 0.28),
 
-        0 0 15px
-        rgba(197, 114, 255, 0.05);
+        0 0 18px
+        rgba(199, 120, 255, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   PROGRESS TRACK INNER GLOW
+   ========================================================== */
+
+.chapter6-progress::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 2px;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 190, 236, 0.05),
+            rgba(207, 143, 255, 0.025)
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
 }
 
 
@@ -720,6 +794,8 @@
    ========================================================== */
 
 #chapter6ProgressFill {
+    position: relative;
+
     display: block;
 
     width: 0%;
@@ -728,33 +804,75 @@
 
     min-width: 0;
 
-    border: none;
-
-    border-radius: inherit;
+    border-radius: 999px;
 
     background:
         linear-gradient(
             90deg,
-            #c77cff 0%,
-            #e89bff 45%,
-            #ff9bd6 100%
+            #b979ff 0%,
+            #d993ff 45%,
+            #ff9ed8 100%
         );
 
     box-shadow:
         0 0 8px
-        rgba(222, 142, 255, 0.75),
+        rgba(206, 132, 255, 0.85),
 
         0 0 18px
-        rgba(255, 153, 216, 0.4);
+        rgba(255, 145, 215, 0.55),
+
+        0 0 30px
+        rgba(199, 119, 255, 0.25);
 
     transition:
-        width 0.6s
+        width 0.65s
         cubic-bezier(
             0.22,
             1,
             0.36,
             1
         );
+
+    z-index: 2;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   PROGRESS SHIMMER
+   ========================================================== */
+
+#chapter6ProgressFill::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 80px;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.45),
+            transparent
+        );
+
+    filter: blur(2px);
+
+    opacity: 0.65;
+
+    animation:
+        chapter6ProgressShimmer
+        2.4s
+        ease-in-out
+        infinite;
 }
 
 
@@ -764,8 +882,6 @@
 
 .chapter6-constellation {
     position: relative;
-
-    z-index: 3;
 
     width: 100%;
 
@@ -838,7 +954,6 @@
     left: 0;
 
     width: 100%;
-    height: 100%;
 
     min-height: 680px;
 
@@ -898,19 +1013,14 @@
 
     text-shadow:
         0 0 5px #ffffff,
-
         0 0 12px #ffd6f4,
-
         0 0 25px #e19aff,
-
         0 0 45px
         rgba(203, 125, 255, 0.8);
 
     transition:
         transform 0.3s ease,
-
         opacity 0.4s ease,
-
         filter 0.3s ease;
 
     animation:
@@ -978,13 +1088,9 @@
 
     text-shadow:
         0 0 4px #ffffff,
-
         0 0 10px #ffffff,
-
         0 0 20px #ffb8e9,
-
         0 0 35px #d990ff,
-
         0 0 55px
         rgba(203, 125, 255, 0.8);
 
@@ -997,17 +1103,17 @@
    ========================================================== */
 
 .chapter6-star:hover {
-    transform: scale(1.35);
+    transform:
+        scale(1.35);
 
     color: #ffffff;
 
-    filter: brightness(1.3);
+    filter:
+        brightness(1.3);
 
     text-shadow:
         0 0 8px #ffffff,
-
         0 0 20px #ffb8e9,
-
         0 0 45px #d990ff;
 }
 
@@ -1058,7 +1164,8 @@
 .chapter6-star.completed {
     opacity: 0;
 
-    transform: scale(0.15);
+    transform:
+        scale(0.15);
 
     pointer-events: none;
 
@@ -1103,7 +1210,7 @@
 
 
 /* ==========================================================
-   REASON MESSAGE
+   STAR MESSAGE
    ========================================================== */
 
 .chapter6-message {
@@ -1129,8 +1236,7 @@
 
     padding:
         30px
-        34px
-        36px;
+        34px;
 
     border:
         1px solid
@@ -1141,8 +1247,8 @@
     background:
         linear-gradient(
             145deg,
-            rgba(61, 25, 87, 0.96),
-            rgba(38, 17, 64, 0.98)
+            rgba(61, 25, 87, 0.94),
+            rgba(38, 17, 64, 0.96)
         );
 
     box-shadow:
@@ -1165,16 +1271,10 @@
 
     transition:
         opacity 0.4s ease,
-
         transform 0.4s ease,
-
         visibility 0.4s ease;
 }
 
-
-/* ==========================================================
-   MESSAGE SHOW STATE
-   ========================================================== */
 
 .chapter6-message.show {
     opacity: 1;
@@ -1187,145 +1287,6 @@
             -50%
         )
         scale(1);
-}
-
-
-/* ==========================================================
-   7-SECOND REVEAL TIMER
-   ========================================================== */
-
-/*
-   The timer is created with a pseudo-element so
-   chapter6.js does not need another HTML element.
-
-   Every time .chapter6-message.show appears,
-   this bar animates from 100% → 0% over 7 seconds.
-*/
-
-.chapter6-message::after {
-    content: "";
-
-    position: absolute;
-
-    left: 18px;
-    right: 18px;
-
-    bottom: 12px;
-
-    height: 3px;
-
-    border-radius: 999px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #d28aff,
-            #ff9bd6
-        );
-
-    transform-origin: left center;
-
-    transform:
-        scaleX(0);
-
-    opacity: 0;
-
-    box-shadow:
-        0 0 8px
-        rgba(230, 145, 255, 0.65),
-
-        0 0 14px
-        rgba(255, 146, 214, 0.35);
-
-    pointer-events: none;
-}
-
-
-/*
-   Start the timer only when the message
-   becomes visible.
-*/
-
-.chapter6-message.show::after {
-    opacity: 1;
-
-    animation:
-        chapter6RevealTimer
-        7s
-        linear
-        forwards;
-}
-
-
-/* ==========================================================
-   OPTIONAL TIMER ELEMENT
-   ========================================================== */
-
-/*
-   If your HTML contains a dedicated timer element,
-   these styles will support it too.
-*/
-
-#chapter6RevealTimer,
-.chapter6-reveal-timer {
-    position: relative;
-
-    width: 100%;
-
-    height: 4px;
-
-    margin:
-        18px
-        auto
-        0;
-
-    overflow: hidden;
-
-    border-radius: 999px;
-
-    background:
-        rgba(255, 255, 255, 0.08);
-}
-
-
-#chapter6RevealTimer::before,
-.chapter6-reveal-timer::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    transform-origin: left center;
-
-    transform:
-        scaleX(1);
-
-    border-radius: inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            #d28aff,
-            #ff9bd6
-        );
-
-    box-shadow:
-        0 0 8px
-        rgba(230, 145, 255, 0.6);
-}
-
-
-.chapter6-message.show
-#chapter6RevealTimer::before,
-
-.chapter6-message.show
-.chapter6-reveal-timer::before {
-    animation:
-        chapter6RevealTimer
-        7s
-        linear
-        forwards;
 }
 
 
@@ -1346,31 +1307,6 @@
     text-shadow:
         0 0 15px
         rgba(255, 174, 228, 0.75);
-}
-
-
-/* ==========================================================
-   MESSAGE NUMBER
-   ========================================================== */
-
-#chapter6MessageNumber {
-    margin:
-        0
-        0
-        12px;
-
-    color:
-        rgba(255, 211, 239, 0.55);
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 0.65rem;
-
-    letter-spacing: 0.12em;
-
-    text-transform: uppercase;
 }
 
 
@@ -1402,13 +1338,36 @@
 
 
 /* ==========================================================
+   MESSAGE NUMBER
+   ========================================================== */
+
+#chapter6MessageNumber {
+    margin:
+        0
+        0
+        12px;
+
+    color:
+        rgba(255, 211, 239, 0.55);
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+
+/* ==========================================================
    COMPLETION
    ========================================================== */
 
 .chapter6-completion {
     position: relative;
-
-    z-index: 5;
 
     width:
         min(
@@ -1454,7 +1413,6 @@
 
     transition:
         opacity 0.8s ease,
-
         transform 0.8s ease;
 }
 
@@ -1722,11 +1680,8 @@
 
     transition:
         transform 0.3s ease,
-
         background 0.3s ease,
-
         border-color 0.3s ease,
-
         box-shadow 0.3s ease;
 }
 
@@ -1776,11 +1731,6 @@
    ANIMATIONS
    ========================================================== */
 
-
-/* ==========================================================
-   SKY TWINKLE
-   ========================================================== */
-
 @keyframes chapter6SkyTwinkle {
 
     0%,
@@ -1800,10 +1750,6 @@
 }
 
 
-/* ==========================================================
-   STAR PULSE
-   ========================================================== */
-
 @keyframes chapter6StarPulse {
 
     0%,
@@ -1822,10 +1768,6 @@
     }
 }
 
-
-/* ==========================================================
-   STAR REVEAL
-   ========================================================== */
 
 @keyframes chapter6StarReveal {
 
@@ -1855,10 +1797,6 @@
 }
 
 
-/* ==========================================================
-   STAR DISAPPEAR
-   ========================================================== */
-
 @keyframes chapter6StarDisappear {
 
     0% {
@@ -1887,28 +1825,6 @@
 }
 
 
-/* ==========================================================
-   7-SECOND REVEAL TIMER
-   ========================================================== */
-
-@keyframes chapter6RevealTimer {
-
-    0% {
-        transform:
-            scaleX(1);
-    }
-
-    100% {
-        transform:
-            scaleX(0);
-    }
-}
-
-
-/* ==========================================================
-   COMPLETION PULSE
-   ========================================================== */
-
 @keyframes chapter6CompletionPulse {
 
     0%,
@@ -1924,6 +1840,36 @@
             scale(1.18);
 
         opacity: 1;
+    }
+}
+
+
+/* ==========================================================
+   PROGRESS SHIMMER ANIMATION
+   ========================================================== */
+
+@keyframes chapter6ProgressShimmer {
+
+    0% {
+        transform:
+            translateX(-100px);
+
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 0.65;
+    }
+
+    70% {
+        opacity: 0.65;
+    }
+
+    100% {
+        transform:
+            translateX(100px);
+
+        opacity: 0;
     }
 }
 
@@ -2013,6 +1959,24 @@
     }
 
 
+    .chapter6-discovery-status {
+        min-width: 230px;
+
+        padding:
+            12px
+            20px;
+    }
+
+
+    .chapter6-progress {
+        width:
+            min(
+                480px,
+                calc(100% - 30px)
+            );
+    }
+
+
     .chapter6-constellation {
         min-height: 620px;
 
@@ -2035,20 +1999,6 @@
 
     .chapter6-star-symbol {
         font-size: 1.8rem;
-    }
-
-
-    .chapter6-discovery-status {
-        margin-top: 24px;
-    }
-
-
-    .chapter6-progress {
-        width:
-            min(
-                380px,
-                85%
-            );
     }
 }
 
@@ -2118,43 +2068,66 @@
     }
 
 
-    /* ------------------------------------------------------
-       MOBILE DISCOVERY HUD
-       ------------------------------------------------------ */
+    /* ---------------------------------------------
+       DISCOVERY STATUS MOBILE
+       --------------------------------------------- */
 
     .chapter6-discovery-status {
-        gap: 8px;
+        width:
+            min(
+                100%,
+                290px
+            );
 
-        margin-top: 22px;
+        min-width: 0;
 
         padding:
-            7px
-            13px;
+            12px
+            16px;
+
+        gap: 10px;
 
         font-size: 0.7rem;
     }
 
 
-    #chapter6DiscoveryCount {
-        min-width: 48px;
-
-        font-size: 0.72rem;
+    .chapter6-discovery-label {
+        font-size: 0.69rem;
     }
 
+
+    #chapter6DiscoveryCount {
+        min-width: 54px;
+
+        padding:
+            5px
+            9px;
+
+        font-size: 0.67rem;
+    }
+
+
+    .chapter6-discovery-status::before {
+        width: 17px;
+        height: 17px;
+
+        font-size: 0.65rem;
+    }
+
+
+    /* ---------------------------------------------
+       PROGRESS BAR MOBILE
+       --------------------------------------------- */
 
     .chapter6-progress {
         width:
-            calc(100% - 30px);
+            calc(100% - 24px);
 
-        height: 5px;
+        height: 11px;
 
-        margin-top: 11px;
+        margin-top: 14px;
     }
 
-
-    /* ------------------------------------------------------
-       MOBILE CONSTELLATION
-       ------------------------------------------------------ */
 
     .chapter6-constellation {
         min-height: 600px;
@@ -2186,18 +2159,13 @@
     }
 
 
-    /* ------------------------------------------------------
-       MOBILE MESSAGE
-       ------------------------------------------------------ */
-
     .chapter6-message {
         width:
             calc(100% - 28px);
 
         padding:
             25px
-            22px
-            30px;
+            22px;
 
         border-radius: 20px;
     }
@@ -2207,18 +2175,6 @@
         font-size: 1.35rem;
     }
 
-
-    .chapter6-message::after {
-        left: 14px;
-        right: 14px;
-
-        bottom: 9px;
-    }
-
-
-    /* ------------------------------------------------------
-       MOBILE COMPLETION
-       ------------------------------------------------------ */
 
     .chapter6-completion {
         margin-top: 55px;
@@ -2279,16 +2235,32 @@
 
 
     .chapter6-discovery-status {
-        font-size: 0.66rem;
+        width:
+            calc(100% - 10px);
 
         padding:
-            6px
-            11px;
+            11px
+            12px;
+    }
+
+
+    .chapter6-discovery-label {
+        font-size: 0.64rem;
     }
 
 
     #chapter6DiscoveryCount {
-        font-size: 0.68rem;
+        min-width: 50px;
+
+        font-size: 0.63rem;
+    }
+
+
+    .chapter6-progress {
+        width:
+            calc(100% - 18px);
+
+        height: 10px;
     }
 
 
@@ -2318,8 +2290,7 @@
     .chapter6-message {
         padding:
             22px
-            18px
-            28px;
+            18px;
     }
 
 
@@ -2338,7 +2309,8 @@
     .chapter6-star,
     .chapter6-sky-star,
     .chapter6-flower,
-    .chapter6-completion-symbol {
+    .chapter6-completion-symbol,
+    #chapter6ProgressFill {
         animation: none;
     }
 
@@ -2349,19 +2321,5 @@
     #chapter6ProgressFill,
     .chapter6-continue {
         transition: none;
-    }
-
-
-    .chapter6-message.show::after {
-        animation: none;
-
-        transform:
-            scaleX(0);
-    }
-
-
-    #chapter6RevealTimer::before,
-    .chapter6-reveal-timer::before {
-        animation: none;
     }
 }
