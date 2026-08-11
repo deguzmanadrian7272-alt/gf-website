@@ -207,7 +207,9 @@ document.addEventListener("DOMContentLoaded", () => {
             Remove old result message.
         */
 
-        removeGameMessage(heartBoard);
+        removeGameMessage(
+            heartBoard
+        );
 
 
         updateHeartCount();
@@ -427,14 +429,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /*
             Determine performance.
-
-            Since every clickable object is a real heart,
-            the number of attempts tells us how cleanly
-            the player completed the hunt.
-
-            5 attempts = perfect.
-            6–7 attempts = very good.
-            8+ attempts = still completed.
         */
 
         let message;
@@ -2084,7 +2078,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       CHAPTER 5 CONTINUE BUTTON
+       CHAPTER 5 → CHAPTER 6
+       CONTINUE BUTTON
        ====================================================== */
 
     if (chapter5Continue) {
@@ -2093,28 +2088,51 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             () => {
 
-                /*
-                    Prevent accidental
-                    repeated clicks.
-                */
-
-                chapter5Continue.style.pointerEvents =
-                    "none";
-
-
-                /*
-                    Chapter 5 is complete.
-                */
-
                 console.log(
-                    "🎮 Chapter 5 complete."
+                    "💌 Chapter 5 Continue button clicked."
                 );
 
 
                 /*
-                    Use the SAME navigation system
-                    used by Chapter 3 → 4
-                    and Chapter 4 → 5.
+                    Find Chapter 6.
+                */
+
+                const chapter6 =
+                    document.getElementById(
+                        "chapter6"
+                    );
+
+
+                /*
+                    Chapter 6 must exist in index.html.
+                */
+
+                if (!chapter6) {
+
+                    console.error(
+                        "❌ Chapter 6 was not found in index.html."
+                    );
+
+
+                    alert(
+                        'Chapter 6 could not be found. Please make sure <main id="chapter6"> exists in index.html.'
+                    );
+
+
+                    return;
+
+                }
+
+
+                console.log(
+                    "📖 Opening Chapter 6..."
+                );
+
+
+                /*
+                    --------------------------------------------------
+                    TRY EXISTING TRANSITION SYSTEM FIRST
+                    --------------------------------------------------
                 */
 
                 if (
@@ -2122,31 +2140,252 @@ document.addEventListener("DOMContentLoaded", () => {
                     "function"
                 ) {
 
-                    transitionToChapter(6);
+                    try {
 
-                    return;
+                        transitionToChapter(
+                            6
+                        );
+
+
+                        /*
+                            Give transition.js time
+                            to handle Chapter 6.
+
+                            transition.js currently does not
+                            directly open Chapter 6, so if
+                            Chapter 6 is still hidden,
+                            use the direct fallback.
+                        */
+
+                        setTimeout(
+                            () => {
+
+                                const chapter6Visible =
+                                    chapter6.style.display !==
+                                        "none" &&
+                                    getComputedStyle(
+                                        chapter6
+                                    ).display !==
+                                        "none";
+
+
+                                if (
+                                    !chapter6Visible
+                                ) {
+
+                                    console.warn(
+                                        "⚠️ transitionToChapter(6) did not open Chapter 6. Using direct navigation."
+                                    );
+
+
+                                    openChapter6Directly();
+
+                                }
+
+                            },
+                            700
+                        );
+
+
+                        return;
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "❌ transitionToChapter(6) failed:",
+                            error
+                        );
+
+                        /*
+                            Continue to direct navigation.
+                        */
+
+                    }
 
                 }
 
 
                 /*
-                    Transition system is unavailable.
+                    --------------------------------------------------
+                    DIRECT NAVIGATION FALLBACK
+                    --------------------------------------------------
                 */
 
-                console.warn(
-                    "Chapter transition system is not available."
-                );
-
-
-                /*
-                    Allow the button to be clicked again
-                    if the transition system is missing.
-                */
-
-                chapter5Continue.style.pointerEvents =
-                    "auto";
+                openChapter6Directly();
 
             }
+        );
+
+    }
+
+
+    /* ======================================================
+       DIRECTLY OPEN CHAPTER 6
+       ====================================================== */
+
+    function openChapter6Directly() {
+
+        const chapter6 =
+            document.getElementById(
+                "chapter6"
+            );
+
+
+        if (!chapter6) {
+
+            console.error(
+                "❌ Cannot open Chapter 6 because #chapter6 does not exist."
+            );
+
+
+            return;
+
+        }
+
+
+        /*
+            Hide every chapter.
+        */
+
+        const chapters =
+            document.querySelectorAll(
+                "main[id^='chapter']"
+            );
+
+
+        chapters.forEach(
+            chapter => {
+
+                if (
+                    chapter !== chapter6
+                ) {
+
+                    chapter.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        /*
+            Show Chapter 6.
+        */
+
+        chapter6.style.display =
+            "block";
+
+
+        /*
+            Make sure Chapter 6
+            uses the browser document
+            for scrolling.
+        */
+
+        chapter6.style.height =
+            "auto";
+
+
+        chapter6.style.minHeight =
+            "100vh";
+
+
+        chapter6.style.overflowX =
+            "hidden";
+
+
+        chapter6.style.overflowY =
+            "visible";
+
+
+        /*
+            Restore normal browser scrolling.
+        */
+
+        document.documentElement.style.height =
+            "auto";
+
+
+        document.documentElement.style.overflowY =
+            "auto";
+
+
+        document.body.style.height =
+            "auto";
+
+
+        document.body.style.overflowY =
+            "auto";
+
+
+        document.body.style.overflowX =
+            "hidden";
+
+
+        /*
+            Reset page position.
+        */
+
+        if (
+            typeof window.scrollTo ===
+            "function"
+        ) {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "instant"
+
+            });
+
+        }
+
+
+        /*
+            Update application state.
+        */
+
+        if (
+            typeof setChapter ===
+            "function"
+        ) {
+
+            setChapter(
+                6
+            );
+
+        }
+
+
+        /*
+            Fire chapterChange.
+
+            This allows other chapter modules
+            to respond to Chapter 6 being opened.
+        */
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "chapterChange",
+                {
+
+                    detail: {
+
+                        chapter: 6
+
+                    }
+
+                }
+            )
+        );
+
+
+        console.log(
+            "✨ Chapter 6 opened successfully."
         );
 
     }
