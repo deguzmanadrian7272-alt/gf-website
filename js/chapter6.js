@@ -38,8 +38,8 @@ function initChapter6() {
 
 
     /*
-        If the HTML does not contain the
-        star field, create it automatically.
+        If the HTML does not contain
+        the star field, create it automatically.
     */
 
     if (!starField) {
@@ -76,9 +76,19 @@ function initChapter6() {
     }
 
 
+    /* ======================================================
+       OTHER CHAPTER 6 ELEMENTS
+       ====================================================== */
+
     const discoveryCount =
         document.getElementById(
             "chapter6DiscoveryCount"
+        );
+
+
+    const progressFill =
+        document.getElementById(
+            "chapter6ProgressFill"
         );
 
 
@@ -139,6 +149,11 @@ function initChapter6() {
         TOTAL_STARS *
         REASONS_PER_STAR;
 
+    /*
+        Each reason remains visible
+        for exactly 7 seconds.
+    */
+
     const MESSAGE_DURATION = 7000;
 
 
@@ -165,6 +180,7 @@ function initChapter6() {
        100 REASONS
 
        20 STARS × 5 REASONS
+       = 100 TOTAL DISCOVERIES
        ====================================================== */
 
     const reasons = [
@@ -588,13 +604,43 @@ function initChapter6() {
 
     function updateDiscoveryCount() {
 
-        if (!discoveryCount) {
-            return;
+        if (discoveryCount) {
+
+            discoveryCount.textContent =
+                `${state.totalDiscoveries} / ${TOTAL_DISCOVERIES}`;
+
         }
 
 
-        discoveryCount.textContent =
-            `${state.totalDiscoveries} / ${TOTAL_DISCOVERIES}`;
+        /* ==================================================
+           UPDATE PROGRESS BAR
+           ================================================== */
+
+        if (progressFill) {
+
+            const percentage =
+                (
+                    state.totalDiscoveries /
+                    TOTAL_DISCOVERIES
+                ) * 100;
+
+
+            progressFill.style.width =
+                `${percentage}%`;
+
+
+            progressFill.setAttribute(
+                "aria-valuenow",
+                state.totalDiscoveries
+            );
+
+
+            progressFill.setAttribute(
+                "aria-valuemax",
+                TOTAL_DISCOVERIES
+            );
+
+        }
 
     }
 
@@ -638,12 +684,16 @@ function initChapter6() {
                 <span class="chapter6-star-symbol">
                     ✦
                 </span>
+
+                <span class="chapter6-star-number">
+                    ${starIndex + 1}
+                </span>
             `;
 
 
-        /*
-            Random but controlled position.
-        */
+        /* ==================================================
+           RANDOM STAR POSITION
+           ================================================== */
 
         const left =
             Math.floor(
@@ -665,17 +715,17 @@ function initChapter6() {
             `${top}%`;
 
 
-        /*
-            Slightly different animation delay.
-        */
+        /* ==================================================
+           RANDOM ANIMATION DELAY
+           ================================================== */
 
         star.style.animationDelay =
             `${Math.random() * 2}s`;
 
 
-        /*
-            Click event.
-        */
+        /* ==================================================
+           CLICK EVENT
+           ================================================== */
 
         star.addEventListener(
             "click",
@@ -741,7 +791,9 @@ function initChapter6() {
 
 
         if (!star) {
+
             return null;
+
         }
 
 
@@ -775,17 +827,27 @@ function initChapter6() {
         starIndex
     ) {
 
+        /*
+            Prevent another star from being
+            clicked while the current reason
+            is being displayed.
+        */
+
         if (
             state.messageVisible
         ) {
+
             return;
+
         }
 
 
         if (
             state.completed
         ) {
+
             return;
+
         }
 
 
@@ -794,14 +856,18 @@ function initChapter6() {
 
 
         if (!star) {
+
             return;
+
         }
 
 
         if (
             star.completed
         ) {
+
             return;
+
         }
 
 
@@ -814,13 +880,15 @@ function initChapter6() {
         if (
             reasonIndex === null
         ) {
+
             return;
+
         }
 
 
-        /*
-            Mark reason as discovered.
-        */
+        /* ==================================================
+           MARK REASON AS DISCOVERED
+           ================================================== */
 
         star.discovered.push(
             reasonIndex
@@ -829,6 +897,10 @@ function initChapter6() {
 
         state.totalDiscoveries++;
 
+
+        /* ==================================================
+           UPDATE COUNTER + PROGRESS
+           ================================================== */
 
         updateDiscoveryCount();
 
@@ -841,11 +913,23 @@ function initChapter6() {
             true;
 
 
-        /*
-            Add active visual state.
-        */
+        /* ==================================================
+           STAR REVEAL ANIMATION
+           ================================================== */
 
         if (star.element) {
+
+            star.element.classList.remove(
+                "revealing"
+            );
+
+
+            /*
+                Force animation restart.
+            */
+
+            void star.element.offsetWidth;
+
 
             star.element.classList.add(
                 "revealing"
@@ -854,9 +938,9 @@ function initChapter6() {
         }
 
 
-        /*
-            Show message.
-        */
+        /* ==================================================
+           SHOW MESSAGE
+           ================================================== */
 
         showReasonMessage(
             starIndex,
@@ -864,9 +948,9 @@ function initChapter6() {
         );
 
 
-        /*
-            Start exact 7-second timer.
-        */
+        /* ==================================================
+           EXACT 7-SECOND TIMER
+           ================================================== */
 
         clearTimeout(
             state.messageTimer
@@ -882,7 +966,6 @@ function initChapter6() {
                     );
 
                 },
-
                 MESSAGE_DURATION
             );
 
@@ -899,7 +982,9 @@ function initChapter6() {
     ) {
 
         if (!messageBox) {
+
             return;
+
         }
 
 
@@ -916,6 +1001,10 @@ function initChapter6() {
                 .reasons[reasonIndex];
 
 
+        /* ==================================================
+           MESSAGE NUMBER
+           ================================================== */
+
         if (messageNumber) {
 
             messageNumber.textContent =
@@ -923,6 +1012,10 @@ function initChapter6() {
 
         }
 
+
+        /* ==================================================
+           MESSAGE TEXT
+           ================================================== */
 
         if (messageText) {
 
@@ -965,6 +1058,10 @@ function initChapter6() {
             null;
 
 
+        /* ==================================================
+           HIDE MESSAGE
+           ================================================== */
+
         if (messageBox) {
 
             messageBox.classList.remove(
@@ -987,21 +1084,30 @@ function initChapter6() {
                     }
 
                 },
-
                 350
             );
 
         }
 
 
+        /* ==================================================
+           GET CURRENT STAR
+           ================================================== */
+
         const star =
             stars[starIndex];
 
 
         if (!star) {
+
             return;
+
         }
 
+
+        /* ==================================================
+           REMOVE REVEALING STATE
+           ================================================== */
 
         if (star.element) {
 
@@ -1012,10 +1118,9 @@ function initChapter6() {
         }
 
 
-        /*
-            Check whether this star
-            has revealed all 5 reasons.
-        */
+        /* ==================================================
+           CHECK STAR COMPLETION
+           ================================================== */
 
         if (
             star.discovered.length >=
@@ -1029,10 +1134,9 @@ function initChapter6() {
         }
 
 
-        /*
-            Check whether every star
-            has been completed.
-        */
+        /* ==================================================
+           CHECK CHAPTER COMPLETION
+           ================================================== */
 
         checkChapterCompletion();
 
@@ -1052,20 +1156,28 @@ function initChapter6() {
 
 
         if (!star) {
+
             return;
+
         }
 
 
         if (
             star.completed
         ) {
+
             return;
+
         }
 
 
         star.completed =
             true;
 
+
+        /* ==================================================
+           STAR DISAPPEAR ANIMATION
+           ================================================== */
 
         if (star.element) {
 
@@ -1086,8 +1198,7 @@ function initChapter6() {
                     }
 
                 },
-
-                650
+                800
             );
 
         }
@@ -1140,13 +1251,36 @@ function initChapter6() {
             true;
 
 
+        /* ==================================================
+           MAKE SURE PROGRESS IS 100%
+           ================================================== */
+
+        if (progressFill) {
+
+            progressFill.style.width =
+                "100%";
+
+        }
+
+
+        if (discoveryCount) {
+
+            discoveryCount.textContent =
+                `${TOTAL_DISCOVERIES} / ${TOTAL_DISCOVERIES}`;
+
+        }
+
+
+        /* ==================================================
+           SHOW COMPLETION AFTER SHORT DELAY
+           ================================================== */
+
         setTimeout(
             () => {
 
                 showCompletion();
 
             },
-
             700
         );
 
@@ -1160,7 +1294,9 @@ function initChapter6() {
     function showCompletion() {
 
         if (!completion) {
+
             return;
+
         }
 
 
@@ -1187,6 +1323,18 @@ function initChapter6() {
         }
 
 
+        if (progressFill) {
+
+            progressFill.style.width =
+                "100%";
+
+        }
+
+
+        /* ==================================================
+           SCROLL TO COMPLETION
+           ================================================== */
+
         setTimeout(
             () => {
 
@@ -1201,7 +1349,6 @@ function initChapter6() {
                 });
 
             },
-
             400
         );
 
@@ -1220,7 +1367,7 @@ function initChapter6() {
 
                 /*
                     Existing navigation systems
-                    are always checked first.
+                    are checked first.
                 */
 
                 if (
@@ -1247,9 +1394,9 @@ function initChapter6() {
                 }
 
 
-                /*
-                    Direct fallback.
-                */
+                /* ==================================================
+                   DIRECT FALLBACK
+                   ================================================== */
 
                 const chapter7 =
                     document.getElementById(
@@ -1314,9 +1461,9 @@ function initChapter6() {
     createStars();
 
 
-    /*
-        Hide message initially.
-    */
+    /* ======================================================
+       HIDE MESSAGE INITIALLY
+       ====================================================== */
 
     if (messageBox) {
 
@@ -1330,9 +1477,9 @@ function initChapter6() {
     }
 
 
-    /*
-        Hide completion initially.
-    */
+    /* ======================================================
+       HIDE COMPLETION INITIALLY
+       ====================================================== */
 
     if (completion) {
 
@@ -1341,6 +1488,30 @@ function initChapter6() {
 
         completion.classList.remove(
             "show"
+        );
+
+    }
+
+
+    /* ======================================================
+       INITIAL PROGRESS BAR STATE
+       ====================================================== */
+
+    if (progressFill) {
+
+        progressFill.style.width =
+            "0%";
+
+
+        progressFill.setAttribute(
+            "aria-valuenow",
+            "0"
+        );
+
+
+        progressFill.setAttribute(
+            "aria-valuemax",
+            TOTAL_DISCOVERIES
         );
 
     }
