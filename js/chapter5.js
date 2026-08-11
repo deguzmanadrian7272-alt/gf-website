@@ -2,268 +2,476 @@
    CHAPTER V — MINI GAMES
    Project : Our Story
    File    : chapter5.js
-   Purpose : Mini Games + Chapter VI Navigation
+   Purpose : Mini Games Chapter
    ========================================================== */
 
 
 /* ==========================================================
-   CHAPTER V INITIALIZATION
+   CHAPTER V STATE
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+const chapter5State = {
 
-    const chapter5 = document.getElementById("chapter5");
+    currentGame: "heart",
 
-    if (!chapter5) {
-        return;
-    }
+    heartsFound: 0,
+
+    totalHearts: 5,
+
+    memoryMatches: 0,
+
+    totalMemoryPairs: 6,
+
+    quizIndex: 0,
+
+    quizScore: 0,
+
+    quizFinished: false
+
+};
 
 
-    /* ======================================================
-       GAME SELECTORS
-    ====================================================== */
+/* ==========================================================
+   CHAPTER V ELEMENTS
+========================================================== */
 
-    const gameSelectors = document.querySelectorAll(
+const chapter5GameSelectors =
+    document.querySelectorAll(
         ".chapter5-game-select"
     );
 
-    const gamePanels = document.querySelectorAll(
+const chapter5GamePanels =
+    document.querySelectorAll(
         ".chapter5-game"
     );
 
 
-    /* ======================================================
-       GAME STATE
-    ====================================================== */
+/* ==========================================================
+   GAME SELECTOR
+========================================================== */
 
-    let currentGame = "heart";
+chapter5GameSelectors.forEach(
+    (button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const game =
+                    button.dataset.game;
+
+                if (!game) {
+                    return;
+                }
+
+                switchChapter5Game(game);
+
+            }
+        );
+
+    }
+);
 
 
-    /* ======================================================
-       GAME 1 — FIND THE HEARTS
-    ====================================================== */
+/* ==========================================================
+   SWITCH GAME
+========================================================== */
 
-    const heartBoard = document.getElementById(
+function switchChapter5Game(game) {
+
+    chapter5State.currentGame = game;
+
+
+    chapter5GameSelectors.forEach(
+        (button) => {
+
+            button.classList.toggle(
+                "active",
+                button.dataset.game === game
+            );
+
+        }
+    );
+
+
+    chapter5GamePanels.forEach(
+        (panel) => {
+
+            panel.classList.toggle(
+                "active",
+                panel.dataset.gamePanel === game
+            );
+
+        }
+    );
+
+
+    if (game === "heart") {
+
+        initializeHeartGame();
+
+    }
+
+
+    if (game === "memory") {
+
+        initializeMemoryGame();
+
+    }
+
+
+    if (game === "quiz") {
+
+        initializeQuiz();
+
+    }
+
+}
+
+
+/* ==========================================================
+   GAME 1 — FIND MY HEARTS
+========================================================== */
+
+const chapter5HeartBoard =
+    document.getElementById(
         "chapter5HeartBoard"
     );
 
-    const heartCount = document.getElementById(
+const chapter5HeartCount =
+    document.getElementById(
         "chapter5HeartCount"
     );
 
-    const heartReset = document.getElementById(
+const chapter5HeartReset =
+    document.getElementById(
         "chapter5HeartReset"
     );
 
 
-    const TOTAL_HEARTS = 5;
+/* ==========================================================
+   CREATE HEART GAME
+========================================================== */
 
-    let foundHearts = 0;
+function initializeHeartGame() {
+
+    if (!chapter5HeartBoard) {
+        return;
+    }
 
 
-    /* ======================================================
-       CREATE HEART GAME
-    ====================================================== */
+    chapter5State.heartsFound = 0;
 
-    function createHeartGame() {
 
-        if (!heartBoard) {
-            return;
+    updateHeartCounter();
+
+
+    chapter5HeartBoard.innerHTML = "";
+
+
+    const positions = [
+
+        {
+            top: "18%",
+            left: "15%"
+        },
+
+        {
+            top: "35%",
+            left: "70%"
+        },
+
+        {
+            top: "62%",
+            left: "25%"
+        },
+
+        {
+            top: "72%",
+            left: "78%"
+        },
+
+        {
+            top: "48%",
+            left: "50%"
         }
 
-        heartBoard.innerHTML = "";
-
-        foundHearts = 0;
-
-        updateHeartCount();
+    ];
 
 
-        const positions = [
-            { top: "15%", left: "18%" },
-            { top: "30%", left: "72%" },
-            { top: "55%", left: "40%" },
-            { top: "70%", left: "80%" },
-            { top: "78%", left: "20%" }
-        ];
+    positions.forEach(
+        (position, index) => {
 
+            const heart =
+                document.createElement(
+                    "button"
+                );
 
-        positions.forEach((position, index) => {
-
-            const heart = document.createElement("button");
 
             heart.type = "button";
 
-            heart.className = "chapter5-hidden-heart";
+            heart.className =
+                "chapter5-hidden-heart";
+
+
+            heart.dataset.heart =
+                index + 1;
+
 
             heart.innerHTML = "♥";
 
-            heart.setAttribute(
-                "aria-label",
-                `Hidden heart ${index + 1}`
+
+            heart.style.top =
+                position.top;
+
+            heart.style.left =
+                position.left;
+
+
+            heart.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        heart.classList.contains(
+                            "found"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    heart.classList.add(
+                        "found"
+                    );
+
+
+                    chapter5State.heartsFound++;
+
+
+                    updateHeartCounter();
+
+
+                    if (
+                        chapter5State.heartsFound >=
+                        chapter5State.totalHearts
+                    ) {
+
+                        completeHeartGame();
+
+                    }
+
+                }
             );
 
 
-            heart.style.top = position.top;
+            chapter5HeartBoard.appendChild(
+                heart
+            );
 
-            heart.style.left = position.left;
-
-
-            heart.addEventListener("click", () => {
-
-                if (heart.classList.contains("found")) {
-                    return;
-                }
-
-
-                heart.classList.add("found");
-
-                foundHearts++;
-
-                updateHeartCount();
-
-
-                if (foundHearts === TOTAL_HEARTS) {
-
-                    completeHeartGame();
-
-                }
-
-            });
-
-
-            heartBoard.appendChild(heart);
-
-        });
-
-    }
-
-
-    /* ======================================================
-       UPDATE HEART COUNT
-    ====================================================== */
-
-    function updateHeartCount() {
-
-        if (!heartCount) {
-            return;
         }
+    );
 
-        heartCount.textContent =
-            `${foundHearts} / ${TOTAL_HEARTS}`;
+}
 
+
+/* ==========================================================
+   HEART COUNTER
+========================================================== */
+
+function updateHeartCounter() {
+
+    if (!chapter5HeartCount) {
+        return;
     }
 
 
-    /* ======================================================
-       HEART GAME COMPLETE
-    ====================================================== */
+    chapter5HeartCount.textContent =
+        `${chapter5State.heartsFound} / ${chapter5State.totalHearts}`;
 
-    function completeHeartGame() {
+}
 
-        if (!heartBoard) {
-            return;
+
+/* ==========================================================
+   HEART GAME COMPLETE
+========================================================== */
+
+function completeHeartGame() {
+
+    if (!chapter5HeartBoard) {
+        return;
+    }
+
+
+    chapter5HeartBoard.classList.add(
+        "completed"
+    );
+
+}
+
+
+/* ==========================================================
+   HEART RESET
+========================================================== */
+
+if (chapter5HeartReset) {
+
+    chapter5HeartReset.addEventListener(
+        "click",
+        () => {
+
+            chapter5HeartBoard.classList.remove(
+                "completed"
+            );
+
+
+            initializeHeartGame();
+
         }
+    );
+
+}
 
 
-        heartBoard.classList.add(
-            "chapter5-game-complete"
-        );
+/* ==========================================================
+   GAME 2 — MEMORY MATCHING
+========================================================== */
 
-    }
-
-
-    /* ======================================================
-       HEART RESET
-    ====================================================== */
-
-    if (heartReset) {
-
-        heartReset.addEventListener(
-            "click",
-            createHeartGame
-        );
-
-    }
-
-
-
-    /* ======================================================
-       GAME 2 — MEMORY MATCHING
-    ====================================================== */
-
-    const memoryBoard = document.getElementById(
+const chapter5MemoryBoard =
+    document.getElementById(
         "chapter5MemoryBoard"
     );
 
-    const memoryMatches = document.getElementById(
+const chapter5MemoryMatches =
+    document.getElementById(
         "chapter5MemoryMatches"
     );
 
-    const memoryReset = document.getElementById(
+const chapter5MemoryReset =
+    document.getElementById(
         "chapter5MemoryReset"
     );
 
 
-    const memorySymbols = [
-        "♥",
-        "♡",
-        "✦",
-        "✧",
-        "✿",
-        "❀"
-    ];
+/* ==========================================================
+   MEMORY SYMBOLS
+========================================================== */
+
+const chapter5MemorySymbols = [
+
+    "♥",
+
+    "♡",
+
+    "✦",
+
+    "✧",
+
+    "✿",
+
+    "❀"
+
+];
 
 
-    let memoryCards = [];
+/* ==========================================================
+   MEMORY STATE
+========================================================== */
 
-    let firstCard = null;
+let chapter5MemoryFirstCard = null;
 
-    let secondCard = null;
+let chapter5MemorySecondCard = null;
 
-    let lockBoard = false;
-
-    let matchedPairs = 0;
-
-
-    /* ======================================================
-       CREATE MEMORY GAME
-    ====================================================== */
-
-    function createMemoryGame() {
-
-        if (!memoryBoard) {
-            return;
-        }
+let chapter5MemoryLocked = false;
 
 
-        memoryBoard.innerHTML = "";
+/* ==========================================================
+   SHUFFLE ARRAY
+========================================================== */
 
-        memoryCards = [];
+function shuffleChapter5Array(array) {
 
-        firstCard = null;
-
-        secondCard = null;
-
-        lockBoard = false;
-
-        matchedPairs = 0;
+    const shuffled =
+        [...array];
 
 
-        updateMemoryMatches();
+    for (
+        let i = shuffled.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
 
 
-        const cards = [
-            ...memorySymbols,
-            ...memorySymbols
+        [
+            shuffled[i],
+            shuffled[j]
+        ] = [
+
+            shuffled[j],
+            shuffled[i]
+
         ];
 
+    }
 
-        shuffleArray(cards);
+
+    return shuffled;
+
+}
 
 
-        cards.forEach((symbol, index) => {
+/* ==========================================================
+   INITIALIZE MEMORY GAME
+========================================================== */
 
-            const card = document.createElement("button");
+function initializeMemoryGame() {
+
+    if (!chapter5MemoryBoard) {
+        return;
+    }
+
+
+    chapter5State.memoryMatches = 0;
+
+
+    chapter5MemoryFirstCard = null;
+
+    chapter5MemorySecondCard = null;
+
+    chapter5MemoryLocked = false;
+
+
+    updateMemoryCounter();
+
+
+    chapter5MemoryBoard.innerHTML = "";
+
+
+    const cards = shuffleChapter5Array([
+
+        ...chapter5MemorySymbols,
+
+        ...chapter5MemorySymbols
+
+    ]);
+
+
+    cards.forEach(
+        (symbol, index) => {
+
+            const card =
+                document.createElement(
+                    "button"
+                );
+
 
             card.type = "button";
 
@@ -271,7 +479,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 "chapter5-memory-card";
 
 
-            card.dataset.symbol = symbol;
+            card.dataset.symbol =
+                symbol;
+
+
+            card.dataset.index =
+                index;
 
 
             card.innerHTML = `
@@ -287,830 +500,801 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
 
 
-            card.setAttribute(
-                "aria-label",
-                `Memory card ${index + 1}`
-            );
-
-
             card.addEventListener(
                 "click",
-                () => flipMemoryCard(card)
+                () => {
+
+                    handleMemoryCardClick(
+                        card
+                    );
+
+                }
             );
 
 
-            memoryBoard.appendChild(card);
+            chapter5MemoryBoard.appendChild(
+                card
+            );
 
-            memoryCards.push(card);
+        }
+    );
 
-        });
+}
+
+
+/* ==========================================================
+   MEMORY CARD CLICK
+========================================================== */
+
+function handleMemoryCardClick(card) {
+
+    if (
+        chapter5MemoryLocked
+    ) {
+
+        return;
 
     }
 
 
-    /* ======================================================
-       SHUFFLE ARRAY
-    ====================================================== */
+    if (
+        card.classList.contains(
+            "flipped"
+        )
+    ) {
 
-    function shuffleArray(array) {
+        return;
 
-        for (
-            let i = array.length - 1;
-            i > 0;
-            i--
-        ) {
+    }
 
-            const randomIndex =
-                Math.floor(
-                    Math.random() * (i + 1)
+
+    if (
+        card.classList.contains(
+            "matched"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    card.classList.add(
+        "flipped"
+    );
+
+
+    if (
+        !chapter5MemoryFirstCard
+    ) {
+
+        chapter5MemoryFirstCard =
+            card;
+
+        return;
+
+    }
+
+
+    chapter5MemorySecondCard =
+        card;
+
+
+    chapter5MemoryLocked = true;
+
+
+    const firstSymbol =
+        chapter5MemoryFirstCard.dataset.symbol;
+
+    const secondSymbol =
+        chapter5MemorySecondCard.dataset.symbol;
+
+
+    if (
+        firstSymbol ===
+        secondSymbol
+    ) {
+
+        setTimeout(
+            () => {
+
+                chapter5MemoryFirstCard.classList.add(
+                    "matched"
+                );
+
+                chapter5MemorySecondCard.classList.add(
+                    "matched"
                 );
 
 
-            [
-                array[i],
-                array[randomIndex]
-            ] = [
-                array[randomIndex],
-                array[i]
-            ];
+                chapter5State.memoryMatches++;
 
-        }
 
-    }
+                updateMemoryCounter();
 
 
-    /* ======================================================
-       FLIP MEMORY CARD
-    ====================================================== */
+                resetMemorySelection();
 
-    function flipMemoryCard(card) {
 
-        if (
-            lockBoard ||
-            card === firstCard ||
-            card.classList.contains("matched")
-        ) {
+                if (
+                    chapter5State.memoryMatches >=
+                    chapter5State.totalMemoryPairs
+                ) {
 
-            return;
+                    completeMemoryGame();
 
-        }
+                }
 
-
-        card.classList.add("flipped");
-
-
-        if (!firstCard) {
-
-            firstCard = card;
-
-            return;
-
-        }
-
-
-        secondCard = card;
-
-        checkMemoryMatch();
-
-    }
-
-
-    /* ======================================================
-       CHECK MEMORY MATCH
-    ====================================================== */
-
-    function checkMemoryMatch() {
-
-        const isMatch =
-            firstCard.dataset.symbol ===
-            secondCard.dataset.symbol;
-
-
-        if (isMatch) {
-
-            disableMatchedCards();
-
-        } else {
-
-            unflipCards();
-
-        }
-
-    }
-
-
-    /* ======================================================
-       MATCHED CARDS
-    ====================================================== */
-
-    function disableMatchedCards() {
-
-        firstCard.classList.add("matched");
-
-        secondCard.classList.add("matched");
-
-
-        matchedPairs++;
-
-        updateMemoryMatches();
-
-
-        resetMemorySelection();
-
-
-        if (
-            matchedPairs === memorySymbols.length
-        ) {
-
-            completeMemoryGame();
-
-        }
-
-    }
-
-
-    /* ======================================================
-       UNFLIP CARDS
-    ====================================================== */
-
-    function unflipCards() {
-
-        lockBoard = true;
-
-
-        setTimeout(() => {
-
-            if (firstCard) {
-                firstCard.classList.remove(
-                    "flipped"
-                );
-            }
-
-
-            if (secondCard) {
-                secondCard.classList.remove(
-                    "flipped"
-                );
-            }
-
-
-            resetMemorySelection();
-
-        }, 800);
-
-    }
-
-
-    /* ======================================================
-       RESET MEMORY SELECTION
-    ====================================================== */
-
-    function resetMemorySelection() {
-
-        firstCard = null;
-
-        secondCard = null;
-
-        lockBoard = false;
-
-    }
-
-
-    /* ======================================================
-       UPDATE MEMORY MATCHES
-    ====================================================== */
-
-    function updateMemoryMatches() {
-
-        if (!memoryMatches) {
-            return;
-        }
-
-
-        memoryMatches.textContent =
-            `${matchedPairs} / ${memorySymbols.length}`;
-
-    }
-
-
-    /* ======================================================
-       MEMORY COMPLETE
-    ====================================================== */
-
-    function completeMemoryGame() {
-
-        if (!memoryBoard) {
-            return;
-        }
-
-
-        memoryBoard.classList.add(
-            "chapter5-game-complete"
+            },
+            450
         );
 
     }
 
+    else {
 
-    /* ======================================================
-       MEMORY RESET
-    ====================================================== */
+        setTimeout(
+            () => {
 
-    if (memoryReset) {
+                chapter5MemoryFirstCard.classList.remove(
+                    "flipped"
+                );
 
-        memoryReset.addEventListener(
-            "click",
-            createMemoryGame
+                chapter5MemorySecondCard.classList.remove(
+                    "flipped"
+                );
+
+
+                resetMemorySelection();
+
+            },
+            800
         );
 
     }
 
+}
 
 
-    /* ======================================================
-       GAME 3 — QUIZ
-    ====================================================== */
+/* ==========================================================
+   RESET MEMORY SELECTION
+========================================================== */
 
-    const quizQuestion = document.getElementById(
-        "chapter5QuizQuestion"
+function resetMemorySelection() {
+
+    chapter5MemoryFirstCard = null;
+
+    chapter5MemorySecondCard = null;
+
+    chapter5MemoryLocked = false;
+
+}
+
+
+/* ==========================================================
+   MEMORY COUNTER
+========================================================== */
+
+function updateMemoryCounter() {
+
+    if (!chapter5MemoryMatches) {
+        return;
+    }
+
+
+    chapter5MemoryMatches.textContent =
+        `${chapter5State.memoryMatches} / ${chapter5State.totalMemoryPairs}`;
+
+}
+
+
+/* ==========================================================
+   MEMORY COMPLETE
+========================================================== */
+
+function completeMemoryGame() {
+
+    if (!chapter5MemoryBoard) {
+        return;
+    }
+
+
+    chapter5MemoryBoard.classList.add(
+        "completed"
     );
 
-    const quizAnswers = document.getElementById(
-        "chapter5QuizAnswers"
+}
+
+
+/* ==========================================================
+   MEMORY RESET
+========================================================== */
+
+if (chapter5MemoryReset) {
+
+    chapter5MemoryReset.addEventListener(
+        "click",
+        () => {
+
+            chapter5MemoryBoard.classList.remove(
+                "completed"
+            );
+
+
+            initializeMemoryGame();
+
+        }
     );
 
-    const quizFeedback = document.getElementById(
-        "chapter5QuizFeedback"
-    );
+}
 
-    const quizProgress = document.getElementById(
+
+/* ==========================================================
+   GAME 3 — QUIZ
+========================================================== */
+
+const chapter5QuizProgress =
+    document.getElementById(
         "chapter5QuizProgress"
     );
 
-    const quizNext = document.getElementById(
+const chapter5QuizQuestion =
+    document.getElementById(
+        "chapter5QuizQuestion"
+    );
+
+const chapter5QuizAnswers =
+    document.getElementById(
+        "chapter5QuizAnswers"
+    );
+
+const chapter5QuizFeedback =
+    document.getElementById(
+        "chapter5QuizFeedback"
+    );
+
+const chapter5QuizNext =
+    document.getElementById(
         "chapter5QuizNext"
     );
 
 
-    const quizQuestions = [
+/* ==========================================================
+   QUIZ QUESTIONS
+========================================================== */
 
-        {
-            question:
-                "Who said 'good night' first?",
+const chapter5QuizQuestions = [
 
-            answers: [
-                "Me",
-                "You",
-                "We both did",
-                "I don't remember"
-            ],
+    {
 
-            correct: 0
-        },
+        question:
+            "Who said good night first?",
 
-        {
-            question:
-                "What do I enjoy most about our conversations?",
+        answers: [
 
-            answers: [
-                "How random they can be",
-                "How short they are",
-                "Nothing",
-                "Only the serious ones"
-            ],
+            "Me",
 
-            correct: 0
-        },
+            "You",
 
-        {
-            question:
-                "What slowly became important to me?",
+            "We both did",
 
-            answers: [
-                "Our little moments",
-                "The weather",
-                "Video games",
-                "Nothing at all"
-            ],
+            "I don't remember"
 
-            correct: 0
-        }
+        ],
 
-    ];
+        correct: 0
+
+    },
 
 
-    let currentQuestion = 0;
+    {
 
-    let quizScore = 0;
+        question:
+            "Which part of our story matters most?",
 
+        answers: [
 
-    /* ======================================================
-       LOAD QUIZ QUESTION
-    ====================================================== */
+            "The big moments",
 
-    function loadQuizQuestion() {
+            "The little moments",
 
-        if (
-            !quizQuestion ||
-            !quizAnswers
-        ) {
+            "The funny moments",
 
-            return;
+            "All of them"
 
-        }
+        ],
 
+        correct: 3
 
-        const question =
-            quizQuestions[currentQuestion];
+    },
 
 
-        quizQuestion.textContent =
-            question.question;
+    {
+
+        question:
+            "What do I think makes you special?",
+
+        answers: [
+
+            "Everything about you",
+
+            "Your little habits",
+
+            "The way you make moments special",
+
+            "All of the above"
+
+        ],
+
+        correct: 3
+
+    },
 
 
-        quizProgress.textContent =
-            `Question ${currentQuestion + 1} / ${quizQuestions.length}`;
+    {
+
+        question:
+            "What do I want to keep doing with you?",
+
+        answers: [
+
+            "Making memories",
+
+            "Laughing together",
+
+            "Writing our story",
+
+            "All of these"
+
+        ],
+
+        correct: 3
+
+    }
+
+];
 
 
-        quizAnswers.innerHTML = "";
+/* ==========================================================
+   INITIALIZE QUIZ
+========================================================== */
 
+function initializeQuiz() {
 
-        if (quizFeedback) {
+    if (
+        !chapter5QuizQuestion ||
+        !chapter5QuizAnswers
+    ) {
 
-            quizFeedback.textContent = "";
-
-            quizFeedback.className =
-                "chapter5-quiz-feedback";
-
-        }
-
-
-        if (quizNext) {
-
-            quizNext.hidden = true;
-
-        }
-
-
-        question.answers.forEach(
-            (answer, index) => {
-
-                const button =
-                    document.createElement("button");
-
-
-                button.type = "button";
-
-                button.className =
-                    "chapter5-quiz-answer";
-
-
-                button.textContent =
-                    answer;
-
-
-                button.addEventListener(
-                    "click",
-                    () => answerQuiz(index)
-                );
-
-
-                quizAnswers.appendChild(button);
-
-            }
-        );
+        return;
 
     }
 
 
-    /* ======================================================
-       ANSWER QUIZ
-    ====================================================== */
+    chapter5State.quizIndex = 0;
 
-    function answerQuiz(answerIndex) {
+    chapter5State.quizScore = 0;
 
-        const question =
-            quizQuestions[currentQuestion];
+    chapter5State.quizFinished = false;
 
 
-        const answerButtons =
-            quizAnswers.querySelectorAll(
-                ".chapter5-quiz-answer"
+    if (chapter5QuizNext) {
+
+        chapter5QuizNext.hidden = true;
+
+    }
+
+
+    if (chapter5QuizFeedback) {
+
+        chapter5QuizFeedback.textContent = "";
+
+        chapter5QuizFeedback.className =
+            "chapter5-quiz-feedback";
+
+    }
+
+
+    renderQuizQuestion();
+
+}
+
+
+/* ==========================================================
+   RENDER QUIZ QUESTION
+========================================================== */
+
+function renderQuizQuestion() {
+
+    const question =
+        chapter5QuizQuestions[
+            chapter5State.quizIndex
+        ];
+
+
+    if (!question) {
+
+        finishQuiz();
+
+        return;
+
+    }
+
+
+    if (chapter5QuizProgress) {
+
+        chapter5QuizProgress.textContent =
+            `Question ${chapter5State.quizIndex + 1} of ${chapter5QuizQuestions.length}`;
+
+    }
+
+
+    chapter5QuizQuestion.textContent =
+        question.question;
+
+
+    chapter5QuizAnswers.innerHTML = "";
+
+
+    if (chapter5QuizFeedback) {
+
+        chapter5QuizFeedback.textContent = "";
+
+        chapter5QuizFeedback.className =
+            "chapter5-quiz-feedback";
+
+    }
+
+
+    if (chapter5QuizNext) {
+
+        chapter5QuizNext.hidden = true;
+
+    }
+
+
+    question.answers.forEach(
+        (answer, index) => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.type = "button";
+
+            button.className =
+                "chapter5-quiz-answer";
+
+
+            button.textContent =
+                answer;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    handleQuizAnswer(
+                        index
+                    );
+
+                }
             );
 
 
-        answerButtons.forEach(
-            button => {
-                button.disabled = true;
-            }
+            chapter5QuizAnswers.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   HANDLE QUIZ ANSWER
+========================================================== */
+
+function handleQuizAnswer(answerIndex) {
+
+    const question =
+        chapter5QuizQuestions[
+            chapter5State.quizIndex
+        ];
+
+
+    if (!question) {
+        return;
+    }
+
+
+    const answerButtons =
+        chapter5QuizAnswers.querySelectorAll(
+            "button"
         );
 
 
-        if (
-            answerIndex ===
-            question.correct
-        ) {
+    answerButtons.forEach(
+        (button) => {
 
-            quizScore++;
+            button.disabled = true;
+
+        }
+    );
 
 
-            if (quizFeedback) {
+    if (
+        answerIndex ===
+        question.correct
+    ) {
 
-                quizFeedback.textContent =
-                    "That's right. ❤️";
+        chapter5State.quizScore++;
 
-                quizFeedback.classList.add(
-                    "correct"
-                );
 
-            }
+        if (chapter5QuizFeedback) {
 
-        } else {
+            chapter5QuizFeedback.textContent =
+                "That's right. ❤️";
 
-            if (quizFeedback) {
-
-                quizFeedback.textContent =
-                    "Close! But I'll forgive you. ♡";
-
-                quizFeedback.classList.add(
-                    "incorrect"
-                );
-
-            }
+            chapter5QuizFeedback.classList.add(
+                "correct"
+            );
 
         }
 
+    }
 
-        if (quizNext) {
+    else {
 
-            quizNext.hidden = false;
+        if (chapter5QuizFeedback) {
+
+            chapter5QuizFeedback.textContent =
+                "Close enough... I'll let it slide. ♡";
+
+            chapter5QuizFeedback.classList.add(
+                "incorrect"
+            );
 
         }
 
     }
 
 
-    /* ======================================================
-       NEXT QUIZ QUESTION
-    ====================================================== */
+    if (chapter5QuizNext) {
 
-    if (quizNext) {
+        chapter5QuizNext.hidden = false;
 
-        quizNext.addEventListener(
-            "click",
-            () => {
+    }
 
-                currentQuestion++;
+}
 
 
-                if (
-                    currentQuestion >=
-                    quizQuestions.length
-                ) {
+/* ==========================================================
+   NEXT QUIZ QUESTION
+========================================================== */
 
-                    finishQuiz();
+if (chapter5QuizNext) {
 
-                    return;
+    chapter5QuizNext.addEventListener(
+        "click",
+        () => {
 
-                }
+            chapter5State.quizIndex++;
 
 
-                loadQuizQuestion();
+            if (
+                chapter5State.quizIndex >=
+                chapter5QuizQuestions.length
+            ) {
+
+                finishQuiz();
 
             }
-        );
+
+            else {
+
+                renderQuizQuestion();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ==========================================================
+   FINISH QUIZ
+========================================================== */
+
+function finishQuiz() {
+
+    chapter5State.quizFinished = true;
+
+
+    if (chapter5QuizProgress) {
+
+        chapter5QuizProgress.textContent =
+            "Quiz Complete";
 
     }
 
 
-    /* ======================================================
-       FINISH QUIZ
-    ====================================================== */
+    if (chapter5QuizQuestion) {
 
-    function finishQuiz() {
-
-        if (quizQuestion) {
-
-            quizQuestion.textContent =
-                "You made it through! ❤️";
-
-        }
-
-
-        if (quizProgress) {
-
-            quizProgress.textContent =
-                `Score: ${quizScore} / ${quizQuestions.length}`;
-
-        }
-
-
-        if (quizAnswers) {
-
-            quizAnswers.innerHTML = "";
-
-        }
-
-
-        if (quizFeedback) {
-
-            quizFeedback.textContent =
-                "Maybe now you know a little more about us.";
-
-        }
-
-
-        if (quizNext) {
-
-            quizNext.hidden = true;
-
-        }
+        chapter5QuizQuestion.textContent =
+            `You got ${chapter5State.quizScore} out of ${chapter5QuizQuestions.length}!`;
 
     }
 
 
+    if (chapter5QuizAnswers) {
 
-    /* ======================================================
-       GAME SELECTOR
-    ====================================================== */
+        chapter5QuizAnswers.innerHTML = "";
 
-    gameSelectors.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const selectedGame =
-                    button.dataset.game;
+    }
 
 
-                if (!selectedGame) {
-                    return;
-                }
+    if (chapter5QuizFeedback) {
+
+        chapter5QuizFeedback.textContent =
+            "Maybe what matters most is that we made it this far together. ♡";
+
+        chapter5QuizFeedback.className =
+            "chapter5-quiz-feedback correct";
+
+    }
 
 
-                currentGame =
-                    selectedGame;
+    if (chapter5QuizNext) {
+
+        chapter5QuizNext.hidden = true;
+
+    }
+
+}
 
 
-                gameSelectors.forEach(
-                    selector => {
+/* ==========================================================
+   CHAPTER V COMPLETION
+========================================================== */
 
-                        selector.classList.toggle(
-                            "active",
-                            selector === button
-                        );
-
-                    }
-                );
+const chapter5Completion =
+    document.getElementById(
+        "chapter5Completion"
+    );
 
 
-                gamePanels.forEach(panel => {
+/* ==========================================================
+   SHOW COMPLETION
+========================================================== */
 
-                    panel.classList.toggle(
-                        "active",
-                        panel.dataset.gamePanel ===
-                        selectedGame
-                    );
+function showChapter5Completion() {
 
-                });
-
-            }
-        );
-
-    });
+    if (!chapter5Completion) {
+        return;
+    }
 
 
-
-    /* ======================================================
-       CHAPTER V COMPLETION
-    ====================================================== */
-
-    const chapter5Completion =
-        document.getElementById(
-            "chapter5Completion"
-        );
+    chapter5Completion.hidden =
+        false;
 
 
-    function showChapter5Completion() {
-
-        if (!chapter5Completion) {
-            return;
-        }
-
-
-        chapter5Completion.hidden = false;
-
-
-        requestAnimationFrame(() => {
+    requestAnimationFrame(
+        () => {
 
             chapter5Completion.classList.add(
                 "show"
             );
 
-        });
-
-    }
-
-
-
-    /* ======================================================
-       CHAPTER V → CHAPTER VI
-       IMPORTANT NAVIGATION FIX
-    ====================================================== */
-
-    const chapter5Continue =
-        document.getElementById(
-            "chapter5Continue"
-        );
-
-
-    if (chapter5Continue) {
-
-        chapter5Continue.addEventListener(
-            "click",
-            handleChapter5Continue
-        );
-
-    }
-
-
-    function handleChapter5Continue(event) {
-
-        event.preventDefault();
-
-
-        /*
-         * Prevent accidental double clicks.
-         */
-
-        if (
-            chapter5Continue.classList.contains(
-                "is-navigating"
-            )
-        ) {
-
-            return;
-
         }
+    );
+
+}
 
 
-        chapter5Continue.classList.add(
-            "is-navigating"
-        );
+/* ==========================================================
+   CHAPTER V → CHAPTER VI
+   IMPORTANT:
+   Uses the SAME transition system as
+   Chapter III → IV and Chapter IV → V.
+========================================================== */
+
+const chapter5Continue =
+    document.getElementById(
+        "chapter5Continue"
+    );
 
 
-        /*
-         * Same transition-first approach
-         * used for the previous chapter
-         * navigation fixes.
-         */
+if (chapter5Continue) {
 
-        if (
-            typeof window.goToChapter ===
-            "function"
-        ) {
+    chapter5Continue.addEventListener(
+        "click",
+        () => {
 
-            try {
+            console.log(
+                "💌 Chapter 5 complete. Continuing to Chapter 6..."
+            );
 
-                window.goToChapter(6);
+
+            /*
+             * DO NOT use:
+             *
+             * window.goToChapter(6)
+             *
+             * DO NOT use:
+             *
+             * window.showChapter(6)
+             *
+             * The existing project navigation uses:
+             *
+             * transitionToChapter()
+             */
+
+
+            if (
+                typeof transitionToChapter ===
+                "function"
+            ) {
+
+                transitionToChapter(6);
 
                 return;
 
-            } catch (error) {
-
-                console.warn(
-                    "goToChapter(6) failed:",
-                    error
-                );
-
             }
 
-        }
 
-
-        /*
-         * Second fallback.
-         */
-
-        if (
-            typeof window.showChapter ===
-            "function"
-        ) {
-
-            try {
-
-                window.showChapter(6);
-
-                return;
-
-            } catch (error) {
-
-                console.warn(
-                    "showChapter(6) failed:",
-                    error
-                );
-
-            }
+            console.warn(
+                "Chapter transition system is not available."
+            );
 
         }
+    );
+
+}
 
 
-        /*
-         * Final direct-navigation fallback.
-         *
-         * This makes sure Chapter VI becomes
-         * visible even if the global navigation
-         * functions are unavailable.
-         */
+/* ==========================================================
+   INITIALIZE CHAPTER V
+========================================================== */
 
-        const chapter6 =
-            document.getElementById(
-                "chapter6"
-            );
+function initializeChapter5() {
 
+    initializeHeartGame();
 
-        if (!chapter6) {
+    initializeMemoryGame();
 
-            console.error(
-                "Chapter VI (#chapter6) was not found."
-            );
+    initializeQuiz();
+
+}
 
 
-            chapter5Continue.classList.remove(
-                "is-navigating"
-            );
+/* ==========================================================
+   START CHAPTER V
+========================================================== */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeChapter5
+    );
+
+}
+
+else {
+
+    initializeChapter5();
+
+}
 
 
-            return;
-
-        }
-
-
-        /*
-         * Hide every chapter.
-         */
-
-        document
-            .querySelectorAll("main")
-            .forEach(main => {
-
-                main.classList.remove(
-                    "active"
-                );
-
-                main.style.display = "none";
-
-            });
-
-
-        /*
-         * Show Chapter VI.
-         */
-
-        chapter6.classList.add(
-            "active"
-        );
-
-        chapter6.style.display = "block";
-
-
-        /*
-         * Make sure the page starts at
-         * the beginning of Chapter VI.
-         */
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-
-        /*
-         * Release navigation lock after
-         * the transition has had time to finish.
-         */
-
-        setTimeout(() => {
-
-            chapter5Continue.classList.remove(
-                "is-navigating"
-            );
-
-        }, 1000);
-
-    }
-
-
-
-    /* ======================================================
-       INITIALIZE CHAPTER V
-    ====================================================== */
-
-    createHeartGame();
-
-    createMemoryGame();
-
-    loadQuizQuestion();
-
-
-});
+/* ==========================================================
+   END OF CHAPTER V
+========================================================== */
