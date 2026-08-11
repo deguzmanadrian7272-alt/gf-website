@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
        ====================================================== */
 
     const chapter5 =
-        document.getElementById("chapter5");
+        document.getElementById(
+            "chapter5"
+        );
 
 
     if (!chapter5) {
@@ -2092,129 +2094,57 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 /*
-                    Prevent the button from
-                    submitting anything if it
-                    exists inside a form.
+                    Prevent accidental
+                    repeated clicks.
                 */
 
-                event?.preventDefault?.();
+                chapter5Continue.style.pointerEvents =
+                    "none";
 
 
                 /*
-                    First attempt:
-                    Use the existing chapter
-                    transition system.
+                    Chapter 5 is complete.
                 */
 
-                if (
-                    typeof window.transitionToChapter ===
-                    "function"
-                ) {
-
-                    window.transitionToChapter(6);
-
-                    return;
-
-                }
-
-
-                /*
-                    Second attempt:
-                    Use the existing goToChapter
-                    system.
-                */
-
-                if (
-                    typeof window.goToChapter ===
-                    "function"
-                ) {
-
-                    window.goToChapter(6);
-
-                    return;
-
-                }
-
-
-                /*
-                    Third attempt:
-                    Use the existing showChapter
-                    system.
-                */
-
-                if (
-                    typeof window.showChapter ===
-                    "function"
-                ) {
-
-                    window.showChapter(6);
-
-                    return;
-
-                }
-
-
-                /*
-                    Final fallback:
-                    Directly activate Chapter VI.
-                */
-
-                const chapter6 =
-                    document.getElementById(
-                        "chapter6"
-                    );
-
-
-                if (!chapter6) {
-
-                    console.info(
-                        "Chapter VI has not been added yet."
-                    );
-
-                    return;
-
-                }
-
-
-                /*
-                    Hide every chapter.
-                */
-
-                document
-                    .querySelectorAll(
-                        "main[id^='chapter']"
-                    )
-                    .forEach(
-                        chapter => {
-
-                            chapter.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                /*
-                    Activate Chapter VI.
-                */
-
-                chapter6.classList.add(
-                    "active"
+                console.log(
+                    "🎮 Chapter 5 complete."
                 );
 
 
                 /*
-                    Return to the top.
+                    Use the SAME navigation system
+                    used by Chapter 3 → 4
+                    and Chapter 4 → 5.
                 */
 
-                window.scrollTo({
+                if (
+                    typeof transitionToChapter ===
+                    "function"
+                ) {
 
-                    top: 0,
+                    transitionToChapter(6);
 
-                    behavior: "smooth"
+                    return;
 
-                });
+                }
+
+
+                /*
+                    Transition system is unavailable.
+                */
+
+                console.warn(
+                    "Chapter transition system is not available."
+                );
+
+
+                /*
+                    Allow the button to be clicked again
+                    if the transition system is missing.
+                */
+
+                chapter5Continue.style.pointerEvents =
+                    "auto";
 
             }
         );
