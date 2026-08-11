@@ -5,8 +5,7 @@
    Purpose : Interactive Constellation / 100 Reasons
    ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-
+function initChapter6() {
 
     /* ======================================================
        CHAPTER 6 ELEMENTS
@@ -120,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        100 REASONS
-       
+
        20 STARS × 5 REASONS
        ====================================================== */
 
@@ -128,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 1
-        ================================================ */
+           ================================================ */
 
         [
             "I love the way your smile can make an ordinary moment feel special.",
@@ -145,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 2
-        ================================================ */
+           ================================================ */
 
         [
             "I love listening to you talk, even when the topic is something completely random.",
@@ -162,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 3
-        ================================================ */
+           ================================================ */
 
         [
             "I love the way you make ordinary conversations memorable.",
@@ -179,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 4
-        ================================================ */
+           ================================================ */
 
         [
             "I love the little things you do that you probably don't even realize I notice.",
@@ -196,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 5
-        ================================================ */
+           ================================================ */
 
         [
             "I love how you can make a normal day feel different.",
@@ -213,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 6
-        ================================================ */
+           ================================================ */
 
         [
             "I love how genuine you can be.",
@@ -230,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 7
-        ================================================ */
+           ================================================ */
 
         [
             "I love the way you can make me laugh.",
@@ -247,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 8
-        ================================================ */
+           ================================================ */
 
         [
             "I love how you make me want to appreciate the little moments more.",
@@ -264,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 9
-        ================================================ */
+           ================================================ */
 
         [
             "I love how you can make me feel understood.",
@@ -281,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 10
-        ================================================ */
+           ================================================ */
 
         [
             "I love the way you make me look forward to tomorrow.",
@@ -298,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 11
-        ================================================ */
+           ================================================ */
 
         [
             "I love how much personality you have.",
@@ -315,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 12
-        ================================================ */
+           ================================================ */
 
         [
             "I love the kindness you show in little ways.",
@@ -332,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 13
-        ================================================ */
+           ================================================ */
 
         [
             "I love how you can make me forget about everything else for a while.",
@@ -349,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 14
-        ================================================ */
+           ================================================ */
 
         [
             "I love the memories we've already created.",
@@ -366,7 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 15
-        ================================================ */
+           ================================================ */
 
         [
             "I love the way you make me want to become a better version of myself.",
@@ -383,7 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 16
-        ================================================ */
+           ================================================ */
 
         [
             "I love the comfort of knowing you're there.",
@@ -400,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 17
-        ================================================ */
+           ================================================ */
 
         [
             "I love the excitement that comes from making new memories with you.",
@@ -417,7 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 18
-        ================================================ */
+           ================================================ */
 
         [
             "I love that you became someone I genuinely look forward to.",
@@ -434,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 19
-        ================================================ */
+           ================================================ */
 
         [
             "I love the way our story has grown naturally.",
@@ -451,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* ================================================
            STAR 20
-        ================================================ */
+           ================================================ */
 
         [
             "I love you for all the little things I could never fit into one message.",
@@ -512,7 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ======================================================
        STAR DATA
-       
+
        Each star remembers which reasons
        have already been discovered.
        ====================================================== */
@@ -1391,4 +1390,37 @@ document.addEventListener("DOMContentLoaded", () => {
         "Chapter VI — 100 Reasons initialized ♡"
     );
 
-});
+}
+
+
+/* ==========================================================
+   CHAPTER VI INITIALIZATION
+   ========================================================== */
+
+/*
+    If the script loads before the DOM is ready,
+    wait for DOMContentLoaded.
+
+    If the script loads after DOMContentLoaded has
+    already fired, initialize immediately.
+
+    This prevents Chapter VI from appearing without
+    its generated constellation stars.
+*/
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initChapter6
+    );
+
+}
+
+else {
+
+    initChapter6();
+
+}
