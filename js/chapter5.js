@@ -2092,8 +2092,36 @@ document.addEventListener("DOMContentLoaded", () => {
             () => {
 
                 /*
-                    Preserve the existing
-                    Chapter VI navigation.
+                    Prevent the button from
+                    submitting anything if it
+                    exists inside a form.
+                */
+
+                event?.preventDefault?.();
+
+
+                /*
+                    First attempt:
+                    Use the existing chapter
+                    transition system.
+                */
+
+                if (
+                    typeof window.transitionToChapter ===
+                    "function"
+                ) {
+
+                    window.transitionToChapter(6);
+
+                    return;
+
+                }
+
+
+                /*
+                    Second attempt:
+                    Use the existing goToChapter
+                    system.
                 */
 
                 if (
@@ -2108,6 +2136,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
+                /*
+                    Third attempt:
+                    Use the existing showChapter
+                    system.
+                */
+
                 if (
                     typeof window.showChapter ===
                     "function"
@@ -2121,8 +2155,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                    Fallback:
-                    Look for Chapter VI.
+                    Final fallback:
+                    Directly activate Chapter VI.
                 */
 
                 const chapter6 =
@@ -2131,36 +2165,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                if (chapter6) {
+                if (!chapter6) {
 
-                    document
-                        .querySelectorAll(
-                            "main[id^='chapter']"
-                        )
-                        .forEach(
-                            chapter => {
-
-                                chapter.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                    chapter6.classList.add(
-                        "active"
+                    console.info(
+                        "Chapter VI has not been added yet."
                     );
-
-
-                    window.scrollTo({
-
-                        top: 0,
-
-                        behavior: "smooth"
-
-                    });
-
 
                     return;
 
@@ -2168,12 +2177,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                    Chapter VI doesn't exist yet.
+                    Hide every chapter.
                 */
 
-                console.info(
-                    "Chapter VI has not been added yet."
+                document
+                    .querySelectorAll(
+                        "main[id^='chapter']"
+                    )
+                    .forEach(
+                        chapter => {
+
+                            chapter.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                /*
+                    Activate Chapter VI.
+                */
+
+                chapter6.classList.add(
+                    "active"
                 );
+
+
+                /*
+                    Return to the top.
+                */
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior: "smooth"
+
+                });
 
             }
         );
