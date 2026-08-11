@@ -5,6 +5,7 @@
    Purpose : Interactive Constellation / 100 Reasons
    ========================================================== */
 
+
 function initChapter6() {
 
     /* ======================================================
@@ -26,10 +27,53 @@ function initChapter6() {
     }
 
 
-    const starField =
+    /* ======================================================
+       STAR FIELD
+       ====================================================== */
+
+    let starField =
         document.getElementById(
             "chapter6StarField"
         );
+
+
+    /*
+        If the HTML does not contain the
+        star field, create it automatically.
+    */
+
+    if (!starField) {
+
+        const constellation =
+            chapter6.querySelector(
+                ".chapter6-constellation"
+            );
+
+
+        if (constellation) {
+
+            starField =
+                document.createElement(
+                    "div"
+                );
+
+
+            starField.id =
+                "chapter6StarField";
+
+
+            constellation.appendChild(
+                starField
+            );
+
+
+            console.log(
+                "Chapter 6 star field created automatically."
+            );
+
+        }
+
+    }
 
 
     const discoveryCount =
@@ -75,7 +119,7 @@ function initChapter6() {
     if (!starField) {
 
         console.warn(
-            "Chapter 6 star field not found."
+            "Chapter 6 star field not found or could not be created."
         );
 
         return;
@@ -125,9 +169,9 @@ function initChapter6() {
 
     const reasons = [
 
-        /* ================================================
+        /* ==================================================
            STAR 1
-           ================================================ */
+           ================================================== */
 
         [
             "I love the way your smile can make an ordinary moment feel special.",
@@ -142,9 +186,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 2
-           ================================================ */
+           ================================================== */
 
         [
             "I love listening to you talk, even when the topic is something completely random.",
@@ -159,9 +203,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 3
-           ================================================ */
+           ================================================== */
 
         [
             "I love the way you make ordinary conversations memorable.",
@@ -176,9 +220,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 4
-           ================================================ */
+           ================================================== */
 
         [
             "I love the little things you do that you probably don't even realize I notice.",
@@ -193,9 +237,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 5
-           ================================================ */
+           ================================================== */
 
         [
             "I love how you can make a normal day feel different.",
@@ -210,9 +254,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 6
-           ================================================ */
+           ================================================== */
 
         [
             "I love how genuine you can be.",
@@ -227,9 +271,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 7
-           ================================================ */
+           ================================================== */
 
         [
             "I love the way you can make me laugh.",
@@ -244,9 +288,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 8
-           ================================================ */
+           ================================================== */
 
         [
             "I love how you make me want to appreciate the little moments more.",
@@ -261,9 +305,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 9
-           ================================================ */
+           ================================================== */
 
         [
             "I love how you can make me feel understood.",
@@ -278,9 +322,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 10
-           ================================================ */
+           ================================================== */
 
         [
             "I love the way you make me look forward to tomorrow.",
@@ -295,9 +339,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 11
-           ================================================ */
+           ================================================== */
 
         [
             "I love how much personality you have.",
@@ -312,9 +356,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 12
-           ================================================ */
+           ================================================== */
 
         [
             "I love the kindness you show in little ways.",
@@ -329,9 +373,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 13
-           ================================================ */
+           ================================================== */
 
         [
             "I love how you can make me forget about everything else for a while.",
@@ -346,9 +390,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 14
-           ================================================ */
+           ================================================== */
 
         [
             "I love the memories we've already created.",
@@ -363,9 +407,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 15
-           ================================================ */
+           ================================================== */
 
         [
             "I love the way you make me want to become a better version of myself.",
@@ -380,9 +424,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 16
-           ================================================ */
+           ================================================== */
 
         [
             "I love the comfort of knowing you're there.",
@@ -397,9 +441,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 17
-           ================================================ */
+           ================================================== */
 
         [
             "I love the excitement that comes from making new memories with you.",
@@ -414,9 +458,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 18
-           ================================================ */
+           ================================================== */
 
         [
             "I love that you became someone I genuinely look forward to.",
@@ -431,9 +475,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 19
-           ================================================ */
+           ================================================== */
 
         [
             "I love the way our story has grown naturally.",
@@ -448,9 +492,9 @@ function initChapter6() {
         ],
 
 
-        /* ================================================
+        /* ==================================================
            STAR 20
-           ================================================ */
+           ================================================== */
 
         [
             "I love you for all the little things I could never fit into one message.",
@@ -497,9 +541,7 @@ function initChapter6() {
         ) {
 
             console.error(
-                `Chapter 6 Star ${
-                    i + 1
-                } must contain exactly 5 reasons.`
+                `Chapter 6 Star ${i + 1} must contain exactly 5 reasons.`
             );
 
             return;
@@ -511,9 +553,6 @@ function initChapter6() {
 
     /* ======================================================
        STAR DATA
-
-       Each star remembers which reasons
-       have already been discovered.
        ====================================================== */
 
     const stars = [];
@@ -550,9 +589,7 @@ function initChapter6() {
     function updateDiscoveryCount() {
 
         if (!discoveryCount) {
-
             return;
-
         }
 
 
@@ -597,13 +634,15 @@ function initChapter6() {
         star.innerHTML =
             `
                 <span class="chapter6-star-glow"></span>
-                <span class="chapter6-star-symbol">✦</span>
+
+                <span class="chapter6-star-symbol">
+                    ✦
+                </span>
             `;
 
 
         /*
-            Random but controlled
-            position.
+            Random but controlled position.
         */
 
         const left =
@@ -627,14 +666,11 @@ function initChapter6() {
 
 
         /*
-            Slightly different
-            animation delay.
+            Slightly different animation delay.
         */
 
-        star.style.setProperty(
-            "--chapter6-star-delay",
-            `${Math.random() * 2}s`
-        );
+        star.style.animationDelay =
+            `${Math.random() * 2}s`;
 
 
         /*
@@ -684,6 +720,11 @@ function initChapter6() {
 
         }
 
+
+        console.log(
+            `Chapter 6 created ${TOTAL_STARS} interactive stars.`
+        );
+
     }
 
 
@@ -700,9 +741,7 @@ function initChapter6() {
 
 
         if (!star) {
-
             return null;
-
         }
 
 
@@ -736,31 +775,17 @@ function initChapter6() {
         starIndex
     ) {
 
-        /*
-            Don't allow another star
-            while a message is currently visible.
-        */
-
         if (
             state.messageVisible
         ) {
-
             return;
-
         }
 
-
-        /*
-            Don't do anything after
-            the entire chapter is complete.
-        */
 
         if (
             state.completed
         ) {
-
             return;
-
         }
 
 
@@ -769,23 +794,14 @@ function initChapter6() {
 
 
         if (!star) {
-
             return;
-
         }
 
-
-        /*
-            Don't interact with
-            completed stars.
-        */
 
         if (
             star.completed
         ) {
-
             return;
-
         }
 
 
@@ -798,15 +814,12 @@ function initChapter6() {
         if (
             reasonIndex === null
         ) {
-
             return;
-
         }
 
 
         /*
-            Mark reason as discovered
-            immediately.
+            Mark reason as discovered.
         */
 
         star.discovered.push(
@@ -819,10 +832,6 @@ function initChapter6() {
 
         updateDiscoveryCount();
 
-
-        /*
-            Mark current star.
-        */
 
         state.activeStar =
             starIndex;
@@ -850,11 +859,8 @@ function initChapter6() {
         */
 
         showReasonMessage(
-
             starIndex,
-
             reasonIndex
-
         );
 
 
@@ -878,7 +884,6 @@ function initChapter6() {
                 },
 
                 MESSAGE_DURATION
-
             );
 
     }
@@ -894,9 +899,7 @@ function initChapter6() {
     ) {
 
         if (!messageBox) {
-
             return;
-
         }
 
 
@@ -932,11 +935,6 @@ function initChapter6() {
         messageBox.hidden =
             false;
 
-
-        /*
-            Force browser to recognize
-            the hidden → visible transition.
-        */
 
         requestAnimationFrame(
             () => {
@@ -974,10 +972,6 @@ function initChapter6() {
             );
 
 
-            /*
-                Hide after fade-out.
-            */
-
             setTimeout(
                 () => {
 
@@ -1005,9 +999,7 @@ function initChapter6() {
 
 
         if (!star) {
-
             return;
-
         }
 
 
@@ -1060,18 +1052,14 @@ function initChapter6() {
 
 
         if (!star) {
-
             return;
-
         }
 
 
         if (
             star.completed
         ) {
-
             return;
-
         }
 
 
@@ -1085,12 +1073,6 @@ function initChapter6() {
                 "completed"
             );
 
-
-            /*
-                Give the star a moment
-                to perform its disappearance
-                animation.
-            */
 
             setTimeout(
                 () => {
@@ -1158,11 +1140,6 @@ function initChapter6() {
             true;
 
 
-        /*
-            Small delay so the final
-            star disappearance can finish.
-        */
-
         setTimeout(
             () => {
 
@@ -1183,9 +1160,7 @@ function initChapter6() {
     function showCompletion() {
 
         if (!completion) {
-
             return;
-
         }
 
 
@@ -1204,10 +1179,6 @@ function initChapter6() {
         );
 
 
-        /*
-            Update final counter.
-        */
-
         if (discoveryCount) {
 
             discoveryCount.textContent =
@@ -1215,11 +1186,6 @@ function initChapter6() {
 
         }
 
-
-        /*
-            Scroll the completion
-            message into view.
-        */
 
         setTimeout(
             () => {
@@ -1315,8 +1281,7 @@ function initChapter6() {
 
                     window.scrollTo({
 
-                        top:
-                            0,
+                        top: 0,
 
                         behavior:
                             "smooth"
@@ -1328,11 +1293,6 @@ function initChapter6() {
 
                 }
 
-
-                /*
-                    Chapter VII isn't
-                    available yet.
-                */
 
                 console.info(
                     "Chapter VII has not been added yet."
@@ -1403,9 +1363,6 @@ function initChapter6() {
 
     If the script loads after DOMContentLoaded has
     already fired, initialize immediately.
-
-    This prevents Chapter VI from appearing without
-    its generated constellation stars.
 */
 
 if (
