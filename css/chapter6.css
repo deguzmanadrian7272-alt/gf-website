@@ -233,12 +233,10 @@
         infinite;
 }
 
-
 .chapter6-sky-star-1 {
     top: 15%;
     left: 12%;
 }
-
 
 .chapter6-sky-star-2 {
     top: 25%;
@@ -247,14 +245,12 @@
     animation-delay: 0.8s;
 }
 
-
 .chapter6-sky-star-3 {
     top: 12%;
     left: 55%;
 
     animation-delay: 1.4s;
 }
-
 
 .chapter6-sky-star-4 {
     top: 32%;
@@ -263,14 +259,12 @@
     animation-delay: 0.4s;
 }
 
-
 .chapter6-sky-star-5 {
     top: 48%;
     left: 8%;
 
     animation-delay: 1.8s;
 }
-
 
 .chapter6-sky-star-6 {
     top: 58%;
@@ -279,14 +273,12 @@
     animation-delay: 1.1s;
 }
 
-
 .chapter6-sky-star-7 {
     top: 75%;
     left: 20%;
 
     animation-delay: 2s;
 }
-
 
 .chapter6-sky-star-8 {
     top: 82%;
@@ -322,13 +314,11 @@
         infinite;
 }
 
-
 .chapter6-flower-1 {
     left: 7%;
     animation-duration: 12s;
     animation-delay: -2s;
 }
-
 
 .chapter6-flower-2 {
     left: 18%;
@@ -337,13 +327,11 @@
     font-size: 0.95rem;
 }
 
-
 .chapter6-flower-3 {
     left: 30%;
     animation-duration: 13s;
     animation-delay: -5s;
 }
-
 
 .chapter6-flower-4 {
     left: 44%;
@@ -352,13 +340,11 @@
     font-size: 1rem;
 }
 
-
 .chapter6-flower-5 {
     left: 57%;
     animation-duration: 14s;
     animation-delay: -4s;
 }
-
 
 .chapter6-flower-6 {
     left: 69%;
@@ -367,13 +353,11 @@
     font-size: 0.9rem;
 }
 
-
 .chapter6-flower-7 {
     left: 82%;
     animation-duration: 13s;
     animation-delay: -6s;
 }
-
 
 .chapter6-flower-8 {
     left: 94%;
@@ -541,11 +525,15 @@
 .chapter6-progress-section {
     position: relative;
 
-    width: 100%;
+    width: min(
+        620px,
+        calc(100% - 20px)
+    );
 
-    max-width: 620px;
-
-    margin: 32px auto 0;
+    margin:
+        32px
+        auto
+        0;
 
     display: flex;
 
@@ -554,13 +542,11 @@
     align-items: center;
 
     justify-content: center;
-
-    text-align: center;
 }
 
 
 /* ==========================================================
-   REASONS DISCOVERED LABEL
+   "REASONS DISCOVERED" LABEL
 ========================================================== */
 
 .chapter6-progress-label {
@@ -574,64 +560,73 @@
 
     width: fit-content;
 
-    margin-bottom: 12px;
+    min-height: 38px;
+
+    margin-bottom: -1px;
 
     padding:
         8px
-        18px;
+        20px;
 
     border:
         1px solid
-        rgba(255, 202, 238, 0.28);
+        rgba(255, 206, 240, 0.28);
 
-    border-radius: 999px;
+    border-bottom:
+        1px solid
+        rgba(255, 206, 240, 0.18);
+
+    border-radius:
+        18px
+        18px
+        0
+        0;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255, 173, 226, 0.10),
-            rgba(188, 116, 255, 0.10)
+            rgba(255, 182, 229, 0.11),
+            rgba(191, 121, 255, 0.12)
         );
 
     box-shadow:
-        0 8px 30px
-        rgba(0, 0, 0, 0.18),
+        0 -4px 25px
+        rgba(213, 122, 255, 0.06),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.08),
-
-        0 0 25px
-        rgba(214, 126, 255, 0.08);
+        rgba(255, 255, 255, 0.08);
 
     backdrop-filter:
-        blur(10px);
+        blur(12px);
 
     -webkit-backdrop-filter:
-        blur(10px);
+        blur(12px);
 
     color:
-        rgba(255, 229, 247, 0.82);
+        rgba(255, 228, 247, 0.82);
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size: 0.74rem;
+    font-size: 0.72rem;
 
     font-weight: 400;
 
-    letter-spacing: 0.08em;
+    letter-spacing: 0.13em;
 
     text-transform: uppercase;
 
-    white-space: nowrap;
+    text-shadow:
+        0 0 10px
+        rgba(255, 177, 229, 0.18);
 
-    box-sizing: border-box;
+    z-index: 2;
 }
 
 
 /* ==========================================================
-   LABEL DECORATIVE STAR
+   SMALL STAR DECORATION BESIDE LABEL
 ========================================================== */
 
 .chapter6-progress-label::before {
@@ -640,13 +635,13 @@
     margin-right: 9px;
 
     color:
-        #ffd8f2;
+        #ffd7f1;
 
-    font-size: 0.72rem;
+    font-size: 0.7rem;
 
     text-shadow:
-        0 0 8px
-        rgba(255, 189, 235, 0.9);
+        0 0 9px
+        rgba(255, 193, 236, 0.85);
 }
 
 
@@ -658,183 +653,112 @@
    </div>
 ========================================================== */
 
-#chapter6Progress {
+#chapter6Progress.chapter6-progress {
     position: relative;
 
-    display: inline-flex;
+    display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    min-width: 120px;
+    width: min(
+        320px,
+        100%
+    );
 
-    min-height: 46px;
+    min-height: 56px;
 
-    margin: 0 auto;
+    margin: 0;
 
     padding:
-        9px
-        20px;
+        10px
+        28px;
 
     border:
         1px solid
-        rgba(255, 211, 241, 0.30);
+        rgba(255, 209, 241, 0.30);
 
-    border-radius: 999px;
+    border-radius:
+        0
+        0
+        28px
+        28px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255, 186, 232, 0.12),
-            rgba(185, 111, 255, 0.14)
+            rgba(255, 175, 227, 0.13),
+            rgba(194, 120, 255, 0.14)
         );
 
     box-shadow:
+        0 12px 35px
+        rgba(8, 3, 22, 0.22),
+
+        0 0 30px
+        rgba(205, 121, 255, 0.08),
+
         inset 0 1px 0
-        rgba(255, 255, 255, 0.10),
+        rgba(255, 255, 255, 0.09),
 
-        inset 0 -8px 20px
-        rgba(30, 10, 54, 0.15),
-
-        0 8px 30px
-        rgba(0, 0, 0, 0.20),
-
-        0 0 25px
-        rgba(214, 126, 255, 0.10);
+        inset 0 -1px 0
+        rgba(255, 174, 225, 0.08);
 
     backdrop-filter:
-        blur(12px);
+        blur(14px);
 
     -webkit-backdrop-filter:
-        blur(12px);
+        blur(14px);
+
+    box-sizing: border-box;
 
     color:
-        #ffd8f0;
+        #ffe1f4;
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size: 0.86rem;
+    font-size: 1rem;
 
-    font-weight: 600;
+    font-weight: 500;
+
+    letter-spacing: 0.12em;
 
     line-height: 1;
 
-    letter-spacing: 0.10em;
-
     text-shadow:
-        0 0 10px
-        rgba(255, 174, 227, 0.55);
+        0 0 12px
+        rgba(255, 174, 227, 0.48);
 
-    box-sizing: border-box;
-
-    transition:
-        border-color 0.35s ease,
-        box-shadow 0.35s ease,
-        transform 0.35s ease;
+    z-index: 1;
 }
 
 
 /* ==========================================================
-   COUNTER HOVER / ACTIVE FEEL
+   COUNTER INNER GLOW
 ========================================================== */
 
-#chapter6Progress:hover {
-    border-color:
-        rgba(255, 216, 242, 0.45);
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.12),
-
-        0 10px 35px
-        rgba(0, 0, 0, 0.24),
-
-        0 0 30px
-        rgba(222, 126, 255, 0.16);
-}
-
-
-/* ==========================================================
-   PROGRESS BAR OUTER TRACK
-========================================================== */
-
-.chapter6-progress-bar {
-    position: relative;
-
-    width:
-        min(
-            520px,
-            calc(100% - 30px)
-        );
-
-    height: 14px;
-
-    margin:
-        16px
-        auto
-        0;
-
-    padding: 2px;
-
-    overflow: hidden;
-
-    border:
-        1px solid
-        rgba(255, 205, 239, 0.24);
-
-    border-radius: 999px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.075),
-            rgba(255, 255, 255, 0.035)
-        );
-
-    box-shadow:
-        inset 0 2px 7px
-        rgba(0, 0, 0, 0.35),
-
-        inset 0 0 10px
-        rgba(184, 104, 255, 0.06),
-
-        0 0 20px
-        rgba(199, 120, 255, 0.08);
-
-    backdrop-filter:
-        blur(8px);
-
-    -webkit-backdrop-filter:
-        blur(8px);
-
-    box-sizing: border-box;
-}
-
-
-/* ==========================================================
-   PROGRESS BAR INNER GLOW
-========================================================== */
-
-.chapter6-progress-bar::before {
+#chapter6Progress.chapter6-progress::before {
     content: "";
 
     position: absolute;
 
-    inset: 2px;
+    inset: 1px;
 
-    z-index: 0;
-
-    border-radius: inherit;
+    border-radius:
+        0
+        0
+        27px
+        27px;
 
     background:
         linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.025),
-            rgba(255, 190, 236, 0.055),
-            rgba(207, 143, 255, 0.025)
+            135deg,
+            rgba(255, 255, 255, 0.035),
+            transparent 45%,
+            rgba(218, 143, 255, 0.035)
         );
 
     pointer-events: none;
@@ -842,11 +766,91 @@
 
 
 /* ==========================================================
+   PROGRESS BAR OUTER TRACK
+   This is the actual visible progress bar.
+========================================================== */
+
+.chapter6-progress-bar {
+    position: relative;
+
+    width: min(
+        520px,
+        calc(100% - 30px)
+    );
+
+    height: 16px;
+
+    margin:
+        22px
+        auto
+        0;
+
+    padding: 3px;
+
+    border:
+        1px solid
+        rgba(255, 211, 242, 0.28);
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.08),
+            rgba(255, 255, 255, 0.035)
+        );
+
+    box-shadow:
+        inset 0 2px 7px
+        rgba(0, 0, 0, 0.38),
+
+        inset 0 -1px 2px
+        rgba(255, 255, 255, 0.05),
+
+        0 0 20px
+        rgba(194, 116, 255, 0.10),
+
+        0 8px 25px
+        rgba(5, 2, 17, 0.20);
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   PROGRESS TRACK INNER SHINE
+========================================================== */
+
+.chapter6-progress-bar::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 3px;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.025),
+            rgba(255, 200, 238, 0.055),
+            rgba(202, 137, 255, 0.025)
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* ==========================================================
    PROGRESS FILL
 ========================================================== */
 
-#chapter6ProgressFill,
-.chapter6-progress-fill {
+#chapter6ProgressFill.chapter6-progress-fill {
     position: relative;
 
     display: block;
@@ -862,21 +866,25 @@
     background:
         linear-gradient(
             90deg,
-            #a96cff 0%,
-            #c77dff 30%,
+            #a96df4 0%,
+            #c47dff 28%,
             #df91ff 55%,
-            #ff9ed8 100%
+            #ff9bd7 80%,
+            #ffc0e8 100%
         );
 
     box-shadow:
-        0 0 8px
-        rgba(206, 132, 255, 0.90),
+        0 0 7px
+        rgba(194, 117, 255, 0.95),
 
-        0 0 18px
-        rgba(255, 145, 215, 0.60),
+        0 0 16px
+        rgba(223, 133, 255, 0.78),
 
-        0 0 32px
-        rgba(199, 119, 255, 0.28);
+        0 0 28px
+        rgba(255, 143, 216, 0.45),
+
+        inset 0 1px 1px
+        rgba(255, 255, 255, 0.48);
 
     transition:
         width 0.65s
@@ -887,9 +895,9 @@
             1
         );
 
-    z-index: 2;
-
     box-sizing: border-box;
+
+    z-index: 2;
 }
 
 
@@ -897,8 +905,7 @@
    PROGRESS FILL SHIMMER
 ========================================================== */
 
-#chapter6ProgressFill::after,
-.chapter6-progress-fill::after {
+#chapter6ProgressFill.chapter6-progress-fill::after {
     content: "";
 
     position: absolute;
@@ -907,7 +914,7 @@
     right: 0;
     bottom: 0;
 
-    width: 90px;
+    width: 100px;
 
     border-radius: inherit;
 
@@ -915,21 +922,19 @@
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.55),
+            rgba(255, 255, 255, 0.50),
             transparent
         );
 
     filter: blur(2px);
 
-    opacity: 0.65;
+    opacity: 0.6;
 
     animation:
         chapter6ProgressShimmer
         2.4s
         ease-in-out
         infinite;
-
-    pointer-events: none;
 }
 
 
@@ -1202,7 +1207,6 @@
     pointer-events: none;
 }
 
-
 .chapter6-star.discovering {
     animation:
         chapter6StarReveal
@@ -1331,7 +1335,6 @@
         transform 0.4s ease,
         visibility 0.4s ease;
 }
-
 
 .chapter6-message.show {
     opacity: 1;
@@ -1473,7 +1476,6 @@
         transform 0.8s ease;
 }
 
-
 .chapter6-completion.show {
     opacity: 1;
 
@@ -1599,7 +1601,6 @@
     text-align: center;
 }
 
-
 .chapter6-ending-symbol {
     color:
         rgba(255, 206, 240, 0.8);
@@ -1610,7 +1611,6 @@
         0 0 15px
         rgba(255, 181, 232, 0.65);
 }
-
 
 .chapter6-ending p {
     margin:
@@ -1629,7 +1629,6 @@
 
     line-height: 1.8;
 }
-
 
 .chapter6-ending h3 {
     margin:
@@ -1669,7 +1668,6 @@
 
     text-align: center;
 }
-
 
 .chapter6-continue-section p {
     margin-bottom: 22px;
@@ -1742,7 +1740,6 @@
         box-shadow 0.3s ease;
 }
 
-
 .chapter6-continue:hover {
     transform:
         translateY(-3px);
@@ -1764,7 +1761,6 @@
         0 0 25px
         rgba(255, 145, 214, 0.16);
 }
-
 
 .chapter6-continue:focus-visible {
     outline:
@@ -2017,21 +2013,16 @@
 
 
     .chapter6-progress-section {
-        max-width: 560px;
+        width:
+            min(
+                580px,
+                calc(100% - 20px)
+            );
     }
 
 
-    .chapter6-progress-label {
-        font-size: 0.70rem;
-    }
-
-
-    #chapter6Progress {
-        min-width: 112px;
-
-        min-height: 44px;
-
-        font-size: 0.82rem;
+    #chapter6Progress.chapter6-progress {
+        width: 300px;
     }
 
 
@@ -2136,55 +2127,67 @@
 
 
     /* ---------------------------------------------
-       DISCOVERY / PROGRESS MOBILE
-       --------------------------------------------- */
+       DISCOVERY SECTION MOBILE
+    --------------------------------------------- */
 
     .chapter6-progress-section {
-        width: 100%;
-
-        max-width: 100%;
+        width:
+            calc(100% - 8px);
 
         margin-top: 28px;
     }
 
 
     .chapter6-progress-label {
-        margin-bottom: 10px;
+        min-height: 35px;
 
         padding:
             7px
-            14px;
+            16px;
 
-        font-size: 0.66rem;
+        font-size: 0.64rem;
 
-        letter-spacing: 0.07em;
+        letter-spacing: 0.11em;
     }
 
 
-    #chapter6Progress {
-        min-width: 104px;
+    #chapter6Progress.chapter6-progress {
+        width:
+            min(
+                280px,
+                100%
+            );
 
-        min-height: 42px;
+        min-height: 52px;
 
         padding:
-            8px
-            16px;
+            9px
+            22px;
 
-        font-size: 0.76rem;
+        font-size: 0.88rem;
 
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
     }
 
 
     .chapter6-progress-bar {
         width:
-            calc(100% - 24px);
+            calc(100% - 20px);
 
-        height: 12px;
+        height: 14px;
 
-        margin-top: 14px;
+        margin-top: 18px;
     }
 
+
+    #chapter6ProgressFill.chapter6-progress-fill::after {
+        width: 70px;
+    }
+
+
+    /* ---------------------------------------------
+       CONSTELLATION MOBILE
+    --------------------------------------------- */
 
     .chapter6-constellation {
         min-height: 600px;
@@ -2216,6 +2219,10 @@
     }
 
 
+    /* ---------------------------------------------
+       MESSAGE MOBILE
+    --------------------------------------------- */
+
     .chapter6-message {
         width:
             calc(100% - 28px);
@@ -2232,6 +2239,10 @@
         font-size: 1.35rem;
     }
 
+
+    /* ---------------------------------------------
+       COMPLETION MOBILE
+    --------------------------------------------- */
 
     .chapter6-completion {
         margin-top: 55px;
@@ -2291,33 +2302,39 @@
     }
 
 
-    .chapter6-progress-label {
-        padding:
-            7px
-            12px;
-
-        font-size: 0.61rem;
+    .chapter6-progress-section {
+        width:
+            calc(100% - 4px);
     }
 
 
-    #chapter6Progress {
-        min-width: 96px;
-
-        min-height: 40px;
-
+    .chapter6-progress-label {
         padding:
             7px
             13px;
 
-        font-size: 0.70rem;
+        font-size: 0.60rem;
+    }
+
+
+    #chapter6Progress.chapter6-progress {
+        width:
+            min(
+                260px,
+                100%
+            );
+
+        min-height: 49px;
+
+        font-size: 0.82rem;
     }
 
 
     .chapter6-progress-bar {
         width:
-            calc(100% - 18px);
+            calc(100% - 16px);
 
-        height: 11px;
+        height: 12px;
     }
 
 
