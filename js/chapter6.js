@@ -80,9 +80,24 @@ function initChapter6() {
        OTHER CHAPTER 6 ELEMENTS
        ====================================================== */
 
+    /*
+        IMPORTANT:
+
+        Your HTML currently uses:
+
+        #chapter6Progress
+
+        for:
+
+        Reasons discovered
+        0 / 100
+
+        So this JS correctly uses #chapter6Progress.
+    */
+
     const discoveryCount =
         document.getElementById(
-            "chapter6DiscoveryCount"
+            "chapter6Progress"
         );
 
 
@@ -149,9 +164,14 @@ function initChapter6() {
         TOTAL_STARS *
         REASONS_PER_STAR;
 
+
     /*
-        Each reason remains visible
-        for exactly 7 seconds.
+        EXACT REASON DISPLAY TIME
+
+        Every discovered reason remains
+        visible for exactly 7 seconds.
+
+        DO NOT CHANGE THIS VALUE.
     */
 
     const MESSAGE_DURATION = 7000;
@@ -169,6 +189,8 @@ function initChapter6() {
 
         messageTimer: null,
 
+        countdownTimer: null,
+
         messageVisible: false,
 
         completed: false
@@ -178,9 +200,6 @@ function initChapter6() {
 
     /* ======================================================
        100 REASONS
-
-       20 STARS × 5 REASONS
-       = 100 TOTAL DISCOVERIES
        ====================================================== */
 
     const reasons = [
@@ -599,6 +618,230 @@ function initChapter6() {
 
 
     /* ======================================================
+       VISIBLE COUNTDOWN ELEMENT
+       ====================================================== */
+
+    let countdownElement = null;
+
+
+    function createCountdownElement() {
+
+        if (!messageBox) {
+
+            return null;
+
+        }
+
+
+        /*
+            If the countdown already exists,
+            reuse it.
+        */
+
+        let countdown =
+            messageBox.querySelector(
+                ".chapter6-reason-timer"
+            );
+
+
+        if (countdown) {
+
+            return countdown;
+
+        }
+
+
+        countdown =
+            document.createElement(
+                "div"
+            );
+
+
+        countdown.className =
+            "chapter6-reason-timer";
+
+
+        countdown.innerHTML = `
+
+            <div class="chapter6-reason-timer-label">
+                This little reason will fade away in
+            </div>
+
+            <div
+                class="chapter6-reason-timer-number"
+                aria-live="polite"
+            >
+                7
+            </div>
+
+            <div class="chapter6-reason-timer-track">
+
+                <span
+                    class="chapter6-reason-timer-fill"
+                ></span>
+
+            </div>
+
+        `;
+
+
+        messageBox.appendChild(
+            countdown
+        );
+
+
+        return countdown;
+
+    }
+
+
+    /* ======================================================
+       UPDATE VISIBLE COUNTDOWN
+       ====================================================== */
+
+    function updateCountdown(
+        seconds
+    ) {
+
+        if (!countdownElement) {
+
+            return;
+
+        }
+
+
+        const number =
+            countdownElement.querySelector(
+                ".chapter6-reason-timer-number"
+            );
+
+
+        const fill =
+            countdownElement.querySelector(
+                ".chapter6-reason-timer-fill"
+            );
+
+
+        if (number) {
+
+            number.textContent =
+                seconds;
+
+        }
+
+
+        if (fill) {
+
+            const percentage =
+                (
+                    seconds /
+                    7
+                ) * 100;
+
+
+            fill.style.width =
+                `${percentage}%`;
+
+        }
+
+    }
+
+
+    /* ======================================================
+       START 7-SECOND COUNTDOWN
+       ====================================================== */
+
+    function startCountdown() {
+
+        /*
+            Clear any old countdown.
+        */
+
+        clearInterval(
+            state.countdownTimer
+        );
+
+
+        countdownElement =
+            createCountdownElement();
+
+
+        if (!countdownElement) {
+
+            return;
+
+        }
+
+
+        let secondsRemaining =
+            7;
+
+
+        updateCountdown(
+            secondsRemaining
+        );
+
+
+        /*
+            Count down once every second.
+
+            The actual reason remains visible
+            for exactly 7000ms because the main
+            timeout below controls the removal.
+        */
+
+        state.countdownTimer =
+            setInterval(
+                () => {
+
+                    secondsRemaining--;
+
+
+                    if (
+                        secondsRemaining < 0
+                    ) {
+
+                        clearInterval(
+                            state.countdownTimer
+                        );
+
+                        state.countdownTimer =
+                            null;
+
+                        return;
+
+                    }
+
+
+                    updateCountdown(
+                        secondsRemaining
+                    );
+
+                },
+                1000
+            );
+
+    }
+
+
+    /* ======================================================
+       STOP COUNTDOWN
+       ====================================================== */
+
+    function stopCountdown() {
+
+        clearInterval(
+            state.countdownTimer
+        );
+
+
+        state.countdownTimer =
+            null;
+
+    }
+
+
+    /* ======================================================
        UPDATE DISCOVERY COUNTER
        ====================================================== */
 
@@ -949,7 +1192,14 @@ function initChapter6() {
 
 
         /* ==================================================
-           EXACT 7-SECOND TIMER
+           START VISIBLE 7-SECOND TIMER
+           ================================================== */
+
+        startCountdown();
+
+
+        /* ==================================================
+           EXACT 7-SECOND REASON TIMER
            ================================================== */
 
         clearTimeout(
@@ -1049,6 +1299,26 @@ function initChapter6() {
     function finishReasonDisplay(
         starIndex
     ) {
+
+        /*
+            Stop visible countdown.
+        */
+
+        stopCountdown();
+
+
+        /*
+            Clear main timer reference.
+        */
+
+        clearTimeout(
+            state.messageTimer
+        );
+
+
+        state.messageTimer =
+            null;
+
 
         state.messageVisible =
             false;
