@@ -1624,7 +1624,6 @@ function initChapter6() {
 
     }
 
-
 /* ======================================================
    CHAPTER VI → CHAPTER VII
    ====================================================== */
@@ -1633,14 +1632,37 @@ if (continueButton) {
 
     continueButton.addEventListener(
         "click",
-        (event) => {
+        () => {
 
-            event.preventDefault();
-            event.stopPropagation();
+            /* ==================================================
+               TRANSITION-FIRST NAVIGATION
+               ================================================== */
+
+            /*
+                Use the existing transition system first.
+
+                This is the same approach used for:
+                Chapter III → Chapter IV
+                Chapter IV → Chapter V
+                Chapter V → Chapter VI
+
+                DO NOT modify transition.js.
+            */
+
+            if (
+                typeof window.transitionToChapter ===
+                "function"
+            ) {
+
+                window.transitionToChapter(7);
+
+                return;
+
+            }
 
 
             /* ==================================================
-               FIND CHAPTER VII
+               DIRECT NAVIGATION FALLBACK
                ================================================== */
 
             const chapter7 =
@@ -1651,8 +1673,8 @@ if (continueButton) {
 
             if (!chapter7) {
 
-                console.error(
-                    "❌ Chapter VII was not found. Make sure <main id=\"chapter7\"> exists in index.html."
+                console.warn(
+                    "Chapter VII element not found."
                 );
 
                 return;
@@ -1660,81 +1682,33 @@ if (continueButton) {
             }
 
 
-            console.log(
-                "✨ Opening Chapter VII..."
-            );
+            /*
+                Remove active state only.
 
+                Do NOT manually set display:none
+                on every chapter.
 
-            /* ==================================================
-               GET ALL ACTUAL CHAPTER CONTAINERS
-               
-               IMPORTANT:
-               We target the chapter IDs directly instead of
-               relying on main[id^='chapter'].
+                The existing CSS/navigation system
+                is responsible for chapter visibility.
+            */
 
-               This prevents Chapter 0, Chapter 2, etc.
-               from remaining visible on the same page.
-               ================================================== */
+            document
+                .querySelectorAll(
+                    "main[id^='chapter']"
+                )
+                .forEach(
+                    (chapter) => {
 
-            const chapterIds = [
-
-                "chapter0",
-                "chapter1",
-                "chapter2",
-                "chapter3",
-                "chapter4",
-                "chapter5",
-                "chapter6",
-                "chapter7"
-
-            ];
-
-
-            const chapters = [];
-
-
-            chapterIds.forEach(
-                (id) => {
-
-                    const chapter =
-                        document.getElementById(
-                            id
-                        );
-
-
-                    if (chapter) {
-
-                        chapters.push(
-                            chapter
+                        chapter.classList.remove(
+                            "active"
                         );
 
                     }
-
-                }
-            );
+                );
 
 
             /* ==================================================
-               HIDE EVERY CHAPTER
-               ================================================== */
-
-            chapters.forEach(
-                (chapter) => {
-
-                    chapter.classList.remove(
-                        "active"
-                    );
-
-
-                    chapter.style.display =
-                        "none";
-
-                }
-            );
-
-
-            /* ==================================================
-               SHOW ONLY CHAPTER VII
+               ACTIVATE CHAPTER VII
                ================================================== */
 
             chapter7.classList.add(
@@ -1742,12 +1716,8 @@ if (continueButton) {
             );
 
 
-            chapter7.style.display =
-                "block";
-
-
             /* ==================================================
-               RESET SCROLL POSITION
+               SCROLL TO TOP
                ================================================== */
 
             window.scrollTo({
@@ -1756,52 +1726,16 @@ if (continueButton) {
 
                 left: 0,
 
-                behavior: "instant"
+                behavior: "smooth"
 
             });
-
-
-            /* ==================================================
-               CHAPTER CHANGE EVENT
-               ================================================== */
-
-            document.dispatchEvent(
-
-                new CustomEvent(
-                    "chapterChange",
-                    {
-                        detail: {
-                            chapter: 7
-                        }
-                    }
-                )
-
-            );
-
-
-            /* ==================================================
-               INITIALIZE CHAPTER VII
-               ================================================== */
-
-            if (
-                typeof window.initChapter7 ===
-                "function"
-            ) {
-
-                window.initChapter7();
-
-            }
-
-
-            console.log(
-                "💗 Chapter VII opened successfully."
-            );
 
         }
     );
 
 }
 
+   
     /* ======================================================
        INITIALIZE CHAPTER VI
        ====================================================== */
