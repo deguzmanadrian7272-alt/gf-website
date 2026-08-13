@@ -3,12 +3,12 @@
    Project : Our Story
    File    : chapter6.css
    Purpose : Interactive Constellation / 100 Reasons
-========================================================== */
+   ========================================================== */
 
 
 /* ==========================================================
    CHAPTER VI ROOT
-========================================================== */
+   ========================================================== */
 
 #chapter6 {
     position: relative;
@@ -51,7 +51,7 @@
             #160c2f 100%
         );
 
-    color: #fff;
+    color: #ffffff;
 
     isolation: isolate;
 }
@@ -59,7 +59,7 @@
 
 /* ==========================================================
    CHAPTER VI ACTIVE STATE
-========================================================== */
+   ========================================================== */
 
 #chapter6.active {
     display: block;
@@ -72,7 +72,7 @@
 
 /* ==========================================================
    CHAPTER VI BACKGROUND
-========================================================== */
+   ========================================================== */
 
 .chapter6-background {
     position: absolute;
@@ -92,7 +92,7 @@
 
 /* ==========================================================
    NIGHT SKY GLOW
-========================================================== */
+   ========================================================== */
 
 .chapter6-sky-glow {
     position: absolute;
@@ -126,7 +126,7 @@
 
 /* ==========================================================
    SECONDARY PINK GLOW
-========================================================== */
+   ========================================================== */
 
 .chapter6-pink-glow {
     position: absolute;
@@ -152,7 +152,7 @@
 
 /* ==========================================================
    MOON
-========================================================== */
+   ========================================================== */
 
 .chapter6-moon {
     position: absolute;
@@ -185,7 +185,7 @@
 
 /* ==========================================================
    MOON CRATERS
-========================================================== */
+   ========================================================== */
 
 .chapter6-moon::before {
     content: "";
@@ -212,7 +212,7 @@
 
 /* ==========================================================
    SMALL SKY STARS
-========================================================== */
+   ========================================================== */
 
 .chapter6-sky-star {
     position: absolute;
@@ -290,7 +290,7 @@
 
 /* ==========================================================
    FALLING FLOWERS
-========================================================== */
+   ========================================================== */
 
 .chapter6-flower {
     position: absolute;
@@ -369,7 +369,7 @@
 
 /* ==========================================================
    CHAPTER VI WRAPPER
-========================================================== */
+   ========================================================== */
 
 .chapter6-wrapper {
     position: relative;
@@ -393,7 +393,7 @@
 
 /* ==========================================================
    INTRODUCTION
-========================================================== */
+   ========================================================== */
 
 .chapter6-intro {
     position: relative;
@@ -408,7 +408,7 @@
 
 /* ==========================================================
    CHAPTER LABEL
-========================================================== */
+   ========================================================== */
 
 .chapter6-label {
     display: inline-block;
@@ -445,7 +445,7 @@
 
 /* ==========================================================
    INTRO TITLE
-========================================================== */
+   ========================================================== */
 
 .chapter6-intro h2 {
     margin: 0;
@@ -480,7 +480,7 @@
 
 /* ==========================================================
    INTRO SUBTITLE
-========================================================== */
+   ========================================================== */
 
 .chapter6-subtitle {
     max-width: 680px;
@@ -504,7 +504,7 @@
 
 /* ==========================================================
    INTRO DIVIDER
-========================================================== */
+   ========================================================== */
 
 .chapter6-intro-divider {
     margin-top: 25px;
@@ -520,49 +520,113 @@
 
 /* ==========================================================
    DISCOVERY / PROGRESS SECTION
-========================================================== */
+   ========================================================== */
 
 .chapter6-progress-section {
     position: relative;
 
-    width: min(
-        620px,
-        calc(100% - 20px)
-    );
+    width:
+        min(
+            620px,
+            calc(100% - 30px)
+        );
 
     margin:
-        32px
+        34px
         auto
         0;
 
-    display: flex;
+    padding:
+        22px
+        26px
+        25px;
 
-    flex-direction: column;
+    border:
+        1px solid
+        rgba(255, 202, 238, 0.20);
 
-    align-items: center;
+    border-radius: 24px;
 
-    justify-content: center;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 178, 228, 0.075),
+            rgba(180, 109, 255, 0.08)
+        );
+
+    box-shadow:
+        0 14px 40px
+        rgba(0, 0, 0, 0.20),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08),
+
+        0 0 35px
+        rgba(214, 126, 255, 0.06);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    box-sizing: border-box;
+
+    text-align: center;
 }
 
 
 /* ==========================================================
-   "REASONS DISCOVERED" LABEL
-========================================================== */
+   REASONS DISCOVERED LABEL
+   ========================================================== */
 
 .chapter6-progress-label {
-    position: relative;
+    display: block;
 
+    margin-bottom: 12px;
+
+    color:
+        rgba(255, 224, 244, 0.72);
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.70rem;
+
+    font-weight: 400;
+
+    letter-spacing: 0.20em;
+
+    line-height: 1.4;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        0 0 10px
+        rgba(255, 181, 232, 0.18);
+}
+
+
+/* ==========================================================
+   DISCOVERY COUNTER
+   ========================================================== */
+
+#chapter6Progress {
     display: inline-flex;
 
     align-items: center;
 
     justify-content: center;
 
-    width: fit-content;
+    min-width: 130px;
 
-    min-height: 38px;
+    min-height: 42px;
 
-    margin-bottom: -1px;
+    margin:
+        0
+        auto
+        18px;
 
     padding:
         8px
@@ -570,148 +634,16 @@
 
     border:
         1px solid
-        rgba(255, 206, 240, 0.28);
+        rgba(255, 215, 243, 0.28);
 
-    border-bottom:
-        1px solid
-        rgba(255, 206, 240, 0.18);
-
-    border-radius:
-        18px
-        18px
-        0
-        0;
+    border-radius: 999px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255, 182, 229, 0.11),
-            rgba(191, 121, 255, 0.12)
+            rgba(255, 189, 232, 0.12),
+            rgba(196, 125, 255, 0.13)
         );
-
-    box-shadow:
-        0 -4px 25px
-        rgba(213, 122, 255, 0.06),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.08);
-
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
-
-    color:
-        rgba(255, 228, 247, 0.82);
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 0.72rem;
-
-    font-weight: 400;
-
-    letter-spacing: 0.13em;
-
-    text-transform: uppercase;
-
-    text-shadow:
-        0 0 10px
-        rgba(255, 177, 229, 0.18);
-
-    z-index: 2;
-}
-
-
-/* ==========================================================
-   SMALL STAR DECORATION BESIDE LABEL
-========================================================== */
-
-.chapter6-progress-label::before {
-    content: "✦";
-
-    margin-right: 9px;
-
-    color:
-        #ffd7f1;
-
-    font-size: 0.7rem;
-
-    text-shadow:
-        0 0 9px
-        rgba(255, 193, 236, 0.85);
-}
-
-
-/* ==========================================================
-   DISCOVERY COUNTER
-   HTML:
-   <div id="chapter6Progress" class="chapter6-progress">
-       0 / 100
-   </div>
-========================================================== */
-
-#chapter6Progress.chapter6-progress {
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: min(
-        320px,
-        100%
-    );
-
-    min-height: 56px;
-
-    margin: 0;
-
-    padding:
-        10px
-        28px;
-
-    border:
-        1px solid
-        rgba(255, 209, 241, 0.30);
-
-    border-radius:
-        0
-        0
-        28px
-        28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 175, 227, 0.13),
-            rgba(194, 120, 255, 0.14)
-        );
-
-    box-shadow:
-        0 12px 35px
-        rgba(8, 3, 22, 0.22),
-
-        0 0 30px
-        rgba(205, 121, 255, 0.08),
-
-        inset 0 1px 0
-        rgba(255, 255, 255, 0.09),
-
-        inset 0 -1px 0
-        rgba(255, 174, 225, 0.08);
-
-    backdrop-filter:
-        blur(14px);
-
-    -webkit-backdrop-filter:
-        blur(14px);
-
-    box-sizing: border-box;
 
     color:
         #ffe1f4;
@@ -720,115 +652,118 @@
         "Poppins",
         sans-serif;
 
-    font-size: 1rem;
+    font-size: 0.78rem;
 
-    font-weight: 500;
-
-    letter-spacing: 0.12em;
+    font-weight: 600;
 
     line-height: 1;
 
+    letter-spacing: 0.08em;
+
     text-shadow:
-        0 0 12px
-        rgba(255, 174, 227, 0.48);
-
-    z-index: 1;
-}
-
-
-/* ==========================================================
-   COUNTER INNER GLOW
-========================================================== */
-
-#chapter6Progress.chapter6-progress::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 1px;
-
-    border-radius:
-        0
-        0
-        27px
-        27px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.035),
-            transparent 45%,
-            rgba(218, 143, 255, 0.035)
-        );
-
-    pointer-events: none;
-}
-
-
-/* ==========================================================
-   PROGRESS BAR OUTER TRACK
-   This is the actual visible progress bar.
-========================================================== */
-
-.chapter6-progress-bar {
-    position: relative;
-
-    width: min(
-        520px,
-        calc(100% - 30px)
-    );
-
-    height: 16px;
-
-    margin:
-        22px
-        auto
-        0;
-
-    padding: 3px;
-
-    border:
-        1px solid
-        rgba(255, 211, 242, 0.28);
-
-    border-radius: 999px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.08),
-            rgba(255, 255, 255, 0.035)
-        );
+        0 0 10px
+        rgba(255, 170, 225, 0.45);
 
     box-shadow:
-        inset 0 2px 7px
-        rgba(0, 0, 0, 0.38),
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.10),
 
-        inset 0 -1px 2px
-        rgba(255, 255, 255, 0.05),
+        0 0 18px
+        rgba(219, 126, 255, 0.08);
 
-        0 0 20px
-        rgba(194, 116, 255, 0.10),
-
-        0 8px 25px
-        rgba(5, 2, 17, 0.20);
-
-    overflow: hidden;
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 
     box-sizing: border-box;
 }
 
 
 /* ==========================================================
-   PROGRESS TRACK INNER SHINE
-========================================================== */
+   COUNTER UPDATE EFFECT
+   ========================================================== */
+
+#chapter6Progress.updated {
+    transform: scale(1.08);
+
+    border-color:
+        rgba(255, 221, 246, 0.55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 193, 234, 0.20),
+            rgba(205, 133, 255, 0.20)
+        );
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.14),
+
+        0 0 25px
+        rgba(255, 157, 220, 0.20);
+}
+
+
+/* ==========================================================
+   PROGRESS BAR OUTER CONTAINER
+   ========================================================== */
+
+.chapter6-progress-bar {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+
+    height: 16px;
+
+    padding: 2px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(255, 213, 242, 0.22);
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(9, 5, 24, 0.72),
+            rgba(30, 13, 48, 0.78)
+        );
+
+    box-shadow:
+        inset 0 2px 6px
+        rgba(0, 0, 0, 0.40),
+
+        inset 0 -1px 0
+        rgba(255, 255, 255, 0.04),
+
+        0 0 18px
+        rgba(190, 111, 255, 0.08);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   PROGRESS BAR INNER TRACK
+   ========================================================== */
 
 .chapter6-progress-bar::before {
     content: "";
 
     position: absolute;
 
-    inset: 3px;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+    left: 2px;
 
     border-radius: 999px;
 
@@ -836,8 +771,8 @@
         linear-gradient(
             90deg,
             rgba(255, 255, 255, 0.025),
-            rgba(255, 200, 238, 0.055),
-            rgba(202, 137, 255, 0.025)
+            rgba(255, 196, 236, 0.045),
+            rgba(207, 143, 255, 0.025)
         );
 
     pointer-events: none;
@@ -848,9 +783,10 @@
 
 /* ==========================================================
    PROGRESS FILL
-========================================================== */
+   ========================================================== */
 
-#chapter6ProgressFill.chapter6-progress-fill {
+.chapter6-progress-fill,
+#chapter6ProgressFill {
     position: relative;
 
     display: block;
@@ -866,25 +802,22 @@
     background:
         linear-gradient(
             90deg,
-            #a96df4 0%,
-            #c47dff 28%,
-            #df91ff 55%,
-            #ff9bd7 80%,
-            #ffc0e8 100%
+            #a96df2 0%,
+            #bd7aff 25%,
+            #d990ff 50%,
+            #ef9ee8 75%,
+            #ffafd9 100%
         );
 
     box-shadow:
         0 0 7px
-        rgba(194, 117, 255, 0.95),
+        rgba(203, 126, 255, 0.90),
 
-        0 0 16px
-        rgba(223, 133, 255, 0.78),
+        0 0 15px
+        rgba(255, 145, 215, 0.65),
 
         0 0 28px
-        rgba(255, 143, 216, 0.45),
-
-        inset 0 1px 1px
-        rgba(255, 255, 255, 0.48);
+        rgba(199, 119, 255, 0.35);
 
     transition:
         width 0.65s
@@ -895,26 +828,28 @@
             1
         );
 
-    box-sizing: border-box;
-
     z-index: 2;
+
+    box-sizing: border-box;
 }
 
 
 /* ==========================================================
    PROGRESS FILL SHIMMER
-========================================================== */
+   ========================================================== */
 
-#chapter6ProgressFill.chapter6-progress-fill::after {
+.chapter6-progress-fill::after,
+#chapter6ProgressFill::after {
     content: "";
 
     position: absolute;
 
     top: 0;
-    right: 0;
+    right: auto;
     bottom: 0;
+    left: -80px;
 
-    width: 100px;
+    width: 80px;
 
     border-radius: inherit;
 
@@ -922,25 +857,27 @@
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.50),
+            rgba(255, 255, 255, 0.55),
             transparent
         );
 
     filter: blur(2px);
 
-    opacity: 0.6;
+    opacity: 0.70;
 
     animation:
         chapter6ProgressShimmer
         2.4s
         ease-in-out
         infinite;
+
+    pointer-events: none;
 }
 
 
 /* ==========================================================
    CONSTELLATION AREA
-========================================================== */
+   ========================================================== */
 
 .chapter6-constellation {
     position: relative;
@@ -979,7 +916,7 @@
 
 /* ==========================================================
    CONSTELLATION INNER GLOW
-========================================================== */
+   ========================================================== */
 
 .chapter6-constellation::before {
     content: "";
@@ -1005,7 +942,7 @@
 
 /* ==========================================================
    INTERACTIVE STAR FIELD
-========================================================== */
+   ========================================================== */
 
 #chapter6StarField {
     position: absolute;
@@ -1029,7 +966,7 @@
 
 /* ==========================================================
    INTERACTIVE STAR
-========================================================== */
+   ========================================================== */
 
 .chapter6-star {
     position: absolute;
@@ -1095,7 +1032,7 @@
 
 /* ==========================================================
    STAR GLOW
-========================================================== */
+   ========================================================== */
 
 .chapter6-star-glow {
     position: absolute;
@@ -1125,7 +1062,7 @@
 
 /* ==========================================================
    STAR SYMBOL
-========================================================== */
+   ========================================================== */
 
 .chapter6-star-symbol {
     position: relative;
@@ -1162,7 +1099,7 @@
 
 /* ==========================================================
    STAR HOVER
-========================================================== */
+   ========================================================== */
 
 .chapter6-star:hover {
     transform:
@@ -1182,7 +1119,7 @@
 
 /* ==========================================================
    STAR FOCUS
-========================================================== */
+   ========================================================== */
 
 .chapter6-star:focus-visible {
     outline:
@@ -1195,7 +1132,7 @@
 
 /* ==========================================================
    STAR REVEALING
-========================================================== */
+   ========================================================== */
 
 .chapter6-star.revealing {
     animation:
@@ -1206,6 +1143,7 @@
 
     pointer-events: none;
 }
+
 
 .chapter6-star.discovering {
     animation:
@@ -1220,7 +1158,7 @@
 
 /* ==========================================================
    COMPLETED STAR
-========================================================== */
+   ========================================================== */
 
 .chapter6-star.completed {
     opacity: 0;
@@ -1240,7 +1178,7 @@
 
 /* ==========================================================
    STAR NUMBER
-========================================================== */
+   ========================================================== */
 
 .chapter6-star-number {
     position: absolute;
@@ -1272,7 +1210,7 @@
 
 /* ==========================================================
    STAR MESSAGE
-========================================================== */
+   ========================================================== */
 
 .chapter6-message {
     position: absolute;
@@ -1336,6 +1274,7 @@
         visibility 0.4s ease;
 }
 
+
 .chapter6-message.show {
     opacity: 1;
 
@@ -1352,7 +1291,7 @@
 
 /* ==========================================================
    MESSAGE DECORATION
-========================================================== */
+   ========================================================== */
 
 .chapter6-message-symbol {
     display: block;
@@ -1372,7 +1311,7 @@
 
 /* ==========================================================
    MESSAGE TEXT
-========================================================== */
+   ========================================================== */
 
 #chapter6MessageText {
     margin: 0;
@@ -1399,7 +1338,7 @@
 
 /* ==========================================================
    MESSAGE NUMBER
-========================================================== */
+   ========================================================== */
 
 #chapter6MessageNumber {
     margin:
@@ -1424,7 +1363,7 @@
 
 /* ==========================================================
    COMPLETION
-========================================================== */
+   ========================================================== */
 
 .chapter6-completion {
     position: relative;
@@ -1476,6 +1415,7 @@
         transform 0.8s ease;
 }
 
+
 .chapter6-completion.show {
     opacity: 1;
 
@@ -1486,7 +1426,7 @@
 
 /* ==========================================================
    COMPLETION SYMBOL
-========================================================== */
+   ========================================================== */
 
 .chapter6-completion-symbol {
     display: block;
@@ -1515,7 +1455,7 @@
 
 /* ==========================================================
    COMPLETION TITLE
-========================================================== */
+   ========================================================== */
 
 .chapter6-completion h3 {
     margin: 0;
@@ -1540,7 +1480,7 @@
 
 /* ==========================================================
    COMPLETION TEXT
-========================================================== */
+   ========================================================== */
 
 .chapter6-completion p {
     max-width: 610px;
@@ -1567,7 +1507,7 @@
 
 /* ==========================================================
    COMPLETION HIGHLIGHT
-========================================================== */
+   ========================================================== */
 
 .chapter6-completion-highlight {
     color:
@@ -1588,7 +1528,7 @@
 
 /* ==========================================================
    CHAPTER VI ENDING
-========================================================== */
+   ========================================================== */
 
 .chapter6-ending {
     max-width: 700px;
@@ -1601,6 +1541,7 @@
     text-align: center;
 }
 
+
 .chapter6-ending-symbol {
     color:
         rgba(255, 206, 240, 0.8);
@@ -1611,6 +1552,7 @@
         0 0 15px
         rgba(255, 181, 232, 0.65);
 }
+
 
 .chapter6-ending p {
     margin:
@@ -1629,6 +1571,7 @@
 
     line-height: 1.8;
 }
+
 
 .chapter6-ending h3 {
     margin:
@@ -1656,7 +1599,7 @@
 
 /* ==========================================================
    CONTINUE SECTION
-========================================================== */
+   ========================================================== */
 
 .chapter6-continue-section {
     max-width: 620px;
@@ -1668,6 +1611,7 @@
 
     text-align: center;
 }
+
 
 .chapter6-continue-section p {
     margin-bottom: 22px;
@@ -1685,7 +1629,7 @@
 
 /* ==========================================================
    CONTINUE BUTTON
-========================================================== */
+   ========================================================== */
 
 .chapter6-continue {
     position: relative;
@@ -1740,6 +1684,7 @@
         box-shadow 0.3s ease;
 }
 
+
 .chapter6-continue:hover {
     transform:
         translateY(-3px);
@@ -1762,6 +1707,7 @@
         rgba(255, 145, 214, 0.16);
 }
 
+
 .chapter6-continue:focus-visible {
     outline:
         2px solid
@@ -1773,7 +1719,7 @@
 
 /* ==========================================================
    HIDDEN STATE
-========================================================== */
+   ========================================================== */
 
 #chapter6Completion[hidden] {
     display: none;
@@ -1782,7 +1728,7 @@
 
 /* ==========================================================
    ANIMATIONS
-========================================================== */
+   ========================================================== */
 
 @keyframes chapter6SkyTwinkle {
 
@@ -1899,28 +1845,36 @@
 
 /* ==========================================================
    PROGRESS SHIMMER ANIMATION
-========================================================== */
+   ========================================================== */
 
 @keyframes chapter6ProgressShimmer {
 
     0% {
         transform:
-            translateX(-100px);
+            translateX(-80px);
 
         opacity: 0;
     }
 
-    30% {
+    20% {
         opacity: 0.65;
     }
 
-    70% {
+    50% {
         opacity: 0.65;
+    }
+
+    80% {
+        opacity: 0;
     }
 
     100% {
         transform:
-            translateX(100px);
+            translateX(
+                calc(
+                    100% + 80px
+                )
+            );
 
         opacity: 0;
     }
@@ -1929,7 +1883,7 @@
 
 /* ==========================================================
    FLOWER FALL
-========================================================== */
+   ========================================================== */
 
 @keyframes chapter6FlowerFall {
 
@@ -1989,7 +1943,7 @@
 
 /* ==========================================================
    RESPONSIVE — TABLET
-========================================================== */
+   ========================================================== */
 
 @media (max-width: 900px) {
 
@@ -2015,23 +1969,33 @@
     .chapter6-progress-section {
         width:
             min(
-                580px,
-                calc(100% - 20px)
+                560px,
+                calc(100% - 30px)
             );
+
+        padding:
+            20px
+            22px
+            23px;
     }
 
 
-    #chapter6Progress.chapter6-progress {
-        width: 300px;
+    .chapter6-progress-label {
+        font-size: 0.68rem;
+    }
+
+
+    #chapter6Progress {
+        min-width: 120px;
+
+        min-height: 40px;
+
+        font-size: 0.74rem;
     }
 
 
     .chapter6-progress-bar {
-        width:
-            min(
-                480px,
-                calc(100% - 30px)
-            );
+        height: 15px;
     }
 
 
@@ -2063,7 +2027,7 @@
 
 /* ==========================================================
    RESPONSIVE — MOBILE
-========================================================== */
+   ========================================================== */
 
 @media (max-width: 600px) {
 
@@ -2127,67 +2091,60 @@
 
 
     /* ---------------------------------------------
-       DISCOVERY SECTION MOBILE
-    --------------------------------------------- */
+       DISCOVERY / PROGRESS SECTION MOBILE
+       --------------------------------------------- */
 
     .chapter6-progress-section {
         width:
             calc(100% - 8px);
 
         margin-top: 28px;
+
+        padding:
+            18px
+            16px
+            20px;
+
+        border-radius: 20px;
     }
 
 
     .chapter6-progress-label {
-        min-height: 35px;
+        margin-bottom: 10px;
+
+        font-size: 0.64rem;
+
+        letter-spacing: 0.16em;
+    }
+
+
+    #chapter6Progress {
+        min-width: 116px;
+
+        min-height: 38px;
+
+        margin-bottom: 15px;
 
         padding:
             7px
             16px;
 
-        font-size: 0.64rem;
-
-        letter-spacing: 0.11em;
-    }
-
-
-    #chapter6Progress.chapter6-progress {
-        width:
-            min(
-                280px,
-                100%
-            );
-
-        min-height: 52px;
-
-        padding:
-            9px
-            22px;
-
-        font-size: 0.88rem;
-
-        letter-spacing: 0.1em;
+        font-size: 0.70rem;
     }
 
 
     .chapter6-progress-bar {
-        width:
-            calc(100% - 20px);
+        width: 100%;
 
-        height: 14px;
+        height: 13px;
 
-        margin-top: 18px;
-    }
-
-
-    #chapter6ProgressFill.chapter6-progress-fill::after {
-        width: 70px;
+        padding: 2px;
     }
 
 
     /* ---------------------------------------------
        CONSTELLATION MOBILE
-    --------------------------------------------- */
+       --------------------------------------------- */
 
     .chapter6-constellation {
         min-height: 600px;
@@ -2219,10 +2176,6 @@
     }
 
 
-    /* ---------------------------------------------
-       MESSAGE MOBILE
-    --------------------------------------------- */
-
     .chapter6-message {
         width:
             calc(100% - 28px);
@@ -2239,10 +2192,6 @@
         font-size: 1.35rem;
     }
 
-
-    /* ---------------------------------------------
-       COMPLETION MOBILE
-    --------------------------------------------- */
 
     .chapter6-completion {
         margin-top: 55px;
@@ -2292,7 +2241,7 @@
 
 /* ==========================================================
    RESPONSIVE — SMALL MOBILE
-========================================================== */
+   ========================================================== */
 
 @media (max-width: 380px) {
 
@@ -2305,35 +2254,31 @@
     .chapter6-progress-section {
         width:
             calc(100% - 4px);
+
+        padding:
+            16px
+            13px
+            18px;
     }
 
 
     .chapter6-progress-label {
-        padding:
-            7px
-            13px;
-
         font-size: 0.60rem;
+
+        letter-spacing: 0.13em;
     }
 
 
-    #chapter6Progress.chapter6-progress {
-        width:
-            min(
-                260px,
-                100%
-            );
+    #chapter6Progress {
+        min-width: 108px;
 
-        min-height: 49px;
+        min-height: 36px;
 
-        font-size: 0.82rem;
+        font-size: 0.65rem;
     }
 
 
     .chapter6-progress-bar {
-        width:
-            calc(100% - 16px);
-
         height: 12px;
     }
 
@@ -2376,7 +2321,7 @@
 
 /* ==========================================================
    REDUCED MOTION
-========================================================== */
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -2393,7 +2338,8 @@
     .chapter6-message,
     .chapter6-completion,
     #chapter6ProgressFill,
-    .chapter6-continue {
+    .chapter6-continue,
+    #chapter6Progress {
         transition: none;
     }
 }
