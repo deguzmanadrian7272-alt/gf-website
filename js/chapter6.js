@@ -1633,16 +1633,19 @@ if (continueButton) {
 
     continueButton.addEventListener(
         "click",
-        () => {
+        (event) => {
+
+            event.preventDefault();
+            event.stopPropagation();
 
             console.log(
                 "💌 Chapter 6 Continue button clicked."
             );
 
 
-            /*
-                Find Chapter 7.
-            */
+            /* ==================================================
+               FIND CHAPTER VII
+               ================================================== */
 
             const chapter7 =
                 document.getElementById(
@@ -1650,21 +1653,11 @@ if (continueButton) {
                 );
 
 
-            /*
-                Chapter 7 must exist in index.html.
-            */
-
             if (!chapter7) {
 
                 console.error(
                     "❌ Chapter 7 was not found in index.html."
                 );
-
-
-                alert(
-                    'Chapter 7 could not be found. Please make sure <main id="chapter7"> exists in index.html.'
-                );
-
 
                 return;
 
@@ -1676,11 +1669,20 @@ if (continueButton) {
             );
 
 
-            /*
-                --------------------------------------------------
-                TRY EXISTING TRANSITION SYSTEM FIRST
-                --------------------------------------------------
-            */
+            /* ==================================================
+               PREVENT DOUBLE CLICK
+               ================================================== */
+
+            continueButton.disabled =
+                true;
+
+            continueButton.style.pointerEvents =
+                "none";
+
+
+            /* ==================================================
+               TRY EXISTING TRANSITION SYSTEM FIRST
+               ================================================== */
 
             if (
                 typeof transitionToChapter ===
@@ -1695,37 +1697,276 @@ if (continueButton) {
 
 
                     /*
-                        Give transition.js time
-                        to handle Chapter 7.
+                        IMPORTANT:
 
-                        If Chapter 7 is still hidden,
-                        use the direct fallback.
+                        transition.js changes the
+                        application state and fires
+                        chapterChange, but it does
+                        NOT actually hide/show all
+                        chapter <main> elements.
+
+                        Therefore we check BOTH:
+
+                        1. Is Chapter 7 visible?
+                        2. Are ALL OTHER chapters hidden?
+
+                        This prevents the bug where
+                        Chapter 7 is visible while
+                        Chapter 0, Chapter 2, or
+                        Chapter 6 are still visible.
                     */
 
                     setTimeout(
                         () => {
 
-                            const chapter7Visible =
-                                chapter7.style.display !==
-                                    "none" &&
-                                getComputedStyle(
-                                    chapter7
-                                ).display !==
-                                    "none";
-
-
-                            if (
-                                !chapter7Visible
-                            ) {
-
-                                console.warn(
-                                    "⚠️ transitionToChapter(7) did not open Chapter 7. Using direct navigation."
+                            const allChapters =
+                                document.querySelectorAll(
+                                    "main[id^='chapter']"
                                 );
 
 
-                                openChapter7Directly();
+                            let otherChapterVisible =
+                                false;
+
+
+                            allChapters.forEach(
+                                (chapter) => {
+
+                                    if (
+                                        chapter !==
+                                        chapter7
+                                    ) {
+
+                                        const computed =
+                                            getComputedStyle(
+                                                chapter
+                                            );
+
+
+                                        if (
+                                            computed.display !==
+                                                "none" &&
+                                            !chapter.hidden
+                                        ) {
+
+                                            otherChapterVisible =
+                                                true;
+
+                                        }
+
+                                    }
+
+                                }
+                            );
+
+
+                            const chapter7Visible =
+                                getComputedStyle(
+                                    chapter7
+                                ).display !==
+                                    "none" &&
+                                !chapter7.hidden;
+
+
+                            /*
+                                If Chapter 7 isn't
+                                properly opened OR
+                                another chapter is
+                                still visible,
+                                force direct navigation.
+                            */
+
+                            if (
+                                !chapter7Visible ||
+                                otherChapterVisible
+                            ) {
+
+                                console.warn(
+                                    "⚠️ Transition did not properly isolate Chapter 7. Using direct navigation."
+                                );
+
+
+                                /*
+                                    HIDE EVERY OTHER CHAPTER
+                                */
+
+                                allChapters.forEach(
+                                    (chapter) => {
+
+                                        if (
+                                            chapter !==
+                                            chapter7
+                                        ) {
+
+                                            chapter.classList.remove(
+                                                "active"
+                                            );
+
+                                            chapter.hidden =
+                                                true;
+
+                                            chapter.style.display =
+                                                "none";
+
+                                            chapter.setAttribute(
+                                                "aria-hidden",
+                                                "true"
+                                            );
+
+                                        }
+
+                                    }
+                                );
+
+
+                                /*
+                                    SHOW ONLY CHAPTER 7
+                                */
+
+                                chapter7.hidden =
+                                    false;
+
+                                chapter7.style.display =
+                                    "block";
+
+                                chapter7.classList.add(
+                                    "active"
+                                );
+
+                                chapter7.setAttribute(
+                                    "aria-hidden",
+                                    "false"
+                                );
+
+
+                                /*
+                                    RESTORE NORMAL PAGE
+                                    SCROLLING
+                                */
+
+                                document.documentElement.style.height =
+                                    "auto";
+
+                                document.documentElement.style.overflowY =
+                                    "auto";
+
+
+                                document.body.style.height =
+                                    "auto";
+
+                                document.body.style.overflowY =
+                                    "auto";
+
+                                document.body.style.overflowX =
+                                    "hidden";
+
+
+                                chapter7.style.height =
+                                    "auto";
+
+                                chapter7.style.minHeight =
+                                    "100vh";
+
+                                chapter7.style.overflowX =
+                                    "hidden";
+
+                                chapter7.style.overflowY =
+                                    "visible";
+
+
+                                /*
+                                    UPDATE APP STATE
+                                */
+
+                                if (
+                                    typeof setChapter ===
+                                    "function"
+                                ) {
+
+                                    setChapter(
+                                        7
+                                    );
+
+                                }
+
+
+                                /*
+                                    TELL THE APP THAT
+                                    CHAPTER 7 IS ACTIVE
+                                */
+
+                                document.dispatchEvent(
+                                    new CustomEvent(
+                                        "chapterChange",
+                                        {
+                                            detail: {
+                                                chapter: 7
+                                            }
+                                        }
+                                    )
+                                );
+
+
+                                /*
+                                    SCROLL TO THE TOP
+                                */
+
+                                window.scrollTo({
+
+                                    top: 0,
+
+                                    left: 0,
+
+                                    behavior: "instant"
+
+                                });
+
+
+                                /*
+                                    INITIALIZE CHAPTER 7
+                                */
+
+                                if (
+                                    typeof window.initChapter7 ===
+                                    "function"
+                                ) {
+
+                                    window.initChapter7();
+
+                                }
+
+
+                                console.log(
+                                    "✨ Chapter 7 opened successfully through direct navigation."
+                                );
 
                             }
+
+                            else {
+
+                                /*
+                                    Transition system
+                                    successfully isolated
+                                    Chapter 7.
+                                */
+
+                                console.log(
+                                    "✨ Chapter 7 opened successfully through transition system."
+                                );
+
+                            }
+
+
+                            /*
+                                Re-enable button after
+                                navigation has completed.
+                            */
+
+                            continueButton.disabled =
+                                false;
+
+                            continueButton.style.pointerEvents =
+                                "auto";
 
                         },
                         700
@@ -1743,198 +1984,189 @@ if (continueButton) {
                         error
                     );
 
-                    /*
-                        Continue to direct navigation.
-                    */
+                }
+
+            }
+
+
+            /* ==================================================
+               DIRECT NAVIGATION FALLBACK
+               IF transitionToChapter DOES NOT EXIST
+               ================================================== */
+
+            const allChapters =
+                document.querySelectorAll(
+                    "main[id^='chapter']"
+                );
+
+
+            /*
+                HIDE ALL OTHER CHAPTERS
+            */
+
+            allChapters.forEach(
+                (chapter) => {
+
+                    if (
+                        chapter !==
+                        chapter7
+                    ) {
+
+                        chapter.classList.remove(
+                            "active"
+                        );
+
+                        chapter.hidden =
+                            true;
+
+                        chapter.style.display =
+                            "none";
+
+                        chapter.setAttribute(
+                            "aria-hidden",
+                            "true"
+                        );
+
+                    }
 
                 }
+            );
+
+
+            /*
+                SHOW ONLY CHAPTER 7
+            */
+
+            chapter7.hidden =
+                false;
+
+            chapter7.style.display =
+                "block";
+
+            chapter7.classList.add(
+                "active"
+            );
+
+            chapter7.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            /*
+                RESTORE NORMAL SCROLLING
+            */
+
+            document.documentElement.style.height =
+                "auto";
+
+            document.documentElement.style.overflowY =
+                "auto";
+
+
+            document.body.style.height =
+                "auto";
+
+            document.body.style.overflowY =
+                "auto";
+
+            document.body.style.overflowX =
+                "hidden";
+
+
+            chapter7.style.height =
+                "auto";
+
+            chapter7.style.minHeight =
+                "100vh";
+
+            chapter7.style.overflowX =
+                "hidden";
+
+            chapter7.style.overflowY =
+                "visible";
+
+
+            /*
+                UPDATE APP STATE
+            */
+
+            if (
+                typeof setChapter ===
+                "function"
+            ) {
+
+                setChapter(
+                    7
+                );
 
             }
 
 
             /*
-                --------------------------------------------------
-                DIRECT NAVIGATION FALLBACK
-                --------------------------------------------------
+                FIRE CHAPTER CHANGE EVENT
             */
 
-            openChapter7Directly();
-
-        }
-    );
-
-}
-
-
-/* ======================================================
-   DIRECTLY OPEN CHAPTER 7
-   ====================================================== */
-
-function openChapter7Directly() {
-
-    const chapter7 =
-        document.getElementById(
-            "chapter7"
-        );
+            document.dispatchEvent(
+                new CustomEvent(
+                    "chapterChange",
+                    {
+                        detail: {
+                            chapter: 7
+                        }
+                    }
+                )
+            );
 
 
-    if (!chapter7) {
+            /*
+                SCROLL TO TOP
+            */
 
-        console.error(
-            "❌ Cannot open Chapter 7 because #chapter7 does not exist."
-        );
+            window.scrollTo({
 
+                top: 0,
 
-        return;
+                left: 0,
 
-    }
+                behavior: "instant"
 
-
-    /*
-        Hide every chapter.
-    */
-
-    const chapters =
-        document.querySelectorAll(
-            "main[id^='chapter']"
-        );
+            });
 
 
-    chapters.forEach(
-        chapter => {
+            /*
+                INITIALIZE CHAPTER 7
+            */
 
             if (
-                chapter !== chapter7
+                typeof window.initChapter7 ===
+                "function"
             ) {
 
-                chapter.style.display =
-                    "none";
+                window.initChapter7();
 
             }
+
+
+            console.log(
+                "✨ Chapter 7 opened successfully through direct fallback."
+            );
+
+
+            /*
+                Re-enable button.
+            */
+
+            continueButton.disabled =
+                false;
+
+            continueButton.style.pointerEvents =
+                "auto";
 
         }
     );
 
-
-    /*
-        Show Chapter 7.
-    */
-
-    chapter7.style.display =
-        "block";
-
-
-    /*
-        Make sure Chapter 7
-        uses the browser document
-        for scrolling.
-    */
-
-    chapter7.style.height =
-        "auto";
-
-
-    chapter7.style.minHeight =
-        "100vh";
-
-
-    chapter7.style.overflowX =
-        "hidden";
-
-
-    chapter7.style.overflowY =
-        "visible";
-
-
-    /*
-        Restore normal browser scrolling.
-    */
-
-    document.documentElement.style.height =
-        "auto";
-
-
-    document.documentElement.style.overflowY =
-        "auto";
-
-
-    document.body.style.height =
-        "auto";
-
-
-    document.body.style.overflowY =
-        "auto";
-
-
-    document.body.style.overflowX =
-        "hidden";
-
-
-    /*
-        Reset page position.
-    */
-
-    if (
-        typeof window.scrollTo ===
-        "function"
-    ) {
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "instant"
-
-        });
-
-    }
-
-
-    /*
-        Update application state.
-    */
-
-    if (
-        typeof setChapter ===
-        "function"
-    ) {
-
-        setChapter(
-            7
-        );
-
-    }
-
-
-    /*
-        Fire chapterChange.
-
-        This allows other chapter modules
-        to respond to Chapter 7 being opened.
-    */
-
-    document.dispatchEvent(
-        new CustomEvent(
-            "chapterChange",
-            {
-
-                detail: {
-
-                    chapter: 7
-
-                }
-
-            }
-        )
-    );
-
-
-    console.log(
-        "✨ Chapter 7 opened successfully."
-    );
-
 }
-
    
     /* ======================================================
        INITIALIZE CHAPTER VI
