@@ -671,7 +671,7 @@ function initChapter6() {
                 class="chapter6-reason-timer-number"
                 aria-live="polite"
             >
-                7
+                5
             </div>
 
             <div class="chapter6-reason-timer-track">
@@ -735,7 +735,7 @@ function initChapter6() {
             const percentage =
                 (
                     seconds /
-                    7
+                    5
                 ) * 100;
 
 
@@ -774,7 +774,7 @@ function initChapter6() {
 
 
         let secondsRemaining =
-            7;
+            5;
 
 
         updateCountdown(
