@@ -1625,100 +1625,146 @@ function initChapter6() {
     }
 
 
-    /* ======================================================
-       CHAPTER VI → CHAPTER VII
-       ====================================================== */
+/* ======================================================
+   CHAPTER VI → CHAPTER VII
+   ====================================================== */
 
-    if (continueButton) {
+if (continueButton) {
 
-        continueButton.addEventListener(
-            "click",
-            () => {
+    continueButton.addEventListener(
+        "click",
+        () => {
+
+            /*
+                CHAPTER 6 → CHAPTER 7
+
+                Follow the same navigation approach
+                used by the previous chapter transitions.
+
+                transition.js and app.js remain untouched.
+            */
+
+            /* ==================================================
+               METHOD 1 — EXISTING CHAPTER NAVIGATION
+               ================================================== */
+
+            if (
+                typeof window.goToChapter ===
+                "function"
+            ) {
+
+                window.goToChapter(7);
+
+                return;
+
+            }
+
+
+            /* ==================================================
+               METHOD 2 — EXISTING SHOW CHAPTER FUNCTION
+               ================================================== */
+
+            if (
+                typeof window.showChapter ===
+                "function"
+            ) {
+
+                window.showChapter(7);
+
+                return;
+
+            }
+
+
+            /* ==================================================
+               METHOD 3 — DIRECT CHAPTER NAVIGATION FALLBACK
+               ================================================== */
+
+            const chapter7 =
+                document.getElementById(
+                    "chapter7"
+                );
+
+
+            if (chapter7) {
 
                 /*
-                    Existing navigation systems
-                    are checked first.
+                    Remove active state from
+                    every chapter.
+                */
+
+                document
+                    .querySelectorAll(
+                        "main[id^='chapter']"
+                    )
+                    .forEach(
+                        chapter => {
+
+                            chapter.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                /*
+                    Activate Chapter VII.
+                */
+
+                chapter7.classList.add(
+                    "active"
+                );
+
+
+                /*
+                    Scroll back to the
+                    beginning of the chapter.
+                */
+
+                window.scrollTo({
+
+                    top: 0,
+
+                    behavior:
+                        "smooth"
+
+                });
+
+
+                /*
+                    Initialize Chapter VII
+                    if its initialization function
+                    is available.
                 */
 
                 if (
-                    typeof window.goToChapter ===
+                    typeof window.initChapter7 ===
                     "function"
                 ) {
 
-                    window.goToChapter(7);
-
-                    return;
+                    window.initChapter7();
 
                 }
 
 
-                if (
-                    typeof window.showChapter ===
-                    "function"
-                ) {
-
-                    window.showChapter(7);
-
-                    return;
-
-                }
-
-
-                /* ==================================================
-                   DIRECT FALLBACK
-                   ================================================== */
-
-                const chapter7 =
-                    document.getElementById(
-                        "chapter7"
-                    );
-
-
-                if (chapter7) {
-
-                    document
-                        .querySelectorAll(
-                            "main[id^='chapter']"
-                        )
-                        .forEach(
-                            chapter => {
-
-                                chapter.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                    chapter7.classList.add(
-                        "active"
-                    );
-
-
-                    window.scrollTo({
-
-                        top: 0,
-
-                        behavior:
-                            "smooth"
-
-                    });
-
-
-                    return;
-
-                }
-
-
-                console.info(
-                    "Chapter VII has not been added yet."
-                );
+                return;
 
             }
-        );
 
-    }
+
+            /* ==================================================
+               CHAPTER 7 NOT FOUND
+               ================================================== */
+
+            console.warn(
+                "Chapter VII element (#chapter7) was not found."
+            );
+
+        }
+    );
+
+}
 
 
     /* ======================================================
