@@ -7,10 +7,23 @@
 
 
 /* ==========================================================
-   FINAL CHAPTER — ROOT
+   FINAL CHAPTER — VISIBILITY + ROOT
    ========================================================== */
 
+/*
+   IMPORTANT:
+   Chapter 7 must NOT appear while other chapters are active.
+
+   It is hidden by default and only becomes visible when
+   JavaScript adds the "active" class.
+
+   This prevents the Final Chapter from appearing in
+   Chapters 0–6.
+*/
+
 #chapter7 {
+    display: none;
+
     position: relative;
 
     width: 100%;
@@ -52,6 +65,14 @@
         );
 
     isolation: isolate;
+}
+
+
+/*
+   ONLY SHOW CHAPTER 7 WHEN IT IS ACTIVE.
+*/
+#chapter7.active {
+    display: block;
 }
 
 
@@ -1086,21 +1107,17 @@
 @keyframes finalIntroReveal {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(30px);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0);
-
     }
 
 }
@@ -1109,21 +1126,17 @@
 @keyframes messageReveal {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(25px);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0);
-
     }
 
 }
@@ -1132,23 +1145,19 @@
 @keyframes cardReveal {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(45px)
             scale(0.97);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
-
     }
 
 }
@@ -1158,21 +1167,17 @@
 
     0%,
     100% {
-
         transform:
             scale(1);
 
         opacity: 0.65;
-
     }
 
     50% {
-
         transform:
             scale(1.18);
 
         opacity: 1;
-
     }
 
 }
@@ -1182,21 +1187,17 @@
 
     0%,
     100% {
-
         transform:
             translateY(0);
 
         opacity: 0.45;
-
     }
 
     50% {
-
         transform:
             translateY(7px);
 
         opacity: 0.9;
-
     }
 
 }
@@ -1206,23 +1207,19 @@
 
     0%,
     100% {
-
         transform:
             translateY(0)
             rotate(0deg);
 
         opacity: 0.12;
-
     }
 
     50% {
-
         transform:
             translateY(-22px)
             rotate(8deg);
 
         opacity: 0.28;
-
     }
 
 }
@@ -1232,21 +1229,17 @@
 
     0%,
     100% {
-
         opacity: 0.15;
 
         transform:
             scale(0.7);
-
     }
 
     50% {
-
         opacity: 0.8;
 
         transform:
             scale(1.5);
-
     }
 
 }
@@ -1256,7 +1249,6 @@
 
     0%,
     100% {
-
         box-shadow:
             0 15px 40px rgba(
                 205,
@@ -1264,11 +1256,9 @@
                 157,
                 0.25
             );
-
     }
 
     50% {
-
         box-shadow:
             0 18px 48px rgba(
                 218,
@@ -1282,7 +1272,6 @@
                 188,
                 0.1
             );
-
     }
 
 }
@@ -1316,7 +1305,6 @@
         );
 
     outline-offset: 5px;
-
 }
 
 
@@ -1337,7 +1325,6 @@
         transition-duration: 0.01ms !important;
 
         scroll-behavior: auto !important;
-
     }
 
 }
@@ -1354,14 +1341,12 @@
         padding:
             90px 20px
             110px;
-
     }
 
 
     .chapter7-intro {
 
         margin-bottom: 70px;
-
     }
 
 
@@ -1372,14 +1357,12 @@
             50px;
 
         border-radius: 22px;
-
     }
 
 
     .chapter7-buttons {
 
         gap: 16px;
-
     }
 
 
@@ -1389,7 +1372,6 @@
 
         padding:
             14px 25px;
-
     }
 
 
@@ -1399,28 +1381,24 @@
 
         padding:
             13px 22px;
-
     }
 
 
     .chapter7-message {
 
         margin-bottom: 65px;
-
     }
 
 
     .chapter7-before-question {
 
         margin-top: 75px;
-
     }
 
 
     .chapter7-ending {
 
         margin-top: 90px;
-
     }
 
 }
@@ -1437,7 +1415,6 @@
         padding:
             75px 16px
             90px;
-
     }
 
 
@@ -1446,7 +1423,6 @@
         font-size: 0.55rem;
 
         letter-spacing: 0.28em;
-
     }
 
 
@@ -1458,14 +1434,12 @@
                 15vw,
                 4.3rem
             );
-
     }
 
 
     .chapter7-subtitle {
 
         font-size: 1.2rem;
-
     }
 
 
@@ -1474,14 +1448,12 @@
         font-size: 1.15rem;
 
         line-height: 1.75;
-
     }
 
 
     .chapter7-before-question p {
 
         font-size: 1.3rem;
-
     }
 
 
@@ -1492,7 +1464,6 @@
             42px;
 
         border-radius: 20px;
-
     }
 
 
@@ -1504,7 +1475,6 @@
                 12vw,
                 3.4rem
             );
-
     }
 
 
@@ -1513,7 +1483,6 @@
         gap: 12px;
 
         min-height: 75px;
-
     }
 
 
@@ -1527,7 +1496,6 @@
             13px 21px;
 
         font-size: 0.75rem;
-
     }
 
 
@@ -1541,7 +1509,6 @@
             12px 18px;
 
         font-size: 0.72rem;
-
     }
 
 
@@ -1553,42 +1520,36 @@
             14px 24px;
 
         font-size: 0.75rem;
-
     }
 
 
     .chapter7-floating-heart {
 
         opacity: 0.65;
-
     }
 
 
     .chapter7-floating-heart:nth-child(1) {
 
         left: 3%;
-
     }
 
 
     .chapter7-floating-heart:nth-child(2) {
 
         right: 3%;
-
     }
 
 
     .chapter7-floating-heart:nth-child(3) {
 
         left: 2%;
-
     }
 
 
     .chapter7-floating-heart:nth-child(4) {
 
         right: 2%;
-
     }
 
 }
@@ -1603,7 +1564,6 @@
     .chapter7-buttons {
 
         gap: 8px;
-
     }
 
 
@@ -1613,7 +1573,6 @@
 
         padding:
             12px 17px;
-
     }
 
 
@@ -1623,7 +1582,6 @@
 
         padding:
             11px 15px;
-
     }
 
 
@@ -1632,7 +1590,6 @@
         padding:
             42px 16px
             38px;
-
     }
 
 }
