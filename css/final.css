@@ -2,51 +2,42 @@
    FINAL.CSS
    Project : Our Story
    Chapter : FINAL — Ending / Final Question
-   Purpose : Final Question / Ending
-
-   IMPORTANT:
-   - Final Chapter uses #chapter8
-   - Hidden by default
-   - Only visible when .active is added
-   - All styles are isolated to #chapter8
    ========================================================== */
 
 
 /* ==========================================================
-   FINAL CHAPTER — VISIBILITY CONTROL
+   FINAL CHAPTER — VISIBILITY
    ========================================================== */
 
 /*
-   FINAL CHAPTER IS COMPLETELY HIDDEN BY DEFAULT.
+   FINAL CHAPTER IS HIDDEN BY DEFAULT.
 
    It will ONLY appear when JavaScript adds:
-
        class="active"
 
-   to #chapter8.
+   Example:
+       <section id="chapter8">
+       <section id="chapter8" class="active">
 */
 
 #chapter8 {
-    display: none;
+    display: none !important;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 
 /*
-   FINAL CHAPTER IS VISIBLE ONLY WHEN ACTIVE.
+   FINAL CHAPTER — ACTIVE STATE
+
+   This is the ONLY state where the Final Chapter
+   is allowed to appear.
 */
 
 #chapter8.active {
-    display: block;
-}
-
-
-/*
-   Extra protection while hidden.
-*/
-
-#chapter8:not(.active) {
-    visibility: hidden;
-    pointer-events: none;
+    display: block !important;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 
@@ -971,7 +962,7 @@
 }
 
 
-#chapter8 .chapter8-floating-heart:nth-child(1) {
+#chapter8 .chapter8-floating-heart:nth-of-type(1) {
     top: 15%;
     left: 10%;
 
@@ -981,7 +972,7 @@
 }
 
 
-#chapter8 .chapter8-floating-heart:nth-child(2) {
+#chapter8 .chapter8-floating-heart:nth-of-type(2) {
     top: 31%;
     right: 11%;
 
@@ -991,7 +982,7 @@
 }
 
 
-#chapter8 .chapter8-floating-heart:nth-child(3) {
+#chapter8 .chapter8-floating-heart:nth-of-type(3) {
     top: 58%;
     left: 7%;
 
@@ -1001,7 +992,7 @@
 }
 
 
-#chapter8 .chapter8-floating-heart:nth-child(4) {
+#chapter8 .chapter8-floating-heart:nth-of-type(4) {
     top: 70%;
     right: 8%;
 
@@ -1011,7 +1002,7 @@
 }
 
 
-#chapter8 .chapter8-floating-heart:nth-child(5) {
+#chapter8 .chapter8-floating-heart:nth-of-type(5) {
     top: 85%;
     left: 18%;
 
@@ -1046,13 +1037,13 @@
 }
 
 
-#chapter8 .chapter8-sparkle:nth-child(6) {
+#chapter8 .chapter8-sparkle:nth-of-type(6) {
     top: 22%;
     left: 22%;
 }
 
 
-#chapter8 .chapter8-sparkle:nth-child(7) {
+#chapter8 .chapter8-sparkle:nth-of-type(7) {
     top: 36%;
     right: 23%;
 
@@ -1060,7 +1051,7 @@
 }
 
 
-#chapter8 .chapter8-sparkle:nth-child(8) {
+#chapter8 .chapter8-sparkle:nth-of-type(8) {
     top: 67%;
     left: 25%;
 
@@ -1068,7 +1059,7 @@
 }
 
 
-#chapter8 .chapter8-sparkle:nth-child(9) {
+#chapter8 .chapter8-sparkle:nth-of-type(9) {
     top: 77%;
     right: 21%;
 
@@ -1131,71 +1122,56 @@
 @keyframes finalIntroReveal {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(30px);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0);
-
     }
-
 }
 
 
 @keyframes messageReveal {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(25px);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0);
-
     }
-
 }
 
 
 @keyframes cardReveal {
 
     from {
-
         opacity: 0;
 
         transform:
             translateY(45px)
             scale(0.97);
-
     }
 
     to {
-
         opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
-
     }
-
 }
 
 
@@ -1203,23 +1179,18 @@
 
     0%,
     100% {
-
         transform:
             scale(1);
 
         opacity: 0.65;
-
     }
 
     50% {
-
         transform:
             scale(1.18);
 
         opacity: 1;
-
     }
-
 }
 
 
@@ -1227,23 +1198,18 @@
 
     0%,
     100% {
-
         transform:
             translateY(0);
 
         opacity: 0.45;
-
     }
 
     50% {
-
         transform:
             translateY(7px);
 
         opacity: 0.9;
-
     }
-
 }
 
 
@@ -1251,25 +1217,20 @@
 
     0%,
     100% {
-
         transform:
             translateY(0)
             rotate(0deg);
 
         opacity: 0.12;
-
     }
 
     50% {
-
         transform:
             translateY(-22px)
             rotate(8deg);
 
         opacity: 0.28;
-
     }
-
 }
 
 
@@ -1277,23 +1238,18 @@
 
     0%,
     100% {
-
         opacity: 0.15;
 
         transform:
             scale(0.7);
-
     }
 
     50% {
-
         opacity: 0.8;
 
         transform:
             scale(1.5);
-
     }
-
 }
 
 
@@ -1301,7 +1257,6 @@
 
     0%,
     100% {
-
         box-shadow:
             0 15px 40px rgba(
                 205,
@@ -1309,11 +1264,9 @@
                 157,
                 0.25
             );
-
     }
 
     50% {
-
         box-shadow:
             0 18px 48px rgba(
                 218,
@@ -1327,9 +1280,7 @@
                 188,
                 0.1
             );
-
     }
-
 }
 
 
@@ -1338,7 +1289,6 @@
    ========================================================== */
 
 #chapter8 ::selection {
-
     background:
         rgba(232, 132, 176, 0.35);
 
@@ -1375,15 +1325,18 @@
     #chapter8 *::before,
     #chapter8 *::after {
 
-        animation-duration: 0.01ms !important;
+        animation-duration:
+            0.01ms !important;
 
-        animation-iteration-count: 1 !important;
+        animation-iteration-count:
+            1 !important;
 
-        transition-duration: 0.01ms !important;
+        transition-duration:
+            0.01ms !important;
 
-        scroll-behavior: auto !important;
+        scroll-behavior:
+            auto !important;
     }
-
 }
 
 
@@ -1394,7 +1347,6 @@
 @media (max-width: 768px) {
 
     #chapter8 {
-
         padding:
             90px 20px
             110px;
@@ -1402,13 +1354,11 @@
 
 
     #chapter8 .chapter8-intro {
-
         margin-bottom: 70px;
     }
 
 
     #chapter8 .chapter8-question-card {
-
         padding:
             55px 30px
             50px;
@@ -1418,13 +1368,11 @@
 
 
     #chapter8 .chapter8-buttons {
-
         gap: 16px;
     }
 
 
     #chapter8 #chapter8Yes {
-
         min-width: 135px;
 
         padding:
@@ -1433,7 +1381,6 @@
 
 
     #chapter8 #chapter8No {
-
         min-width: 115px;
 
         padding:
@@ -1442,22 +1389,18 @@
 
 
     #chapter8 .chapter8-message {
-
         margin-bottom: 65px;
     }
 
 
     #chapter8 .chapter8-before-question {
-
         margin-top: 75px;
     }
 
 
     #chapter8 .chapter8-ending {
-
         margin-top: 90px;
     }
-
 }
 
 
@@ -1468,7 +1411,6 @@
 @media (max-width: 520px) {
 
     #chapter8 {
-
         padding:
             75px 16px
             90px;
@@ -1476,7 +1418,6 @@
 
 
     #chapter8 .chapter8-label {
-
         font-size: 0.55rem;
 
         letter-spacing: 0.28em;
@@ -1484,7 +1425,6 @@
 
 
     #chapter8 .chapter8-title {
-
         font-size:
             clamp(
                 3rem,
@@ -1495,13 +1435,11 @@
 
 
     #chapter8 .chapter8-subtitle {
-
         font-size: 1.2rem;
     }
 
 
     #chapter8 .chapter8-message p {
-
         font-size: 1.15rem;
 
         line-height: 1.75;
@@ -1509,13 +1447,11 @@
 
 
     #chapter8 .chapter8-before-question p {
-
         font-size: 1.3rem;
     }
 
 
     #chapter8 .chapter8-question-card {
-
         padding:
             48px 20px
             42px;
@@ -1525,7 +1461,6 @@
 
 
     #chapter8 .chapter8-question {
-
         font-size:
             clamp(
                 2.2rem,
@@ -1536,7 +1471,6 @@
 
 
     #chapter8 .chapter8-buttons {
-
         gap: 12px;
 
         min-height: 75px;
@@ -1544,7 +1478,6 @@
 
 
     #chapter8 #chapter8Yes {
-
         min-width: 120px;
 
         min-height: 52px;
@@ -1557,7 +1490,6 @@
 
 
     #chapter8 #chapter8No {
-
         min-width: 105px;
 
         min-height: 48px;
@@ -1570,7 +1502,6 @@
 
 
     #chapter8 #chapter8Message {
-
         min-width: 175px;
 
         padding:
@@ -1581,34 +1512,28 @@
 
 
     #chapter8 .chapter8-floating-heart {
-
         opacity: 0.65;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(1) {
-
+    #chapter8 .chapter8-floating-heart:nth-of-type(1) {
         left: 3%;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(2) {
-
+    #chapter8 .chapter8-floating-heart:nth-of-type(2) {
         right: 3%;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(3) {
-
+    #chapter8 .chapter8-floating-heart:nth-of-type(3) {
         left: 2%;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(4) {
-
+    #chapter8 .chapter8-floating-heart:nth-of-type(4) {
         right: 2%;
     }
-
 }
 
 
@@ -1619,13 +1544,11 @@
 @media (max-width: 360px) {
 
     #chapter8 .chapter8-buttons {
-
         gap: 8px;
     }
 
 
     #chapter8 #chapter8Yes {
-
         min-width: 110px;
 
         padding:
@@ -1634,7 +1557,6 @@
 
 
     #chapter8 #chapter8No {
-
         min-width: 95px;
 
         padding:
@@ -1643,10 +1565,8 @@
 
 
     #chapter8 .chapter8-question-card {
-
         padding:
             42px 16px
             38px;
     }
-
 }
