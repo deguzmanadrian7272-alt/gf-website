@@ -7,27 +7,34 @@
    IMPORTANT:
    - Final Chapter root is #chapter8
    - Hidden by default
-   - Visible only when #chapter8 has .active
-   - ALL inner styles are scoped to #chapter8
-   - This prevents Final Chapter CSS from affecting Chapter VII
+   - Visible ONLY when #chapter8 has .active
+   - ALL styles are scoped to #chapter8
+   - Does NOT affect Chapters 0–VII
    ========================================================== */
 
 
 /* ==========================================================
-   FINAL CHAPTER — VISIBILITY CONTROL
+   FINAL CHAPTER — VISIBILITY
    ========================================================== */
 
+/*
+   IMPORTANT:
+   The Final Chapter must remain completely hidden until
+   JavaScript adds the "active" class.
+
+   HTML:
+   <section id="chapter8">
+
+   When active:
+   <section id="chapter8" class="active">
+*/
+
 #chapter8 {
-    display: none;
+    display: none !important;
 }
 
 #chapter8.active {
-    display: block;
-}
-
-#chapter8:not(.active) {
-    visibility: hidden;
-    pointer-events: none;
+    display: block !important;
 }
 
 
@@ -55,19 +62,16 @@
             rgba(157, 91, 151, 0.16),
             transparent 34%
         ),
-
         radial-gradient(
             circle at 20% 75%,
             rgba(255, 132, 180, 0.08),
             transparent 30%
         ),
-
         radial-gradient(
             circle at 80% 70%,
             rgba(126, 74, 139, 0.10),
             transparent 30%
         ),
-
         linear-gradient(
             180deg,
             #09070b 0%,
@@ -81,7 +85,7 @@
 
 
 /* ==========================================================
-   FINAL ATMOSPHERE
+   FINAL CHAPTER — ATMOSPHERE
    ========================================================== */
 
 #chapter8::before {
@@ -137,7 +141,7 @@
 
 
 /* ==========================================================
-   FINAL CONTENT WRAPPER
+   FINAL CHAPTER — CONTENT WRAPPER
    ========================================================== */
 
 #chapter8 .chapter7-container {
@@ -198,11 +202,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        3.4rem,
-        8vw,
-        6.5rem
-    );
+    font-size:
+        clamp(
+            3.4rem,
+            8vw,
+            6.5rem
+        );
 
     font-weight: 400;
 
@@ -231,11 +236,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        1.3rem,
-        2.5vw,
-        1.8rem
-    );
+    font-size:
+        clamp(
+            1.3rem,
+            2.5vw,
+            1.8rem
+        );
 
     font-style: italic;
 
@@ -288,11 +294,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        1.25rem,
-        2.4vw,
-        1.65rem
-    );
+    font-size:
+        clamp(
+            1.25rem,
+            2.4vw,
+            1.65rem
+        );
 
     line-height: 1.8;
 
@@ -331,11 +338,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        1.45rem,
-        3vw,
-        2rem
-    );
+    font-size:
+        clamp(
+            1.45rem,
+            3vw,
+            2rem
+        );
 
     font-style: italic;
 
@@ -386,11 +394,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        1.2rem,
-        2.4vw,
-        1.55rem
-    );
+    font-size:
+        clamp(
+            1.2rem,
+            2.4vw,
+            1.55rem
+        );
 
     line-height: 1.9;
 
@@ -499,11 +508,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        1.25rem,
-        2.5vw,
-        1.55rem
-    );
+    font-size:
+        clamp(
+            1.25rem,
+            2.5vw,
+            1.55rem
+        );
 
     font-style: italic;
 
@@ -538,11 +548,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        2.4rem,
-        6vw,
-        4.5rem
-    );
+    font-size:
+        clamp(
+            2.4rem,
+            6vw,
+            4.5rem
+        );
 
     font-weight: 500;
 
@@ -754,7 +765,7 @@
 
 
 /* ==========================================================
-   YES BUTTON — GROWS AFTER NO
+   YES BUTTON — GROWING STATES
    ========================================================== */
 
 #chapter8 #chapter7Yes.grow-1 {
@@ -883,7 +894,7 @@
 
 
 /* ==========================================================
-   FINAL MESSAGE AFTER YES
+   FINAL SUCCESS MESSAGE
    ========================================================== */
 
 #chapter8 .chapter7-success-message {
@@ -894,11 +905,12 @@
         Georgia,
         serif;
 
-    font-size: clamp(
-        1.2rem,
-        2.5vw,
-        1.55rem
-    );
+    font-size:
+        clamp(
+            1.2rem,
+            2.5vw,
+            1.55rem
+        );
 
     font-style: italic;
 
@@ -948,7 +960,7 @@
 }
 
 
-#chapter8 .chapter7-floating-heart:nth-child(1) {
+#chapter8 .chapter7-floating-heart:nth-of-type(1) {
     top: 15%;
     left: 10%;
 
@@ -958,7 +970,7 @@
 }
 
 
-#chapter8 .chapter7-floating-heart:nth-child(2) {
+#chapter8 .chapter7-floating-heart:nth-of-type(2) {
     top: 31%;
     right: 11%;
 
@@ -968,7 +980,7 @@
 }
 
 
-#chapter8 .chapter7-floating-heart:nth-child(3) {
+#chapter8 .chapter7-floating-heart:nth-of-type(3) {
     top: 58%;
     left: 7%;
 
@@ -978,7 +990,7 @@
 }
 
 
-#chapter8 .chapter7-floating-heart:nth-child(4) {
+#chapter8 .chapter7-floating-heart:nth-of-type(4) {
     top: 70%;
     right: 8%;
 
@@ -988,7 +1000,7 @@
 }
 
 
-#chapter8 .chapter7-floating-heart:nth-child(5) {
+#chapter8 .chapter7-floating-heart:nth-of-type(5) {
     top: 85%;
     left: 18%;
 
@@ -1023,13 +1035,13 @@
 }
 
 
-#chapter8 .chapter7-sparkle:nth-child(6) {
+#chapter8 .chapter7-sparkle:nth-of-type(6) {
     top: 22%;
     left: 22%;
 }
 
 
-#chapter8 .chapter7-sparkle:nth-child(7) {
+#chapter8 .chapter7-sparkle:nth-of-type(7) {
     top: 36%;
     right: 23%;
 
@@ -1037,7 +1049,7 @@
 }
 
 
-#chapter8 .chapter7-sparkle:nth-child(8) {
+#chapter8 .chapter7-sparkle:nth-of-type(8) {
     top: 67%;
     left: 25%;
 
@@ -1045,7 +1057,7 @@
 }
 
 
-#chapter8 .chapter7-sparkle:nth-child(9) {
+#chapter8 .chapter7-sparkle:nth-of-type(9) {
     top: 77%;
     right: 21%;
 
@@ -1105,49 +1117,47 @@
    ANIMATIONS
    ========================================================== */
 
-@keyframes finalIntroReveal {
-
+#chapter8 @keyframes finalIntroReveal {
     from {
         opacity: 0;
-
-        transform:
-            translateY(30px);
+        transform: translateY(30px);
     }
 
     to {
         opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        transform:
-            translateY(0);
+@keyframes finalIntroReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
 @keyframes messageReveal {
-
     from {
         opacity: 0;
-
-        transform:
-            translateY(25px);
+        transform: translateY(25px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
-
 }
 
 
 @keyframes cardReveal {
-
     from {
         opacity: 0;
-
         transform:
             translateY(45px)
             scale(0.97);
@@ -1155,57 +1165,42 @@
 
     to {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
     }
-
 }
 
 
 @keyframes heartBreathing {
-
     0%,
     100% {
-        transform:
-            scale(1);
-
+        transform: scale(1);
         opacity: 0.65;
     }
 
     50% {
-        transform:
-            scale(1.18);
-
+        transform: scale(1.18);
         opacity: 1;
     }
-
 }
 
 
 @keyframes arrowFloat {
-
     0%,
     100% {
-        transform:
-            translateY(0);
-
+        transform: translateY(0);
         opacity: 0.45;
     }
 
     50% {
-        transform:
-            translateY(7px);
-
+        transform: translateY(7px);
         opacity: 0.9;
     }
-
 }
 
 
 @keyframes floatingHeart {
-
     0%,
     100% {
         transform:
@@ -1222,12 +1217,10 @@
 
         opacity: 0.28;
     }
-
 }
 
 
 @keyframes sparklePulse {
-
     0%,
     100% {
         opacity: 0.15;
@@ -1242,12 +1235,10 @@
         transform:
             scale(1.5);
     }
-
 }
 
 
 @keyframes messageButtonGlow {
-
     0%,
     100% {
         box-shadow:
@@ -1274,7 +1265,6 @@
                 0.1
             );
     }
-
 }
 
 
@@ -1296,7 +1286,6 @@
 
 #chapter8 button:focus-visible,
 #chapter8 a:focus-visible {
-
     outline:
         2px solid rgba(
             255,
@@ -1318,7 +1307,6 @@
     #chapter8 *,
     #chapter8 *::before,
     #chapter8 *::after {
-
         animation-duration:
             0.01ms !important;
 
@@ -1331,7 +1319,6 @@
         scroll-behavior:
             auto !important;
     }
-
 }
 
 
@@ -1396,7 +1383,6 @@
     #chapter8 .chapter7-ending {
         margin-top: 90px;
     }
-
 }
 
 
@@ -1512,25 +1498,24 @@
     }
 
 
-    #chapter8 .chapter7-floating-heart:nth-child(1) {
+    #chapter8 .chapter7-floating-heart:nth-of-type(1) {
         left: 3%;
     }
 
 
-    #chapter8 .chapter7-floating-heart:nth-child(2) {
+    #chapter8 .chapter7-floating-heart:nth-of-type(2) {
         right: 3%;
     }
 
 
-    #chapter8 .chapter7-floating-heart:nth-child(3) {
+    #chapter8 .chapter7-floating-heart:nth-of-type(3) {
         left: 2%;
     }
 
 
-    #chapter8 .chapter7-floating-heart:nth-child(4) {
+    #chapter8 .chapter7-floating-heart:nth-of-type(4) {
         right: 2%;
     }
-
 }
 
 
@@ -1566,5 +1551,4 @@
             42px 16px
             38px;
     }
-
 }
