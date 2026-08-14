@@ -1,498 +1,1687 @@
 /* ==========================================================
    FINAL.CSS
    Project : Our Story
-   Chapter : VIII — Final Chapter
+   Chapter : FINAL — Ending / Final Question
    Purpose : Final Question / Ending
+
+   IMPORTANT:
+   - Final Chapter uses #chapter8
+   - Hidden by default
+   - Only becomes visible when .active is added
+   - Prevents the Final Chapter from appearing alongside
+     Chapters 0–VII
+   ========================================================== */
+
+
+/* ==========================================================
+   FINAL CHAPTER — VISIBILITY CONTROL
+   ========================================================== */
+
+/*
+   IMPORTANT FIX
+
+   The Final Chapter must NOT appear automatically when
+   another chapter is active.
+
+   JavaScript/navigation should add:
+       class="active"
+
+   when the Final Chapter is supposed to be displayed.
+*/
+
+#chapter8 {
+    display: none;
+}
+
+
+/*
+   Final Chapter becomes visible ONLY when active.
+*/
+
+#chapter8.active {
+    display: block;
+}
+
+
+/*
+   Prevent the final chapter from interfering with the
+   normal chapter layout while hidden.
+*/
+
+#chapter8:not(.active) {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   FINAL CHAPTER — ROOT
    ========================================================== */
 
 #chapter8 {
     position: relative;
+
     width: 100%;
     min-height: 100vh;
+
     padding: 120px 24px 140px;
+
     box-sizing: border-box;
+
     overflow: hidden;
+
     color: #fff4fa;
+
     background:
-        radial-gradient(circle at 50% 25%, rgba(157, 91, 151, .16), transparent 34%),
-        radial-gradient(circle at 20% 75%, rgba(255, 132, 180, .08), transparent 30%),
-        radial-gradient(circle at 80% 70%, rgba(126, 74, 139, .10), transparent 30%),
-        linear-gradient(180deg, #09070b 0%, #100a12 38%, #160d18 72%, #0b070d 100%);
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(157, 91, 151, 0.16),
+            transparent 34%
+        ),
+
+        radial-gradient(
+            circle at 20% 75%,
+            rgba(255, 132, 180, 0.08),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(126, 74, 139, 0.10),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #09070b 0%,
+            #100a12 38%,
+            #160d18 72%,
+            #0b070d 100%
+        );
+
     isolation: isolate;
 }
 
+
+/* ==========================================================
+   FINAL ATMOSPHERE
+   ========================================================== */
+
 #chapter8::before {
     content: "";
+
     position: absolute;
+
     inset: 0;
+
     z-index: -2;
+
     pointer-events: none;
-    background: radial-gradient(circle at center, transparent 0%, rgba(7, 4, 9, .12) 45%, rgba(5, 3, 7, .55) 100%);
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 0%,
+            rgba(7, 4, 9, 0.12) 45%,
+            rgba(5, 3, 7, 0.55) 100%
+        );
 }
+
 
 #chapter8::after {
     content: "";
+
     position: absolute;
+
     width: 700px;
     height: 700px;
+
     top: 5%;
     left: 50%;
+
     transform: translateX(-50%);
+
     z-index: -1;
+
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 152, 196, .055) 0%, rgba(181, 106, 169, .025) 35%, transparent 70%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 152, 196, 0.055) 0%,
+            rgba(181, 106, 169, 0.025) 35%,
+            transparent 70%
+        );
+
     filter: blur(10px);
+
     pointer-events: none;
 }
 
-.chapter8-container {
+
+/* ==========================================================
+   FINAL CONTENT WRAPPER
+   ========================================================== */
+
+.chapter7-container {
     position: relative;
+
     width: min(900px, 100%);
+
     margin: 0 auto;
+
     text-align: center;
 }
 
-.chapter8-intro {
+
+/* ==========================================================
+   INTRO / FINAL CHAPTER TITLE
+   ========================================================== */
+
+.chapter7-intro {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
+
     margin-bottom: 90px;
-    animation: chapter8IntroReveal 1.5s ease both;
+
+    animation:
+        finalIntroReveal 1.5s ease both;
 }
 
-.chapter8-label {
+
+.chapter7-label {
     margin: 0 0 18px;
-    font-family: "Poppins", sans-serif;
-    font-size: .65rem;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.65rem;
+
     font-weight: 500;
-    letter-spacing: .38em;
+
+    letter-spacing: 0.38em;
+
     text-transform: uppercase;
-    color: rgba(255, 180, 210, .72);
+
+    color: rgba(255, 180, 210, 0.72);
 }
 
-.chapter8-title {
+
+.chapter7-title {
     margin: 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(3.4rem, 8vw, 6.5rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        3.4rem,
+        8vw,
+        6.5rem
+    );
+
     font-weight: 400;
-    line-height: .9;
-    letter-spacing: -.035em;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.035em;
+
     color: #fff7fb;
-    text-shadow: 0 0 25px rgba(255, 159, 198, .12), 0 0 70px rgba(174, 88, 154, .08);
+
+    text-shadow:
+        0 0 25px rgba(255, 159, 198, 0.12),
+        0 0 70px rgba(174, 88, 154, 0.08);
 }
 
-.chapter8-title span { color: #f39abf; }
 
-.chapter8-subtitle {
+.chapter7-title span {
+    color: #f39abf;
+}
+
+
+.chapter7-subtitle {
     margin: 28px 0 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        1.3rem,
+        2.5vw,
+        1.8rem
+    );
+
     font-style: italic;
+
     font-weight: 400;
-    color: rgba(255, 222, 235, .72);
+
+    color: rgba(255, 222, 235, 0.72);
 }
 
-.chapter8-heart {
+
+/* ==========================================================
+   HEART SYMBOL
+   ========================================================== */
+
+.chapter7-heart {
     margin-top: 28px;
-    font-family: "Cormorant Garamond", Georgia, serif;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
     font-size: 1.5rem;
+
     color: #ff9fc5;
-    animation: chapter8HeartBreathing 3.2s ease-in-out infinite;
+
+    animation:
+        heartBreathing 3.2s ease-in-out infinite;
 }
 
-.chapter8-message {
+
+/* ==========================================================
+   STORY MESSAGE
+   ========================================================== */
+
+.chapter7-message {
     width: min(650px, 100%);
+
     margin: 0 auto 80px;
-    animation: chapter8MessageReveal 1.6s ease .25s both;
+
+    animation:
+        messageReveal 1.6s ease 0.25s both;
 }
 
-.chapter8-message p {
+
+.chapter7-message p {
     margin: 0 0 24px;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        1.25rem,
+        2.4vw,
+        1.65rem
+    );
+
     line-height: 1.8;
+
     font-weight: 400;
-    color: rgba(255, 235, 244, .86);
+
+    color: rgba(255, 235, 244, 0.86);
 }
 
-.chapter8-message .soft-text {
-    color: rgba(255, 197, 219, .68);
+
+.chapter7-message .soft-text {
+    color: rgba(255, 197, 219, 0.68);
+
     font-size: 1.05rem;
-    letter-spacing: .02em;
+
+    letter-spacing: 0.02em;
 }
 
-.chapter8-before-question {
+
+/* ==========================================================
+   BEFORE I ASK YOU
+   ========================================================== */
+
+.chapter7-before-question {
     margin: 100px auto 70px;
-    animation: chapter8MessageReveal 1.5s ease .5s both;
+
+    animation:
+        messageReveal 1.5s ease 0.5s both;
 }
 
-.chapter8-before-question p {
+
+.chapter7-before-question p {
     margin: 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.45rem, 3vw, 2rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        1.45rem,
+        3vw,
+        2rem
+    );
+
     font-style: italic;
+
     line-height: 1.7;
-    color: rgba(255, 211, 227, .82);
+
+    color: rgba(255, 211, 227, 0.82);
 }
 
-.chapter8-arrow {
+
+.chapter7-arrow {
     display: block;
+
     margin-top: 24px;
-    font-family: "Poppins", sans-serif;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
     font-size: 1rem;
-    color: rgba(255, 157, 197, .7);
-    animation: chapter8ArrowFloat 2.5s ease-in-out infinite;
+
+    color: rgba(255, 157, 197, 0.7);
+
+    animation:
+        arrowFloat 2.5s ease-in-out infinite;
 }
 
-.chapter8-emotional-message {
+
+/* ==========================================================
+   EMOTIONAL MESSAGE
+   ========================================================== */
+
+.chapter7-emotional-message {
     width: min(620px, 100%);
+
     margin: 0 auto 90px;
+
     padding: 0 20px;
+
     box-sizing: border-box;
 }
 
-.chapter8-emotional-message p {
+
+.chapter7-emotional-message p {
     margin: 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        1.2rem,
+        2.4vw,
+        1.55rem
+    );
+
     line-height: 1.9;
-    color: rgba(255, 232, 242, .8);
+
+    color: rgba(255, 232, 242, 0.8);
 }
 
-.chapter8-question-card {
+
+/* ==========================================================
+   FINAL QUESTION CARD
+   ========================================================== */
+
+.chapter7-question-card {
     position: relative;
+
     width: min(700px, 100%);
+
     margin: 0 auto;
+
     padding: 70px 55px 65px;
+
     box-sizing: border-box;
-    border: 1px solid rgba(255, 170, 203, .18);
+
+    border: 1px solid rgba(
+        255,
+        170,
+        203,
+        0.18
+    );
+
     border-radius: 28px;
-    background: linear-gradient(145deg, rgba(255, 255, 255, .045), rgba(255, 144, 190, .025));
-    box-shadow: 0 30px 100px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255, 255, 255, .05), 0 0 80px rgba(172, 83, 153, .07);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    animation: chapter8CardReveal 1.7s ease .65s both;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 144, 190, 0.025)
+        );
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 80px rgba(172, 83, 153, 0.07);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    animation:
+        cardReveal 1.7s ease 0.65s both;
 }
 
-.chapter8-question-card::before,
-.chapter8-question-card::after {
-    position: absolute;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.3rem;
-    color: rgba(255, 157, 197, .35);
-}
 
-.chapter8-question-card::before {
+/* ==========================================================
+   CARD DECORATION
+   ========================================================== */
+
+.chapter7-question-card::before {
     content: "♡";
+
+    position: absolute;
+
     top: 20px;
     left: 28px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.3rem;
+
+    color: rgba(255, 157, 197, 0.35);
 }
 
-.chapter8-question-card::after {
+
+.chapter7-question-card::after {
     content: "♡";
+
+    position: absolute;
+
     right: 28px;
     bottom: 20px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.3rem;
+
+    color: rgba(255, 157, 197, 0.35);
 }
 
-.chapter8-question-intro {
+
+/* ==========================================================
+   QUESTION INTRO
+   ========================================================== */
+
+.chapter7-question-intro {
     margin: 0 0 35px;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        1.25rem,
+        2.5vw,
+        1.55rem
+    );
+
     font-style: italic;
-    color: rgba(255, 213, 229, .7);
+
+    color: rgba(255, 213, 229, 0.7);
 }
 
-.chapter8-question-arrow {
+
+.chapter7-question-arrow {
     display: block;
+
     margin-top: 18px;
-    font-family: "Poppins", sans-serif;
-    font-size: .9rem;
-    color: rgba(255, 151, 192, .55);
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.9rem;
+
+    color: rgba(255, 151, 192, 0.55);
 }
 
-.chapter8-question {
+
+/* ==========================================================
+   MAIN QUESTION
+   ========================================================== */
+
+.chapter7-question {
     margin: 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        2.4rem,
+        6vw,
+        4.5rem
+    );
+
     font-weight: 500;
-    line-height: .95;
-    letter-spacing: .015em;
+
+    line-height: 0.95;
+
+    letter-spacing: 0.015em;
+
     color: #fff7fb;
-    text-shadow: 0 0 25px rgba(255, 140, 187, .12);
+
+    text-shadow:
+        0 0 25px rgba(255, 140, 187, 0.12);
 }
 
-.chapter8-question strong {
+
+.chapter7-question strong {
     display: block;
+
     margin-top: 8px;
+
     color: #ff9fc5;
+
     font-weight: 500;
-    text-shadow: 0 0 25px rgba(255, 105, 167, .28), 0 0 60px rgba(255, 105, 167, .12);
+
+    text-shadow:
+        0 0 25px rgba(255, 105, 167, 0.28),
+        0 0 60px rgba(255, 105, 167, 0.12);
 }
 
-.chapter8-buttons {
+
+/* ==========================================================
+   BUTTON AREA
+   ========================================================== */
+
+.chapter7-buttons {
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 24px;
+
     margin-top: 55px;
+
     min-height: 85px;
+
     position: relative;
 }
 
-.chapter8-button {
+
+/* ==========================================================
+   COMMON BUTTON
+   ========================================================== */
+
+.chapter7-button {
     position: relative;
+
     border: none;
+
     outline: none;
+
     cursor: pointer;
-    font-family: "Poppins", sans-serif;
-    font-size: .85rem;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.85rem;
+
     font-weight: 500;
-    letter-spacing: .05em;
+
+    letter-spacing: 0.05em;
+
     border-radius: 999px;
-    transition: transform .45s ease, opacity .45s ease, filter .45s ease, box-shadow .45s ease;
-    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+
+    -webkit-tap-highlight-color:
+        transparent;
 }
 
-#chapter8Yes {
+
+/* ==========================================================
+   YES BUTTON
+   ========================================================== */
+
+#chapter7Yes {
     min-width: 150px;
+
     min-height: 56px;
+
     padding: 15px 32px;
+
     color: #fff;
-    background: linear-gradient(135deg, #e987b0, #c66fa4);
-    box-shadow: 0 10px 30px rgba(205, 102, 157, .25), 0 0 0 1px rgba(255, 206, 226, .08);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e987b0,
+            #c66fa4
+        );
+
+    box-shadow:
+        0 10px 30px rgba(205, 102, 157, 0.25),
+        0 0 0 1px rgba(255, 206, 226, 0.08);
+
     transform-origin: center;
 }
 
-#chapter8Yes:hover:not(:disabled) {
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 15px 40px rgba(219, 103, 163, .35), 0 0 35px rgba(255, 137, 187, .13);
+
+#chapter7Yes:hover {
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    box-shadow:
+        0 15px 40px rgba(219, 103, 163, 0.35),
+        0 0 35px rgba(255, 137, 187, 0.13);
 }
 
-#chapter8Yes:active:not(:disabled) { transform: translateY(0) scale(.98); }
 
-#chapter8No {
+#chapter7Yes:active {
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+/* ==========================================================
+   NO BUTTON
+   ========================================================== */
+
+#chapter7No {
     min-width: 130px;
+
     min-height: 52px;
+
     padding: 14px 28px;
-    color: rgba(255, 226, 238, .82);
-    background: rgba(255, 255, 255, .035);
-    border: 1px solid rgba(255, 181, 208, .17);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+
+    color: rgba(255, 226, 238, 0.82);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border: 1px solid rgba(
+        255,
+        181,
+        208,
+        0.17
+    );
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+
     transform-origin: center;
 }
 
-#chapter8No:hover:not(:disabled) {
-    background: rgba(255, 255, 255, .06);
-    border-color: rgba(255, 181, 208, .28);
-    transform: translateY(-2px);
+
+#chapter7No:hover {
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border-color:
+        rgba(255, 181, 208, 0.28);
+
+    transform:
+        translateY(-2px);
 }
 
-#chapter8No:active:not(:disabled) { transform: scale(.96); }
 
-#chapter8No.shrink-1 { transform: scale(.72); opacity: .82; }
-#chapter8No.shrink-2 { transform: scale(.44); opacity: .58; }
-#chapter8No.shrink-3 { transform: scale(0); opacity: 0; pointer-events: none; }
-
-#chapter8Yes.grow-1 { transform: scale(1.08); }
-#chapter8Yes.grow-2 { transform: scale(1.18); }
-#chapter8Yes.grow-3 {
-    transform: scale(1.32);
-    box-shadow: 0 18px 50px rgba(219, 103, 163, .4), 0 0 45px rgba(255, 137, 187, .15);
+#chapter7No:active {
+    transform:
+        scale(0.96);
 }
 
-.chapter8-message-button {
+
+/* ==========================================================
+   NO BUTTON — SHRINKING STATES
+   ========================================================== */
+
+#chapter7No.shrink-1 {
+    transform:
+        scale(0.72);
+
+    opacity: 0.82;
+}
+
+
+#chapter7No.shrink-2 {
+    transform:
+        scale(0.44);
+
+    opacity: 0.58;
+}
+
+
+#chapter7No.shrink-3 {
+    transform:
+        scale(0);
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   YES BUTTON — GROWS AFTER NO
+   ========================================================== */
+
+#chapter7Yes.grow-1 {
+    transform:
+        scale(1.08);
+}
+
+
+#chapter7Yes.grow-2 {
+    transform:
+        scale(1.18);
+}
+
+
+#chapter7Yes.grow-3 {
+    transform:
+        scale(1.32);
+
+    box-shadow:
+        0 18px 50px rgba(219, 103, 163, 0.4),
+        0 0 45px rgba(255, 137, 187, 0.15);
+}
+
+
+/* ==========================================================
+   MESSAGE ME BUTTON
+   ========================================================== */
+
+#chapter7Message {
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 10px;
+
     min-width: 190px;
+
     min-height: 56px;
+
     padding: 15px 32px;
+
     margin-top: 42px;
+
     border-radius: 999px;
+
     text-decoration: none;
-    font-family: "Poppins", sans-serif;
-    font-size: .82rem;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.82rem;
+
     font-weight: 500;
-    letter-spacing: .06em;
+
+    letter-spacing: 0.06em;
+
     color: #fff;
-    background: linear-gradient(135deg, #ef9bbb, #c875a6);
-    box-shadow: 0 15px 40px rgba(205, 102, 157, .28);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef9bbb,
+            #c875a6
+        );
+
+    box-shadow:
+        0 15px 40px rgba(205, 102, 157, 0.28);
+
     opacity: 0;
+
     visibility: hidden;
-    transform: translateY(15px) scale(.92);
+
+    transform:
+        translateY(15px)
+        scale(0.92);
+
     pointer-events: none;
-    transition: opacity .7s ease, visibility .7s ease, transform .7s cubic-bezier(.16, 1, .3, 1);
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease,
+        transform 0.7s cubic-bezier(
+            0.16,
+            1,
+            0.3,
+            1
+        );
 }
 
-.chapter8-message-button.show {
+
+/* ==========================================================
+   MESSAGE ME — REVEALED
+   ========================================================== */
+
+#chapter7Message.show {
     opacity: 1;
+
     visibility: visible;
-    transform: translateY(0) scale(1);
+
+    transform:
+        translateY(0)
+        scale(1);
+
     pointer-events: auto;
-    animation: chapter8MessageButtonGlow 2.8s ease-in-out infinite;
+
+    animation:
+        messageButtonGlow 2.8s ease-in-out infinite;
 }
 
-.chapter8-message-button:hover {
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 18px 50px rgba(218, 107, 164, .38), 0 0 35px rgba(255, 141, 188, .12);
+
+#chapter7Message:hover {
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    box-shadow:
+        0 18px 50px rgba(218, 107, 164, 0.38),
+        0 0 35px rgba(255, 141, 188, 0.12);
 }
 
-.chapter8-success-message {
-    margin: 28px 0 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+
+#chapter7Message:active {
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+/* ==========================================================
+   FINAL MESSAGE AFTER YES
+   ========================================================== */
+
+.chapter7-success-message {
+    margin-top: 28px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: clamp(
+        1.2rem,
+        2.5vw,
+        1.55rem
+    );
+
     font-style: italic;
+
     line-height: 1.7;
-    color: rgba(255, 218, 231, .82);
+
+    color: rgba(255, 218, 231, 0.82);
+
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity .8s ease, transform .8s ease;
+
+    transform:
+        translateY(12px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
 }
 
-.chapter8-success-message.show { opacity: 1; transform: translateY(0); }
 
-.chapter8-ending { margin-top: 120px; text-align: center; opacity: .7; }
+.chapter7-success-message.show {
+    opacity: 1;
 
-.chapter8-ending-line {
-    width: 80px;
-    height: 1px;
-    margin: 0 auto 25px;
-    background: linear-gradient(90deg, transparent, rgba(255, 166, 201, .45), transparent);
+    transform:
+        translateY(0);
 }
 
-.chapter8-ending p {
-    margin: 0;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1rem;
-    font-style: italic;
-    letter-spacing: .05em;
-    color: rgba(255, 215, 230, .55);
-}
 
-.chapter8-floating-heart {
+/* ==========================================================
+   DECORATIVE FLOATING HEARTS
+   ========================================================== */
+
+.chapter7-floating-heart {
     position: absolute;
+
     z-index: -1;
-    color: rgba(255, 148, 192, .18);
+
+    color: rgba(
+        255,
+        148,
+        192,
+        0.18
+    );
+
     pointer-events: none;
-    animation: chapter8FloatingHeart 8s ease-in-out infinite;
+
+    animation:
+        floatingHeart 8s ease-in-out infinite;
 }
 
-.chapter8-floating-heart:nth-child(1) { top: 15%; left: 10%; font-size: 18px; animation-delay: 0s; }
-.chapter8-floating-heart:nth-child(2) { top: 31%; right: 11%; font-size: 13px; animation-delay: 1.8s; }
-.chapter8-floating-heart:nth-child(3) { top: 58%; left: 7%; font-size: 12px; animation-delay: 3.2s; }
-.chapter8-floating-heart:nth-child(4) { top: 70%; right: 8%; font-size: 20px; animation-delay: 4.5s; }
-.chapter8-floating-heart:nth-child(5) { top: 85%; left: 18%; font-size: 10px; animation-delay: 2.5s; }
 
-.chapter8-sparkle {
+.chapter7-floating-heart:nth-child(1) {
+    top: 15%;
+    left: 10%;
+
+    font-size: 18px;
+
+    animation-delay: 0s;
+}
+
+
+.chapter7-floating-heart:nth-child(2) {
+    top: 31%;
+    right: 11%;
+
+    font-size: 13px;
+
+    animation-delay: 1.8s;
+}
+
+
+.chapter7-floating-heart:nth-child(3) {
+    top: 58%;
+    left: 7%;
+
+    font-size: 12px;
+
+    animation-delay: 3.2s;
+}
+
+
+.chapter7-floating-heart:nth-child(4) {
+    top: 70%;
+    right: 8%;
+
+    font-size: 20px;
+
+    animation-delay: 4.5s;
+}
+
+
+.chapter7-floating-heart:nth-child(5) {
+    top: 85%;
+    left: 18%;
+
+    font-size: 10px;
+
+    animation-delay: 2.5s;
+}
+
+
+/* ==========================================================
+   SMALL STAR / SPARKLE DECORATION
+   ========================================================== */
+
+.chapter7-sparkle {
     position: absolute;
+
     width: 3px;
     height: 3px;
+
     border-radius: 50%;
-    background: rgba(255, 205, 224, .65);
-    box-shadow: 0 0 8px rgba(255, 177, 207, .5);
+
+    background:
+        rgba(255, 205, 224, 0.65);
+
+    box-shadow:
+        0 0 8px rgba(255, 177, 207, 0.5);
+
     pointer-events: none;
-    animation: chapter8SparklePulse 3s ease-in-out infinite;
+
+    animation:
+        sparklePulse 3s ease-in-out infinite;
 }
 
-.chapter8-sparkle:nth-child(6) { top: 22%; left: 22%; }
-.chapter8-sparkle:nth-child(7) { top: 36%; right: 23%; animation-delay: 1s; }
-.chapter8-sparkle:nth-child(8) { top: 67%; left: 25%; animation-delay: 2s; }
-.chapter8-sparkle:nth-child(9) { top: 77%; right: 21%; animation-delay: .7s; }
+
+.chapter7-sparkle:nth-child(6) {
+    top: 22%;
+    left: 22%;
+}
+
+
+.chapter7-sparkle:nth-child(7) {
+    top: 36%;
+    right: 23%;
+
+    animation-delay: 1s;
+}
+
+
+.chapter7-sparkle:nth-child(8) {
+    top: 67%;
+    left: 25%;
+
+    animation-delay: 2s;
+}
+
+
+.chapter7-sparkle:nth-child(9) {
+    top: 77%;
+    right: 21%;
+
+    animation-delay: 0.7s;
+}
+
+
+/* ==========================================================
+   BOTTOM ENDING
+   ========================================================== */
+
+.chapter7-ending {
+    margin-top: 120px;
+
+    text-align: center;
+
+    opacity: 0.7;
+}
+
+
+.chapter7-ending-line {
+    width: 80px;
+
+    height: 1px;
+
+    margin: 0 auto 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 166, 201, 0.45),
+            transparent
+        );
+}
+
+
+.chapter7-ending p {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1rem;
+
+    font-style: italic;
+
+    letter-spacing: 0.05em;
+
+    color: rgba(255, 215, 230, 0.55);
+}
+
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+
+@keyframes finalIntroReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes messageReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes cardReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(45px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes heartBreathing {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity: 0.65;
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.18);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes arrowFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+        opacity: 0.45;
+
+    }
+
+    50% {
+
+        transform:
+            translateY(7px);
+
+        opacity: 0.9;
+
+    }
+
+}
+
+
+@keyframes floatingHeart {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0.12;
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-22px)
+            rotate(8deg);
+
+        opacity: 0.28;
+
+    }
+
+}
+
+
+@keyframes sparklePulse {
+
+    0%,
+    100% {
+
+        opacity: 0.15;
+
+        transform:
+            scale(0.7);
+
+    }
+
+    50% {
+
+        opacity: 0.8;
+
+        transform:
+            scale(1.5);
+
+    }
+
+}
+
+
+@keyframes messageButtonGlow {
+
+    0%,
+    100% {
+
+        box-shadow:
+            0 15px 40px rgba(
+                205,
+                102,
+                157,
+                0.25
+            );
+
+    }
+
+    50% {
+
+        box-shadow:
+            0 18px 48px rgba(
+                218,
+                107,
+                164,
+                0.38
+            ),
+            0 0 28px rgba(
+                255,
+                141,
+                188,
+                0.1
+            );
+
+    }
+
+}
+
+
+/* ==========================================================
+   SELECTION
+   ========================================================== */
+
+#chapter8 ::selection {
+    background:
+        rgba(232, 132, 176, 0.35);
+
+    color: #fff;
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
 
 #chapter8 button:focus-visible,
 #chapter8 a:focus-visible {
-    outline: 2px solid rgba(255, 175, 207, .75);
+
+    outline:
+        2px solid rgba(
+            255,
+            175,
+            207,
+            0.75
+        );
+
     outline-offset: 5px;
+
 }
 
-#chapter8 ::selection { background: rgba(232, 132, 176, .35); color: #fff; }
 
-@keyframes chapter8IntroReveal {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes chapter8MessageReveal {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes chapter8CardReveal {
-    from { opacity: 0; transform: translateY(45px) scale(.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes chapter8HeartBreathing {
-    0%, 100% { transform: scale(1); opacity: .65; }
-    50% { transform: scale(1.18); opacity: 1; }
-}
-
-@keyframes chapter8ArrowFloat {
-    0%, 100% { transform: translateY(0); opacity: .45; }
-    50% { transform: translateY(7px); opacity: .9; }
-}
-
-@keyframes chapter8FloatingHeart {
-    0%, 100% { transform: translateY(0) rotate(0deg); opacity: .12; }
-    50% { transform: translateY(-22px) rotate(8deg); opacity: .28; }
-}
-
-@keyframes chapter8SparklePulse {
-    0%, 100% { opacity: .15; transform: scale(.7); }
-    50% { opacity: .8; transform: scale(1.5); }
-}
-
-@keyframes chapter8MessageButtonGlow {
-    0%, 100% { box-shadow: 0 15px 40px rgba(205, 102, 157, .25); }
-    50% { box-shadow: 0 18px 48px rgba(218, 107, 164, .38), 0 0 28px rgba(255, 141, 188, .1); }
-}
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
+
     #chapter8 *,
     #chapter8 *::before,
     #chapter8 *::after {
-        animation-duration: .01ms !important;
+
+        animation-duration: 0.01ms !important;
+
         animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
+
+        transition-duration: 0.01ms !important;
+
         scroll-behavior: auto !important;
+
     }
+
 }
+
+
+/* ==========================================================
+   TABLET
+   ========================================================== */
 
 @media (max-width: 768px) {
-    #chapter8 { padding: 90px 20px 110px; }
-    .chapter8-intro { margin-bottom: 70px; }
-    .chapter8-question-card { padding: 55px 30px 50px; border-radius: 22px; }
-    .chapter8-buttons { gap: 16px; }
-    #chapter8Yes { min-width: 135px; padding: 14px 25px; }
-    #chapter8No { min-width: 115px; padding: 13px 22px; }
-    .chapter8-message { margin-bottom: 65px; }
-    .chapter8-before-question { margin-top: 75px; }
-    .chapter8-ending { margin-top: 90px; }
+
+    #chapter8 {
+
+        padding:
+            90px 20px
+            110px;
+
+    }
+
+
+    .chapter7-intro {
+
+        margin-bottom: 70px;
+
+    }
+
+
+    .chapter7-question-card {
+
+        padding:
+            55px 30px
+            50px;
+
+        border-radius: 22px;
+
+    }
+
+
+    .chapter7-buttons {
+
+        gap: 16px;
+
+    }
+
+
+    #chapter7Yes {
+
+        min-width: 135px;
+
+        padding:
+            14px 25px;
+
+    }
+
+
+    #chapter7No {
+
+        min-width: 115px;
+
+        padding:
+            13px 22px;
+
+    }
+
+
+    .chapter7-message {
+
+        margin-bottom: 65px;
+
+    }
+
+
+    .chapter7-before-question {
+
+        margin-top: 75px;
+
+    }
+
+
+    .chapter7-ending {
+
+        margin-top: 90px;
+
+    }
+
 }
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
 
 @media (max-width: 520px) {
-    #chapter8 { padding: 75px 16px 90px; }
-    .chapter8-label { font-size: .55rem; letter-spacing: .28em; }
-    .chapter8-title { font-size: clamp(3rem, 15vw, 4.3rem); }
-    .chapter8-subtitle { font-size: 1.2rem; }
-    .chapter8-message p { font-size: 1.15rem; line-height: 1.75; }
-    .chapter8-before-question p { font-size: 1.3rem; }
-    .chapter8-question-card { padding: 48px 20px 42px; border-radius: 20px; }
-    .chapter8-question { font-size: clamp(2.2rem, 12vw, 3.4rem); }
-    .chapter8-buttons { gap: 12px; min-height: 75px; }
-    #chapter8Yes { min-width: 120px; min-height: 52px; padding: 13px 21px; font-size: .75rem; }
-    #chapter8No { min-width: 105px; min-height: 48px; padding: 12px 18px; font-size: .72rem; }
-    .chapter8-message-button { min-width: 175px; padding: 14px 24px; font-size: .75rem; }
-    .chapter8-floating-heart { opacity: .65; }
-    .chapter8-floating-heart:nth-child(1), .chapter8-floating-heart:nth-child(3) { left: 3%; }
-    .chapter8-floating-heart:nth-child(2), .chapter8-floating-heart:nth-child(4) { right: 3%; }
+
+    #chapter8 {
+
+        padding:
+            75px 16px
+            90px;
+
+    }
+
+
+    .chapter7-label {
+
+        font-size: 0.55rem;
+
+        letter-spacing: 0.28em;
+
+    }
+
+
+    .chapter7-title {
+
+        font-size:
+            clamp(
+                3rem,
+                15vw,
+                4.3rem
+            );
+
+    }
+
+
+    .chapter7-subtitle {
+
+        font-size: 1.2rem;
+
+    }
+
+
+    .chapter7-message p {
+
+        font-size: 1.15rem;
+
+        line-height: 1.75;
+
+    }
+
+
+    .chapter7-before-question p {
+
+        font-size: 1.3rem;
+
+    }
+
+
+    .chapter7-question-card {
+
+        padding:
+            48px 20px
+            42px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .chapter7-question {
+
+        font-size:
+            clamp(
+                2.2rem,
+                12vw,
+                3.4rem
+            );
+
+    }
+
+
+    .chapter7-buttons {
+
+        gap: 12px;
+
+        min-height: 75px;
+
+    }
+
+
+    #chapter7Yes {
+
+        min-width: 120px;
+
+        min-height: 52px;
+
+        padding:
+            13px 21px;
+
+        font-size: 0.75rem;
+
+    }
+
+
+    #chapter7No {
+
+        min-width: 105px;
+
+        min-height: 48px;
+
+        padding:
+            12px 18px;
+
+        font-size: 0.72rem;
+
+    }
+
+
+    #chapter7Message {
+
+        min-width: 175px;
+
+        padding:
+            14px 24px;
+
+        font-size: 0.75rem;
+
+    }
+
+
+    .chapter7-floating-heart {
+
+        opacity: 0.65;
+
+    }
+
+
+    .chapter7-floating-heart:nth-child(1) {
+
+        left: 3%;
+
+    }
+
+
+    .chapter7-floating-heart:nth-child(2) {
+
+        right: 3%;
+
+    }
+
+
+    .chapter7-floating-heart:nth-child(3) {
+
+        left: 2%;
+
+    }
+
+
+    .chapter7-floating-heart:nth-child(4) {
+
+        right: 2%;
+
+    }
+
 }
 
+
+/* ==========================================================
+   VERY SMALL DEVICES
+   ========================================================== */
+
 @media (max-width: 360px) {
-    .chapter8-buttons { gap: 8px; }
-    #chapter8Yes { min-width: 110px; padding: 12px 17px; }
-    #chapter8No { min-width: 95px; padding: 11px 15px; }
-    .chapter8-question-card { padding: 42px 16px 38px; }
+
+    .chapter7-buttons {
+
+        gap: 8px;
+
+    }
+
+
+    #chapter7Yes {
+
+        min-width: 110px;
+
+        padding:
+            12px 17px;
+
+    }
+
+
+    #chapter7No {
+
+        min-width: 95px;
+
+        padding:
+            11px 15px;
+
+    }
+
+
+    .chapter7-question-card {
+
+        padding:
+            42px 16px
+            38px;
+
+    }
+
 }
