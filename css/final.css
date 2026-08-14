@@ -1,30 +1,84 @@
 /* ==========================================================
    FINAL.CSS
    Project : Our Story
-   Chapter : VIII — Final Chapter
+   Chapter : FINAL — Ending / Final Question
    Purpose : Final Question / Ending
 
    IMPORTANT:
    - Final Chapter root is #chapter8
    - Hidden by default
-   - JavaScript controls when #chapter8 is displayed
-   - ALL Final Chapter inner styles are scoped to #chapter8
-   - Uses ONLY chapter8-* classes
-   - Does NOT affect Chapter VII
+   - Visible ONLY when #chapter8 has .active
+   - ALL inner styles are scoped to #chapter8
+   - Final Chapter MUST NOT occupy page space when inactive
+   - This prevents Final Chapter CSS from affecting Chapter VII
    ========================================================== */
 
 
 /* ==========================================================
-   FINAL CHAPTER — VISIBILITY
+   FINAL CHAPTER — VISIBILITY CONTROL
    ========================================================== */
 
-#chapter8 {
-    display: none;
+/*
+   IMPORTANT FIX
+   ----------------------------------------------------------
+   The Final Chapter must completely disappear when it is not
+   active.
 
+   display: none removes the element from the document flow.
+   !important protects this rule from other chapter/global CSS.
+*/
+
+html body #chapter8:not(.active) {
+    display: none !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+}
+
+
+/*
+   ONLY the active Final Chapter is allowed to appear.
+*/
+
+html body #chapter8.active {
+    display: block !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+}
+
+
+/*
+   Extra protection against generic chapter rules such as:
+
+   .chapter
+   .chapter-section
+   section
+   .active
+   etc.
+
+   The Final Chapter is hidden unless it specifically has
+   the active class.
+*/
+
+html body #chapter8 {
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   FINAL CHAPTER — ROOT
+   ========================================================== */
+
+html body #chapter8 {
     position: relative;
 
     width: 100%;
     min-height: 100vh;
+
+    padding: 120px 24px 140px;
 
     box-sizing: border-box;
 
@@ -59,26 +113,15 @@
             #0b070d 100%
         );
 
-    padding: 120px 24px 140px;
-
     isolation: isolate;
 }
 
 
-/*
-   JavaScript uses:
-   finalChapter.style.display = "block";
-
-   This means the Final Chapter becomes visible
-   without requiring changes to the existing JS.
-*/
-
-
 /* ==========================================================
-   FINAL CHAPTER — ATMOSPHERE
+   FINAL ATMOSPHERE
    ========================================================== */
 
-#chapter8::before {
+html body #chapter8::before {
     content: "";
 
     position: absolute;
@@ -99,7 +142,7 @@
 }
 
 
-#chapter8::after {
+html body #chapter8::after {
     content: "";
 
     position: absolute;
@@ -131,10 +174,10 @@
 
 
 /* ==========================================================
-   FINAL CHAPTER — CONTENT WRAPPER
+   FINAL CONTENT WRAPPER
    ========================================================== */
 
-#chapter8 .chapter8-container {
+html body #chapter8 .chapter7-container {
     position: relative;
 
     width: min(900px, 100%);
@@ -146,10 +189,10 @@
 
 
 /* ==========================================================
-   FINAL CHAPTER — INTRO
+   INTRO / FINAL CHAPTER TITLE
    ========================================================== */
 
-#chapter8 .chapter8-intro {
+html body #chapter8 .chapter7-intro {
     display: flex;
 
     flex-direction: column;
@@ -161,14 +204,11 @@
     margin-bottom: 90px;
 
     animation:
-        chapter8IntroReveal
-        1.5s
-        ease
-        both;
+        finalIntroReveal 1.5s ease both;
 }
 
 
-#chapter8 .chapter8-label {
+html body #chapter8 .chapter7-label {
     margin: 0 0 18px;
 
     font-family:
@@ -183,17 +223,11 @@
 
     text-transform: uppercase;
 
-    color:
-        rgba(
-            255,
-            180,
-            210,
-            0.72
-        );
+    color: rgba(255, 180, 210, 0.72);
 }
 
 
-#chapter8 .chapter8-title {
+html body #chapter8 .chapter7-title {
     margin: 0;
 
     font-family:
@@ -201,12 +235,11 @@
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            3.4rem,
-            8vw,
-            6.5rem
-        );
+    font-size: clamp(
+        3.4rem,
+        8vw,
+        6.5rem
+    );
 
     font-weight: 400;
 
@@ -217,30 +250,17 @@
     color: #fff7fb;
 
     text-shadow:
-        0 0 25px
-        rgba(
-            255,
-            159,
-            198,
-            0.12
-        ),
-
-        0 0 70px
-        rgba(
-            174,
-            88,
-            154,
-            0.08
-        );
+        0 0 25px rgba(255, 159, 198, 0.12),
+        0 0 70px rgba(174, 88, 154, 0.08);
 }
 
 
-#chapter8 .chapter8-title span {
+html body #chapter8 .chapter7-title span {
     color: #f39abf;
 }
 
 
-#chapter8 .chapter8-subtitle {
+html body #chapter8 .chapter7-subtitle {
     margin: 28px 0 0;
 
     font-family:
@@ -248,32 +268,25 @@
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            1.3rem,
-            2.5vw,
-            1.8rem
-        );
+    font-size: clamp(
+        1.3rem,
+        2.5vw,
+        1.8rem
+    );
 
     font-style: italic;
 
     font-weight: 400;
 
-    color:
-        rgba(
-            255,
-            222,
-            235,
-            0.72
-        );
+    color: rgba(255, 222, 235, 0.72);
 }
 
 
 /* ==========================================================
-   FINAL HEART
+   HEART SYMBOL
    ========================================================== */
 
-#chapter8 .chapter8-heart {
+html body #chapter8 .chapter7-heart {
     margin-top: 28px;
 
     font-family:
@@ -286,10 +299,7 @@
     color: #ff9fc5;
 
     animation:
-        chapter8HeartBreathing
-        3.2s
-        ease-in-out
-        infinite;
+        heartBreathing 3.2s ease-in-out infinite;
 }
 
 
@@ -297,21 +307,17 @@
    STORY MESSAGE
    ========================================================== */
 
-#chapter8 .chapter8-message {
+html body #chapter8 .chapter7-message {
     width: min(650px, 100%);
 
     margin: 0 auto 80px;
 
     animation:
-        chapter8MessageReveal
-        1.6s
-        ease
-        0.25s
-        both;
+        messageReveal 1.6s ease 0.25s both;
 }
 
 
-#chapter8 .chapter8-message p {
+html body #chapter8 .chapter7-message p {
     margin: 0 0 24px;
 
     font-family:
@@ -319,35 +325,22 @@
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            1.25rem,
-            2.4vw,
-            1.65rem
-        );
+    font-size: clamp(
+        1.25rem,
+        2.4vw,
+        1.65rem
+    );
 
     line-height: 1.8;
 
     font-weight: 400;
 
-    color:
-        rgba(
-            255,
-            235,
-            244,
-            0.86
-        );
+    color: rgba(255, 235, 244, 0.86);
 }
 
 
-#chapter8 .chapter8-message .soft-text {
-    color:
-        rgba(
-            255,
-            197,
-            219,
-            0.68
-        );
+html body #chapter8 .chapter7-message .soft-text {
+    color: rgba(255, 197, 219, 0.68);
 
     font-size: 1.05rem;
 
@@ -356,23 +349,18 @@
 
 
 /* ==========================================================
-   BEFORE THE QUESTION
+   BEFORE I ASK YOU
    ========================================================== */
 
-#chapter8 .chapter8-before-question {
-    margin:
-        100px auto 70px;
+html body #chapter8 .chapter7-before-question {
+    margin: 100px auto 70px;
 
     animation:
-        chapter8MessageReveal
-        1.5s
-        ease
-        0.5s
-        both;
+        messageReveal 1.5s ease 0.5s both;
 }
 
 
-#chapter8 .chapter8-before-question p {
+html body #chapter8 .chapter7-before-question p {
     margin: 0;
 
     font-family:
@@ -380,28 +368,21 @@
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            1.45rem,
-            3vw,
-            2rem
-        );
+    font-size: clamp(
+        1.45rem,
+        3vw,
+        2rem
+    );
 
     font-style: italic;
 
     line-height: 1.7;
 
-    color:
-        rgba(
-            255,
-            211,
-            227,
-            0.82
-        );
+    color: rgba(255, 211, 227, 0.82);
 }
 
 
-#chapter8 .chapter8-arrow {
+html body #chapter8 .chapter7-arrow {
     display: block;
 
     margin-top: 24px;
@@ -412,19 +393,10 @@
 
     font-size: 1rem;
 
-    color:
-        rgba(
-            255,
-            157,
-            197,
-            0.7
-        );
+    color: rgba(255, 157, 197, 0.7);
 
     animation:
-        chapter8ArrowFloat
-        2.5s
-        ease-in-out
-        infinite;
+        arrowFloat 2.5s ease-in-out infinite;
 }
 
 
@@ -432,20 +404,18 @@
    EMOTIONAL MESSAGE
    ========================================================== */
 
-#chapter8 .chapter8-emotional-message {
+html body #chapter8 .chapter7-emotional-message {
     width: min(620px, 100%);
 
-    margin:
-        0 auto 90px;
+    margin: 0 auto 90px;
 
-    padding:
-        0 20px;
+    padding: 0 20px;
 
     box-sizing: border-box;
 }
 
 
-#chapter8 .chapter8-emotional-message p {
+html body #chapter8 .chapter7-emotional-message p {
     margin: 0;
 
     font-family:
@@ -453,22 +423,15 @@
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            1.2rem,
-            2.4vw,
-            1.55rem
-        );
+    font-size: clamp(
+        1.2rem,
+        2.4vw,
+        1.55rem
+    );
 
     line-height: 1.9;
 
-    color:
-        rgba(
-            255,
-            232,
-            242,
-            0.8
-        );
+    color: rgba(255, 232, 242, 0.8);
 }
 
 
@@ -476,72 +439,37 @@
    FINAL QUESTION CARD
    ========================================================== */
 
-#chapter8 .chapter8-question-card {
+html body #chapter8 .chapter7-question-card {
     position: relative;
 
     width: min(700px, 100%);
 
     margin: 0 auto;
 
-    padding:
-        70px
-        55px
-        65px;
+    padding: 70px 55px 65px;
 
     box-sizing: border-box;
 
-    border:
-        1px solid
-        rgba(
-            255,
-            170,
-            203,
-            0.18
-        );
+    border: 1px solid rgba(
+        255,
+        170,
+        203,
+        0.18
+    );
 
     border-radius: 28px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(
-                255,
-                255,
-                255,
-                0.045
-            ),
-            rgba(
-                255,
-                144,
-                190,
-                0.025
-            )
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 144, 190, 0.025)
         );
 
     box-shadow:
-        0 30px 100px
-        rgba(
-            0,
-            0,
-            0,
-            0.38
-        ),
-
-        inset 0 1px 0
-        rgba(
-            255,
-            255,
-            255,
-            0.05
-        ),
-
-        0 0 80px
-        rgba(
-            172,
-            83,
-            153,
-            0.07
-        );
+        0 30px 100px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 80px rgba(172, 83, 153, 0.07);
 
     backdrop-filter:
         blur(14px);
@@ -550,21 +478,21 @@
         blur(14px);
 
     animation:
-        chapter8CardReveal
-        1.7s
-        ease
-        0.65s
-        both;
+        cardReveal 1.7s ease 0.65s both;
 }
 
 
 /* ==========================================================
-   QUESTION CARD DECORATION
+   CARD DECORATION
    ========================================================== */
 
-#chapter8 .chapter8-question-card::before,
-#chapter8 .chapter8-question-card::after {
+html body #chapter8 .chapter7-question-card::before {
+    content: "♡";
+
     position: absolute;
+
+    top: 20px;
+    left: 28px;
 
     font-family:
         "Cormorant Garamond",
@@ -573,29 +501,26 @@
 
     font-size: 1.3rem;
 
-    color:
-        rgba(
-            255,
-            157,
-            197,
-            0.35
-        );
+    color: rgba(255, 157, 197, 0.35);
 }
 
 
-#chapter8 .chapter8-question-card::before {
+html body #chapter8 .chapter7-question-card::after {
     content: "♡";
 
-    top: 20px;
-    left: 28px;
-}
-
-
-#chapter8 .chapter8-question-card::after {
-    content: "♡";
+    position: absolute;
 
     right: 28px;
     bottom: 20px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.3rem;
+
+    color: rgba(255, 157, 197, 0.35);
 }
 
 
@@ -603,35 +528,27 @@
    QUESTION INTRO
    ========================================================== */
 
-#chapter8 .chapter8-question-intro {
-    margin:
-        0 0 35px;
+html body #chapter8 .chapter7-question-intro {
+    margin: 0 0 35px;
 
     font-family:
         "Cormorant Garamond",
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            1.25rem,
-            2.5vw,
-            1.55rem
-        );
+    font-size: clamp(
+        1.25rem,
+        2.5vw,
+        1.55rem
+    );
 
     font-style: italic;
 
-    color:
-        rgba(
-            255,
-            213,
-            229,
-            0.7
-        );
+    color: rgba(255, 213, 229, 0.7);
 }
 
 
-#chapter8 .chapter8-question-arrow {
+html body #chapter8 .chapter7-question-arrow {
     display: block;
 
     margin-top: 18px;
@@ -642,13 +559,7 @@
 
     font-size: 0.9rem;
 
-    color:
-        rgba(
-            255,
-            151,
-            192,
-            0.55
-        );
+    color: rgba(255, 151, 192, 0.55);
 }
 
 
@@ -656,7 +567,7 @@
    MAIN QUESTION
    ========================================================== */
 
-#chapter8 .chapter8-question {
+html body #chapter8 .chapter7-question {
     margin: 0;
 
     font-family:
@@ -664,12 +575,11 @@
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            2.4rem,
-            6vw,
-            4.5rem
-        );
+    font-size: clamp(
+        2.4rem,
+        6vw,
+        4.5rem
+    );
 
     font-weight: 500;
 
@@ -680,17 +590,11 @@
     color: #fff7fb;
 
     text-shadow:
-        0 0 25px
-        rgba(
-            255,
-            140,
-            187,
-            0.12
-        );
+        0 0 25px rgba(255, 140, 187, 0.12);
 }
 
 
-#chapter8 .chapter8-question strong {
+html body #chapter8 .chapter7-question strong {
     display: block;
 
     margin-top: 8px;
@@ -700,21 +604,8 @@
     font-weight: 500;
 
     text-shadow:
-        0 0 25px
-        rgba(
-            255,
-            105,
-            167,
-            0.28
-        ),
-
-        0 0 60px
-        rgba(
-            255,
-            105,
-            167,
-            0.12
-        );
+        0 0 25px rgba(255, 105, 167, 0.28),
+        0 0 60px rgba(255, 105, 167, 0.12);
 }
 
 
@@ -722,7 +613,7 @@
    BUTTON AREA
    ========================================================== */
 
-#chapter8 .chapter8-buttons {
+html body #chapter8 .chapter7-buttons {
     display: flex;
 
     align-items: center;
@@ -743,7 +634,7 @@
    COMMON BUTTON
    ========================================================== */
 
-#chapter8 .chapter8-button {
+html body #chapter8 .chapter7-button {
     position: relative;
 
     border: none;
@@ -779,13 +670,12 @@
    YES BUTTON
    ========================================================== */
 
-#chapter8 #chapter8Yes {
+html body #chapter8 #chapter7Yes {
     min-width: 150px;
 
     min-height: 56px;
 
-    padding:
-        15px 32px;
+    padding: 15px 32px;
 
     color: #fff;
 
@@ -797,51 +687,25 @@
         );
 
     box-shadow:
-        0 10px 30px
-        rgba(
-            205,
-            102,
-            157,
-            0.25
-        ),
-
-        0 0 0 1px
-        rgba(
-            255,
-            206,
-            226,
-            0.08
-        );
+        0 10px 30px rgba(205, 102, 157, 0.25),
+        0 0 0 1px rgba(255, 206, 226, 0.08);
 
     transform-origin: center;
 }
 
 
-#chapter8 #chapter8Yes:hover:not(:disabled) {
+html body #chapter8 #chapter7Yes:hover {
     transform:
         translateY(-3px)
         scale(1.04);
 
     box-shadow:
-        0 15px 40px
-        rgba(
-            219,
-            103,
-            163,
-            0.35
-        ),
-
-        0 0 35px
-        rgba(
-            255,
-            137,
-            187,
-            0.13
-        );
+        0 15px 40px rgba(219, 103, 163, 0.35),
+        0 0 35px rgba(255, 137, 187, 0.13);
 }
 
 
-#chapter8 #chapter8Yes:active:not(:disabled) {
+html body #chapter8 #chapter7Yes:active {
     transform:
         translateY(0)
         scale(0.98);
@@ -852,85 +716,55 @@
    NO BUTTON
    ========================================================== */
 
-#chapter8 #chapter8No {
+html body #chapter8 #chapter7No {
     min-width: 130px;
 
     min-height: 52px;
 
-    padding:
-        14px 28px;
+    padding: 14px 28px;
 
-    color:
-        rgba(
-            255,
-            226,
-            238,
-            0.82
-        );
+    color: rgba(255, 226, 238, 0.82);
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.035
-        );
+        rgba(255, 255, 255, 0.035);
 
-    border:
-        1px solid
-        rgba(
-            255,
-            181,
-            208,
-            0.17
-        );
+    border: 1px solid rgba(
+        255,
+        181,
+        208,
+        0.17
+    );
 
     box-shadow:
-        0 8px 25px
-        rgba(
-            0,
-            0,
-            0,
-            0.15
-        );
+        0 8px 25px rgba(0, 0, 0, 0.15);
 
     transform-origin: center;
 }
 
 
-#chapter8 #chapter8No:hover:not(:disabled) {
+html body #chapter8 #chapter7No:hover {
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+        rgba(255, 255, 255, 0.06);
 
     border-color:
-        rgba(
-            255,
-            181,
-            208,
-            0.28
-        );
+        rgba(255, 181, 208, 0.28);
 
     transform:
         translateY(-2px);
 }
 
 
-#chapter8 #chapter8No:active:not(:disabled) {
+html body #chapter8 #chapter7No:active {
     transform:
         scale(0.96);
 }
 
 
 /* ==========================================================
-   NO BUTTON — SHRINKING
+   NO BUTTON — SHRINKING STATES
    ========================================================== */
 
-#chapter8 #chapter8No.shrink-1 {
+html body #chapter8 #chapter7No.shrink-1 {
     transform:
         scale(0.72);
 
@@ -938,7 +772,7 @@
 }
 
 
-#chapter8 #chapter8No.shrink-2 {
+html body #chapter8 #chapter7No.shrink-2 {
     transform:
         scale(0.44);
 
@@ -946,7 +780,7 @@
 }
 
 
-#chapter8 #chapter8No.shrink-3 {
+html body #chapter8 #chapter7No.shrink-3 {
     transform:
         scale(0);
 
@@ -957,41 +791,28 @@
 
 
 /* ==========================================================
-   YES BUTTON — GROWING
+   YES BUTTON — GROWS AFTER NO
    ========================================================== */
 
-#chapter8 #chapter8Yes.grow-1 {
+html body #chapter8 #chapter7Yes.grow-1 {
     transform:
         scale(1.08);
 }
 
 
-#chapter8 #chapter8Yes.grow-2 {
+html body #chapter8 #chapter7Yes.grow-2 {
     transform:
         scale(1.18);
 }
 
 
-#chapter8 #chapter8Yes.grow-3 {
+html body #chapter8 #chapter7Yes.grow-3 {
     transform:
         scale(1.32);
 
     box-shadow:
-        0 18px 50px
-        rgba(
-            219,
-            103,
-            163,
-            0.4
-        ),
-
-        0 0 45px
-        rgba(
-            255,
-            137,
-            187,
-            0.15
-        );
+        0 18px 50px rgba(219, 103, 163, 0.4),
+        0 0 45px rgba(255, 137, 187, 0.15);
 }
 
 
@@ -999,7 +820,7 @@
    MESSAGE ME BUTTON
    ========================================================== */
 
-#chapter8 .chapter8-message-button {
+html body #chapter8 #chapter7Message {
     display: inline-flex;
 
     align-items: center;
@@ -1012,8 +833,7 @@
 
     min-height: 56px;
 
-    padding:
-        15px 32px;
+    padding: 15px 32px;
 
     margin-top: 42px;
 
@@ -1041,13 +861,7 @@
         );
 
     box-shadow:
-        0 15px 40px
-        rgba(
-            205,
-            102,
-            157,
-            0.28
-        );
+        0 15px 40px rgba(205, 102, 157, 0.28);
 
     opacity: 0;
 
@@ -1071,7 +885,7 @@
 }
 
 
-#chapter8 .chapter8-message-button.show {
+html body #chapter8 #chapter7Message.show {
     opacity: 1;
 
     visibility: visible;
@@ -1083,38 +897,22 @@
     pointer-events: auto;
 
     animation:
-        chapter8MessageButtonGlow
-        2.8s
-        ease-in-out
-        infinite;
+        messageButtonGlow 2.8s ease-in-out infinite;
 }
 
 
-#chapter8 .chapter8-message-button:hover {
+html body #chapter8 #chapter7Message:hover {
     transform:
         translateY(-3px)
         scale(1.04);
 
     box-shadow:
-        0 18px 50px
-        rgba(
-            218,
-            107,
-            164,
-            0.38
-        ),
-
-        0 0 35px
-        rgba(
-            255,
-            141,
-            188,
-            0.12
-        );
+        0 18px 50px rgba(218, 107, 164, 0.38),
+        0 0 35px rgba(255, 141, 188, 0.12);
 }
 
 
-#chapter8 .chapter8-message-button:active {
+html body #chapter8 #chapter7Message:active {
     transform:
         translateY(0)
         scale(0.98);
@@ -1122,36 +920,28 @@
 
 
 /* ==========================================================
-   SUCCESS MESSAGE
+   FINAL MESSAGE AFTER YES
    ========================================================== */
 
-#chapter8 .chapter8-success-message {
-    margin:
-        28px 0 0;
+html body #chapter8 .chapter7-success-message {
+    margin-top: 28px;
 
     font-family:
         "Cormorant Garamond",
         Georgia,
         serif;
 
-    font-size:
-        clamp(
-            1.2rem,
-            2.5vw,
-            1.55rem
-        );
+    font-size: clamp(
+        1.2rem,
+        2.5vw,
+        1.55rem
+    );
 
     font-style: italic;
 
     line-height: 1.7;
 
-    color:
-        rgba(
-            255,
-            218,
-            231,
-            0.82
-        );
+    color: rgba(255, 218, 231, 0.82);
 
     opacity: 0;
 
@@ -1164,7 +954,7 @@
 }
 
 
-#chapter8 .chapter8-success-message.show {
+html body #chapter8 .chapter7-success-message.show {
     opacity: 1;
 
     transform:
@@ -1173,10 +963,138 @@
 
 
 /* ==========================================================
+   DECORATIVE FLOATING HEARTS
+   ========================================================== */
+
+html body #chapter8 .chapter7-floating-heart {
+    position: absolute;
+
+    z-index: -1;
+
+    color: rgba(
+        255,
+        148,
+        192,
+        0.18
+    );
+
+    pointer-events: none;
+
+    animation:
+        floatingHeart 8s ease-in-out infinite;
+}
+
+
+html body #chapter8 .chapter7-floating-heart:nth-child(1) {
+    top: 15%;
+    left: 10%;
+
+    font-size: 18px;
+
+    animation-delay: 0s;
+}
+
+
+html body #chapter8 .chapter7-floating-heart:nth-child(2) {
+    top: 31%;
+    right: 11%;
+
+    font-size: 13px;
+
+    animation-delay: 1.8s;
+}
+
+
+html body #chapter8 .chapter7-floating-heart:nth-child(3) {
+    top: 58%;
+    left: 7%;
+
+    font-size: 12px;
+
+    animation-delay: 3.2s;
+}
+
+
+html body #chapter8 .chapter7-floating-heart:nth-child(4) {
+    top: 70%;
+    right: 8%;
+
+    font-size: 20px;
+
+    animation-delay: 4.5s;
+}
+
+
+html body #chapter8 .chapter7-floating-heart:nth-child(5) {
+    top: 85%;
+    left: 18%;
+
+    font-size: 10px;
+
+    animation-delay: 2.5s;
+}
+
+
+/* ==========================================================
+   SMALL STAR / SPARKLE DECORATION
+   ========================================================== */
+
+html body #chapter8 .chapter7-sparkle {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 205, 224, 0.65);
+
+    box-shadow:
+        0 0 8px rgba(255, 177, 207, 0.5);
+
+    pointer-events: none;
+
+    animation:
+        sparklePulse 3s ease-in-out infinite;
+}
+
+
+html body #chapter8 .chapter7-sparkle:nth-child(6) {
+    top: 22%;
+    left: 22%;
+}
+
+
+html body #chapter8 .chapter7-sparkle:nth-child(7) {
+    top: 36%;
+    right: 23%;
+
+    animation-delay: 1s;
+}
+
+
+html body #chapter8 .chapter7-sparkle:nth-child(8) {
+    top: 67%;
+    left: 25%;
+
+    animation-delay: 2s;
+}
+
+
+html body #chapter8 .chapter7-sparkle:nth-child(9) {
+    top: 77%;
+    right: 21%;
+
+    animation-delay: 0.7s;
+}
+
+
+/* ==========================================================
    BOTTOM ENDING
    ========================================================== */
 
-#chapter8 .chapter8-ending {
+html body #chapter8 .chapter7-ending {
     margin-top: 120px;
 
     text-align: center;
@@ -1185,30 +1103,24 @@
 }
 
 
-#chapter8 .chapter8-ending-line {
+html body #chapter8 .chapter7-ending-line {
     width: 80px;
 
     height: 1px;
 
-    margin:
-        0 auto 25px;
+    margin: 0 auto 25px;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(
-                255,
-                166,
-                201,
-                0.45
-            ),
+            rgba(255, 166, 201, 0.45),
             transparent
         );
 }
 
 
-#chapter8 .chapter8-ending p {
+html body #chapter8 .chapter7-ending p {
     margin: 0;
 
     font-family:
@@ -1222,191 +1134,7 @@
 
     letter-spacing: 0.05em;
 
-    color:
-        rgba(
-            255,
-            215,
-            230,
-            0.55
-        );
-}
-
-
-/* ==========================================================
-   FLOATING HEARTS
-   ========================================================== */
-
-#chapter8 .chapter8-floating-heart {
-    position: absolute;
-
-    z-index: -1;
-
-    color:
-        rgba(
-            255,
-            148,
-            192,
-            0.18
-        );
-
-    pointer-events: none;
-
-    animation:
-        chapter8FloatingHeart
-        8s
-        ease-in-out
-        infinite;
-}
-
-
-#chapter8 .chapter8-floating-heart:nth-child(1) {
-    top: 15%;
-    left: 10%;
-
-    font-size: 18px;
-
-    animation-delay: 0s;
-}
-
-
-#chapter8 .chapter8-floating-heart:nth-child(2) {
-    top: 31%;
-    right: 11%;
-
-    font-size: 13px;
-
-    animation-delay: 1.8s;
-}
-
-
-#chapter8 .chapter8-floating-heart:nth-child(3) {
-    top: 58%;
-    left: 7%;
-
-    font-size: 12px;
-
-    animation-delay: 3.2s;
-}
-
-
-#chapter8 .chapter8-floating-heart:nth-child(4) {
-    top: 70%;
-    right: 8%;
-
-    font-size: 20px;
-
-    animation-delay: 4.5s;
-}
-
-
-#chapter8 .chapter8-floating-heart:nth-child(5) {
-    top: 85%;
-    left: 18%;
-
-    font-size: 10px;
-
-    animation-delay: 2.5s;
-}
-
-
-/* ==========================================================
-   SPARKLES
-   ========================================================== */
-
-#chapter8 .chapter8-sparkle {
-    position: absolute;
-
-    width: 3px;
-    height: 3px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(
-            255,
-            205,
-            224,
-            0.65
-        );
-
-    box-shadow:
-        0 0 8px
-        rgba(
-            255,
-            177,
-            207,
-            0.5
-        );
-
-    pointer-events: none;
-
-    animation:
-        chapter8SparklePulse
-        3s
-        ease-in-out
-        infinite;
-}
-
-
-#chapter8 .chapter8-sparkle:nth-child(6) {
-    top: 22%;
-    left: 22%;
-}
-
-
-#chapter8 .chapter8-sparkle:nth-child(7) {
-    top: 36%;
-    right: 23%;
-
-    animation-delay: 1s;
-}
-
-
-#chapter8 .chapter8-sparkle:nth-child(8) {
-    top: 67%;
-    left: 25%;
-
-    animation-delay: 2s;
-}
-
-
-#chapter8 .chapter8-sparkle:nth-child(9) {
-    top: 77%;
-    right: 21%;
-
-    animation-delay: 0.7s;
-}
-
-
-/* ==========================================================
-   ACCESSIBILITY
-   ========================================================== */
-
-#chapter8 button:focus-visible,
-#chapter8 a:focus-visible {
-    outline:
-        2px solid
-        rgba(
-            255,
-            175,
-            207,
-            0.75
-        );
-
-    outline-offset: 5px;
-}
-
-
-#chapter8 ::selection {
-    background:
-        rgba(
-            232,
-            132,
-            176,
-            0.35
-        );
-
-    color: #fff;
+    color: rgba(255, 215, 230, 0.55);
 }
 
 
@@ -1414,7 +1142,7 @@
    ANIMATIONS
    ========================================================== */
 
-@keyframes chapter8IntroReveal {
+@keyframes finalIntroReveal {
 
     from {
         opacity: 0;
@@ -1433,7 +1161,7 @@
 }
 
 
-@keyframes chapter8MessageReveal {
+@keyframes messageReveal {
 
     from {
         opacity: 0;
@@ -1452,7 +1180,7 @@
 }
 
 
-@keyframes chapter8CardReveal {
+@keyframes cardReveal {
 
     from {
         opacity: 0;
@@ -1473,7 +1201,7 @@
 }
 
 
-@keyframes chapter8HeartBreathing {
+@keyframes heartBreathing {
 
     0%,
     100% {
@@ -1493,7 +1221,7 @@
 }
 
 
-@keyframes chapter8ArrowFloat {
+@keyframes arrowFloat {
 
     0%,
     100% {
@@ -1513,7 +1241,7 @@
 }
 
 
-@keyframes chapter8FloatingHeart {
+@keyframes floatingHeart {
 
     0%,
     100% {
@@ -1535,7 +1263,7 @@
 }
 
 
-@keyframes chapter8SparklePulse {
+@keyframes sparklePulse {
 
     0%,
     100% {
@@ -1555,13 +1283,12 @@
 }
 
 
-@keyframes chapter8MessageButtonGlow {
+@keyframes messageButtonGlow {
 
     0%,
     100% {
         box-shadow:
-            0 15px 40px
-            rgba(
+            0 15px 40px rgba(
                 205,
                 102,
                 157,
@@ -1571,16 +1298,13 @@
 
     50% {
         box-shadow:
-            0 18px 48px
-            rgba(
+            0 18px 48px rgba(
                 218,
                 107,
                 164,
                 0.38
             ),
-
-            0 0 28px
-            rgba(
+            0 0 28px rgba(
                 255,
                 141,
                 188,
@@ -1592,14 +1316,45 @@
 
 
 /* ==========================================================
+   SELECTION
+   ========================================================== */
+
+html body #chapter8 ::selection {
+    background:
+        rgba(232, 132, 176, 0.35);
+
+    color: #fff;
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+html body #chapter8 button:focus-visible,
+html body #chapter8 a:focus-visible {
+
+    outline:
+        2px solid rgba(
+            255,
+            175,
+            207,
+            0.75
+        );
+
+    outline-offset: 5px;
+}
+
+
+/* ==========================================================
    REDUCED MOTION
    ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
-    #chapter8 *,
-    #chapter8 *::before,
-    #chapter8 *::after {
+    html body #chapter8 *,
+    html body #chapter8 *::before,
+    html body #chapter8 *::after {
 
         animation-duration:
             0.01ms !important;
@@ -1623,19 +1378,19 @@
 
 @media (max-width: 768px) {
 
-    #chapter8 {
+    html body #chapter8 {
         padding:
             90px 20px
             110px;
     }
 
 
-    #chapter8 .chapter8-intro {
+    html body #chapter8 .chapter7-intro {
         margin-bottom: 70px;
     }
 
 
-    #chapter8 .chapter8-question-card {
+    html body #chapter8 .chapter7-question-card {
         padding:
             55px 30px
             50px;
@@ -1644,12 +1399,12 @@
     }
 
 
-    #chapter8 .chapter8-buttons {
+    html body #chapter8 .chapter7-buttons {
         gap: 16px;
     }
 
 
-    #chapter8 #chapter8Yes {
+    html body #chapter8 #chapter7Yes {
         min-width: 135px;
 
         padding:
@@ -1657,7 +1412,7 @@
     }
 
 
-    #chapter8 #chapter8No {
+    html body #chapter8 #chapter7No {
         min-width: 115px;
 
         padding:
@@ -1665,17 +1420,17 @@
     }
 
 
-    #chapter8 .chapter8-message {
+    html body #chapter8 .chapter7-message {
         margin-bottom: 65px;
     }
 
 
-    #chapter8 .chapter8-before-question {
+    html body #chapter8 .chapter7-before-question {
         margin-top: 75px;
     }
 
 
-    #chapter8 .chapter8-ending {
+    html body #chapter8 .chapter7-ending {
         margin-top: 90px;
     }
 
@@ -1688,21 +1443,21 @@
 
 @media (max-width: 520px) {
 
-    #chapter8 {
+    html body #chapter8 {
         padding:
             75px 16px
             90px;
     }
 
 
-    #chapter8 .chapter8-label {
+    html body #chapter8 .chapter7-label {
         font-size: 0.55rem;
 
         letter-spacing: 0.28em;
     }
 
 
-    #chapter8 .chapter8-title {
+    html body #chapter8 .chapter7-title {
         font-size:
             clamp(
                 3rem,
@@ -1712,24 +1467,24 @@
     }
 
 
-    #chapter8 .chapter8-subtitle {
+    html body #chapter8 .chapter7-subtitle {
         font-size: 1.2rem;
     }
 
 
-    #chapter8 .chapter8-message p {
+    html body #chapter8 .chapter7-message p {
         font-size: 1.15rem;
 
         line-height: 1.75;
     }
 
 
-    #chapter8 .chapter8-before-question p {
+    html body #chapter8 .chapter7-before-question p {
         font-size: 1.3rem;
     }
 
 
-    #chapter8 .chapter8-question-card {
+    html body #chapter8 .chapter7-question-card {
         padding:
             48px 20px
             42px;
@@ -1738,7 +1493,7 @@
     }
 
 
-    #chapter8 .chapter8-question {
+    html body #chapter8 .chapter7-question {
         font-size:
             clamp(
                 2.2rem,
@@ -1748,14 +1503,14 @@
     }
 
 
-    #chapter8 .chapter8-buttons {
+    html body #chapter8 .chapter7-buttons {
         gap: 12px;
 
         min-height: 75px;
     }
 
 
-    #chapter8 #chapter8Yes {
+    html body #chapter8 #chapter7Yes {
         min-width: 120px;
 
         min-height: 52px;
@@ -1767,7 +1522,7 @@
     }
 
 
-    #chapter8 #chapter8No {
+    html body #chapter8 #chapter7No {
         min-width: 105px;
 
         min-height: 48px;
@@ -1779,7 +1534,7 @@
     }
 
 
-    #chapter8 .chapter8-message-button {
+    html body #chapter8 #chapter7Message {
         min-width: 175px;
 
         padding:
@@ -1789,27 +1544,27 @@
     }
 
 
-    #chapter8 .chapter8-floating-heart {
+    html body #chapter8 .chapter7-floating-heart {
         opacity: 0.65;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(1) {
+    html body #chapter8 .chapter7-floating-heart:nth-child(1) {
         left: 3%;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(2) {
+    html body #chapter8 .chapter7-floating-heart:nth-child(2) {
         right: 3%;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(3) {
+    html body #chapter8 .chapter7-floating-heart:nth-child(3) {
         left: 2%;
     }
 
 
-    #chapter8 .chapter8-floating-heart:nth-child(4) {
+    html body #chapter8 .chapter7-floating-heart:nth-child(4) {
         right: 2%;
     }
 
@@ -1822,12 +1577,12 @@
 
 @media (max-width: 360px) {
 
-    #chapter8 .chapter8-buttons {
+    html body #chapter8 .chapter7-buttons {
         gap: 8px;
     }
 
 
-    #chapter8 #chapter8Yes {
+    html body #chapter8 #chapter7Yes {
         min-width: 110px;
 
         padding:
@@ -1835,7 +1590,7 @@
     }
 
 
-    #chapter8 #chapter8No {
+    html body #chapter8 #chapter7No {
         min-width: 95px;
 
         padding:
@@ -1843,7 +1598,7 @@
     }
 
 
-    #chapter8 .chapter8-question-card {
+    html body #chapter8 .chapter7-question-card {
         padding:
             42px 16px
             38px;
