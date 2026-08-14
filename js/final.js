@@ -2,7 +2,7 @@
    FINAL.JS
    Project : Our Story
    Purpose : Final Chapter — The Question / Ending
-   Chapter : VII
+   Chapter : FINAL
    ========================================================== */
 
 
@@ -11,17 +11,12 @@
    ========================================================== */
 
 /*
-    ==========================================================
-    EDIT THIS LINK ONLY
-    ==========================================================
-
     Replace the URL below with your Instagram profile.
 
     Example:
 
     const INSTAGRAM_URL =
         "https://www.instagram.com/yourusername/";
-
 */
 
 const INSTAGRAM_URL =
@@ -43,16 +38,31 @@ function initFinalChapter() {
        FINAL CHAPTER ELEMENT
        ====================================================== */
 
+    /*
+        IMPORTANT:
+
+        Final Chapter uses #chapter8.
+
+        This matches final.css.
+
+        We DO NOT force the chapter to become
+        visible here.
+
+        Visibility is controlled by the
+        existing chapter navigation system
+        through the .active class.
+    */
+
     const finalChapter =
         document.getElementById(
-            "chapter7"
+            "chapter8"
         );
 
 
     if (!finalChapter) {
 
         console.warn(
-            "⚠️ Chapter VII element not found."
+            "⚠️ Final Chapter #chapter8 not found."
         );
 
         return;
@@ -64,15 +74,19 @@ function initFinalChapter() {
        FINAL CHAPTER ELEMENTS
        ====================================================== */
 
+    /*
+        These IDs match final.css.
+    */
+
     const noButton =
         document.getElementById(
-            "finalNoButton"
+            "chapter7No"
         );
 
 
     const yesButton =
         document.getElementById(
-            "finalYesButton"
+            "chapter7Yes"
         );
 
 
@@ -90,18 +104,18 @@ function initFinalChapter() {
 
     const messageButton =
         document.getElementById(
-            "finalMessageButton"
+            "chapter7Message"
         );
 
 
     /* ======================================================
-       SAFETY CHECK
+       SAFETY CHECKS
        ====================================================== */
 
     if (!noButton) {
 
         console.warn(
-            "⚠️ Final Chapter NO button not found."
+            "⚠️ Final Chapter NO button #chapter7No not found."
         );
 
     }
@@ -110,7 +124,34 @@ function initFinalChapter() {
     if (!yesButton) {
 
         console.warn(
-            "⚠️ Final Chapter YES button not found."
+            "⚠️ Final Chapter YES button #chapter7Yes not found."
+        );
+
+    }
+
+
+    if (!questionSection) {
+
+        console.warn(
+            "⚠️ Final question section #finalQuestion not found."
+        );
+
+    }
+
+
+    if (!successSection) {
+
+        console.warn(
+            "⚠️ Final success section #finalSuccess not found."
+        );
+
+    }
+
+
+    if (!messageButton) {
+
+        console.warn(
+            "⚠️ Final message button #chapter7Message not found."
         );
 
     }
@@ -132,47 +173,94 @@ function initFinalChapter() {
 
 
     /* ======================================================
-       NO BUTTON SIZES
+       INITIAL STATE
        ====================================================== */
 
     /*
-        Each click makes the NO button smaller.
+        Success screen starts hidden.
 
-        0 = normal
-        1 = smaller
-        2 = tiny
-        3 = gone
+        IMPORTANT:
+
+        We only control the SUCCESS SECTION here.
+
+        We do NOT hide/show #chapter8 itself.
+
+        The chapter navigation system controls
+        #chapter8.active.
     */
 
-    const noButtonSizes = [
+    if (successSection) {
 
-        "1",
+        successSection.hidden =
+            true;
 
-        "0.65",
+        successSection.classList.remove(
+            "show"
+        );
 
-        "0.35"
+    }
 
-    ];
-
-
-    /* ======================================================
-       YES BUTTON SIZES
-       ====================================================== */
 
     /*
-        The YES button gradually becomes
-        more visually dominant.
+        Reset question section.
     */
 
-    const yesButtonSizes = [
+    if (questionSection) {
 
-        "1",
+        questionSection.classList.remove(
+            "question-complete"
+        );
 
-        "1.12",
+    }
 
-        "1.28"
 
-    ];
+    /*
+        Reset NO button.
+    */
+
+    if (noButton) {
+
+        noButton.style.display =
+            "";
+
+        noButton.style.transform =
+            "";
+
+        noButton.disabled =
+            false;
+
+        noButton.removeAttribute(
+            "aria-hidden"
+        );
+
+        noButton.classList.remove(
+            "shrink-1",
+            "shrink-2",
+            "shrink-3"
+        );
+
+    }
+
+
+    /*
+        Reset YES button.
+    */
+
+    if (yesButton) {
+
+        yesButton.style.transform =
+            "";
+
+        yesButton.disabled =
+            false;
+
+        yesButton.classList.remove(
+            "grow-1",
+            "grow-2",
+            "grow-3"
+        );
+
+    }
 
 
     /* ======================================================
@@ -206,7 +294,7 @@ function initFinalChapter() {
 
 
         /*
-            Increase NO click count.
+            Increase click count.
         */
 
         state.noClicks++;
@@ -218,91 +306,92 @@ function initFinalChapter() {
 
 
         /* ==================================================
-           FIRST / SECOND CLICK
+           FIRST CLICK
            ================================================== */
 
         if (
-            state.noClicks <
-            state.maxNoClicks
+            state.noClicks === 1
         ) {
 
-            const sizeIndex =
-                state.noClicks - 1;
+            /*
+                Remove any previous state.
+            */
 
-
-            const newSize =
-                noButtonSizes[
-                    sizeIndex
-                ];
-
-
-            const yesSize =
-                yesButtonSizes[
-                    sizeIndex
-                ];
+            noButton.classList.remove(
+                "shrink-2",
+                "shrink-3"
+            );
 
 
             /*
                 Make NO smaller.
             */
 
-            noButton.style.transform =
-                `scale(${newSize})`;
-
-
-            /*
-                Make YES bigger.
-            */
-
-            if (yesButton) {
-
-                yesButton.style.transform =
-                    `scale(${yesSize})`;
-
-            }
-
-
-            /*
-                Add visual class.
-            */
-
             noButton.classList.add(
-                "shrinking"
+                "shrink-1"
             );
 
 
             /*
-                Restart the animation.
-            */
-
-            void noButton.offsetWidth;
-
-
-            noButton.classList.remove(
-                "shrinking"
-            );
-
-
-            /*
-                Add emphasis to YES.
+                Make YES slightly larger.
             */
 
             if (yesButton) {
-
-                yesButton.classList.add(
-                    "yes-growing"
-                );
-
-
-                void yesButton.offsetWidth;
-
 
                 yesButton.classList.remove(
-                    "yes-growing"
+                    "grow-2",
+                    "grow-3"
+                );
+
+                yesButton.classList.add(
+                    "grow-1"
                 );
 
             }
 
+            return;
+
+        }
+
+
+        /* ==================================================
+           SECOND CLICK
+           ================================================== */
+
+        if (
+            state.noClicks === 2
+        ) {
+
+            /*
+                Make NO even smaller.
+            */
+
+            noButton.classList.remove(
+                "shrink-1",
+                "shrink-3"
+            );
+
+            noButton.classList.add(
+                "shrink-2"
+            );
+
+
+            /*
+                Make YES larger.
+            */
+
+            if (yesButton) {
+
+                yesButton.classList.remove(
+                    "grow-1",
+                    "grow-3"
+                );
+
+                yesButton.classList.add(
+                    "grow-2"
+                );
+
+            }
 
             return;
 
@@ -313,33 +402,38 @@ function initFinalChapter() {
            THIRD CLICK
            ================================================== */
 
-        /*
-            The third NO click makes
-            the button disappear.
-        */
-
         if (
             state.noClicks >=
             state.maxNoClicks
         ) {
 
+            /*
+                Make NO disappear.
+            */
+
+            noButton.classList.remove(
+                "shrink-1",
+                "shrink-2"
+            );
+
             noButton.classList.add(
-                "disappearing"
+                "shrink-3"
             );
 
 
             /*
-                Make YES the largest button.
+                Make YES the dominant button.
             */
 
             if (yesButton) {
 
-                yesButton.style.transform =
-                    "scale(1.42)";
-
+                yesButton.classList.remove(
+                    "grow-1",
+                    "grow-2"
+                );
 
                 yesButton.classList.add(
-                    "yes-final"
+                    "grow-3"
                 );
 
             }
@@ -360,8 +454,8 @@ function initFinalChapter() {
 
 
             /*
-                Wait for the disappearance
-                animation before hiding it.
+                After the CSS transition,
+                completely remove it from layout.
             */
 
             setTimeout(
@@ -423,8 +517,7 @@ function initFinalChapter() {
 
 
         /*
-            Disable the YES button
-            to prevent repeated triggering.
+            Disable YES.
         */
 
         yesButton.disabled =
@@ -432,11 +525,10 @@ function initFinalChapter() {
 
 
         /*
-            Hide the question section
-            with a CSS class.
+            Hide/complete the question section.
 
-            CSS will handle the actual
-            animation.
+            The CSS associated with this class
+            can handle the visual transition.
         */
 
         if (questionSection) {
@@ -449,8 +541,8 @@ function initFinalChapter() {
 
 
         /*
-            Small delay makes the transition
-            feel more emotional.
+            Give the question a moment
+            before showing the success message.
         */
 
         setTimeout(
@@ -491,7 +583,7 @@ function initFinalChapter() {
 
 
         /*
-            Add animation class
+            Trigger CSS animation
             on the next frame.
         */
 
@@ -507,7 +599,7 @@ function initFinalChapter() {
 
 
         /*
-            Scroll toward the success message.
+            Scroll to the success message.
         */
 
         setTimeout(
@@ -559,40 +651,29 @@ function initFinalChapter() {
 
 
         /*
-            Create several floating hearts.
+            Floating heart symbols.
         */
 
         const hearts = [
 
             "♡",
-
             "♥",
-
             "♡",
-
             "✦",
-
             "♥",
-
             "♡",
-
             "✧",
-
             "♥",
-
             "♡",
-
             "✦",
-
             "♥",
-
             "♡"
 
         ];
 
 
         hearts.forEach(
-            (symbol, index) => {
+            (symbol) => {
 
                 const heart =
                     document.createElement(
@@ -625,8 +706,7 @@ function initFinalChapter() {
 
 
                 /*
-                    Slightly different
-                    animation duration.
+                    Random animation duration.
                 */
 
                 heart.style.animationDuration =
@@ -641,14 +721,18 @@ function initFinalChapter() {
         );
 
 
+        /*
+            Add celebration to FINAL CHAPTER,
+            not to the entire document.
+        */
+
         finalChapter.appendChild(
             container
         );
 
 
         /*
-            Remove the celebration
-            after the animation.
+            Remove celebration after animation.
         */
 
         setTimeout(
@@ -680,8 +764,8 @@ function initFinalChapter() {
     function handleMessageClick() {
 
         /*
-            Make sure the user has
-            actually provided an Instagram URL.
+            Make sure Instagram URL
+            has been updated.
         */
 
         if (
@@ -725,90 +809,8 @@ function initFinalChapter() {
 
 
     /* ======================================================
-       INITIAL FINAL CHAPTER STATE
+       FINAL INITIALIZATION COMPLETE
        ====================================================== */
-
-    /*
-        Make sure success screen is
-        hidden when Chapter VII starts.
-    */
-
-    if (successSection) {
-
-        successSection.hidden =
-            true;
-
-
-        successSection.classList.remove(
-            "show"
-        );
-
-    }
-
-
-    /*
-        Reset question section.
-    */
-
-    if (questionSection) {
-
-        questionSection.classList.remove(
-            "question-complete"
-        );
-
-    }
-
-
-    /*
-        Reset NO button.
-    */
-
-    if (noButton) {
-
-        noButton.style.display =
-            "";
-
-
-        noButton.style.transform =
-            "scale(1)";
-
-
-        noButton.disabled =
-            false;
-
-
-        noButton.removeAttribute(
-            "aria-hidden"
-        );
-
-
-        noButton.classList.remove(
-            "disappearing"
-        );
-
-    }
-
-
-    /*
-        Reset YES button.
-    */
-
-    if (yesButton) {
-
-        yesButton.style.transform =
-            "scale(1)";
-
-
-        yesButton.disabled =
-            false;
-
-
-        yesButton.classList.remove(
-            "yes-final"
-        );
-
-    }
-
 
     console.log(
         "✨ Final Chapter — The Question initialized ♡"
@@ -818,14 +820,12 @@ function initFinalChapter() {
 
 
 /* ==========================================================
-   INITIALIZATION
-========================================================== */
+   DOM INITIALIZATION
+   ========================================================== */
 
 /*
-    We check whether the DOM is already ready.
-
-    This makes the file safe whether it is loaded
-    before or after DOMContentLoaded.
+    Safe whether final.js is loaded
+    before or after the DOM.
 */
 
 if (
