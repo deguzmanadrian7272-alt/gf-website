@@ -1,22 +1,21 @@
 /* ==========================================================
    CHAPTER II — THE LITTLE THINGS
-   Project : Our Story
-   File    : chapter2.css
-   Purpose : Romantic / Soft / Memory Chapter
+   Romantic Story / Memory Chapter
    ========================================================== */
 
 
 /* ==========================================================
-   ROOT
+   CHAPTER 2 ROOT
    ========================================================== */
 
 #chapter2 {
     position: relative;
-
     width: 100%;
     min-height: 100vh;
 
-    display: none;
+    /* IMPORTANT:
+       Let the chapter grow naturally so the page can scroll. */
+    height: auto;
 
     overflow-x: hidden;
     overflow-y: visible;
@@ -31,19 +30,16 @@
             rgba(255, 184, 216, 0.10),
             transparent 28%
         ),
-
         radial-gradient(
             circle at 85% 35%,
             rgba(190, 150, 220, 0.08),
             transparent 30%
         ),
-
         radial-gradient(
             circle at 50% 100%,
             rgba(255, 180, 210, 0.07),
             transparent 35%
         ),
-
         linear-gradient(
             180deg,
             #0b080d 0%,
@@ -54,7 +50,7 @@
 
 
 /* ==========================================================
-   ACTIVE STATE
+   CHAPTER 2 ACTIVE STATE
    ========================================================== */
 
 #chapter2.active {
@@ -70,29 +66,17 @@
     width: 8px;
 }
 
-
-/*
-   The scrollbar belongs to the page now,
-   not to an internal Chapter II container.
-*/
-
 #chapter2::-webkit-scrollbar-track {
-    background:
-        rgba(255, 255, 255, 0.025);
+    background: rgba(255, 255, 255, 0.025);
 }
 
-
 #chapter2::-webkit-scrollbar-thumb {
-    background:
-        rgba(255, 190, 220, 0.28);
-
+    background: rgba(255, 190, 220, 0.28);
     border-radius: 20px;
 }
 
-
 #chapter2::-webkit-scrollbar-thumb:hover {
-    background:
-        rgba(255, 190, 220, 0.50);
+    background: rgba(255, 190, 220, 0.50);
 }
 
 
@@ -116,42 +100,6 @@
     pointer-events: none;
 
     z-index: 0;
-}
-
-
-/*
-   Extra large background layer.
-   This allows the background to continue through
-   the entire Chapter II height.
-*/
-
-.chapter2-background::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(255, 180, 215, 0.035),
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 88% 48%,
-            rgba(205, 155, 230, 0.035),
-            transparent 27%
-        ),
-
-        radial-gradient(
-            circle at 50% 85%,
-            rgba(255, 170, 210, 0.025),
-            transparent 30%
-        );
-
-    pointer-events: none;
 }
 
 
@@ -197,11 +145,11 @@
 
     position: absolute;
 
-    width: 500px;
-    height: 500px;
+    width: 450px;
+    height: 450px;
 
     right: -220px;
-    bottom: -220px;
+    bottom: -200px;
 
     border-radius: 50%;
 
@@ -209,7 +157,6 @@
         radial-gradient(
             circle,
             rgba(211, 170, 230, 0.10),
-            rgba(211, 170, 230, 0.025) 45%,
             transparent 70%
         );
 
@@ -233,10 +180,7 @@
 
     text-shadow:
         0 0 15px
-        rgba(255, 180, 215, 0.45),
-
-        0 0 30px
-        rgba(255, 150, 205, 0.18);
+        rgba(255, 180, 215, 0.45);
 
     opacity: 0;
 
@@ -248,57 +192,45 @@
 }
 
 
-/*
-   IMPORTANT:
-   These hearts are distributed across the chapter
-   rather than being concentrated around the first viewport.
-*/
+/* Heart positions */
 
-.chapter2-heart:nth-child(2) {
+.chapter2-heart:nth-child(1) {
     left: 12%;
-    top: 10%;
-
+    top: 18%;
     animation-delay: 0s;
 }
 
-
-.chapter2-heart:nth-child(3) {
+.chapter2-heart:nth-child(2) {
     left: 84%;
-    top: 25%;
-
+    top: 30%;
     animation-delay: 2s;
 }
 
-
-.chapter2-heart:nth-child(4) {
-    left: 16%;
-    top: 55%;
-
+.chapter2-heart:nth-child(3) {
+    left: 18%;
+    top: 58%;
     animation-delay: 4s;
 }
 
-
-.chapter2-heart:nth-child(5) {
-    right: 14%;
+.chapter2-heart:nth-child(4) {
+    left: 76%;
     top: 78%;
-
     animation-delay: 1s;
 }
 
 
-/*
-   Extra subtle heart positions using the background itself.
-   This gives the chapter more atmosphere without requiring
-   additional HTML elements.
-*/
+/* Extra hearts lower in the chapter */
 
-.chapter2-background {
-    background:
-        radial-gradient(
-            circle at 10% 15%,
-            rgba(255, 185, 218, 0.025),
-            transparent 20%
-        );
+.chapter2-heart:nth-child(5) {
+    left: 45%;
+    top: 42%;
+    animation-delay: 3s;
+}
+
+.chapter2-heart:nth-child(6) {
+    left: 92%;
+    top: 60%;
+    animation-delay: 5s;
 }
 
 
@@ -316,7 +248,7 @@
         1050px
     );
 
-    min-height: 100%;
+    min-height: 100vh;
 
     margin: 0 auto;
 
@@ -1203,7 +1135,6 @@
         min-height:
             160px;
     }
-
 }
 
 
@@ -1300,7 +1231,6 @@
         margin-bottom:
             60px;
     }
-
 }
 
 
