@@ -2,7 +2,7 @@
    CHAPTER II — THE LITTLE THINGS
    Project : Our Story
    File    : chapter2.css
-   Purpose : Romantic / Cute / Storybook Memory Chapter
+   Purpose : Romantic / Soft / Memory Chapter
    ========================================================== */
 
 
@@ -63,22 +63,95 @@
 
 
 /* ==========================================================
+   SCROLLBAR
+   ========================================================== */
+
+#chapter2::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+/*
+   The scrollbar belongs to the page now,
+   not to an internal Chapter II container.
+*/
+
+#chapter2::-webkit-scrollbar-track {
+    background:
+        rgba(255, 255, 255, 0.025);
+}
+
+
+#chapter2::-webkit-scrollbar-thumb {
+    background:
+        rgba(255, 190, 220, 0.28);
+
+    border-radius: 20px;
+}
+
+
+#chapter2::-webkit-scrollbar-thumb:hover {
+    background:
+        rgba(255, 190, 220, 0.50);
+}
+
+
+/* ==========================================================
    BACKGROUND
    ========================================================== */
 
 .chapter2-background {
     position: absolute;
 
-    inset: 0;
+    top: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;
+
+    min-height: 100%;
 
     overflow: hidden;
 
     pointer-events: none;
 
     z-index: 0;
+}
+
+
+/*
+   Extra large background layer.
+   This allows the background to continue through
+   the entire Chapter II height.
+*/
+
+.chapter2-background::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 180, 215, 0.035),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 88% 48%,
+            rgba(205, 155, 230, 0.035),
+            transparent 27%
+        ),
+
+        radial-gradient(
+            circle at 50% 85%,
+            rgba(255, 170, 210, 0.025),
+            transparent 30%
+        );
+
+    pointer-events: none;
 }
 
 
@@ -100,8 +173,8 @@
     background:
         radial-gradient(
             circle,
-            rgba(255, 190, 220, 0.14),
-            rgba(255, 190, 220, 0.04) 40%,
+            rgba(255, 190, 220, 0.12),
+            rgba(255, 190, 220, 0.03) 40%,
             transparent 70%
         );
 
@@ -116,7 +189,7 @@
 
 
 /* ==========================================================
-   SECOND BACKGROUND GLOW
+   SECOND GLOW
    ========================================================== */
 
 .chapter2-background::after {
@@ -128,15 +201,15 @@
     height: 500px;
 
     right: -220px;
-    bottom: -180px;
+    bottom: -220px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(211, 170, 230, 0.12),
-            rgba(211, 170, 230, 0.03) 45%,
+            rgba(211, 170, 230, 0.10),
+            rgba(211, 170, 230, 0.025) 45%,
             transparent 70%
         );
 
@@ -153,20 +226,17 @@
 
     display: block;
 
-    z-index: 1;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 1rem;
+    font-size: 0.85rem;
 
     color:
-        rgba(255, 205, 225, 0.75);
+        rgba(255, 205, 225, 0.55);
 
     text-shadow:
-        0 0 10px rgba(255, 180, 215, 0.65),
-        0 0 22px rgba(255, 160, 210, 0.35);
+        0 0 15px
+        rgba(255, 180, 215, 0.45),
+
+        0 0 30px
+        rgba(255, 150, 205, 0.18);
 
     opacity: 0;
 
@@ -178,79 +248,81 @@
 }
 
 
-/* ==========================================================
-   HEART POSITIONS
-   ========================================================== */
+/*
+   IMPORTANT:
+   These hearts are distributed across the chapter
+   rather than being concentrated around the first viewport.
+*/
 
-.chapter2-heart:nth-child(1) {
-    left: 10%;
-    top: 18%;
+.chapter2-heart:nth-child(2) {
+    left: 12%;
+    top: 10%;
 
     animation-delay: 0s;
 }
 
 
-.chapter2-heart:nth-child(2) {
-    left: 87%;
-    top: 27%;
+.chapter2-heart:nth-child(3) {
+    left: 84%;
+    top: 25%;
 
     animation-delay: 2s;
 }
 
 
-.chapter2-heart:nth-child(3) {
-    left: 15%;
-    top: 58%;
+.chapter2-heart:nth-child(4) {
+    left: 16%;
+    top: 55%;
 
     animation-delay: 4s;
 }
 
 
-.chapter2-heart:nth-child(4) {
-    left: 82%;
-    top: 70%;
+.chapter2-heart:nth-child(5) {
+    right: 14%;
+    top: 78%;
 
     animation-delay: 1s;
 }
 
 
-.chapter2-heart:nth-child(5) {
-    left: 48%;
-    top: 38%;
+/*
+   Extra subtle heart positions using the background itself.
+   This gives the chapter more atmosphere without requiring
+   additional HTML elements.
+*/
 
-    animation-delay: 3s;
-}
-
-
-.chapter2-heart:nth-child(6) {
-    left: 65%;
-    top: 86%;
-
-    animation-delay: 5s;
+.chapter2-background {
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(255, 185, 218, 0.025),
+            transparent 20%
+        );
 }
 
 
 /* ==========================================================
-   MAIN WRAPPER
+   WRAPPER
    ========================================================== */
 
 .chapter2-wrapper {
     position: relative;
 
-    z-index: 5;
+    z-index: 2;
 
     width: min(
-        1050px,
-        calc(100% - 40px)
+        100%,
+        1050px
     );
 
-    min-height: 100vh;
+    min-height: 100%;
 
     margin: 0 auto;
 
     padding:
         90px
-        0
+        30px
         120px;
 
     box-sizing: border-box;
@@ -264,13 +336,13 @@
 .chapter2-intro {
     position: relative;
 
+    text-align: center;
+
     max-width: 850px;
 
     margin:
         0 auto
         110px;
-
-    text-align: center;
 }
 
 
@@ -320,10 +392,7 @@
 
     text-shadow:
         0 0 30px
-        rgba(255, 190, 220, 0.12),
-
-        0 0 60px
-        rgba(255, 150, 210, 0.05);
+        rgba(255, 190, 220, 0.10);
 }
 
 
@@ -341,7 +410,7 @@
     font-size: 1.2rem;
 
     color:
-        rgba(255, 205, 225, 0.65);
+        rgba(255, 205, 225, 0.55);
 }
 
 
@@ -352,16 +421,12 @@
         25px auto
         0;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
     font-size: 0.9rem;
 
     line-height: 2;
 
     color:
-        rgba(255, 238, 246, 0.68);
+        rgba(255, 238, 246, 0.65);
 }
 
 
@@ -389,17 +454,17 @@
 
     text-align: center;
 
+    border-radius: 26px;
+
     border:
         1px solid
-        rgba(255, 215, 232, 0.13);
-
-    border-radius: 28px;
+        rgba(255, 215, 232, 0.10);
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.055),
-            rgba(255, 210, 230, 0.018)
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 210, 230, 0.015)
         );
 
     box-shadow:
@@ -407,13 +472,13 @@
         rgba(0, 0, 0, 0.25),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.05);
+        rgba(255, 255, 255, 0.04);
 
     backdrop-filter:
-        blur(10px);
+        blur(8px);
 
     -webkit-backdrop-filter:
-        blur(10px);
+        blur(8px);
 
     transition:
         transform 0.5s ease,
@@ -427,14 +492,14 @@
         translateY(-8px);
 
     border-color:
-        rgba(255, 210, 230, 0.25);
+        rgba(255, 210, 230, 0.23);
 
     box-shadow:
         0 40px 90px
         rgba(0, 0, 0, 0.32),
 
         0 0 40px
-        rgba(255, 190, 220, 0.05),
+        rgba(255, 190, 220, 0.04),
 
         inset 0 1px 0
         rgba(255, 255, 255, 0.06);
@@ -456,7 +521,7 @@
     font-size: 0.8rem;
 
     color:
-        rgba(255, 210, 230, 0.45);
+        rgba(255, 210, 230, 0.40);
 }
 
 
@@ -471,7 +536,7 @@
     font-size: 0.8rem;
 
     color:
-        rgba(255, 210, 230, 0.35);
+        rgba(255, 210, 230, 0.30);
 }
 
 
@@ -492,17 +557,26 @@
 
     border:
         1px solid
-        rgba(255, 210, 230, 0.22);
+        rgba(255, 210, 230, 0.18);
 
     border-radius: 50%;
 
     font-size: 0.7rem;
 
     color:
-        rgba(255, 220, 235, 0.75);
+        rgba(255, 220, 235, 0.70);
 
     background:
-        rgba(255, 220, 235, 0.03);
+        rgba(255, 220, 235, 0.025);
+}
+
+
+/* ==========================================================
+   STORY CONTENT
+   ========================================================== */
+
+.chapter2-story-content {
+    position: relative;
 }
 
 
@@ -535,7 +609,7 @@
 
 
 /* ==========================================================
-   STORY TEXT
+   STORY PARAGRAPHS
    ========================================================== */
 
 .chapter2-story p {
@@ -545,16 +619,12 @@
         0 auto
         14px;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
     font-size: 0.9rem;
 
     line-height: 2;
 
     color:
-        rgba(255, 238, 246, 0.72);
+        rgba(255, 238, 246, 0.70);
 }
 
 
@@ -581,10 +651,6 @@
 
     margin-bottom: 14px;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
     font-size: 0.7rem;
 
     letter-spacing: 0.3em;
@@ -592,7 +658,7 @@
     text-transform: uppercase;
 
     color:
-        rgba(255, 210, 230, 0.58);
+        rgba(255, 210, 230, 0.55);
 }
 
 
@@ -628,7 +694,10 @@
     grid-template-columns:
         repeat(
             2,
-            minmax(0, 1fr)
+            minmax(
+                0,
+                1fr
+            )
         );
 
     gap: 22px;
@@ -660,15 +729,15 @@
 
     border:
         1px solid
-        rgba(255, 215, 232, 0.12);
+        rgba(255, 215, 232, 0.10);
 
-    border-radius: 24px;
+    border-radius: 22px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.045),
-            rgba(255, 200, 225, 0.018)
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 200, 225, 0.015)
         );
 
     box-shadow:
@@ -746,14 +815,14 @@
 
     border:
         1px solid
-        rgba(255, 210, 230, 0.18);
+        rgba(255, 210, 230, 0.16);
 
     border-radius: 50%;
 
     font-size: 1.1rem;
 
     color:
-        rgba(255, 220, 235, 0.78);
+        rgba(255, 220, 235, 0.75);
 
     background:
         rgba(255, 220, 235, 0.035);
@@ -781,16 +850,12 @@
 .chapter2-joke-card p {
     margin: 0;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
     font-size: 0.82rem;
 
     line-height: 1.8;
 
     color:
-        rgba(255, 238, 246, 0.72);
+        rgba(255, 238, 246, 0.70);
 }
 
 
@@ -826,7 +891,7 @@
     font-size: 1.4rem;
 
     color:
-        rgba(255, 205, 225, 0.60);
+        rgba(255, 205, 225, 0.55);
 
     animation:
         chapter2SymbolFloat
@@ -865,16 +930,12 @@
         0 auto
         12px;
 
-    font-family:
-        "Poppins",
-        sans-serif;
-
     font-size: 0.9rem;
 
     line-height: 2;
 
     color:
-        rgba(255, 238, 246, 0.70);
+        rgba(255, 238, 246, 0.68);
 }
 
 
@@ -905,7 +966,7 @@
 
     border:
         1px solid
-        rgba(255, 210, 230, 0.18);
+        rgba(255, 210, 230, 0.16);
 
     border-radius: 30px;
 
@@ -913,7 +974,7 @@
         rgba(255, 255, 255, 0.025);
 
     color:
-        rgba(255, 235, 245, 0.78);
+        rgba(255, 235, 245, 0.75);
 
     font-family:
         "Poppins",
@@ -965,7 +1026,7 @@
     font-size: 1.1rem;
 
     color:
-        rgba(255, 220, 235, 0.65);
+        rgba(255, 220, 235, 0.60);
 }
 
 
@@ -989,7 +1050,7 @@
 
     border:
         1px solid
-        rgba(255, 210, 230, 0.28);
+        rgba(255, 210, 230, 0.25);
 
     border-radius: 30px;
 
@@ -997,7 +1058,7 @@
         rgba(255, 255, 255, 0.025);
 
     color:
-        rgba(255, 240, 247, 0.88);
+        rgba(255, 240, 247, 0.85);
 
     font-family:
         "Poppins",
@@ -1056,15 +1117,15 @@
 @keyframes chapter2HeartFloat {
     0% {
         transform:
-            translateY(30px)
-            scale(0.75)
-            rotate(-8deg);
+            translateY(25px)
+            scale(0.8)
+            rotate(-5deg);
 
         opacity: 0;
     }
 
     20% {
-        opacity: 0.65;
+        opacity: 0.6;
     }
 
     50% {
@@ -1073,16 +1134,16 @@
             scale(1)
             rotate(5deg);
 
-        opacity: 0.4;
+        opacity: 0.35;
     }
 
     80% {
-        opacity: 0.65;
+        opacity: 0.6;
     }
 
     100% {
         transform:
-            translateY(-70px)
+            translateY(-60px)
             scale(0.75)
             rotate(-5deg);
 
@@ -1092,15 +1153,16 @@
 
 
 @keyframes chapter2SymbolFloat {
-    0%,
-    100% {
-        transform:
-            translateY(0);
+    0% {
+        transform: translateY(0);
     }
 
     50% {
-        transform:
-            translateY(-7px);
+        transform: translateY(-7px);
+    }
+
+    100% {
+        transform: translateY(0);
     }
 }
 
@@ -1112,21 +1174,16 @@
 @media (max-width: 768px) {
 
     .chapter2-wrapper {
-        width:
-            calc(100% - 30px);
-
         padding:
             75px
-            0
+            20px
             100px;
     }
-
 
     .chapter2-intro {
         margin-bottom:
             80px;
     }
-
 
     .chapter2-story {
         padding:
@@ -1137,23 +1194,16 @@
             70px;
     }
 
-
     .chapter2-jokes-grid {
         grid-template-columns:
             1fr;
     }
-
 
     .chapter2-joke-card {
         min-height:
             160px;
     }
 
-
-    .chapter2-heart {
-        font-size:
-            0.9rem;
-    }
 }
 
 
@@ -1164,27 +1214,21 @@
 @media (max-width: 480px) {
 
     .chapter2-wrapper {
-        width:
-            calc(100% - 20px);
-
         padding:
             60px
-            0
+            15px
             80px;
     }
-
 
     .chapter2-intro {
         margin-bottom:
             65px;
     }
 
-
     .chapter2-intro h2 {
         font-size:
             3.2rem;
     }
-
 
     .chapter2-intro p {
         font-size:
@@ -1193,7 +1237,6 @@
         line-height:
             1.8;
     }
-
 
     .chapter2-story {
         padding:
@@ -1207,12 +1250,10 @@
             20px;
     }
 
-
     .chapter2-story h3 {
         font-size:
             2rem;
     }
-
 
     .chapter2-story p {
         font-size:
@@ -1222,18 +1263,15 @@
             1.9;
     }
 
-
     .chapter2-inside-jokes {
         margin-bottom:
             80px;
     }
 
-
     .chapter2-inside-jokes h3 {
         font-size:
             2.4rem;
     }
-
 
     .chapter2-joke-card {
         padding:
@@ -1241,12 +1279,10 @@
             22px;
     }
 
-
     .chapter2-navigation {
         gap:
             12px;
     }
-
 
     .chapter2-nav-btn {
         min-width:
@@ -1260,17 +1296,11 @@
             0.7rem;
     }
 
-
     #chapter2Continue {
         margin-bottom:
             60px;
     }
 
-
-    .chapter2-heart {
-        font-size:
-            0.8rem;
-    }
 }
 
 
@@ -1280,13 +1310,17 @@
 
 @media (prefers-reduced-motion: reduce) {
 
+    #chapter2 {
+        scroll-behavior:
+            auto;
+    }
+
     .chapter2-glow,
     .chapter2-heart,
     .chapter2-ending-symbol {
         animation:
             none;
     }
-
 
     .chapter2-story,
     .chapter2-joke-card,
