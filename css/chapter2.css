@@ -6,22 +6,29 @@
    Reference Style : Chapter VII
    ========================================================== */
 
+
 /* ==========================================================
    ROOT
    ========================================================== */
 
 #chapter2 {
     position: relative;
+
     width: 100%;
     min-height: 100vh;
+
+    /*
+       IMPORTANT:
+       Allow the chapter to naturally grow with its content.
+       The browser/page handles scrolling.
+    */
     height: auto;
 
     display: none;
 
     /*
-       IMPORTANT:
-       Do NOT use overflow: auto here.
-       Chapter II should use the browser's normal page scroll.
+       Do NOT create an internal scrollbar.
+       Scrolling is handled by the main page.
     */
     overflow: visible;
 
@@ -64,18 +71,26 @@
    ========================================================== */
 
 .chapter2-background {
-    /*
-       FIXED BACKGROUND
-       ----------------
-       Keeps the decorative background visible while
-       the user scrolls through the chapter.
-    */
-    position: fixed;
+    position: absolute;
 
-    inset: 0;
+    /*
+       Stretch the background with the entire chapter.
+       It is NOT fixed to the viewport.
+    */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    min-height: 100%;
 
     z-index: 0;
 
+    /*
+       Prevent decorations from creating horizontal scrolling.
+       Vertical scrolling remains controlled by the page.
+    */
     overflow: hidden;
 
     pointer-events: none;
@@ -158,6 +173,8 @@
 .chapter2-heart {
     position: absolute;
 
+    z-index: 2;
+
     display: block;
 
     color:
@@ -176,26 +193,34 @@
         infinite;
 }
 
+
+/* ==========================================================
+   HEART POSITIONS
+   ========================================================== */
+
 .chapter2-heart:nth-child(1) {
-    left: 10%;
-    top: 18%;
+    left: 8%;
+    top: 12%;
 }
 
 .chapter2-heart:nth-child(2) {
-    left: 84%;
-    top: 27%;
+    right: 8%;
+    top: 28%;
+
     animation-delay: 1.7s;
 }
 
 .chapter2-heart:nth-child(3) {
-    left: 17%;
-    top: 64%;
+    left: 12%;
+    top: 52%;
+
     animation-delay: 3.2s;
 }
 
 .chapter2-heart:nth-child(4) {
-    right: 10%;
-    top: 78%;
+    right: 11%;
+    top: 76%;
+
     animation-delay: 0.8s;
 }
 
@@ -235,8 +260,7 @@
         );
 
     /*
-       Allow the wrapper to naturally grow with the content.
-       This is important for normal page scrolling.
+       The wrapper naturally grows with the content.
     */
     min-height: 100vh;
     height: auto;
@@ -1350,6 +1374,7 @@
    ========================================================== */
 
 @keyframes chapter2GlowPulse {
+
     0%, 100% {
         opacity:
             0.65;
@@ -1371,6 +1396,7 @@
 
 
 @keyframes chapter2HeartFloat {
+
     0%, 100% {
         opacity:
             0.35;
@@ -1392,6 +1418,7 @@
 
 
 @keyframes chapter2SymbolFloat {
+
     0%, 100% {
         transform:
             translateY(0);
@@ -1417,7 +1444,6 @@
         padding-top:
             60px;
     }
-
 }
 
 
@@ -1477,7 +1503,6 @@
         gap:
             8px;
     }
-
 }
 
 
@@ -1576,7 +1601,6 @@
             20px
             40px;
     }
-
 }
 
 
