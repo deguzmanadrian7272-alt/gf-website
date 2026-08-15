@@ -1,1 +1,1901 @@
+/* ==========================================================
+   FINAL.CSS
+   Project : Our Story
+   Chapter : FINAL — The Question
+   Purpose : Final Question / Ending
 
+   IMPORTANT:
+   - Final Chapter root is #finalChapter
+   - Hidden by default
+   - Visible ONLY when #finalChapter has .active
+   - Inactive Final Chapter is removed from document flow
+   - Active Final Chapter becomes a fixed full-screen layer
+   - All inner styles are scoped to #finalChapter
+   - Does NOT modify other chapters
+========================================================== */
+
+
+/* ==========================================================
+   FINAL CHAPTER — VISIBILITY / FLOW CONTROL
+========================================================== */
+
+/*
+   CRITICAL:
+
+   The Final Chapter is completely removed from the document
+   when inactive.
+
+   This prevents it from appearing underneath Chapter 0–7,
+   even if the other chapters are still present in the HTML.
+*/
+
+#finalChapter {
+    display: none !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+}
+
+
+/*
+   ACTIVE FINAL CHAPTER
+
+   Once JavaScript adds .active, the Final Chapter becomes
+   a fixed full-screen layer.
+
+   Because it is fixed, it does NOT occupy normal document
+   flow and therefore cannot appear below another chapter.
+*/
+
+#finalChapter.active {
+    display: block !important;
+
+    visibility: visible !important;
+
+    pointer-events: auto !important;
+
+    position: fixed !important;
+
+    inset: 0;
+
+    width: 100vw;
+
+    height: 100vh;
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    padding: 120px 24px 140px;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+
+    overflow-y: auto;
+
+    z-index: 9999;
+
+    color: #fff4fa;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(157, 91, 151, 0.16),
+            transparent 34%
+        ),
+
+        radial-gradient(
+            circle at 20% 75%,
+            rgba(255, 132, 180, 0.08),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 70%,
+            rgba(126, 74, 139, 0.10),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #09070b 0%,
+            #100a12 38%,
+            #160d18 72%,
+            #0b070d 100%
+        );
+
+    isolation: isolate;
+}
+
+
+/*
+   EXTRA SAFETY:
+
+   If .active is removed by JavaScript, the Final Chapter
+   immediately returns to display:none.
+*/
+
+#finalChapter:not(.active) {
+    display: none !important;
+
+    visibility: hidden !important;
+
+    pointer-events: none !important;
+}
+
+
+/* ==========================================================
+   FINAL BACKGROUND
+========================================================== */
+
+#finalChapter .final-background {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   BACKGROUND GLOWS
+========================================================== */
+
+#finalChapter .final-glow {
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(20px);
+}
+
+
+#finalChapter .final-glow-1 {
+    width: 600px;
+
+    height: 600px;
+
+    top: -180px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 152, 196, 0.08),
+            transparent 70%
+        );
+}
+
+
+#finalChapter .final-glow-2 {
+    width: 500px;
+
+    height: 500px;
+
+    right: -180px;
+
+    bottom: -180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(181, 106, 169, 0.08),
+            transparent 70%
+        );
+}
+
+
+/* ==========================================================
+   FINAL MOON
+========================================================== */
+
+#finalChapter .final-moon {
+    position: absolute;
+
+    width: 260px;
+
+    height: 260px;
+
+    top: 8%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255, 235, 244, 0.16),
+            rgba(255, 190, 220, 0.05) 45%,
+            transparent 72%
+        );
+
+    filter: blur(1px);
+
+    opacity: 0.65;
+}
+
+
+/* ==========================================================
+   STARS
+========================================================== */
+
+#finalChapter .final-star {
+    position: absolute;
+
+    z-index: 1;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    color:
+        rgba(255, 220, 237, 0.65);
+
+    pointer-events: none;
+
+    animation:
+        finalStarPulse 4s ease-in-out infinite;
+}
+
+
+#finalChapter .final-star-1 {
+    top: 18%;
+
+    left: 14%;
+
+    font-size: 1rem;
+
+    animation-delay: 0s;
+}
+
+
+#finalChapter .final-star-2 {
+    top: 27%;
+
+    right: 15%;
+
+    font-size: 0.85rem;
+
+    animation-delay: 1.2s;
+}
+
+
+#finalChapter .final-star-3 {
+    top: 62%;
+
+    left: 9%;
+
+    font-size: 0.75rem;
+
+    animation-delay: 2.2s;
+}
+
+
+#finalChapter .final-star-4 {
+    top: 72%;
+
+    right: 11%;
+
+    font-size: 1rem;
+
+    animation-delay: 0.8s;
+}
+
+
+/* ==========================================================
+   DECORATIVE HEARTS
+========================================================== */
+
+#finalChapter .final-heart {
+    position: absolute;
+
+    z-index: 1;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    color:
+        rgba(255, 151, 195, 0.25);
+
+    pointer-events: none;
+
+    animation:
+        finalHeartDrift 7s ease-in-out infinite;
+}
+
+
+#finalChapter .final-heart-1 {
+    top: 34%;
+
+    left: 8%;
+
+    font-size: 1.4rem;
+
+    animation-delay: 0s;
+}
+
+
+#finalChapter .final-heart-2 {
+    top: 48%;
+
+    right: 9%;
+
+    font-size: 1.1rem;
+
+    animation-delay: 2s;
+}
+
+
+#finalChapter .final-heart-3 {
+    top: 79%;
+
+    left: 17%;
+
+    font-size: 0.8rem;
+
+    animation-delay: 3.5s;
+}
+
+
+/* ==========================================================
+   FINAL WRAPPER
+========================================================== */
+
+#finalChapter .final-wrapper {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(900px, 100%);
+
+    min-height: 100%;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   FINAL INTRO
+========================================================== */
+
+#finalChapter .final-intro {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 80vh;
+
+    margin-bottom: 80px;
+
+    animation:
+        finalIntroReveal 1.5s ease both;
+}
+
+
+/* ==========================================================
+   FINAL LABEL
+========================================================== */
+
+#finalChapter .final-label {
+    margin-bottom: 18px;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.65rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.38em;
+
+    text-transform: uppercase;
+
+    color:
+        rgba(255, 180, 210, 0.72);
+}
+
+
+/* ==========================================================
+   FINAL ORNAMENT
+========================================================== */
+
+#finalChapter .final-ornament {
+    margin-bottom: 25px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.15rem;
+
+    letter-spacing: 0.08em;
+
+    color:
+        rgba(255, 181, 211, 0.55);
+}
+
+
+/* ==========================================================
+   FINAL TITLE
+========================================================== */
+
+#finalChapter .final-intro h1 {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            3.5rem,
+            9vw,
+            6.8rem
+        );
+
+    font-weight: 400;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.035em;
+
+    color: #fff7fb;
+
+    text-shadow:
+        0 0 25px rgba(255, 159, 198, 0.12),
+        0 0 70px rgba(174, 88, 154, 0.08);
+}
+
+
+/* ==========================================================
+   FINAL SYMBOL
+========================================================== */
+
+#finalChapter .final-symbol {
+    margin-top: 30px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.7rem;
+
+    color: #ff9fc5;
+
+    animation:
+        heartBreathing 3.2s ease-in-out infinite;
+}
+
+
+/* ==========================================================
+   OPENING MESSAGE
+========================================================== */
+
+#finalChapter .final-opening-message {
+    margin: 30px 0 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.3rem,
+            2.5vw,
+            1.8rem
+        );
+
+    font-style: italic;
+
+    line-height: 1.6;
+
+    color:
+        rgba(255, 222, 235, 0.72);
+}
+
+
+/* ==========================================================
+   SCROLL INDICATOR
+========================================================== */
+
+#finalChapter .final-scroll-indicator {
+    margin-top: 45px;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 1rem;
+
+    color:
+        rgba(255, 157, 197, 0.65);
+
+    animation:
+        arrowFloat 2.5s ease-in-out infinite;
+}
+
+
+/* ==========================================================
+   BEFORE QUESTION SECTION
+========================================================== */
+
+#finalChapter .final-message-section {
+    width: min(680px, 100%);
+
+    margin: 0 auto 120px;
+
+    text-align: center;
+
+    animation:
+        messageReveal 1.5s ease 0.25s both;
+}
+
+
+/* ==========================================================
+   BEFORE QUESTION
+========================================================== */
+
+#finalChapter .final-before-question {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.5rem,
+            3vw,
+            2rem
+        );
+
+    font-style: italic;
+
+    line-height: 1.7;
+
+    color:
+        rgba(255, 211, 227, 0.82);
+}
+
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+#finalChapter .final-divider {
+    margin: 28px 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.2rem;
+
+    color:
+        rgba(255, 157, 197, 0.6);
+}
+
+
+/* ==========================================================
+   MESSAGE LEAD
+========================================================== */
+
+#finalChapter .final-message-lead {
+    margin: 0 0 55px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.8rem,
+            4vw,
+            2.7rem
+        );
+
+    line-height: 1.25;
+
+    color:
+        rgba(255, 235, 244, 0.9);
+}
+
+
+/* ==========================================================
+   EMOTIONAL MESSAGE
+========================================================== */
+
+#finalChapter .final-emotional-message {
+    width: min(620px, 100%);
+
+    margin: 0 auto;
+
+    padding: 0 20px;
+
+    box-sizing: border-box;
+}
+
+
+#finalChapter .final-emotional-message p {
+    margin: 0 0 30px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.2rem,
+            2.4vw,
+            1.55rem
+        );
+
+    line-height: 1.9;
+
+    color:
+        rgba(255, 232, 242, 0.8);
+}
+
+
+#finalChapter .final-emotional-message p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ==========================================================
+   FINAL QUESTION SECTION
+========================================================== */
+
+#finalChapter .final-question-section {
+    width: 100%;
+
+    margin: 0 auto 100px;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+/* ==========================================================
+   FINAL QUESTION CARD
+========================================================== */
+
+#finalChapter .final-question-card {
+    position: relative;
+
+    width: min(700px, 100%);
+
+    padding: 70px 55px 65px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        rgba(255, 170, 203, 0.18);
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 144, 190, 0.025)
+        );
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 0 80px rgba(172, 83, 153, 0.07);
+
+    backdrop-filter: blur(14px);
+
+    -webkit-backdrop-filter: blur(14px);
+
+    animation:
+        cardReveal 1.7s ease 0.45s both;
+}
+
+
+/* ==========================================================
+   QUESTION CARD DECORATIONS
+========================================================== */
+
+#finalChapter .final-question-card::before {
+    content: "♡";
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 28px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.3rem;
+
+    color:
+        rgba(255, 157, 197, 0.35);
+}
+
+
+#finalChapter .final-question-card::after {
+    content: "♡";
+
+    position: absolute;
+
+    right: 28px;
+
+    bottom: 20px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.3rem;
+
+    color:
+        rgba(255, 157, 197, 0.35);
+}
+
+
+/* ==========================================================
+   QUESTION TOP DECORATION
+========================================================== */
+
+#finalChapter .final-question-decoration {
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    color:
+        rgba(255, 175, 207, 0.5);
+}
+
+
+#finalChapter .final-decoration-top {
+    margin-bottom: 30px;
+
+    font-size: 1.5rem;
+}
+
+
+/* ==========================================================
+   QUESTION SMALL TEXT
+========================================================== */
+
+#finalChapter .final-question-small {
+    margin-bottom: 20px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.2rem,
+            2.5vw,
+            1.5rem
+        );
+
+    font-style: italic;
+
+    line-height: 1.6;
+
+    color:
+        rgba(255, 213, 229, 0.7);
+}
+
+
+/* ==========================================================
+   QUESTION HEART
+========================================================== */
+
+#finalChapter .final-question-heart {
+    margin: 15px 0 25px;
+
+    font-size: 1.5rem;
+
+    animation:
+        heartBreathing 3.2s ease-in-out infinite;
+}
+
+
+/* ==========================================================
+   MAIN QUESTION
+========================================================== */
+
+#finalChapter .final-question-card h2 {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            2.4rem,
+            6vw,
+            4.5rem
+        );
+
+    font-weight: 500;
+
+    line-height: 0.95;
+
+    letter-spacing: 0.015em;
+
+    color: #fff7fb;
+
+    text-shadow:
+        0 0 25px rgba(255, 140, 187, 0.12);
+}
+
+
+#finalChapter .final-question-card h2 span {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #ff9fc5;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 0 25px rgba(255, 105, 167, 0.28),
+        0 0 60px rgba(255, 105, 167, 0.12);
+}
+
+
+/* ==========================================================
+   ANSWER AREA
+========================================================== */
+
+#finalChapter .final-answer-area {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 24px;
+
+    margin-top: 55px;
+
+    min-height: 85px;
+
+    position: relative;
+}
+
+
+/* ==========================================================
+   COMMON ANSWER BUTTON
+========================================================== */
+
+#finalChapter .final-answer-btn {
+    position: relative;
+
+    border: none;
+
+    outline: none;
+
+    cursor: pointer;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.85rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.05em;
+
+    border-radius: 999px;
+
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease,
+        filter 0.45s ease,
+        box-shadow 0.45s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ==========================================================
+   YES BUTTON
+========================================================== */
+
+#finalChapter .final-yes-btn {
+    min-width: 150px;
+
+    min-height: 56px;
+
+    padding: 15px 32px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e987b0,
+            #c66fa4
+        );
+
+    box-shadow:
+        0 10px 30px rgba(205, 102, 157, 0.25),
+        0 0 0 1px rgba(255, 206, 226, 0.08);
+
+    transform-origin: center;
+}
+
+
+#finalChapter .final-yes-btn:hover {
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    box-shadow:
+        0 15px 40px rgba(219, 103, 163, 0.35),
+        0 0 35px rgba(255, 137, 187, 0.13);
+}
+
+
+#finalChapter .final-yes-btn:active {
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+/* ==========================================================
+   NO BUTTON
+========================================================== */
+
+#finalChapter .final-no-btn {
+    min-width: 130px;
+
+    min-height: 52px;
+
+    padding: 14px 28px;
+
+    color:
+        rgba(255, 226, 238, 0.82);
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid
+        rgba(255, 181, 208, 0.17);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+
+    transform-origin: center;
+}
+
+
+#finalChapter .final-no-btn:hover {
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    border-color:
+        rgba(255, 181, 208, 0.28);
+
+    transform:
+        translateY(-2px);
+}
+
+
+#finalChapter .final-no-btn:active {
+    transform:
+        scale(0.96);
+}
+
+
+/* ==========================================================
+   NO BUTTON — SHRINKING STATES
+========================================================== */
+
+#finalChapter .final-no-btn.shrink-1 {
+    transform: scale(0.72);
+
+    opacity: 0.82;
+}
+
+
+#finalChapter .final-no-btn.shrink-2 {
+    transform: scale(0.44);
+
+    opacity: 0.58;
+}
+
+
+#finalChapter .final-no-btn.shrink-3 {
+    transform: scale(0);
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   YES BUTTON — GROWING STATES
+========================================================== */
+
+#finalChapter .final-yes-btn.grow-1 {
+    transform: scale(1.08);
+}
+
+
+#finalChapter .final-yes-btn.grow-2 {
+    transform: scale(1.18);
+}
+
+
+#finalChapter .final-yes-btn.grow-3 {
+    transform: scale(1.32);
+
+    box-shadow:
+        0 18px 50px rgba(219, 103, 163, 0.4),
+        0 0 45px rgba(255, 137, 187, 0.15);
+}
+
+
+/* ==========================================================
+   FINAL HINT
+========================================================== */
+
+#finalChapter .final-hint {
+    min-height: 25px;
+
+    margin: 25px 0 0;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.78rem;
+
+    letter-spacing: 0.03em;
+
+    color:
+        rgba(255, 197, 219, 0.68);
+}
+
+
+/* ==========================================================
+   BOTTOM QUESTION DECORATION
+========================================================== */
+
+#finalChapter .final-decoration-bottom {
+    margin-top: 35px;
+
+    font-size: 1.3rem;
+}
+
+
+/* ==========================================================
+   YES RESPONSE
+========================================================== */
+
+#finalChapter .final-yes-response {
+    width: min(700px, 100%);
+
+    margin: 80px auto 100px;
+
+    padding: 70px 40px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    animation:
+        messageReveal 1s ease both;
+}
+
+
+/*
+   The HTML already uses the hidden attribute.
+
+   This rule guarantees that the response remains invisible
+   until JavaScript removes the hidden attribute.
+*/
+
+#finalChapter .final-yes-response[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================================
+   SUCCESS SYMBOL
+========================================================== */
+
+#finalChapter .final-success-symbol {
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 3rem;
+
+    color: #ff9fc5;
+
+    animation:
+        heartBreathing 3.2s ease-in-out infinite;
+}
+
+
+/* ==========================================================
+   SUCCESS STARS
+========================================================== */
+
+#finalChapter .final-success-stars {
+    margin-top: 15px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1rem;
+
+    letter-spacing: 0.25em;
+
+    color:
+        rgba(255, 203, 224, 0.65);
+}
+
+
+/* ==========================================================
+   SUCCESS TITLE
+========================================================== */
+
+#finalChapter .final-yes-response h2 {
+    margin: 25px 0 30px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            2.5rem,
+            6vw,
+            4.5rem
+        );
+
+    font-weight: 400;
+
+    line-height: 1;
+
+    color: #fff7fb;
+}
+
+
+/* ==========================================================
+   SUCCESS MAIN MESSAGE
+========================================================== */
+
+#finalChapter .final-success-main {
+    width: min(600px, 100%);
+
+    margin: 0 auto 25px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.3rem,
+            2.7vw,
+            1.7rem
+        );
+
+    line-height: 1.8;
+
+    color:
+        rgba(255, 232, 242, 0.88);
+}
+
+
+/* ==========================================================
+   SUCCESS SECONDARY MESSAGE
+========================================================== */
+
+#finalChapter .final-success-secondary {
+    width: min(550px, 100%);
+
+    margin: 0 auto;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            1.15rem,
+            2.4vw,
+            1.5rem
+        );
+
+    font-style: italic;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255, 205, 224, 0.7);
+}
+
+
+/* ==========================================================
+   SUCCESS DIVIDER
+========================================================== */
+
+#finalChapter .final-success-divider {
+    margin: 35px 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1rem;
+
+    letter-spacing: 0.15em;
+
+    color:
+        rgba(255, 175, 207, 0.55);
+}
+
+
+/* ==========================================================
+   MESSAGE BUTTON
+========================================================== */
+
+#finalChapter .final-message-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 190px;
+
+    min-height: 56px;
+
+    padding: 15px 32px;
+
+    box-sizing: border-box;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size: 0.82rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.06em;
+
+    color: #fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef9bbb,
+            #c875a6
+        );
+
+    box-shadow:
+        0 15px 40px rgba(205, 102, 157, 0.28);
+
+    transition:
+        transform 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+
+#finalChapter .final-message-btn:hover {
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    box-shadow:
+        0 18px 50px rgba(218, 107, 164, 0.38),
+        0 0 35px rgba(255, 141, 188, 0.12);
+}
+
+
+#finalChapter .final-message-btn:active {
+    transform:
+        translateY(0)
+        scale(0.98);
+}
+
+
+/* ==========================================================
+   MESSAGE NOTE
+========================================================== */
+
+#finalChapter .final-message-note {
+    margin: 25px 0 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1rem;
+
+    font-style: italic;
+
+    line-height: 1.7;
+
+    color:
+        rgba(255, 215, 230, 0.55);
+}
+
+
+/* ==========================================================
+   FINAL FOOTER
+========================================================== */
+
+#finalChapter .final-footer {
+    margin: 100px auto 20px;
+
+    text-align: center;
+
+    opacity: 0.7;
+}
+
+
+#finalChapter .final-footer-symbol {
+    margin-bottom: 20px;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1.2rem;
+
+    color:
+        rgba(255, 177, 207, 0.55);
+}
+
+
+#finalChapter .final-footer p {
+    margin: 0;
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    font-size: 1rem;
+
+    font-style: italic;
+
+    letter-spacing: 0.05em;
+
+    color:
+        rgba(255, 215, 230, 0.55);
+}
+
+
+#finalChapter .final-footer span {
+    display: block;
+
+    margin-top: 12px;
+
+    color:
+        rgba(255, 157, 197, 0.55);
+}
+
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+#finalChapter ::selection {
+    background:
+        rgba(232, 132, 176, 0.35);
+
+    color: #fff;
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
+#finalChapter button:focus-visible,
+#finalChapter a:focus-visible {
+    outline:
+        2px solid
+        rgba(255, 175, 207, 0.75);
+
+    outline-offset: 5px;
+}
+
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+@keyframes finalIntroReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes messageReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes cardReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(45px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes heartBreathing {
+
+    0%,
+    100% {
+        transform: scale(1);
+
+        opacity: 0.65;
+    }
+
+    50% {
+        transform: scale(1.18);
+
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes arrowFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+
+        opacity: 0.45;
+    }
+
+    50% {
+        transform:
+            translateY(7px);
+
+        opacity: 0.9;
+    }
+
+}
+
+
+@keyframes finalHeartDrift {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0.12;
+    }
+
+    50% {
+        transform:
+            translateY(-22px)
+            rotate(8deg);
+
+        opacity: 0.28;
+    }
+
+}
+
+
+@keyframes finalStarPulse {
+
+    0%,
+    100% {
+        opacity: 0.25;
+
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.8;
+
+        transform: scale(1.15);
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #finalChapter *,
+    #finalChapter *::before,
+    #finalChapter *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+}
+
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 768px) {
+
+    #finalChapter.active {
+        padding:
+            90px 20px
+            110px;
+    }
+
+
+    #finalChapter .final-intro {
+        min-height: 75vh;
+
+        margin-bottom: 70px;
+    }
+
+
+    #finalChapter .final-question-card {
+        padding:
+            55px 30px
+            50px;
+
+        border-radius: 22px;
+    }
+
+
+    #finalChapter .final-answer-area {
+        gap: 16px;
+    }
+
+
+    #finalChapter .final-yes-btn {
+        min-width: 135px;
+
+        padding:
+            14px 25px;
+    }
+
+
+    #finalChapter .final-no-btn {
+        min-width: 115px;
+
+        padding:
+            13px 22px;
+    }
+
+
+    #finalChapter .final-message-section {
+        margin-bottom: 90px;
+    }
+
+
+    #finalChapter .final-yes-response {
+        padding:
+            60px 25px;
+    }
+
+
+    #finalChapter .final-footer {
+        margin-top: 80px;
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 520px) {
+
+    #finalChapter.active {
+        padding:
+            75px 16px
+            90px;
+    }
+
+
+    #finalChapter .final-label {
+        font-size: 0.55rem;
+
+        letter-spacing: 0.28em;
+    }
+
+
+    #finalChapter .final-ornament {
+        font-size: 0.95rem;
+    }
+
+
+    #finalChapter .final-intro h1 {
+        font-size:
+            clamp(
+                3rem,
+                15vw,
+                4.3rem
+            );
+    }
+
+
+    #finalChapter .final-opening-message {
+        font-size: 1.2rem;
+    }
+
+
+    #finalChapter .final-message-lead {
+        font-size: 1.7rem;
+    }
+
+
+    #finalChapter .final-emotional-message {
+        padding: 0 10px;
+    }
+
+
+    #finalChapter .final-emotional-message p {
+        font-size: 1.15rem;
+
+        line-height: 1.75;
+    }
+
+
+    #finalChapter .final-question-card {
+        padding:
+            48px 20px
+            42px;
+
+        border-radius: 20px;
+    }
+
+
+    #finalChapter .final-question-card h2 {
+        font-size:
+            clamp(
+                2.2rem,
+                12vw,
+                3.4rem
+            );
+    }
+
+
+    #finalChapter .final-answer-area {
+        gap: 12px;
+
+        min-height: 75px;
+    }
+
+
+    #finalChapter .final-yes-btn {
+        min-width: 120px;
+
+        min-height: 52px;
+
+        padding:
+            13px 21px;
+
+        font-size: 0.75rem;
+    }
+
+
+    #finalChapter .final-no-btn {
+        min-width: 105px;
+
+        min-height: 48px;
+
+        padding:
+            12px 18px;
+
+        font-size: 0.72rem;
+    }
+
+
+    #finalChapter .final-yes-response {
+        padding:
+            50px 15px;
+    }
+
+
+    #finalChapter .final-message-btn {
+        min-width: 175px;
+
+        padding:
+            14px 24px;
+
+        font-size: 0.75rem;
+    }
+
+
+    #finalChapter .final-heart {
+        opacity: 0.65;
+    }
+
+
+    #finalChapter .final-heart-1 {
+        left: 3%;
+    }
+
+
+    #finalChapter .final-heart-2 {
+        right: 3%;
+    }
+
+
+    #finalChapter .final-heart-3 {
+        left: 5%;
+    }
+
+
+    #finalChapter .final-star-1 {
+        left: 4%;
+    }
+
+
+    #finalChapter .final-star-2 {
+        right: 4%;
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SMALL DEVICES
+========================================================== */
+
+@media (max-width: 360px) {
+
+    #finalChapter .final-answer-area {
+        gap: 8px;
+    }
+
+
+    #finalChapter .final-yes-btn {
+        min-width: 110px;
+
+        padding:
+            12px 17px;
+    }
+
+
+    #finalChapter .final-no-btn {
+        min-width: 95px;
+
+        padding:
+            11px 15px;
+    }
+
+
+    #finalChapter .final-question-card {
+        padding:
+            42px 16px
+            38px;
+    }
+
+
+    #finalChapter .final-question-card h2 {
+        font-size: 2.2rem;
+    }
+
+}
