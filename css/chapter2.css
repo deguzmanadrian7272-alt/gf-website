@@ -15,21 +15,10 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-
-    /*
-       IMPORTANT:
-       Do not use height: 100vh here.
-       The chapter must be allowed to grow with its content
-       so the entire chapter can scroll naturally.
-    */
     height: auto;
 
     display: none;
 
-    /*
-       Allow the document/page to scroll instead of creating
-       a separate scrollbar inside Chapter II.
-    */
     overflow: visible;
 
     box-sizing: border-box;
@@ -68,19 +57,11 @@
 
 /* ==========================================================
    BACKGROUND
+   Keeps decorations visible while the page scrolls.
    ========================================================== */
 
 .chapter2-background {
-    /*
-       FIX:
-       Keep the decorative background attached to the viewport
-       while the Chapter II content scrolls.
-
-       This prevents the hearts and glow from disappearing
-       when the user moves down the page.
-    */
     position: fixed;
-
     inset: 0;
 
     z-index: 0;
@@ -88,11 +69,6 @@
     overflow: hidden;
 
     pointer-events: none;
-
-    /*
-       Makes sure the background stays behind everything.
-    */
-    isolation: isolate;
 }
 
 
@@ -174,8 +150,6 @@
 
     display: block;
 
-    z-index: 2;
-
     color:
         rgba(255, 196, 231, 0.82);
 
@@ -191,14 +165,6 @@
         ease-in-out
         infinite;
 }
-
-
-/*
-   Heart positions
-   ----------------
-   These are distributed around the viewport so they remain
-   visible as decorative elements.
-*/
 
 .chapter2-heart:nth-child(1) {
     left: 10%;
@@ -250,9 +216,6 @@
 .chapter2-wrapper {
     position: relative;
 
-    /*
-       Content stays above the fixed background.
-    */
     z-index: 5;
 
     width:
@@ -261,10 +224,6 @@
             calc(100% - 42px)
         );
 
-    /*
-       Important:
-       Allow wrapper to grow naturally with its content.
-    */
     min-height: 100vh;
     height: auto;
 
@@ -666,6 +625,10 @@
 }
 
 
+/* ==========================================================
+   SECTION LABEL
+   ========================================================== */
+
 .chapter2-section-label {
     display: block;
 
@@ -692,6 +655,10 @@
         center;
 }
 
+
+/* ==========================================================
+   JOKES TITLE
+   ========================================================== */
 
 .chapter2-inside-jokes h3 {
     margin:
@@ -1007,6 +974,10 @@
 }
 
 
+/* ==========================================================
+   ENDING DECORATIONS
+   ========================================================== */
+
 .chapter2-ending::before,
 .chapter2-ending::after {
     content:
@@ -1022,7 +993,6 @@
         1.8rem;
 }
 
-
 .chapter2-ending::before {
     left:
         20px;
@@ -1030,7 +1000,6 @@
     top:
         18px;
 }
-
 
 .chapter2-ending::after {
     right:
@@ -1367,7 +1336,6 @@
    ========================================================== */
 
 @keyframes chapter2GlowPulse {
-
     0%, 100% {
         opacity:
             0.65;
@@ -1389,7 +1357,6 @@
 
 
 @keyframes chapter2HeartFloat {
-
     0%, 100% {
         opacity:
             0.35;
@@ -1411,7 +1378,6 @@
 
 
 @keyframes chapter2SymbolFloat {
-
     0%, 100% {
         transform:
             translateY(0);
@@ -1437,7 +1403,6 @@
         padding-top:
             60px;
     }
-
 }
 
 
@@ -1497,7 +1462,6 @@
         gap:
             8px;
     }
-
 }
 
 
@@ -1596,7 +1560,6 @@
             20px
             40px;
     }
-
 }
 
 
