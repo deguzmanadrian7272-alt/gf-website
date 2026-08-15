@@ -1,95 +1,54 @@
 /* ==========================================================
    CHAPTER II — THE LITTLE THINGS
-   Romantic Story / Memory Chapter
+   Project : Our Story
+   File    : chapter2.css
+   Purpose : Girly / Cute / Romantic Memory Storybook
+   Reference Style : Chapter VII
    ========================================================== */
 
 
 /* ==========================================================
-   CHAPTER 2 ROOT
+   ROOT
    ========================================================== */
 
 #chapter2 {
-
     position: relative;
-
     width: 100%;
-
     min-height: 100vh;
-
+    display: none;
     overflow-x: hidden;
-
-    overflow-y: auto;
-
+    overflow-y: visible;
     box-sizing: border-box;
 
+    color: #fff7fd;
+
     background:
         radial-gradient(
-            circle at 20% 10%,
-            rgba(255, 184, 216, 0.10),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 85% 35%,
-            rgba(190, 150, 220, 0.08),
+            circle at 50% 8%,
+            rgba(255, 151, 214, 0.20),
             transparent 30%
         ),
-
         radial-gradient(
-            circle at 50% 100%,
-            rgba(255, 180, 210, 0.07),
-            transparent 35%
+            circle at 12% 48%,
+            rgba(185, 119, 255, 0.14),
+            transparent 28%
         ),
-
+        radial-gradient(
+            circle at 88% 72%,
+            rgba(255, 177, 222, 0.15),
+            transparent 30%
+        ),
         linear-gradient(
             180deg,
-            #0b080d 0%,
-            #100b12 45%,
-            #08070a 100%
+            #130b2d 0%,
+            #21103d 43%,
+            #30164a 72%,
+            #180b31 100%
         );
-
-    color: #fff4f8;
-
 }
 
-
-/* ==========================================================
-   CHAPTER 2 SCROLLBAR
-   ========================================================== */
-
-#chapter2::-webkit-scrollbar {
-
-    width: 8px;
-
-}
-
-
-#chapter2::-webkit-scrollbar-track {
-
-    background:
-        rgba(255, 255, 255, 0.025);
-
-}
-
-
-#chapter2::-webkit-scrollbar-thumb {
-
-    background:
-        rgba(255, 190, 220, 0.28);
-
-    border-radius: 20px;
-
-    transition:
-        background 0.3s ease;
-
-}
-
-
-#chapter2::-webkit-scrollbar-thumb:hover {
-
-    background:
-        rgba(255, 190, 220, 0.50);
-
+#chapter2.active {
+    display: block;
 }
 
 
@@ -98,58 +57,49 @@
    ========================================================== */
 
 .chapter2-background {
-
-    position: fixed;
-
+    position: absolute;
     inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
     z-index: 0;
-
+    overflow: hidden;
+    pointer-events: none;
 }
 
 
 /* ==========================================================
-   BACKGROUND GLOW
+   MAIN GLOW
    ========================================================== */
 
 .chapter2-glow {
-
     position: absolute;
 
-    width: 500px;
+    width: 75vw;
+    height: 75vw;
 
-    height: 500px;
+    max-width: 1050px;
+    max-height: 1050px;
 
-    top: -220px;
+    left: 50%;
+    top: 2%;
 
-    left: -170px;
+    transform: translateX(-50%);
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255, 190, 220, 0.12),
-            rgba(255, 190, 220, 0.03) 40%,
+            rgba(255, 181, 224, 0.15) 0%,
+            rgba(198, 130, 255, 0.09) 38%,
             transparent 70%
         );
 
-    filter: blur(15px);
+    filter: blur(12px);
 
     animation:
         chapter2GlowPulse
         7s
         ease-in-out
         infinite;
-
 }
 
 
@@ -158,30 +108,29 @@
    ========================================================== */
 
 .chapter2-background::after {
-
     content: "";
 
     position: absolute;
 
-    width: 450px;
+    width: 80%;
+    height: 30%;
 
-    height: 450px;
+    left: 50%;
+    bottom: 4%;
 
-    right: -220px;
-
-    bottom: -200px;
+    transform: translateX(-50%);
 
     border-radius: 50%;
 
     background:
         radial-gradient(
-            circle,
-            rgba(211, 170, 230, 0.10),
-            transparent 70%
+            ellipse,
+            rgba(255, 137, 205, 0.17),
+            rgba(190, 116, 255, 0.07) 45%,
+            transparent 72%
         );
 
     filter: blur(25px);
-
 }
 
 
@@ -190,105 +139,94 @@
    ========================================================== */
 
 .chapter2-heart {
-
     position: absolute;
 
     display: block;
 
+    color:
+        rgba(255, 196, 231, 0.82);
+
     font-size: 0.85rem;
 
-    color:
-        rgba(255, 205, 225, 0.55);
-
     text-shadow:
-        0 0 15px
-        rgba(255, 180, 215, 0.45);
-
-    opacity: 0;
+        0 0 8px rgba(255, 175, 222, 0.8),
+        0 0 18px rgba(194, 128, 255, 0.35);
 
     animation:
         chapter2HeartFloat
-        8s
+        7s
         ease-in-out
         infinite;
+}
 
+.chapter2-heart:nth-child(1) {
+    left: 10%;
+    top: 18%;
+}
+
+.chapter2-heart:nth-child(2) {
+    left: 84%;
+    top: 27%;
+    animation-delay: 1.7s;
+}
+
+.chapter2-heart:nth-child(3) {
+    left: 17%;
+    top: 64%;
+    animation-delay: 3.2s;
+}
+
+.chapter2-heart:nth-child(4) {
+    right: 10%;
+    top: 78%;
+    animation-delay: 0.8s;
 }
 
 
 /* ==========================================================
-   HEART POSITIONS
+   DECORATIVE STARS
    ========================================================== */
 
-.chapter2-heart.heart-1 {
+.chapter2-heart::after {
+    content: "✦";
 
-    left: 12%;
+    position: absolute;
 
-    top: 20%;
+    margin-left: 18px;
+    margin-top: -4px;
 
-    animation-delay: 0s;
+    color:
+        rgba(255, 225, 246, 0.45);
 
-}
-
-
-.chapter2-heart.heart-2 {
-
-    left: 84%;
-
-    top: 30%;
-
-    animation-delay: 2s;
-
-}
-
-
-.chapter2-heart.heart-3 {
-
-    left: 18%;
-
-    top: 70%;
-
-    animation-delay: 4s;
-
-}
-
-
-.chapter2-heart.heart-4 {
-
-    left: 76%;
-
-    top: 80%;
-
-    animation-delay: 1s;
-
+    font-size: 0.45rem;
 }
 
 
 /* ==========================================================
-   WRAPPER
+   MAIN WRAPPER
    ========================================================== */
 
 .chapter2-wrapper {
-
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 
-    width: min(
-        100%,
-        1050px
-    );
+    width:
+        min(
+            1100px,
+            calc(100% - 42px)
+        );
 
-    min-height: 100%;
+    min-height: 100vh;
 
     margin: 0 auto;
 
     padding:
-        90px
-        30px
-        120px;
+        74px
+        0
+        90px;
 
     box-sizing: border-box;
-
 }
 
 
@@ -297,47 +235,52 @@
    ========================================================== */
 
 .chapter2-intro {
-
     position: relative;
 
-    max-width: 850px;
-
-    margin:
-        0 auto
-        110px;
+    padding:
+        15px
+        20px
+        58px;
 
     text-align: center;
-
 }
 
 
-.chapter2-label {
+/* ==========================================================
+   INTRO LABEL
+   ========================================================== */
 
+.chapter2-label {
     display: inline-block;
 
-    margin-bottom: 18px;
+    margin-bottom: 10px;
+
+    color:
+        #ffd5ee;
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size: 0.72rem;
+    font-size: 0.74rem;
 
     font-weight: 500;
 
-    letter-spacing: 0.35em;
+    letter-spacing: 0.25em;
 
     text-transform: uppercase;
-
-    color:
-        rgba(255, 210, 230, 0.68);
-
 }
 
 
-.chapter2-intro h2 {
+/* ==========================================================
+   INTRO TITLE
+   ========================================================== */
 
+.chapter2-intro h2 {
     margin: 0;
+
+    color:
+        #fff0fb;
 
     font-family:
         "Cormorant Garamond",
@@ -345,33 +288,37 @@
 
     font-size:
         clamp(
-            4rem,
-            9vw,
+            3.7rem,
+            8vw,
             7rem
         );
 
-    font-weight: 400;
+    font-weight: 500;
 
-    line-height: 0.95;
+    line-height: 0.86;
 
-    letter-spacing: -0.02em;
-
-    color: #fff7fa;
+    letter-spacing: 0.025em;
 
     text-shadow:
-        0 0 30px
-        rgba(255, 190, 220, 0.10);
-
+        0 0 12px rgba(255, 176, 222, 0.65),
+        0 0 34px rgba(255, 125, 211, 0.30),
+        0 0 70px rgba(188, 108, 255, 0.18);
 }
 
 
-.chapter2-intro h2::after {
+/* ==========================================================
+   INTRO ORNAMENT
+   ========================================================== */
 
+.chapter2-intro h2::after {
     content: "♡";
 
     display: block;
 
-    margin-top: 25px;
+    margin-top: 20px;
+
+    color:
+        #ffafd9;
 
     font-family:
         "Cormorant Garamond",
@@ -379,191 +326,159 @@
 
     font-size: 1.2rem;
 
-    color:
-        rgba(255, 205, 225, 0.55);
-
-}
-
-
-.chapter2-intro p {
-
-    max-width: 650px;
-
-    margin:
-        25px auto
-        0;
-
-    font-size: 0.9rem;
-
-    line-height: 2;
-
-    color:
-        rgba(255, 238, 246, 0.65);
-
+    text-shadow:
+        0 0 12px
+        rgba(255, 160, 218, 0.5);
 }
 
 
 /* ==========================================================
-   STORY SECTIONS
+   INTRO DESCRIPTION
+   ========================================================== */
+
+.chapter2-intro p {
+    max-width: 650px;
+
+    margin:
+        18px
+        auto
+        0;
+
+    color:
+        rgba(255, 226, 245, 0.78);
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.82rem;
+
+    font-weight: 300;
+
+    line-height:
+        1.8;
+}
+
+
+/* ==========================================================
+   STORY CARDS
    ========================================================== */
 
 .chapter2-story {
-
     position: relative;
 
-    width: min(
-        100%,
-        800px
-    );
-
-    margin:
-        0 auto
-        100px;
+    margin-bottom: 18px;
 
     padding:
-        55px
-        60px;
-
-    box-sizing: border-box;
-
-    text-align: center;
+        34px
+        34px
+        30px;
 
     border:
         1px solid
-        rgba(255, 215, 232, 0.10);
+        rgba(255, 204, 238, 0.25);
 
-    border-radius: 26px;
+    border-radius:
+        32px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.045),
-            rgba(255, 210, 230, 0.015)
+            rgba(116, 55, 137, 0.44),
+            rgba(47, 21, 75, 0.58)
         );
 
     box-shadow:
-        0 30px 80px
-        rgba(0, 0, 0, 0.25),
+        0 25px 70px
+        rgba(7, 3, 20, 0.22),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.04);
+        rgba(255, 255, 255, 0.09),
+
+        inset 0 0 50px
+        rgba(255, 155, 218, 0.035);
 
     backdrop-filter:
-        blur(8px);
+        blur(13px);
 
     -webkit-backdrop-filter:
-        blur(8px);
+        blur(13px);
+
+    overflow:
+        hidden;
 
     transition:
-        transform 0.5s ease,
-        border-color 0.5s ease,
-        box-shadow 0.5s ease;
-
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
 }
 
 
-/* ==========================================================
-   STORY HOVER
-   ========================================================== */
-
-.chapter2-story:hover,
-.chapter2-story.is-hovered {
-
+.chapter2-story:hover {
     transform:
-        translateY(-8px);
+        translateY(-6px);
 
     border-color:
-        rgba(255, 210, 230, 0.23);
+        rgba(255, 211, 238, 0.42);
 
     box-shadow:
-        0 40px 90px
-        rgba(0, 0, 0, 0.32),
+        0 30px 80px
+        rgba(7, 3, 20, 0.30),
 
-        0 0 40px
-        rgba(255, 190, 220, 0.04),
+        0 0 28px
+        rgba(255, 145, 213, 0.07),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.06);
-
+        rgba(255, 255, 255, 0.11);
 }
 
 
 /* ==========================================================
-   STORY DECORATION
+   STORY CARD GLOW
    ========================================================== */
 
 .chapter2-story::before {
-
-    content: "✦";
-
-    position: absolute;
-
-    top: 20px;
-
-    left: 28px;
-
-    font-size: 0.8rem;
-
-    color:
-        rgba(255, 210, 230, 0.40);
-
-}
-
-
-.chapter2-story::after {
-
-    content: "✦";
+    content: "";
 
     position: absolute;
 
-    right: 28px;
+    width: 260px;
+    height: 260px;
 
-    bottom: 20px;
+    top: -150px;
+    right: -90px;
 
-    font-size: 0.8rem;
+    border-radius: 50%;
 
-    color:
-        rgba(255, 210, 230, 0.30);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 173, 223, 0.16),
+            transparent 68%
+        );
 
+    pointer-events: none;
 }
 
 
 /* ==========================================================
-   STORY NUMBER
+   STORY DECORATIONS
    ========================================================== */
 
-.chapter2-story-number {
+.chapter2-story::after {
+    content: "♡";
 
-    display: inline-flex;
+    position: absolute;
 
-    align-items: center;
-
-    justify-content: center;
-
-    width: 38px;
-
-    height: 38px;
-
-    margin-bottom: 18px;
-
-    border:
-        1px solid
-        rgba(255, 210, 230, 0.18);
-
-    border-radius: 50%;
-
-    font-size: 0.7rem;
+    right: 22px;
+    bottom: 18px;
 
     color:
-        rgba(255, 220, 235, 0.70);
+        rgba(255, 175, 222, 0.45);
 
-    background:
-        rgba(255, 220, 235, 0.025);
-
-    box-shadow:
-        0 0 20px
-        rgba(255, 190, 220, 0.03);
-
+    font-size:
+        1.25rem;
 }
 
 
@@ -572,9 +487,57 @@
    ========================================================== */
 
 .chapter2-story-content {
-
     position: relative;
 
+    z-index: 1;
+}
+
+
+/* ==========================================================
+   STORY NUMBER
+   ========================================================== */
+
+.chapter2-story-number {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 18px;
+
+    border:
+        1px solid
+        rgba(255, 184, 225, 0.55);
+
+    border-radius:
+        19px;
+
+    color:
+        #ffe2f4;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.65rem;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 161, 218, 0.20),
+            rgba(196, 112, 255, 0.08)
+        );
+
+    box-shadow:
+        0 0 24px
+        rgba(255, 142, 209, 0.12),
+
+        inset 0 0 14px
+        rgba(255, 220, 244, 0.05);
 }
 
 
@@ -583,10 +546,12 @@
    ========================================================== */
 
 .chapter2-story h3 {
-
     margin:
         0 0
-        22px;
+        18px;
+
+    color:
+        #fff1fb;
 
     font-family:
         "Cormorant Garamond",
@@ -599,12 +564,11 @@
             3rem
         );
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    line-height: 1.1;
-
-    color: #fff4f8;
-
+    line-height:
+        0.95;
 }
 
 
@@ -613,73 +577,89 @@
    ========================================================== */
 
 .chapter2-story p {
-
-    max-width: 680px;
+    max-width:
+        700px;
 
     margin:
-        0 auto
+        0 0
         14px;
 
-    font-size: 0.9rem;
-
-    line-height: 2;
-
     color:
-        rgba(255, 238, 246, 0.70);
+        rgba(255, 228, 246, 0.78);
 
-}
+    font-family:
+        "Poppins",
+        sans-serif;
 
+    font-size:
+        0.82rem;
 
-.chapter2-story p:last-child {
+    font-weight:
+        300;
 
-    margin-bottom: 0;
-
+    line-height:
+        1.8;
 }
 
 
 /* ==========================================================
-   INSIDE JOKES SECTION
+   INSIDE JOKES
    ========================================================== */
 
 .chapter2-inside-jokes {
+    margin-top:
+        25px;
 
-    width: min(
-        100%,
-        900px
-    );
-
-    margin:
-        20px auto
-        120px;
-
-    text-align: center;
-
+    padding:
+        10px
+        0
+        25px;
 }
 
+
+/* ==========================================================
+   SECTION LABEL
+   ========================================================== */
 
 .chapter2-section-label {
-
     display: block;
 
-    margin-bottom: 14px;
-
-    font-size: 0.7rem;
-
-    letter-spacing: 0.3em;
-
-    text-transform: uppercase;
+    margin-bottom:
+        10px;
 
     color:
-        rgba(255, 210, 230, 0.55);
+        #ffd5ee;
 
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.70rem;
+
+    letter-spacing:
+        0.25em;
+
+    text-transform:
+        uppercase;
+
+    text-align:
+        center;
 }
 
 
-.chapter2-inside-jokes h3 {
+/* ==========================================================
+   JOKES TITLE
+   ========================================================== */
 
+.chapter2-inside-jokes h3 {
     margin:
-        0 0
-        40px;
+        0
+        0
+        30px;
+
+    color:
+        #fff1fb;
 
     font-family:
         "Cormorant Garamond",
@@ -692,10 +672,14 @@
             3.6rem
         );
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    color: #fff5f9;
+    line-height:
+        0.95;
 
+    text-align:
+        center;
 }
 
 
@@ -704,8 +688,8 @@
    ========================================================== */
 
 .chapter2-jokes-grid {
-
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(
@@ -716,8 +700,8 @@
             )
         );
 
-    gap: 22px;
-
+    gap:
+        16px;
 }
 
 
@@ -726,109 +710,128 @@
    ========================================================== */
 
 .chapter2-joke-card {
+    position:
+        relative;
 
-    position: relative;
-
-    min-height: 190px;
+    min-height:
+        190px;
 
     padding:
-        35px
         30px;
 
-    display: flex;
+    display:
+        flex;
 
-    flex-direction: column;
+    flex-direction:
+        column;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
-
-    box-sizing: border-box;
+    justify-content:
+        center;
 
     border:
         1px solid
-        rgba(255, 215, 232, 0.10);
+        rgba(255, 204, 238, 0.22);
 
-    border-radius: 22px;
+    border-radius:
+        24px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(255, 200, 225, 0.015)
+            rgba(255, 159, 216, 0.12),
+            rgba(171, 119, 238, 0.10)
         );
 
+    color:
+        #ffeefa;
+
     box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, 0.20);
+        0 18px 45px
+        rgba(7, 2, 20, 0.20),
 
-    overflow: hidden;
+        inset 0 1px 0
+        rgba(255,255,255,0.06);
 
-    cursor: default;
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    overflow:
+        hidden;
 
     transition:
-        transform 0.45s ease,
-        border-color 0.45s ease,
-        background 0.45s ease,
-        box-shadow 0.45s ease;
-
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 
-.chapter2-joke-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 150px;
-
-    height: 150px;
-
-    top: -90px;
-
-    right: -70px;
-
-    border-radius: 50%;
-
+.chapter2-joke-card:nth-child(even) {
     background:
-        rgba(255, 190, 220, 0.08);
+        linear-gradient(
+            145deg,
+            rgba(184, 135, 255, 0.12),
+            rgba(255, 155, 213, 0.09)
+        );
+}
 
-    filter: blur(20px);
 
-    pointer-events: none;
+.chapter2-joke-card:hover {
+    transform:
+        translateY(-7px)
+        rotate(-0.5deg);
 
+    border-color:
+        rgba(255, 221, 241, 0.55);
+
+    box-shadow:
+        0 25px 55px
+        rgba(7, 2, 20, 0.30),
+
+        0 0 24px
+        rgba(255, 142, 210, 0.09);
 }
 
 
 /* ==========================================================
-   JOKE CARD HOVER
+   JOKE CARD GLOW
    ========================================================== */
 
-.chapter2-joke-card:hover,
-.chapter2-joke-card.is-hovered {
+.chapter2-joke-card::before {
+    content: "";
 
-    transform:
-        translateY(-10px)
-        rotate(0.5deg);
+    position:
+        absolute;
 
-    border-color:
-        rgba(255, 210, 230, 0.25);
+    width:
+        180px;
+
+    height:
+        180px;
+
+    top:
+        -100px;
+
+    right:
+        -70px;
+
+    border-radius:
+        50%;
 
     background:
-        linear-gradient(
-            145deg,
-            rgba(255, 220, 235, 0.07),
-            rgba(255, 200, 225, 0.025)
+        radial-gradient(
+            circle,
+            rgba(255, 173, 223, 0.16),
+            transparent 70%
         );
 
-    box-shadow:
-        0 30px 70px
-        rgba(0, 0, 0, 0.30),
-
-        0 0 30px
-        rgba(255, 190, 220, 0.05);
-
+    pointer-events:
+        none;
 }
 
 
@@ -837,60 +840,58 @@
    ========================================================== */
 
 .chapter2-joke-icon {
+    display:
+        flex;
 
-    position: relative;
+    align-items:
+        center;
 
-    z-index: 1;
+    justify-content:
+        center;
 
-    width: 48px;
+    width:
+        48px;
 
-    height: 48px;
+    height:
+        48px;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin-bottom: 18px;
+    margin-bottom:
+        16px;
 
     border:
         1px solid
-        rgba(255, 210, 230, 0.16);
+        rgba(255, 190, 230, 0.40);
 
-    border-radius: 50%;
-
-    font-size: 1.1rem;
-
-    color:
-        rgba(255, 220, 235, 0.75);
+    border-radius:
+        50%;
 
     background:
-        rgba(255, 220, 235, 0.035);
+        rgba(255, 152, 215, 0.08);
+
+    color:
+        #ffd8ed;
+
+    font-size:
+        1.1rem;
+
+    box-shadow:
+        0 0 18px
+        rgba(255, 141, 211, 0.08);
 
     transition:
-        transform 0.4s ease,
-        background 0.4s ease,
-        border-color 0.4s ease;
-
+        transform 0.3s ease,
+        background 0.3s ease;
 }
 
 
 .chapter2-joke-card:hover
-.chapter2-joke-icon,
-.chapter2-joke-card.is-hovered
 .chapter2-joke-icon {
-
     transform:
-        scale(1.12)
+        scale(1.10)
         rotate(8deg);
 
     background:
-        rgba(255, 210, 230, 0.08);
-
-    border-color:
-        rgba(255, 220, 235, 0.25);
-
+        rgba(255, 152, 215, 0.15);
 }
 
 
@@ -899,20 +900,27 @@
    ========================================================== */
 
 .chapter2-joke-card p {
+    max-width:
+        420px;
 
-    position: relative;
-
-    z-index: 1;
-
-    margin: 0;
-
-    font-size: 0.82rem;
-
-    line-height: 1.8;
+    margin:
+        0;
 
     color:
-        rgba(255, 238, 246, 0.70);
+        rgba(255, 228, 246, 0.78);
 
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.77rem;
+
+    line-height:
+        1.7;
+
+    text-align:
+        center;
 }
 
 
@@ -921,52 +929,120 @@
    ========================================================== */
 
 .chapter2-ending {
+    position:
+        relative;
 
-    width: min(
-        100%,
-        750px
-    );
-
-    margin:
-        0 auto;
+    margin-top:
+        24px;
 
     padding:
-        40px
-        20px
-        80px;
+        42px
+        35px
+        48px;
 
-    text-align: center;
+    border:
+        1px solid
+        rgba(255, 192, 226, 0.28);
 
+    border-radius:
+        28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 181, 221, 0.16),
+            rgba(187, 126, 255, 0.13)
+        );
+
+    text-align:
+        center;
+
+    box-shadow:
+        0 22px 60px
+        rgba(5, 2, 16, 0.20),
+
+        inset 0 1px 0
+        rgba(255,255,255,0.08);
 }
 
 
-.chapter2-ending-symbol {
+/* ==========================================================
+   ENDING DECORATIONS
+   ========================================================== */
 
-    margin-bottom: 25px;
+.chapter2-ending::before,
+.chapter2-ending::after {
+    content:
+        "♡";
+
+    position:
+        absolute;
+
+    color:
+        rgba(255, 175, 222, 0.55);
+
+    font-size:
+        1.8rem;
+}
+
+.chapter2-ending::before {
+    left:
+        20px;
+
+    top:
+        18px;
+}
+
+.chapter2-ending::after {
+    right:
+        20px;
+
+    bottom:
+        18px;
+}
+
+
+/* ==========================================================
+   ENDING SYMBOL
+   ========================================================== */
+
+.chapter2-ending-symbol {
+    margin-bottom:
+        20px;
+
+    color:
+        #ffafd9;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
-    font-size: 1.4rem;
+    font-size:
+        1.4rem;
 
-    color:
-        rgba(255, 205, 225, 0.55);
+    text-shadow:
+        0 0 15px
+        rgba(255, 145, 213, 0.35);
 
     animation:
         chapter2SymbolFloat
         4s
         ease-in-out
         infinite;
-
 }
 
 
-.chapter2-ending h3 {
+/* ==========================================================
+   ENDING TITLE
+   ========================================================== */
 
+.chapter2-ending h3 {
     margin:
         0 0
         22px;
+
+    color:
+        #fff1fb;
 
     font-family:
         "Cormorant Garamond",
@@ -979,35 +1055,165 @@
             3.7rem
         );
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    color: #fff5f9;
-
+    line-height:
+        0.95;
 }
 
 
-.chapter2-ending p {
+/* ==========================================================
+   ENDING TEXT
+   ========================================================== */
 
-    max-width: 650px;
+.chapter2-ending p {
+    max-width:
+        690px;
 
     margin:
         0 auto
         12px;
 
-    font-size: 0.9rem;
-
-    line-height: 2;
-
     color:
-        rgba(255, 238, 246, 0.68);
+        rgba(255, 232, 247, 0.82);
 
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.82rem;
+
+    line-height:
+        1.8;
 }
 
 
-.chapter2-ending p:last-child {
+/* ==========================================================
+   NAVIGATION
+   ========================================================== */
 
-    margin-bottom: 0;
+.chapter2-navigation {
+    display:
+        flex;
 
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        14px;
+
+    margin:
+        25px
+        auto
+        15px;
+}
+
+
+/* ==========================================================
+   NAV BUTTONS
+   ========================================================== */
+
+.chapter2-nav-btn {
+    min-width:
+        115px;
+
+    padding:
+        11px
+        20px;
+
+    border:
+        1px solid
+        rgba(255, 198, 233, 0.40);
+
+    border-radius:
+        999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 132, 205, 0.13),
+            rgba(183, 111, 255, 0.10)
+        );
+
+    color:
+        #ffe8f7;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.72rem;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(123, 54, 152, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.chapter2-nav-btn:hover:not(:disabled) {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(255, 221, 241, 0.65);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 139, 207, 0.25),
+            rgba(188, 120, 255, 0.20)
+        );
+
+    box-shadow:
+        0 12px 30px
+        rgba(176, 84, 166, 0.18);
+}
+
+
+.chapter2-nav-btn:disabled {
+    opacity:
+        0.25;
+
+    cursor:
+        default;
+}
+
+
+/* ==========================================================
+   PAGE INDICATOR
+   ========================================================== */
+
+#chapter2Indicator {
+    min-width:
+        55px;
+
+    color:
+        #ffd5ed;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.15rem;
+
+    text-align:
+        center;
 }
 
 
@@ -1016,93 +1222,104 @@
    ========================================================== */
 
 #chapter2Continue {
+    display:
+        inline-flex;
 
-    display: flex;
+    align-items:
+        center;
 
-    align-items: center;
+    justify-content:
+        center;
 
-    justify-content: center;
-
-    width: fit-content;
+    min-width:
+        160px;
 
     margin:
-        10px auto
-        100px;
+        25px
+        auto
+        20px;
 
     padding:
-        14px
-        30px;
+        12px
+        23px;
 
     border:
         1px solid
-        rgba(255, 210, 230, 0.25);
+        rgba(255, 198, 233, 0.55);
 
-    border-radius: 30px;
+    border-radius:
+        999px;
 
     background:
-        rgba(255, 255, 255, 0.025);
+        linear-gradient(
+            135deg,
+            rgba(255, 132, 205, 0.23),
+            rgba(183, 111, 255, 0.18)
+        );
 
     color:
-        rgba(255, 240, 247, 0.85);
+        #ffe8f7;
 
     font-family:
         "Poppins",
         sans-serif;
 
-    font-size: 0.78rem;
+    font-size:
+        0.75rem;
 
-    font-weight: 400;
+    letter-spacing:
+        0.05em;
 
-    letter-spacing: 0.02em;
+    cursor:
+        pointer;
 
-    cursor: pointer;
+    box-shadow:
+        0 10px 30px
+        rgba(123, 54, 152, 0.18),
 
-    outline: none;
+        inset 0 1px 0
+        rgba(255,255,255,0.10);
 
     transition:
-        transform 0.35s ease,
-        background 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
-
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
 }
 
 
-#chapter2Continue:hover {
-
+#chapter2Continue:hover,
+#chapter2Continue:focus-visible {
     transform:
-        translateY(-4px);
+        translateY(-3px);
 
     background:
-        rgba(255, 210, 230, 0.08);
-
-    border-color:
-        rgba(255, 210, 230, 0.45);
+        linear-gradient(
+            135deg,
+            rgba(255, 139, 207, 0.36),
+            rgba(188, 120, 255, 0.28)
+        );
 
     box-shadow:
-        0 10px 35px
-        rgba(255, 170, 210, 0.08);
+        0 15px 38px
+        rgba(176, 84, 166, 0.25),
 
+        0 0 25px
+        rgba(255, 147, 213, 0.14);
 }
 
 
-#chapter2Continue:active {
+/* ==========================================================
+   FOCUS ACCESSIBILITY
+   ========================================================== */
 
-    transform:
-        translateY(-1px);
-
-}
-
-
+.chapter2-nav-btn:focus-visible,
 #chapter2Continue:focus-visible {
+    outline:
+        2px solid
+        rgba(255, 213, 241, 0.85);
 
-    border-color:
-        rgba(255, 210, 230, 0.55);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(255, 190, 220, 0.10);
-
+    outline-offset:
+        4px;
 }
 
 
@@ -1111,110 +1328,57 @@
    ========================================================== */
 
 @keyframes chapter2GlowPulse {
-
-    0% {
+    0%, 100% {
+        opacity:
+            0.65;
 
         transform:
+            translateX(-50%)
             scale(1);
-
-        opacity: 0.65;
-
     }
 
     50% {
+        opacity:
+            1;
 
         transform:
-            scale(1.12);
-
-        opacity: 1;
-
+            translateX(-50%)
+            scale(1.08);
     }
-
-    100% {
-
-        transform:
-            scale(1);
-
-        opacity: 0.65;
-
-    }
-
 }
 
 
 @keyframes chapter2HeartFloat {
-
-    0% {
+    0%, 100% {
+        opacity:
+            0.35;
 
         transform:
-            translateY(25px)
-            scale(0.8)
-            rotate(-5deg);
-
-        opacity: 0;
-
-    }
-
-    20% {
-
-        opacity: 0.6;
-
+            translateY(0)
+            rotate(-4deg);
     }
 
     50% {
+        opacity:
+            0.9;
 
         transform:
-            translateY(-20px)
-            scale(1)
-            rotate(5deg);
-
-        opacity: 0.35;
-
+            translateY(-10px)
+            rotate(4deg);
     }
-
-    80% {
-
-        opacity: 0.6;
-
-    }
-
-    100% {
-
-        transform:
-            translateY(-60px)
-            scale(0.75)
-            rotate(-5deg);
-
-        opacity: 0;
-
-    }
-
 }
 
 
 @keyframes chapter2SymbolFloat {
-
-    0% {
-
+    0%, 100% {
         transform:
             translateY(0);
-
     }
 
     50% {
-
         transform:
             translateY(-7px);
-
     }
-
-    100% {
-
-        transform:
-            translateY(0);
-
-    }
-
 }
 
 
@@ -1222,59 +1386,14 @@
    TABLET
    ========================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1050px) {
 
     .chapter2-wrapper {
+        width:
+            calc(100% - 32px);
 
-        padding:
-            75px
-            20px
-            100px;
-
-    }
-
-
-    .chapter2-intro {
-
-        margin-bottom:
-            80px;
-
-    }
-
-
-    .chapter2-story {
-
-        padding:
-            45px
-            35px;
-
-        margin-bottom:
-            70px;
-
-    }
-
-
-    .chapter2-jokes-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .chapter2-joke-card {
-
-        min-height:
-            160px;
-
-    }
-
-
-    #chapter2Continue {
-
-        margin-bottom:
-            80px;
-
+        padding-top:
+            60px;
     }
 
 }
@@ -1284,318 +1403,156 @@
    MOBILE
    ========================================================== */
 
-@media (max-width: 480px) {
+@media (max-width: 780px) {
 
     .chapter2-wrapper {
+        width:
+            calc(100% - 24px);
 
-        padding:
-            60px
-            15px
-            80px;
-
+        padding-top:
+            55px;
     }
-
-
-    .chapter2-glow {
-
-        width: 350px;
-
-        height: 350px;
-
-        top: -150px;
-
-        left: -150px;
-
-    }
-
-
-    .chapter2-background::after {
-
-        width: 320px;
-
-        height: 320px;
-
-        right: -180px;
-
-        bottom: -150px;
-
-    }
-
 
     .chapter2-intro {
-
-        margin-bottom:
-            65px;
-
+        padding-bottom:
+            38px;
     }
-
-
-    .chapter2-label {
-
-        font-size:
-            0.65rem;
-
-        letter-spacing:
-            0.25em;
-
-    }
-
-
-    .chapter2-intro h2 {
-
-        font-size:
-            3.2rem;
-
-    }
-
-
-    .chapter2-intro p {
-
-        font-size:
-            0.78rem;
-
-        line-height:
-            1.8;
-
-    }
-
 
     .chapter2-story {
-
         padding:
-            40px
-            22px;
-
-        margin-bottom:
-            55px;
-
-        border-radius:
+            28px
             20px;
 
-    }
-
-
-    .chapter2-story::before {
-
-        top: 15px;
-
-        left: 18px;
-
-    }
-
-
-    .chapter2-story::after {
-
-        right: 18px;
-
-        bottom: 15px;
-
-    }
-
-
-    .chapter2-story h3 {
-
-        font-size:
-            2rem;
-
-    }
-
-
-    .chapter2-story p {
-
-        font-size:
-            0.8rem;
-
-        line-height:
-            1.9;
-
-    }
-
-
-    .chapter2-inside-jokes {
-
-        margin-bottom:
-            80px;
-
-    }
-
-
-    .chapter2-section-label {
-
-        font-size:
-            0.62rem;
-
-        letter-spacing:
-            0.22em;
-
-    }
-
-
-    .chapter2-inside-jokes h3 {
-
-        margin-bottom:
-            30px;
-
-        font-size:
-            2.4rem;
-
-    }
-
-
-    .chapter2-jokes-grid {
-
-        gap:
-            16px;
-
-    }
-
-
-    .chapter2-joke-card {
-
-        min-height:
-            150px;
-
-        padding:
-            30px
-            22px;
-
         border-radius:
-            18px;
-
+            25px;
     }
 
-
-    .chapter2-joke-icon {
-
+    .chapter2-story-number {
         width:
-            44px;
+            48px;
 
         height:
-            44px;
+            48px;
 
-        margin-bottom:
+        border-radius:
             15px;
 
-    }
-
-
-    .chapter2-joke-card p {
-
         font-size:
-            0.76rem;
-
+            1.35rem;
     }
 
-
-    .chapter2-ending {
-
-        padding:
-            30px
-            10px
-            60px;
-
+    .chapter2-jokes-grid {
+        grid-template-columns:
+            1fr;
     }
 
-
-    .chapter2-ending h3 {
-
-        font-size:
-            2.5rem;
-
+    .chapter2-joke-card {
+        min-height:
+            160px;
     }
 
-
-    .chapter2-ending p {
-
-        font-size:
-            0.8rem;
-
-        line-height:
-            1.9;
-
-    }
-
-
-    #chapter2Continue {
-
-        width:
-            calc(
-                100% - 30px
-            );
-
-        max-width:
-            280px;
-
-        margin:
-            10px auto
-            60px;
-
-        padding:
-            13px
-            22px;
-
-        font-size:
-            0.72rem;
-
+    .chapter2-navigation {
+        gap:
+            8px;
     }
 
 }
 
 
 /* ==========================================================
-   VERY SMALL MOBILE
+   SMALL MOBILE
    ========================================================== */
 
-@media (max-width: 360px) {
+@media (max-width: 520px) {
 
     .chapter2-wrapper {
-
-        padding:
-            50px
-            12px
-            70px;
-
+        width:
+            calc(100% - 16px);
     }
-
 
     .chapter2-intro h2 {
-
         font-size:
-            2.8rem;
-
+            clamp(
+                3.1rem,
+                17vw,
+                4.8rem
+            );
     }
 
+    .chapter2-intro p {
+        font-size:
+            0.75rem;
+    }
 
     .chapter2-story {
-
         padding:
-            35px
-            18px;
+            22px
+            15px;
 
+        border-radius:
+            22px;
     }
-
 
     .chapter2-story h3 {
-
         font-size:
-            1.8rem;
-
+            2rem;
     }
 
+    .chapter2-story p {
+        font-size:
+            0.75rem;
+    }
 
     .chapter2-inside-jokes h3 {
-
         font-size:
-            2.1rem;
-
+            2.4rem;
     }
 
+    .chapter2-joke-card {
+        padding:
+            26px
+            18px;
+    }
 
-    .chapter2-ending h3 {
+    .chapter2-joke-card p {
+        font-size:
+            0.72rem;
+    }
+
+    .chapter2-navigation {
+        gap:
+            6px;
+    }
+
+    .chapter2-nav-btn {
+        min-width:
+            90px;
+
+        padding:
+            9px
+            12px;
 
         font-size:
-            2.2rem;
+            0.65rem;
+    }
 
+    #chapter2Continue {
+        min-width:
+            145px;
+
+        padding:
+            11px
+            18px;
+
+        font-size:
+            0.7rem;
+    }
+
+    .chapter2-ending {
+        padding:
+            35px
+            20px
+            40px;
     }
 
 }
@@ -1607,31 +1564,18 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    #chapter2 {
-
-        scroll-behavior:
-            auto;
-
-    }
-
-
     .chapter2-glow,
     .chapter2-heart,
     .chapter2-ending-symbol {
-
         animation:
             none;
-
     }
-
 
     .chapter2-story,
     .chapter2-joke-card,
+    .chapter2-nav-btn,
     #chapter2Continue {
-
         transition:
             none;
-
     }
-
 }
