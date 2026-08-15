@@ -64,33 +64,21 @@ function initFinalChapter() {
        FINAL CHAPTER ELEMENTS
     ====================================================== */
 
-    const noButton =
-        document.getElementById(
-            "finalNoBtn"
-        );
-
-
     const yesButton =
         document.getElementById(
             "finalYesBtn"
         );
 
 
+    const noButton =
+        document.getElementById(
+            "finalNoBtn"
+        );
+
+
     const questionSection =
         document.getElementById(
             "finalQuestion"
-        );
-
-
-    const successSection =
-        document.getElementById(
-            "finalYesResponse"
-        );
-
-
-    const messageButton =
-        document.getElementById(
-            "finalMessageBtn"
         );
 
 
@@ -106,23 +94,35 @@ function initFinalChapter() {
         );
 
 
+    const successSection =
+        document.getElementById(
+            "finalYesResponse"
+        );
+
+
+    const messageButton =
+        document.getElementById(
+            "finalMessageBtn"
+        );
+
+
     /* ======================================================
-       SAFETY CHECK
+       SAFETY CHECKS
     ====================================================== */
 
-    if (!noButton) {
+    if (!yesButton) {
 
         console.warn(
-            "⚠️ Final Chapter NO button not found."
+            "⚠️ Final YES button not found."
         );
 
     }
 
 
-    if (!yesButton) {
+    if (!noButton) {
 
         console.warn(
-            "⚠️ Final Chapter YES button not found."
+            "⚠️ Final NO button not found."
         );
 
     }
@@ -132,6 +132,15 @@ function initFinalChapter() {
 
         console.warn(
             "⚠️ Final question section not found."
+        );
+
+    }
+
+
+    if (!answerArea) {
+
+        console.warn(
+            "⚠️ Final answer area not found."
         );
 
     }
@@ -162,42 +171,8 @@ function initFinalChapter() {
 
 
     /* ======================================================
-       NO BUTTON SIZES
+       INITIALIZE SUCCESS SECTION
     ====================================================== */
-
-    const noButtonSizes = [
-
-        "1",
-
-        "0.65",
-
-        "0.35"
-
-    ];
-
-
-    /* ======================================================
-       YES BUTTON SIZES
-    ====================================================== */
-
-    const yesButtonSizes = [
-
-        "1",
-
-        "1.12",
-
-        "1.28"
-
-    ];
-
-
-    /* ======================================================
-       INITIAL STATE
-    ====================================================== */
-
-    /*
-        The final success response must begin hidden.
-    */
 
     if (successSection) {
 
@@ -211,67 +186,49 @@ function initFinalChapter() {
     }
 
 
-    /*
-        Reset question section.
-    */
-
-    if (questionSection) {
-
-        questionSection.classList.remove(
-            "question-complete"
-        );
-
-    }
-
-
-    /*
-        Reset NO button.
-    */
+    /* ======================================================
+       INITIALIZE NO BUTTON
+    ====================================================== */
 
     if (noButton) {
 
+        noButton.disabled =
+            false;
+
         noButton.style.display =
+            "";
+
+        noButton.style.opacity =
             "";
 
         noButton.style.transform =
             "scale(1)";
 
-        noButton.disabled =
-            false;
-
         noButton.removeAttribute(
             "aria-hidden"
         );
 
-        noButton.classList.remove(
-            "disappearing"
-        );
-
     }
 
 
-    /*
-        Reset YES button.
-    */
+    /* ======================================================
+       INITIALIZE YES BUTTON
+    ====================================================== */
 
     if (yesButton) {
-
-        yesButton.style.transform =
-            "scale(1)";
 
         yesButton.disabled =
             false;
 
-        yesButton.classList.remove(
-            "yes-final"
-        );
+        yesButton.style.transform =
+            "scale(1)";
 
     }
 
 
-    /*
-        Reset hint.
-    */
+    /* ======================================================
+       INITIALIZE HINT
+    ====================================================== */
 
     if (hint) {
 
@@ -298,7 +255,7 @@ function initFinalChapter() {
     function handleNoClick() {
 
         /*
-            Do nothing after she has answered.
+            Prevent interaction after YES.
         */
 
         if (
@@ -310,9 +267,9 @@ function initFinalChapter() {
         }
 
 
-        /*
-            Increase NO click count.
-        */
+        /* ==================================================
+           INCREASE NO COUNT
+        ================================================== */
 
         state.noClicks++;
 
@@ -323,7 +280,7 @@ function initFinalChapter() {
 
 
         /* ==================================================
-           OPTIONAL HINT TEXT
+           HINT TEXT
         ================================================== */
 
         if (hint) {
@@ -346,10 +303,7 @@ function initFinalChapter() {
 
             }
 
-            else if (
-                state.noClicks >=
-                state.maxNoClicks
-            ) {
+            else {
 
                 hint.textContent =
                     "I think the NO button has given up... ♡";
@@ -360,99 +314,57 @@ function initFinalChapter() {
 
 
         /* ==================================================
-           FIRST / SECOND CLICK
+           SHRINK NO BUTTON
         ================================================== */
 
         if (
-            state.noClicks <
-            state.maxNoClicks
+            state.noClicks === 1
         ) {
 
-            const sizeIndex =
-                state.noClicks - 1;
+            noButton.style.transform =
+                "scale(0.72)";
 
+        }
 
-            const newSize =
-                noButtonSizes[
-                    sizeIndex
-                ];
-
-
-            const yesSize =
-                yesButtonSizes[
-                    sizeIndex
-                ];
-
-
-            /*
-                Make NO smaller.
-            */
+        else if (
+            state.noClicks === 2
+        ) {
 
             noButton.style.transform =
-                `scale(${newSize})`;
-
-
-            /*
-                Make YES bigger.
-            */
-
-            if (yesButton) {
-
-                yesButton.style.transform =
-                    `scale(${yesSize})`;
-
-            }
-
-
-            /*
-                Add shrinking animation.
-            */
-
-            noButton.classList.add(
-                "shrinking"
-            );
-
-
-            /*
-                Restart animation.
-            */
-
-            void noButton.offsetWidth;
-
-
-            noButton.classList.remove(
-                "shrinking"
-            );
-
-
-            /*
-                Add emphasis to YES.
-            */
-
-            if (yesButton) {
-
-                yesButton.classList.add(
-                    "yes-growing"
-                );
-
-
-                void yesButton.offsetWidth;
-
-
-                yesButton.classList.remove(
-                    "yes-growing"
-                );
-
-            }
-
-
-            return;
+                "scale(0.44)";
 
         }
 
 
         /* ==================================================
-           THIRD CLICK
+           GROW YES BUTTON
+        ================================================== */
+
+        if (yesButton) {
+
+            if (
+                state.noClicks === 1
+            ) {
+
+                yesButton.style.transform =
+                    "scale(1.08)";
+
+            }
+
+            else if (
+                state.noClicks === 2
+            ) {
+
+                yesButton.style.transform =
+                    "scale(1.18)";
+
+            }
+
+        }
+
+
+        /* ==================================================
+           THIRD NO CLICK
         ================================================== */
 
         if (
@@ -464,35 +376,14 @@ function initFinalChapter() {
                 Make NO disappear.
             */
 
-            noButton.classList.add(
-                "disappearing"
-            );
+            noButton.style.transform =
+                "scale(0)";
 
-
-            /*
-                Make YES the largest button.
-            */
-
-            if (yesButton) {
-
-                yesButton.style.transform =
-                    "scale(1.42)";
-
-
-                yesButton.classList.add(
-                    "yes-final"
-                );
-
-            }
-
-
-            /*
-                Disable NO.
-            */
+            noButton.style.opacity =
+                "0";
 
             noButton.disabled =
                 true;
-
 
             noButton.setAttribute(
                 "aria-hidden",
@@ -501,8 +392,8 @@ function initFinalChapter() {
 
 
             /*
-                Wait for the animation
-                before removing it visually.
+                Remove NO from interaction
+                after the visual transition.
             */
 
             setTimeout(
@@ -514,6 +405,18 @@ function initFinalChapter() {
                 },
                 500
             );
+
+
+            /*
+                Make YES the main choice.
+            */
+
+            if (yesButton) {
+
+                yesButton.style.transform =
+                    "scale(1.32)";
+
+            }
 
 
             console.log(
@@ -542,7 +445,7 @@ function initFinalChapter() {
     function handleYesClick() {
 
         /*
-            Prevent multiple clicks.
+            Prevent multiple answers.
         */
 
         if (
@@ -554,6 +457,10 @@ function initFinalChapter() {
         }
 
 
+        /* ==================================================
+           SET ANSWERED STATE
+        ================================================== */
+
         state.answered =
             true;
 
@@ -563,17 +470,13 @@ function initFinalChapter() {
         );
 
 
-        /*
-            Disable YES.
-        */
+        /* ==================================================
+           DISABLE BUTTONS
+        ================================================== */
 
         yesButton.disabled =
             true;
 
-
-        /*
-            Disable NO as well.
-        */
 
         if (noButton) {
 
@@ -583,36 +486,43 @@ function initFinalChapter() {
         }
 
 
-        /*
-            Hide the answer buttons.
-        */
+        /* ==================================================
+           HIDE ANSWER AREA
+        ================================================== */
 
         if (answerArea) {
 
-            answerArea.classList.add(
-                "answer-complete"
-            );
+            answerArea.style.opacity =
+                "0";
+
+            answerArea.style.transform =
+                "translateY(-10px)";
+
+            answerArea.style.pointerEvents =
+                "none";
+
+            answerArea.style.transition =
+                "opacity 0.6s ease, transform 0.6s ease";
 
         }
 
 
-        /*
-            Complete the question section.
-        */
+        /* ==================================================
+           HIDE QUESTION CARD CONTENT
+        ================================================== */
 
         if (questionSection) {
 
             questionSection.classList.add(
-                "question-complete"
+                "answered"
             );
 
         }
 
 
-        /*
-            Show success screen after
-            a short emotional delay.
-        */
+        /* ==================================================
+           SHOW SUCCESS AFTER DELAY
+        ================================================== */
 
         setTimeout(
             () => {
@@ -643,17 +553,17 @@ function initFinalChapter() {
         }
 
 
-        /*
-            Make success section visible.
-        */
+        /* ==================================================
+           SHOW SUCCESS SECTION
+        ================================================== */
 
         successSection.hidden =
             false;
 
 
         /*
-            Add animation class
-            on the next frame.
+            Trigger CSS animation
+            on the next rendering frame.
         */
 
         requestAnimationFrame(
@@ -667,9 +577,16 @@ function initFinalChapter() {
         );
 
 
-        /*
-            Scroll toward success message.
-        */
+        /* ==================================================
+           HEART CELEBRATION
+        ================================================== */
+
+        createHeartCelebration();
+
+
+        /* ==================================================
+           SCROLL TO SUCCESS
+        ================================================== */
 
         setTimeout(
             () => {
@@ -685,15 +602,8 @@ function initFinalChapter() {
                 });
 
             },
-            400
+            450
         );
-
-
-        /*
-            Create heart celebration.
-        */
-
-        createHeartCelebration();
 
 
         console.log(
@@ -710,7 +620,7 @@ function initFinalChapter() {
     function createHeartCelebration() {
 
         /*
-            Prevent duplicate celebrations.
+            Remove an existing celebration first.
         */
 
         const existingCelebration =
@@ -726,6 +636,10 @@ function initFinalChapter() {
         }
 
 
+        /* ==================================================
+           CREATE CONTAINER
+        ================================================== */
+
         const container =
             document.createElement(
                 "div"
@@ -736,38 +650,37 @@ function initFinalChapter() {
             "final-heart-celebration";
 
 
-        /*
-            Create floating hearts.
-        */
+        container.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        /* ==================================================
+           HEART SYMBOLS
+        ================================================== */
 
         const hearts = [
 
             "♡",
-
             "♥",
-
             "♡",
-
             "✦",
-
             "♥",
-
             "♡",
-
             "✧",
-
             "♥",
-
             "♡",
-
             "✦",
-
             "♥",
-
             "♡"
 
         ];
 
+
+        /* ==================================================
+           CREATE FLOATING HEARTS
+        ================================================== */
 
         hearts.forEach(
             (symbol) => {
@@ -803,7 +716,7 @@ function initFinalChapter() {
 
 
                 /*
-                    Slightly different duration.
+                    Random animation duration.
                 */
 
                 heart.style.animationDuration =
@@ -818,15 +731,18 @@ function initFinalChapter() {
         );
 
 
+        /* ==================================================
+           ADD TO FINAL CHAPTER
+        ================================================== */
+
         finalChapter.appendChild(
             container
         );
 
 
-        /*
-            Remove celebration after
-            animation finishes.
-        */
+        /* ==================================================
+           CLEANUP
+        ================================================== */
 
         setTimeout(
             () => {
@@ -882,8 +798,7 @@ function initFinalChapter() {
     function handleMessageClick(event) {
 
         /*
-            Make sure Instagram URL
-            has been updated.
+            Prevent opening the placeholder URL.
         */
 
         if (
@@ -934,9 +849,7 @@ function initFinalChapter() {
 ========================================================== */
 
 /*
-    Check whether the DOM is already ready.
-
-    This makes final.js safe whether it is loaded
+    This allows final.js to work whether it is loaded
     before or after DOMContentLoaded.
 */
 
