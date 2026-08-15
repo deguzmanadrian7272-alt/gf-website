@@ -15,20 +15,20 @@
     position: relative;
 
     width: 100%;
-    min-height: 100vh;
 
     /*
        IMPORTANT:
-       Allow the chapter to naturally grow with its content.
-       The browser/page handles scrolling.
+       The chapter must be able to become taller than the
+       browser viewport. This allows normal page scrolling.
     */
+    min-height: 100vh;
     height: auto;
 
     display: none;
 
     /*
-       Do NOT create an internal scrollbar.
-       Scrolling is handled by the main page.
+       Do NOT create an internal scrollbar here.
+       The browser/document should handle the scrolling.
     */
     overflow: visible;
 
@@ -71,26 +71,22 @@
    ========================================================== */
 
 .chapter2-background {
-    position: absolute;
-
     /*
-       Stretch the background with the entire chapter.
-       It is NOT fixed to the viewport.
+       Fixed background keeps the decorations visible while
+       the user scrolls through the chapter.
+
+       The actual chapter content remains in normal document
+       flow, so the page itself can scroll.
     */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: fixed;
+
+    inset: 0;
 
     width: 100%;
-    min-height: 100%;
+    height: 100vh;
 
     z-index: 0;
 
-    /*
-       Prevent decorations from creating horizontal scrolling.
-       Vertical scrolling remains controlled by the page.
-    */
     overflow: hidden;
 
     pointer-events: none;
@@ -173,8 +169,6 @@
 .chapter2-heart {
     position: absolute;
 
-    z-index: 2;
-
     display: block;
 
     color:
@@ -199,27 +193,27 @@
    ========================================================== */
 
 .chapter2-heart:nth-child(1) {
-    left: 8%;
-    top: 12%;
+    left: 10%;
+    top: 18%;
 }
 
 .chapter2-heart:nth-child(2) {
-    right: 8%;
-    top: 28%;
+    left: 84%;
+    top: 27%;
 
     animation-delay: 1.7s;
 }
 
 .chapter2-heart:nth-child(3) {
-    left: 12%;
-    top: 52%;
+    left: 17%;
+    top: 64%;
 
     animation-delay: 3.2s;
 }
 
 .chapter2-heart:nth-child(4) {
-    right: 11%;
-    top: 76%;
+    right: 10%;
+    top: 78%;
 
     animation-delay: 0.8s;
 }
@@ -251,6 +245,9 @@
 .chapter2-wrapper {
     position: relative;
 
+    /*
+       Content must always be above the background.
+    */
     z-index: 5;
 
     width:
@@ -260,7 +257,8 @@
         );
 
     /*
-       The wrapper naturally grows with the content.
+       Let the wrapper naturally grow based on its content.
+       This is what allows normal browser scrolling.
     */
     min-height: 100vh;
     height: auto;
@@ -308,13 +306,17 @@
         "Poppins",
         sans-serif;
 
-    font-size: 0.74rem;
+    font-size:
+        0.74rem;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    letter-spacing: 0.25em;
+    letter-spacing:
+        0.25em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 }
 
 
@@ -339,11 +341,14 @@
             7rem
         );
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    line-height: 0.86;
+    line-height:
+        0.86;
 
-    letter-spacing: 0.025em;
+    letter-spacing:
+        0.025em;
 
     text-shadow:
         0 0 12px rgba(255, 176, 222, 0.65),
@@ -370,7 +375,8 @@
         "Cormorant Garamond",
         serif;
 
-    font-size: 1.2rem;
+    font-size:
+        1.2rem;
 
     text-shadow:
         0 0 12px
@@ -383,7 +389,8 @@
    ========================================================== */
 
 .chapter2-intro p {
-    max-width: 650px;
+    max-width:
+        650px;
 
     margin:
         18px
@@ -400,7 +407,8 @@
     font-size:
         0.82rem;
 
-    font-weight: 300;
+    font-weight:
+        300;
 
     line-height:
         1.8;
@@ -414,7 +422,8 @@
 .chapter2-story {
     position: relative;
 
-    margin-bottom: 18px;
+    margin-bottom:
+        18px;
 
     padding:
         34px
@@ -461,6 +470,10 @@
 }
 
 
+/* ==========================================================
+   STORY CARD HOVER
+   ========================================================== */
+
 .chapter2-story:hover {
     transform:
         translateY(-6px);
@@ -504,7 +517,8 @@
             transparent 68%
         );
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 
@@ -513,12 +527,17 @@
    ========================================================== */
 
 .chapter2-story::after {
-    content: "♡";
+    content:
+        "♡";
 
-    position: absolute;
+    position:
+        absolute;
 
-    right: 22px;
-    bottom: 18px;
+    right:
+        22px;
+
+    bottom:
+        18px;
 
     color:
         rgba(255, 175, 222, 0.45);
@@ -533,9 +552,11 @@
    ========================================================== */
 
 .chapter2-story-content {
-    position: relative;
+    position:
+        relative;
 
-    z-index: 1;
+    z-index:
+        1;
 }
 
 
@@ -544,15 +565,23 @@
    ========================================================== */
 
 .chapter2-story-number {
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
-    justify-content: center;
+    align-items:
+        center;
 
-    width: 58px;
-    height: 58px;
+    justify-content:
+        center;
 
-    margin-bottom: 18px;
+    width:
+        58px;
+
+    height:
+        58px;
+
+    margin-bottom:
+        18px;
 
     border:
         1px solid
@@ -668,7 +697,8 @@
    ========================================================== */
 
 .chapter2-section-label {
-    display: block;
+    display:
+        block;
 
     margin-bottom:
         10px;
@@ -817,6 +847,10 @@
 }
 
 
+/* ==========================================================
+   ALTERNATING JOKE CARD
+   ========================================================== */
+
 .chapter2-joke-card:nth-child(even) {
     background:
         linear-gradient(
@@ -826,6 +860,10 @@
         );
 }
 
+
+/* ==========================================================
+   JOKE CARD HOVER
+   ========================================================== */
 
 .chapter2-joke-card:hover {
     transform:
@@ -849,7 +887,8 @@
    ========================================================== */
 
 .chapter2-joke-card::before {
-    content: "";
+    content:
+        "";
 
     position:
         absolute;
@@ -1031,6 +1070,7 @@
         1.8rem;
 }
 
+
 .chapter2-ending::before {
     left:
         20px;
@@ -1038,6 +1078,7 @@
     top:
         18px;
 }
+
 
 .chapter2-ending::after {
     right:
@@ -1211,6 +1252,10 @@
 }
 
 
+/* ==========================================================
+   NAV BUTTON HOVER
+   ========================================================== */
+
 .chapter2-nav-btn:hover:not(:disabled) {
     transform:
         translateY(-3px);
@@ -1230,6 +1275,10 @@
         rgba(176, 84, 166, 0.18);
 }
 
+
+/* ==========================================================
+   DISABLED NAV BUTTON
+   ========================================================== */
 
 .chapter2-nav-btn:disabled {
     opacity:
@@ -1332,6 +1381,10 @@
         background 0.25s ease;
 }
 
+
+/* ==========================================================
+   CONTINUE BUTTON HOVER
+   ========================================================== */
 
 #chapter2Continue:hover,
 #chapter2Continue:focus-visible {
@@ -1444,6 +1497,7 @@
         padding-top:
             60px;
     }
+
 }
 
 
@@ -1503,6 +1557,7 @@
         gap:
             8px;
     }
+
 }
 
 
@@ -1601,6 +1656,7 @@
             20px
             40px;
     }
+
 }
 
 
