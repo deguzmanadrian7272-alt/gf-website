@@ -471,8 +471,8 @@ function initChapter7() {
         }
     );
 
-
-    /* ======================================================
+    
+   /* ======================================================
        CHAPTER VII → FINAL CHAPTER
        ====================================================== */
 
@@ -483,27 +483,101 @@ function initChapter7() {
             () => {
 
                 /*
-                    Use the existing navigation system first.
+                    Prevent accidental double activation.
                 */
 
-                if (
-                    typeof window.goToChapter ===
-                    "function"
-                ) {
+                if (continueButton.disabled) {
+                    return;
+                }
 
-                    window.goToChapter(8);
+
+                continueButton.disabled = true;
+
+
+                console.log(
+                    "✨ Chapter VII → Final Chapter"
+                );
+
+
+                /* ==================================================
+                   FIND FINAL CHAPTER
+                ================================================== */
+
+                const finalChapter =
+                    document.getElementById("chapter8") ||
+                    document.getElementById("finalChapter");
+
+
+                /*
+                    If the final chapter does not exist,
+                    stop here instead of throwing an error.
+                */
+
+                if (!finalChapter) {
+
+                    console.warn(
+                        "⚠️ Final Chapter element not found."
+                    );
+
+                    continueButton.disabled = false;
 
                     return;
 
                 }
 
 
+                /* ==================================================
+                   TRANSITION SYSTEM FIRST
+                ================================================== */
+
                 if (
-                    typeof window.showChapter ===
+                    typeof window.transitionToChapter ===
                     "function"
                 ) {
 
-                    window.showChapter(8);
+                    console.log(
+                        "🎬 Using transitionToChapter(8)..."
+                    );
+
+
+                    window.transitionToChapter(8);
+
+
+                    /*
+                        Give the existing transition system
+                        time to complete.
+
+                        If Chapter 8 is still not visible,
+                        use the direct fallback.
+                    */
+
+                    setTimeout(
+                        () => {
+
+                            const isVisible =
+                                finalChapter.classList.contains(
+                                    "active"
+                                ) ||
+                                getComputedStyle(
+                                    finalChapter
+                                ).display !== "none";
+
+
+                            if (!isVisible) {
+
+                                console.warn(
+                                    "⚠️ Transition did not open Final Chapter. Using direct fallback."
+                                );
+
+
+                                openFinalChapterDirectly();
+
+                            }
+
+                        },
+                        700
+                    );
+
 
                     return;
 
@@ -512,19 +586,32 @@ function initChapter7() {
 
                 /* ==================================================
                    DIRECT FALLBACK
-                   ================================================== */
+                ================================================== */
 
-                const finalChapter =
-                    document.getElementById(
-                        "chapter8"
-                    );
+                console.warn(
+                    "⚠️ transitionToChapter() not available. Using direct navigation."
+                );
 
 
-                if (finalChapter) {
+                openFinalChapterDirectly();
+
+
+                /* ==================================================
+                   DIRECT FINAL CHAPTER NAVIGATION
+                ================================================== */
+
+                function openFinalChapterDirectly() {
+
+                    /*
+                        Hide every chapter first.
+
+                        This is important because all chapters
+                        exist in the same HTML document.
+                    */
 
                     document
                         .querySelectorAll(
-                            "main[id^='chapter']"
+                            "main[id^='chapter'], #finalChapter"
                         )
                         .forEach(
                             (chapter) => {
@@ -533,13 +620,31 @@ function initChapter7() {
                                     "active"
                                 );
 
+                                chapter.style.display =
+                                    "none";
+
                             }
                         );
 
 
+                    /*
+                        Show Final Chapter.
+                    */
+
                     finalChapter.classList.add(
                         "active"
                     );
+
+                    finalChapter.style.display =
+                        "block";
+
+
+                    /*
+                        Reset the Final Chapter scroll.
+                    */
+
+                    finalChapter.scrollTop =
+                        0;
 
 
                     window.scrollTo({
@@ -552,20 +657,32 @@ function initChapter7() {
                     });
 
 
-                    return;
+                    /*
+                        Notify the existing navigation system
+                        that Chapter 8 is now active.
+
+                        This keeps other project logic synchronized.
+                    */
+
+                    document.dispatchEvent(
+
+                        new CustomEvent(
+                            "chapterChange",
+                            {
+                                detail: {
+                                    chapter: 8
+                                }
+                            }
+                        )
+
+                    );
+
+
+                    console.log(
+                        "💗 Final Chapter opened directly."
+                    );
 
                 }
-
-
-                /*
-                    Chapter VIII is intentionally not required yet.
-                    This prevents an error while the final chapter
-                    is still being built.
-                */
-
-                console.info(
-                    "Chapter VIII / Final Chapter has not been added yet."
-                );
 
             }
         );
