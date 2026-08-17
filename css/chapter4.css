@@ -1,13 +1,14 @@
 /* ==========================================================
    CHAPTER IV — LETTERS
    Project : Our Story
-   Purpose : Romantic Letter Chapter
-   Theme   : Violet / Deep Plum / Midnight Romance
+   File    : chapter4.css
+   Purpose : Girly / Cute / Romantic Letter Storybook
+   Design Reference : Chapter VII
    ========================================================== */
 
 
 /* ==========================================================
-   CHAPTER 4 BASE
+   CHAPTER 4 ROOT
    ========================================================== */
 
 #chapter4 {
@@ -18,104 +19,92 @@
 
     min-height: 100vh;
 
-    /*
-        IMPORTANT:
-        Chapter 4 must grow naturally with its content.
-        DO NOT use height: 100vh.
-        DO NOT use overflow-y: auto.
-    */
-
-    height: auto;
+    display: none;
 
     overflow-x: hidden;
 
-    overflow-y: visible;
+    /*
+        Chapter 4 should use the page's natural scrolling.
+        !important prevents chapter4.js from forcing an
+        internal scrollbar through inline styles.
+    */
+
+    overflow-y: visible !important;
 
     box-sizing: border-box;
 
-    display: none;
-
-    color: #ffffff;
-
-    /*
-        Deep violet romantic background.
-        Different from the brighter pink chapters.
-    */
+    color: #fff7fd;
 
     background:
 
         radial-gradient(
-            circle at 50% 0%,
-            rgba(154, 116, 220, 0.20),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 0% 35%,
-            rgba(111, 76, 170, 0.18),
+            circle at 50% 12%,
+            rgba(
+                255,
+                148,
+                213,
+                0.22
+            ),
             transparent 30%
         ),
 
         radial-gradient(
-            circle at 100% 65%,
-            rgba(185, 126, 202, 0.13),
-            transparent 30%
+            circle at 12% 55%,
+            rgba(
+                179,
+                117,
+                255,
+                0.18
+            ),
+            transparent 28%
         ),
 
         radial-gradient(
-            circle at 45% 100%,
-            rgba(76, 48, 126, 0.18),
-            transparent 35%
+            circle at 88% 70%,
+            rgba(
+                255,
+                177,
+                222,
+                0.16
+            ),
+            transparent 30%
         ),
 
         linear-gradient(
             180deg,
-            #171024 0%,
-            #211532 28%,
-            #2a1940 55%,
-            #211531 78%,
-            #100b1a 100%
+            #130b2d 0%,
+            #21103d 42%,
+            #32164d 72%,
+            #180b32 100%
         );
 
 }
 
 
 /* ==========================================================
-   CHAPTER 4 BACKGROUND
+   BACKGROUND
    ========================================================== */
 
 .chapter4-background {
 
     position: absolute;
 
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    /*
-        Allow background to cover the full chapter
-        as the content becomes longer.
-    */
-
-    min-height: 100%;
-
-    height: 100%;
-
-    pointer-events: none;
+    inset: 0;
 
     z-index: 0;
 
     overflow: hidden;
 
+    pointer-events: none;
+
 }
 
 
 /* ==========================================================
-   SOFT VIOLET LIGHT
+   SOFT GLOW
    ========================================================== */
 
-.chapter4-light {
+.chapter4-glow {
 
     position: absolute;
 
@@ -123,136 +112,104 @@
 
     pointer-events: none;
 
-    filter: blur(100px);
-
-    opacity: 0.45;
-
-    animation:
-        chapter4LightFloat
-        12s
-        ease-in-out
-        infinite
-        alternate;
+    filter: blur(18px);
 
 }
 
 
 /* ==========================================================
-   LIGHT 1
+   GLOW 1
    ========================================================== */
 
-.chapter4-light-1 {
+.chapter4-glow-1 {
 
-    width: 450px;
+    width: 75vw;
 
-    height: 450px;
+    height: 75vw;
 
-    top: 3%;
+    max-width: 1000px;
 
-    left: -180px;
+    max-height: 1000px;
+
+    left: 50%;
+
+    top: 2%;
+
+    transform:
+        translateX(-50%);
 
     background:
-        rgba(
-            139,
-            92,
-            190,
-            0.28
+
+        radial-gradient(
+            circle,
+            rgba(
+                255,
+                179,
+                224,
+                0.16
+            ) 0%,
+
+            rgba(
+                197,
+                131,
+                255,
+                0.10
+            ) 38%,
+
+            transparent 70%
         );
 
 }
 
 
 /* ==========================================================
-   LIGHT 2
+   GLOW 2
    ========================================================== */
 
-.chapter4-light-2 {
+.chapter4-glow-2 {
 
-    width: 400px;
-
-    height: 400px;
-
-    top: 42%;
-
-    right: -170px;
-
-    background:
-        rgba(
-            174,
-            118,
-            201,
-            0.22
-        );
-
-    animation-delay:
-        -4s;
-
-}
-
-
-/* ==========================================================
-   LIGHT 3
-   ========================================================== */
-
-.chapter4-light-3 {
-
-    width: 350px;
-
-    height: 350px;
+    left: 50%;
 
     bottom: 5%;
 
-    left: 35%;
+    width: 80%;
+
+    height: 28%;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
 
     background:
-        rgba(
-            105,
-            72,
-            165,
-            0.18
+
+        radial-gradient(
+            ellipse,
+            rgba(
+                255,
+                134,
+                204,
+                0.22
+            ),
+
+            rgba(
+                191,
+                117,
+                255,
+                0.08
+            ) 45%,
+
+            transparent 72%
         );
 
-    animation-delay:
-        -7s;
+    filter:
+        blur(25px);
 
 }
 
 
 /* ==========================================================
-   LIGHT ANIMATION
-   ========================================================== */
-
-@keyframes chapter4LightFloat {
-
-    from {
-
-        transform:
-            translate3d(
-                0,
-                0,
-                0
-            )
-            scale(1);
-
-    }
-
-    to {
-
-        transform:
-            translate3d(
-                30px,
-                -25px,
-                0
-            )
-            scale(1.08);
-
-    }
-
-}
-
-
-/* ==========================================================
-   FLOATING STARS
+   STARS
    ========================================================== */
 
 .chapter4-star {
@@ -261,35 +218,40 @@
 
     z-index: 1;
 
-    pointer-events: none;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
     color:
         rgba(
-            224,
-            207,
+            255,
+            226,
+            248,
+            0.9
+        );
+
+    font-size:
+        0.75rem;
+
+    text-shadow:
+
+        0 0 8px
+        rgba(
+            255,
+            191,
+            231,
+            0.9
+        ),
+
+        0 0 18px
+        rgba(
+            194,
+            128,
             255,
             0.55
         );
 
-    text-shadow:
-        0 0 15px
-        rgba(
-            190,
-            155,
-            255,
-            0.45
-        );
-
     animation:
-        chapter4StarFloat
-        7s
+        chapter4Twinkle
+        3.5s
         ease-in-out
-        infinite
-        alternate;
+        infinite;
 
 }
 
@@ -300,107 +262,45 @@
 
 .chapter4-star-1 {
 
-    top: 12%;
+    top:
+        10%;
 
-    left: 8%;
-
-    font-size:
-        1.4rem;
+    left:
+        8%;
 
 }
 
 
 .chapter4-star-2 {
 
-    top: 25%;
+    top:
+        22%;
 
-    right: 10%;
-
-    font-size:
-        1rem;
+    right:
+        10%;
 
     animation-delay:
-        -2s;
+        0.8s;
 
 }
 
 
 .chapter4-star-3 {
 
-    top: 52%;
+    top:
+        58%;
 
-    left: 12%;
-
-    font-size:
-        0.9rem;
-
-    animation-delay:
-        -4s;
-
-}
-
-
-.chapter4-star-4 {
-
-    top: 72%;
-
-    right: 12%;
-
-    font-size:
-        1.5rem;
+    left:
+        5%;
 
     animation-delay:
-        -1s;
-
-}
-
-
-.chapter4-star-5 {
-
-    bottom: 10%;
-
-    left: 25%;
-
-    font-size:
-        0.8rem;
-
-    animation-delay:
-        -5s;
+        1.6s;
 
 }
 
 
 /* ==========================================================
-   STAR ANIMATION
-   ========================================================== */
-
-@keyframes chapter4StarFloat {
-
-    from {
-
-        opacity: 0.20;
-
-        transform:
-            translateY(10px)
-            rotate(0deg);
-
-    }
-
-    to {
-
-        opacity: 0.75;
-
-        transform:
-            translateY(-14px)
-            rotate(12deg);
-
-    }
-
-}
-
-
-/* ==========================================================
-   FLOATING HEARTS
+   HEARTS
    ========================================================== */
 
 .chapter4-heart {
@@ -409,35 +309,28 @@
 
     z-index: 1;
 
-    pointer-events: none;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
     color:
         rgba(
-            218,
-            170,
-            224,
-            0.42
+            255,
+            196,
+            231,
+            0.8
         );
 
     text-shadow:
-        0 0 18px
+        0 0 14px
         rgba(
-            190,
-            130,
-            215,
-            0.35
+            255,
+            150,
+            216,
+            0.65
         );
 
     animation:
-        chapter4HeartFloat
-        10s
+        chapter4Float
+        5s
         ease-in-out
-        infinite
-        alternate;
+        infinite;
 
 }
 
@@ -448,71 +341,31 @@
 
 .chapter4-heart-1 {
 
-    top: 38%;
+    top:
+        38%;
 
-    left: 5%;
+    left:
+        7%;
 
     font-size:
-        1.3rem;
+        1.6rem;
 
 }
 
 
 .chapter4-heart-2 {
 
-    top: 58%;
+    top:
+        67%;
 
-    right: 6%;
-
-    font-size:
-        1.7rem;
-
-    animation-delay:
-        -3s;
-
-}
-
-
-.chapter4-heart-3 {
-
-    bottom: 8%;
-
-    left: 15%;
+    right:
+        8%;
 
     font-size:
-        1rem;
+        1.45rem;
 
     animation-delay:
-        -6s;
-
-}
-
-
-/* ==========================================================
-   HEART ANIMATION
-   ========================================================== */
-
-@keyframes chapter4HeartFloat {
-
-    from {
-
-        opacity: 0.15;
-
-        transform:
-            translateY(15px)
-            rotate(-8deg);
-
-    }
-
-    to {
-
-        opacity: 0.60;
-
-        transform:
-            translateY(-20px)
-            rotate(8deg);
-
-    }
+        1.5s;
 
 }
 
@@ -525,23 +378,24 @@
 
     position: relative;
 
-    z-index: 2;
+    z-index: 5;
 
     width:
         min(
-            900px,
-            calc(100% - 40px)
+            1000px,
+            calc(100% - 42px)
         );
 
     margin:
         0 auto;
 
     padding:
-        110px
+        74px
         0
-        180px;
+        100px;
 
-    box-sizing: border-box;
+    box-sizing:
+        border-box;
 
 }
 
@@ -552,17 +406,22 @@
 
 .chapter4-intro {
 
+    position:
+        relative;
+
+    padding:
+        15px
+        20px
+        58px;
+
     text-align:
         center;
-
-    margin-bottom:
-        65px;
 
 }
 
 
 /* ==========================================================
-   INTRO LABEL
+   CHAPTER LABEL
    ========================================================== */
 
 .chapter4-label {
@@ -571,55 +430,26 @@
         inline-block;
 
     margin-bottom:
-        18px;
+        10px;
 
-    padding:
-        7px
-        18px;
-
-    border:
-        1px solid
-        rgba(
-            215,
-            190,
-            245,
-            0.28
-        );
-
-    border-radius:
-        50px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.045
-        );
+    color:
+        #ffd5ee;
 
     font-family:
         "Poppins",
         sans-serif;
 
     font-size:
-        0.68rem;
+        0.74rem;
+
+    font-weight:
+        500;
 
     letter-spacing:
-        0.3em;
+        0.25em;
 
     text-transform:
         uppercase;
-
-    color:
-        rgba(
-            225,
-            211,
-            247,
-            0.82
-        );
-
-    backdrop-filter:
-        blur(10px);
 
 }
 
@@ -633,72 +463,96 @@
     margin:
         0;
 
+    color:
+        #fff0fb;
+
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
         clamp(
-            3.5rem,
-            9vw,
-            6.5rem
+            3.4rem,
+            8vw,
+            6.4rem
         );
 
     font-weight:
-        400;
+        500;
 
     line-height:
-        0.95;
+        0.9;
 
-    color:
-        #f8f1ff;
+    letter-spacing:
+        0.025em;
 
     text-shadow:
 
-        0 0 30px
+        0 0 12px
         rgba(
-            174,
-            135,
-            230,
-            0.20
+            255,
+            176,
+            222,
+            0.7
+        ),
+
+        0 0 34px
+        rgba(
+            255,
+            125,
+            211,
+            0.35
+        ),
+
+        0 0 70px
+        rgba(
+            188,
+            108,
+            255,
+            0.2
         );
 
 }
 
 
 /* ==========================================================
-   INTRO SUBTITLE
+   SUBTITLE
    ========================================================== */
 
 .chapter4-subtitle {
 
     max-width:
-        580px;
+        620px;
 
     margin:
-        28px
+        20px
         auto
         0;
 
+    color:
+        #ff9bd0;
+
     font-family:
-        "Cormorant Garamond",
-        serif;
+        "Caveat",
+        cursive;
 
     font-size:
-        1.35rem;
-
-    font-style:
-        italic;
+        clamp(
+            1.7rem,
+            4vw,
+            2.5rem
+        );
 
     line-height:
-        1.75;
+        1;
 
-    color:
+    text-shadow:
+        0 0 18px
         rgba(
-            231,
-            219,
-            244,
-            0.88
+            255,
+            111,
+            192,
+            0.38
         );
 
 }
@@ -710,52 +564,61 @@
 
 .chapter4-intro-divider {
 
-    margin-top:
-        25px;
+    display:
+        block;
+
+    margin:
+        18px
+        auto
+        0;
+
+    color:
+        #ffafd9;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.2rem;
+        1rem;
 
     letter-spacing:
-        0.35em;
-
-    color:
-        rgba(
-            204,
-            175,
-            233,
-            0.62
-        );
+        0.45em;
 
 }
 
 
 /* ==========================================================
-   LETTER TAB NAVIGATION
+   LETTER NAVIGATION
    ========================================================== */
 
 .chapter4-letter-nav {
 
     display:
-        flex;
+        grid;
 
-    justify-content:
-        center;
-
-    align-items:
-        stretch;
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
     gap:
         12px;
 
+    width:
+        min(
+            760px,
+            100%
+        );
+
     margin:
         0
         auto
-        40px;
+        24px;
 
     position:
         relative;
@@ -767,10 +630,13 @@
 
 
 /* ==========================================================
-   LETTER TABS
+   LETTER TAB
    ========================================================== */
 
 .chapter4-letter-tab {
+
+    position:
+        relative;
 
     display:
         flex;
@@ -784,35 +650,45 @@
     justify-content:
         center;
 
-    min-width:
-        150px;
+    min-height:
+        105px;
 
     padding:
-        13px
-        20px;
+        14px
+        12px;
 
     border:
         1px solid
         rgba(
-            215,
-            190,
-            245,
-            0.25
+            255,
+            207,
+            235,
+            0.4
         );
 
     border-radius:
-        14px;
+        18px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.045
+
+        linear-gradient(
+            145deg,
+            rgba(
+                255,
+                159,
+                216,
+                0.16
+            ),
+            rgba(
+                171,
+                119,
+                238,
+                0.14
+            )
         );
 
     color:
-        #f7f0ff;
+        #ffeefa;
 
     font-family:
         "Poppins",
@@ -821,23 +697,82 @@
     cursor:
         pointer;
 
+    box-shadow:
+        0 14px 30px
+        rgba(
+            7,
+            2,
+            20,
+            0.20
+        );
+
     transition:
 
         transform
-        0.3s
-        ease,
-
-        background
-        0.3s
+        0.25s
         ease,
 
         border-color
-        0.3s
+        0.25s
         ease,
 
         box-shadow
-        0.3s
+        0.25s
+        ease,
+
+        background
+        0.25s
         ease;
+
+}
+
+
+/* ==========================================================
+   TAB HEART
+   ========================================================== */
+
+.chapter4-letter-tab::before {
+
+    content:
+        "♥";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(
+            -50%,
+            -55%
+        );
+
+    color:
+        rgba(
+            255,
+            222,
+            243,
+            0.32
+        );
+
+    font-size:
+        2.3rem;
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            255,
+            147,
+            210,
+            0.35
+        );
+
+    pointer-events:
+        none;
 
 }
 
@@ -846,34 +781,55 @@
    TAB HOVER
    ========================================================== */
 
-.chapter4-letter-tab:hover {
+.chapter4-letter-tab:hover,
+.chapter4-letter-tab:focus-visible {
 
     transform:
-        translateY(-3px);
-
-    background:
-        rgba(
-            180,
-            140,
-            220,
-            0.10
-        );
+        translateY(-6px)
+        rotate(-1deg);
 
     border-color:
         rgba(
-            220,
-            195,
-            245,
-            0.55
+            255,
+            221,
+            241,
+            0.72
+        );
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(
+                255,
+                159,
+                216,
+                0.26
+            ),
+            rgba(
+                171,
+                119,
+                238,
+                0.22
+            )
         );
 
     box-shadow:
-        0 10px 30px
+
+        0 20px 38px
         rgba(
-            0,
-            0,
-            0,
-            0.18
+            8,
+            2,
+            21,
+            0.28
+        ),
+
+        0 0 22px
+        rgba(
+            255,
+            142,
+            210,
+            0.1
         );
 
 }
@@ -885,38 +841,48 @@
 
 .chapter4-letter-tab.active {
 
+    border-color:
+        rgba(
+            255,
+            183,
+            224,
+            0.82
+        );
+
     background:
+
         linear-gradient(
-            135deg,
+            145deg,
             rgba(
-                159,
-                118,
-                205,
-                0.20
+                255,
+                152,
+                215,
+                0.22
             ),
             rgba(
+                196,
                 112,
-                76,
-                163,
+                255,
                 0.16
             )
         );
 
-    border-color:
-        rgba(
-            220,
-            195,
-            245,
-            0.68
-        );
-
     box-shadow:
-        0 12px 35px
+
+        0 0 20px
         rgba(
-            65,
-            35,
-            100,
-            0.30
+            255,
+            148,
+            215,
+            0.2
+        ),
+
+        inset 0 0 18px
+        rgba(
+            205,
+            130,
+            255,
+            0.12
         );
 
 }
@@ -928,25 +894,87 @@
 
 .chapter4-letter-tab-number {
 
-    display:
-        block;
+    position:
+        relative;
 
-    margin-bottom:
-        4px;
+    z-index:
+        2;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    margin:
+        0
+        auto
+        7px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            190,
+            230,
+            0.45
+        );
+
+    border-radius:
+        50%;
+
+    color:
+        #ffd5ed;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.15rem;
+        1.2rem;
 
-    color:
+    box-shadow:
+        0 0 18px
         rgba(
-            226,
-            207,
-            247,
-            0.9
+            255,
+            141,
+            211,
+            0.08
+        );
+
+}
+
+
+/* ==========================================================
+   ACTIVE TAB NUMBER
+   ========================================================== */
+
+.chapter4-letter-tab.active
+.chapter4-letter-tab-number {
+
+    border-color:
+        rgba(
+            255,
+            183,
+            224,
+            0.82
+        );
+
+    background:
+        rgba(
+            255,
+            152,
+            215,
+            0.12
         );
 
 }
@@ -958,23 +986,41 @@
 
 .chapter4-letter-tab-title {
 
-    display:
-        block;
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    color:
+        rgba(
+            255,
+            225,
+            246,
+            0.82
+        );
+
+    font-family:
+        "Poppins",
+        sans-serif;
 
     font-size:
-        0.72rem;
+        0.68rem;
+
+    line-height:
+        1.3;
 
     letter-spacing:
-        0.05em;
+        0.03em;
 
-    white-space:
-        nowrap;
+    text-align:
+        center;
 
 }
 
 
 /* ==========================================================
-   LETTER CONTAINER
+   LETTERS CONTAINER
    ========================================================== */
 
 .chapter4-letters {
@@ -984,6 +1030,9 @@
 
     width:
         100%;
+
+    margin-top:
+        25px;
 
 }
 
@@ -1010,7 +1059,7 @@
 
     animation:
         chapter4LetterReveal
-        0.7s
+        0.5s
         ease
         forwards;
 
@@ -1028,117 +1077,135 @@
 
     width:
         min(
-            720px,
+            760px,
             100%
         );
 
-    /*
-        IMPORTANT:
-        No fixed height.
-        The paper grows with the letter.
-    */
-
     min-height:
-        620px;
-
-    height:
-        auto;
+        0;
 
     margin:
-        0 auto;
+        0
+        auto;
 
     padding:
-        75px
-        80px;
+        54px
+        56px
+        48px;
 
     box-sizing:
         border-box;
 
-    /*
-        Soft ivory paper.
-        This contrasts nicely with violet.
-    */
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #fffdf8 0%,
-            #fff7ed 45%,
-            #f4e6f0 100%
-        );
-
     border:
         1px solid
         rgba(
-            118,
-            78,
-            120,
-            0.25
+            255,
+            176,
+            218,
+            0.5
         );
 
     border-radius:
-        6px;
+        14px;
+
+    background:
+
+        repeating-linear-gradient(
+            to bottom,
+            rgba(
+                107,
+                54,
+                109,
+                0.04
+            ) 0,
+
+            rgba(
+                107,
+                54,
+                109,
+                0.04
+            ) 1px,
+
+            transparent 1px,
+
+            transparent 29px
+        ),
+
+        #ffe9f4;
+
+    color:
+        #4b2458;
 
     box-shadow:
 
-        0 35px 100px
+        0 30px 100px
         rgba(
-            0,
-            0,
-            0,
+            5,
+            1,
+            15,
+            0.5
+        ),
+
+        0 0 40px
+        rgba(
+            255,
+            137,
+            206,
+            0.15
+        );
+
+    transform:
+        rotate(-0.6deg);
+
+    transition:
+        transform
+        0.35s
+        ease,
+
+        box-shadow
+        0.35s
+        ease;
+
+}
+
+
+/* ==========================================================
+   PAPER HOVER
+   ========================================================== */
+
+.chapter4-letter.is-open
+.chapter4-letter-paper {
+
+    transform:
+        translateY(-4px)
+        rotate(-0.6deg);
+
+    box-shadow:
+
+        0 38px 110px
+        rgba(
+            5,
+            1,
+            15,
             0.55
         ),
 
-        0 0 60px
+        0 0 48px
         rgba(
-            157,
-            111,
-            200,
-            0.12
+            255,
+            137,
+            206,
+            0.2
         );
-
-    color:
-        #35263a;
 
 }
 
 
 /* ==========================================================
-   PAPER INNER BORDER
+   PAPER DECORATION
    ========================================================== */
 
 .chapter4-letter-paper::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    inset:
-        18px;
-
-    border:
-        1px solid
-        rgba(
-            120,
-            80,
-            120,
-            0.18
-        );
-
-    pointer-events:
-        none;
-
-}
-
-
-/* ==========================================================
-   PAPER CORNER HEART
-   ========================================================== */
-
-.chapter4-letter-paper::after {
 
     content:
         "♡";
@@ -1147,25 +1214,72 @@
         absolute;
 
     top:
-        24px;
+        14px;
 
-    right:
-        30px;
+    left:
+        18px;
+
+    color:
+        #e76fae;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.6rem;
+        1.25rem;
+
+}
+
+
+/* ==========================================================
+   PAPER CORNERS
+   ========================================================== */
+
+.chapter4-paper-corner {
+
+    position:
+        absolute;
+
+    z-index:
+        3;
 
     color:
         rgba(
-            123,
-            75,
-            119,
-            0.42
+            126,
+            47,
+            91,
+            0.5
         );
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.35rem;
+
+}
+
+
+.chapter4-paper-corner-top {
+
+    top:
+        18px;
+
+    left:
+        48px;
+
+}
+
+
+.chapter4-paper-corner-bottom {
+
+    right:
+        24px;
+
+    bottom:
+        18px;
 
 }
 
@@ -1175,6 +1289,12 @@
    ========================================================== */
 
 .chapter4-letter-header {
+
+    position:
+        relative;
+
+    z-index:
+        2;
 
     display:
         flex;
@@ -1186,35 +1306,47 @@
         center;
 
     margin-bottom:
-        38px;
+        30px;
 
-    position:
-        relative;
+    padding-bottom:
+        12px;
 
-    z-index:
-        2;
+    border-bottom:
+        1px solid
+        rgba(
+            126,
+            47,
+            91,
+            0.14
+        );
 
 }
 
 
 /* ==========================================================
-   DATE
+   DATE / HEADER TEXT
    ========================================================== */
 
 .chapter4-letter-date {
+
+    color:
+        #74305f;
 
     font-family:
         "Poppins",
         sans-serif;
 
     font-size:
-        0.7rem;
+        0.68rem;
+
+    font-weight:
+        500;
 
     letter-spacing:
-        0.08em;
+        0.12em;
 
-    color:
-        #69526c;
+    text-transform:
+        uppercase;
 
 }
 
@@ -1225,20 +1357,50 @@
 
 .chapter4-letter-number {
 
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border:
+        1px solid
+        rgba(
+            126,
+            47,
+            91,
+            0.25
+        );
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.35
+        );
+
+    color:
+        #74305f;
+
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.3rem;
-
-    color:
-        rgba(
-            111,
-            70,
-            108,
-            0.62
-        );
+        1.25rem;
 
 }
 
@@ -1265,37 +1427,26 @@
 .chapter4-letter-content p {
 
     margin:
+        20px
         0
-        0
-        24px;
+        0;
+
+    color:
+        #4b2458;
 
     font-family:
-        "Cormorant Garamond",
-        serif;
+        "Caveat",
+        cursive;
 
     font-size:
         clamp(
-            1.2rem,
+            1.3rem,
             2.5vw,
-            1.45rem
+            1.55rem
         );
 
     line-height:
-        1.8;
-
-    letter-spacing:
-        0.01em;
-
-    color:
-        #3d2d42;
-
-}
-
-
-.chapter4-letter-content p:last-child {
-
-    margin-bottom:
-        0;
+        1.5;
 
 }
 
@@ -1306,21 +1457,27 @@
 
 .chapter4-greeting {
 
-    margin-bottom:
-        30px !important;
+    margin:
+        0
+        0
+        24px !important;
+
+    color:
+        #74305f !important;
+
+    font-family:
+        "Cormorant Garamond",
+        serif !important;
 
     font-size:
         clamp(
-            1.6rem,
-            3vw,
-            2rem
+            2rem,
+            4vw,
+            2.5rem
         ) !important;
 
     font-weight:
         600;
-
-    color:
-        #2e2033 !important;
 
 }
 
@@ -1331,11 +1488,11 @@
 
 .chapter4-letter-content em {
 
+    color:
+        #c14d8d;
+
     font-style:
         italic;
-
-    color:
-        #70466e;
 
     font-weight:
         600;
@@ -1350,71 +1507,23 @@
 .chapter4-letter-signature {
 
     margin-top:
-        45px !important;
+        32px !important;
+
+    color:
+        #74305f !important;
+
+    font-family:
+        "Caveat",
+        cursive !important;
+
+    font-size:
+        1.55rem !important;
+
+    line-height:
+        1.35 !important;
 
     text-align:
         right;
-
-    font-size:
-        1.35rem !important;
-
-    font-style:
-        italic;
-
-    color:
-        #654b63 !important;
-
-}
-
-
-/* ==========================================================
-   PAPER CORNERS
-   ========================================================== */
-
-.chapter4-paper-corner {
-
-    position:
-        absolute;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.5rem;
-
-    color:
-        rgba(
-            112,
-            68,
-            108,
-            0.48
-        );
-
-    z-index:
-        3;
-
-}
-
-
-.chapter4-paper-corner-top {
-
-    top:
-        28px;
-
-    left:
-        30px;
-
-}
-
-
-.chapter4-paper-corner-bottom {
-
-    right:
-        30px;
-
-    bottom:
-        25px;
 
 }
 
@@ -1435,10 +1544,10 @@
         center;
 
     gap:
-        25px;
+        18px;
 
     margin-top:
-        35px;
+        24px;
 
     position:
         relative;
@@ -1455,82 +1564,167 @@
 
 .chapter4-control-btn {
 
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        125px;
+
     padding:
-        10px
+        11px
         20px;
 
     border:
         1px solid
         rgba(
-            215,
-            190,
-            245,
-            0.38
+            255,
+            198,
+            233,
+            0.55
         );
 
     border-radius:
-        30px;
+        999px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.07
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                132,
+                205,
+                0.23
+            ),
+            rgba(
+                183,
+                111,
+                255,
+                0.18
+            )
         );
 
     color:
-        #f7efff;
+        #ffe8f7;
 
     font-family:
         "Poppins",
         sans-serif;
 
     font-size:
-        0.78rem;
+        0.72rem;
+
+    letter-spacing:
+        0.04em;
 
     cursor:
         pointer;
 
+    box-shadow:
+
+        0 10px 30px
+        rgba(
+            123,
+            54,
+            152,
+            0.18
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
     transition:
-        0.3s ease;
+        transform
+        0.25s
+        ease,
+
+        box-shadow
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease;
 
 }
 
 
-.chapter4-control-btn:hover {
+/* ==========================================================
+   CONTROL HOVER
+   ========================================================== */
 
-    background:
-        rgba(
-            177,
-            137,
-            220,
-            0.16
-        );
-
-    border-color:
-        rgba(
-            225,
-            205,
-            245,
-            0.72
-        );
+.chapter4-control-btn:hover,
+.chapter4-control-btn:focus-visible {
 
     transform:
-        translateY(-2px);
+        translateY(-3px);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                139,
+                207,
+                0.36
+            ),
+            rgba(
+                188,
+                120,
+                255,
+                0.28
+            )
+        );
+
+    box-shadow:
+
+        0 15px 38px
+        rgba(
+            176,
+            84,
+            166,
+            0.25
+        ),
+
+        0 0 25px
+        rgba(
+            255,
+            147,
+            213,
+            0.14
+        );
 
 }
 
+
+/* ==========================================================
+   DISABLED CONTROL
+   ========================================================== */
 
 .chapter4-control-btn:disabled {
 
     opacity:
-        0.3;
+        0.35;
 
     cursor:
         not-allowed;
 
     transform:
+        none;
+
+    box-shadow:
         none;
 
 }
@@ -1543,25 +1737,529 @@
 .chapter4-indicator {
 
     min-width:
-        70px;
+        60px;
 
-    text-align:
-        center;
+    color:
+        #ffd5ed;
 
     font-family:
         "Cormorant Garamond",
         serif;
 
     font-size:
-        1.1rem;
+        1.25rem;
+
+    text-align:
+        center;
+
+}
+
+
+/* ==========================================================
+   ENDING
+   ========================================================== */
+
+.chapter4-ending {
+
+    position:
+        relative;
+
+    margin:
+        24px
+        auto
+        0;
+
+    padding:
+        42px
+        35px
+        48px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            192,
+            226,
+            0.28
+        );
+
+    border-radius:
+        28px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                181,
+                221,
+                0.16
+            ),
+            rgba(
+                187,
+                126,
+                255,
+                0.13
+            )
+        );
+
+    text-align:
+        center;
+
+    box-shadow:
+
+        0 22px 60px
+        rgba(
+            5,
+            2,
+            16,
+            0.2
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+
+}
+
+
+/* ==========================================================
+   ENDING HEARTS
+   ========================================================== */
+
+.chapter4-ending::before,
+.chapter4-ending::after {
+
+    content:
+        "♡";
+
+    position:
+        absolute;
 
     color:
         rgba(
-            231,
-            215,
-            245,
-            0.9
+            255,
+            175,
+            222,
+            0.55
         );
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        1.8rem;
+
+}
+
+
+.chapter4-ending::before {
+
+    left:
+        20px;
+
+    top:
+        18px;
+
+}
+
+
+.chapter4-ending::after {
+
+    right:
+        20px;
+
+    bottom:
+        18px;
+
+}
+
+
+/* ==========================================================
+   ENDING SYMBOL
+   ========================================================== */
+
+.chapter4-ending-symbol {
+
+    color:
+        #ffafd9;
+
+    font-size:
+        1.8rem;
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            255,
+            147,
+            210,
+            0.5
+        );
+
+}
+
+
+/* ==========================================================
+   ENDING TEXT
+   ========================================================== */
+
+.chapter4-ending-text {
+
+    max-width:
+        690px;
+
+    margin:
+        12px
+        auto
+        0;
+
+    color:
+        rgba(
+            255,
+            232,
+            247,
+            0.82
+        );
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.82rem;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* ==========================================================
+   ENDING HIGHLIGHT
+   ========================================================== */
+
+.chapter4-ending-highlight {
+
+    margin:
+        20px
+        0
+        0;
+
+    color:
+        #ffb1da;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size:
+        clamp(
+            1.9rem,
+            4vw,
+            2.6rem
+        );
+
+    font-weight:
+        500;
+
+    line-height:
+        1.15;
+
+    text-shadow:
+        0 0 18px
+        rgba(
+            255,
+            115,
+            193,
+            0.35
+        );
+
+}
+
+
+/* ==========================================================
+   CONTINUE SECTION
+   ========================================================== */
+
+.chapter4-continue-section {
+
+    position:
+        relative;
+
+    z-index:
+        10;
+
+    margin-top:
+        25px;
+
+    padding:
+        34px
+        25px
+        20px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            192,
+            226,
+            0.22
+        );
+
+    border-radius:
+        25px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                181,
+                221,
+                0.08
+            ),
+            rgba(
+                187,
+                126,
+                255,
+                0.08
+            )
+        );
+
+    text-align:
+        center;
+
+    box-shadow:
+
+        0 18px 50px
+        rgba(
+            5,
+            2,
+            16,
+            0.16
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
+
+}
+
+
+/* ==========================================================
+   CONTINUE TEXT
+   ========================================================== */
+
+.chapter4-continue-section p {
+
+    margin:
+        0;
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.78
+        );
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size:
+        1.55rem;
+
+    line-height:
+        1.2;
+
+}
+
+
+/* ==========================================================
+   CONTINUE BUTTON
+   ========================================================== */
+
+.chapter4-continue {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-width:
+        160px;
+
+    margin-top:
+        20px;
+
+    padding:
+        12px
+        23px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            198,
+            233,
+            0.55
+        );
+
+    border-radius:
+        999px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                132,
+                205,
+                0.23
+            ),
+            rgba(
+                183,
+                111,
+                255,
+                0.18
+            )
+        );
+
+    color:
+        #ffe8f7;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.75rem;
+
+    letter-spacing:
+        0.05em;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(
+            123,
+            54,
+            152,
+            0.18
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+    transition:
+        transform
+        0.25s
+        ease,
+
+        box-shadow
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease;
+
+}
+
+
+/* ==========================================================
+   CONTINUE HOVER
+   ========================================================== */
+
+.chapter4-continue:hover,
+.chapter4-continue:focus-visible {
+
+    transform:
+        translateY(-3px);
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                139,
+                207,
+                0.36
+            ),
+            rgba(
+                188,
+                120,
+                255,
+                0.28
+            )
+        );
+
+    box-shadow:
+
+        0 15px 38px
+        rgba(
+            176,
+            84,
+            166,
+            0.25
+        ),
+
+        0 0 25px
+        rgba(
+            255,
+            147,
+            213,
+            0.14
+        );
+
+}
+
+
+/* ==========================================================
+   FOCUS
+   ========================================================== */
+
+.chapter4-letter-tab:focus-visible,
+.chapter4-control-btn:focus-visible,
+.chapter4-continue:focus-visible {
+
+    outline:
+        2px solid
+        rgba(
+            255,
+            213,
+            241,
+            0.85
+        );
+
+    outline-offset:
+        4px;
 
 }
 
@@ -1578,7 +2276,8 @@
             0;
 
         transform:
-            translateY(25px);
+            translateY(18px)
+            rotate(-0.6deg);
 
     }
 
@@ -1588,7 +2287,8 @@
             1;
 
         transform:
-            translateY(0);
+            translateY(0)
+            rotate(-0.6deg);
 
     }
 
@@ -1596,319 +2296,57 @@
 
 
 /* ==========================================================
-   ENDING
+   STAR TWINKLE
    ========================================================== */
 
-.chapter4-ending {
+@keyframes chapter4Twinkle {
 
-    max-width:
-        650px;
+    0%,
+    100% {
 
-    margin:
-        115px
-        auto
-        0;
+        opacity:
+            0.35;
 
-    text-align:
-        center;
+        transform:
+            scale(0.8);
+
+    }
+
+    50% {
+
+        opacity:
+            1;
+
+        transform:
+            scale(1.25);
+
+    }
 
 }
 
 
 /* ==========================================================
-   ENDING SYMBOL
+   FLOATING HEART
    ========================================================== */
 
-.chapter4-ending-symbol {
+@keyframes chapter4Float {
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+    0%,
+    100% {
 
-    font-size:
-        2rem;
+        transform:
+            translateY(0)
+            rotate(-4deg);
 
-    color:
-        rgba(
-            213,
-            180,
-            239,
-            0.78
-        );
+    }
 
-}
+    50% {
 
+        transform:
+            translateY(-10px)
+            rotate(4deg);
 
-/* ==========================================================
-   ENDING TEXT
-   ========================================================== */
-
-.chapter4-ending-text {
-
-    max-width:
-        560px;
-
-    margin:
-        20px
-        auto
-        15px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.3rem;
-
-    font-style:
-        italic;
-
-    line-height:
-        1.8;
-
-    color:
-        rgba(
-            228,
-            214,
-            239,
-            0.85
-        );
-
-}
-
-
-/* ==========================================================
-   ENDING HIGHLIGHT
-   ========================================================== */
-
-.chapter4-ending-highlight {
-
-    margin:
-        0;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(
-            2rem,
-            5vw,
-            3rem
-        );
-
-    font-weight:
-        400;
-
-    color:
-        #f7efff;
-
-    text-shadow:
-        0 0 25px
-        rgba(
-            175,
-            130,
-            225,
-            0.18
-        );
-
-}
-
-
-/* ==========================================================
-   CONTINUE SECTION
-   ========================================================== */
-
-.chapter4-continue-section {
-
-    margin-top:
-        100px;
-
-    padding:
-        65px
-        0
-        20px;
-
-    text-align:
-        center;
-
-    border-top:
-        1px solid
-        rgba(
-            210,
-            185,
-            235,
-            0.18
-        );
-
-    position:
-        relative;
-
-    z-index:
-        10;
-
-}
-
-
-/* ==========================================================
-   CONTINUE TEXT
-   ========================================================== */
-
-.chapter4-continue-section p {
-
-    margin:
-        0
-        auto
-        28px;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        1.3rem;
-
-    font-style:
-        italic;
-
-    color:
-        rgba(
-            225,
-            211,
-            238,
-            0.85
-        );
-
-}
-
-
-/* ==========================================================
-   CONTINUE BUTTON
-   ========================================================== */
-
-.chapter4-continue {
-
-    padding:
-        15px
-        32px;
-
-    border:
-        1px solid
-        rgba(
-            215,
-            190,
-            245,
-            0.45
-        );
-
-    border-radius:
-        50px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(
-                159,
-                116,
-                208,
-                0.16
-            ),
-            rgba(
-                111,
-                75,
-                164,
-                0.12
-            )
-        );
-
-    color:
-        #f8f1ff;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size:
-        0.82rem;
-
-    letter-spacing:
-        0.05em;
-
-    cursor:
-        pointer;
-
-    position:
-        relative;
-
-    z-index:
-        20;
-
-    transition:
-
-        transform
-        0.35s
-        ease,
-
-        background
-        0.35s
-        ease,
-
-        border-color
-        0.35s
-        ease,
-
-        box-shadow
-        0.35s
-        ease;
-
-}
-
-
-/* ==========================================================
-   CONTINUE HOVER
-   ========================================================== */
-
-.chapter4-continue:hover {
-
-    transform:
-        translateY(-4px);
-
-    background:
-        rgba(
-            177,
-            137,
-            220,
-            0.20
-        );
-
-    border-color:
-        rgba(
-            225,
-            205,
-            245,
-            0.78
-        );
-
-    box-shadow:
-        0 12px 40px
-        rgba(
-            125,
-            80,
-            180,
-            0.18
-        );
-
-}
-
-
-/* ==========================================================
-   CONTINUE ACTIVE
-   ========================================================== */
-
-.chapter4-continue:active {
-
-    transform:
-        translateY(0);
+    }
 
 }
 
@@ -1917,43 +2355,23 @@
    TABLET
    ========================================================== */
 
-@media (max-width: 768px) {
-
-
-    #chapter4 {
-
-        min-height:
-            100vh;
-
-        height:
-            auto;
-
-        overflow-x:
-            hidden;
-
-        overflow-y:
-            visible;
-
-    }
-
+@media (max-width: 780px) {
 
     .chapter4-wrapper {
 
         width:
-            calc(100% - 30px);
+            calc(100% - 24px);
 
-        padding:
-            80px
-            0
-            140px;
+        padding-top:
+            55px;
 
     }
 
 
     .chapter4-intro {
 
-        margin-bottom:
-            50px;
+        padding-bottom:
+            38px;
 
     }
 
@@ -1968,15 +2386,26 @@
 
     .chapter4-letter-tab {
 
-        min-width:
-            0;
-
-        flex:
-            1;
+        min-height:
+            95px;
 
         padding:
-            12px
-            10px;
+            10px
+            7px;
+
+    }
+
+
+    .chapter4-letter-tab-number {
+
+        width:
+            38px;
+
+        height:
+            38px;
+
+        font-size:
+            1.1rem;
 
     }
 
@@ -1984,26 +2413,19 @@
     .chapter4-letter-tab-title {
 
         font-size:
-            0.68rem;
+            0.62rem;
 
     }
 
 
     .chapter4-letter-paper {
 
-        min-height:
-            auto;
-
         padding:
-            60px
-            55px;
+            46px
+            36px
+            40px;
 
-    }
-
-
-    .chapter4-letter-paper::before {
-
-        inset:
+        border-radius:
             13px;
 
     }
@@ -2014,24 +2436,23 @@
         font-size:
             1.35rem;
 
-        line-height:
-            1.8;
+    }
+
+
+    .chapter4-greeting {
+
+        font-size:
+            2rem !important;
 
     }
 
 
     .chapter4-ending {
 
-        margin-top:
-            85px;
-
-    }
-
-
-    .chapter4-continue-section {
-
-        margin-top:
-            80px;
+        padding:
+            36px
+            25px
+            42px;
 
     }
 
@@ -2042,45 +2463,34 @@
    MOBILE
    ========================================================== */
 
-@media (max-width: 480px) {
-
-
-    #chapter4 {
-
-        min-height:
-            100vh;
-
-        height:
-            auto;
-
-        overflow-x:
-            hidden;
-
-        overflow-y:
-            visible;
-
-    }
-
+@media (max-width: 520px) {
 
     .chapter4-wrapper {
 
         width:
-            calc(100% - 22px);
-
-        padding:
-            65px
-            0
-            115px;
+            calc(100% - 16px);
 
     }
 
 
-    /* INTRO */
+    .chapter4-intro {
+
+        padding:
+            10px
+            8px
+            38px;
+
+    }
+
 
     .chapter4-intro h2 {
 
         font-size:
-            3.3rem;
+            clamp(
+                3rem,
+                14vw,
+                4.5rem
+            );
 
     }
 
@@ -2088,40 +2498,47 @@
     .chapter4-subtitle {
 
         font-size:
-            1.15rem;
+            1.8rem;
 
     }
 
-
-    /* LETTER TABS */
 
     .chapter4-letter-nav {
 
         gap:
             6px;
 
-        margin-bottom:
-            28px;
-
     }
 
 
     .chapter4-letter-tab {
 
+        min-height:
+            88px;
+
         padding:
-            10px
-            5px;
+            8px
+            3px;
 
         border-radius:
-            10px;
+            14px;
 
     }
 
 
     .chapter4-letter-tab-number {
 
+        width:
+            31px;
+
+        height:
+            31px;
+
+        margin-bottom:
+            4px;
+
         font-size:
-            1rem;
+            0.9rem;
 
     }
 
@@ -2129,62 +2546,39 @@
     .chapter4-letter-tab-title {
 
         font-size:
-            0.57rem;
+            0.52rem;
 
-        letter-spacing:
-            0;
+        line-height:
+            1.15;
 
     }
 
 
-    /* PAPER */
+    .chapter4-letter-tab::before {
+
+        font-size:
+            1.7rem;
+
+    }
+
 
     .chapter4-letter-paper {
 
-        width:
-            100%;
-
-        min-height:
-            auto;
-
         padding:
-            55px
-            28px;
-
-        border-radius:
-            3px;
+            42px
+            25px
+            32px;
 
     }
 
-
-    .chapter4-letter-paper::before {
-
-        inset:
-            10px;
-
-    }
-
-
-    .chapter4-letter-paper::after {
-
-        top:
-            18px;
-
-        right:
-            20px;
-
-    }
-
-
-    /* PAPER CORNERS */
 
     .chapter4-paper-corner-top {
 
-        top:
-            20px;
-
         left:
-            20px;
+            40px;
+
+        top:
+            14px;
 
     }
 
@@ -2192,52 +2586,60 @@
     .chapter4-paper-corner-bottom {
 
         right:
-            20px;
+            18px;
 
         bottom:
-            18px;
+            14px;
 
     }
 
 
-    /* HEADER */
-
     .chapter4-letter-header {
 
         margin-bottom:
-            28px;
+            24px;
+
+        padding-bottom:
+            10px;
 
     }
 
 
     .chapter4-letter-date {
 
+        max-width:
+            75%;
+
         font-size:
-            0.62rem;
+            0.58rem;
 
     }
 
 
     .chapter4-letter-number {
 
+        width:
+            35px;
+
+        height:
+            35px;
+
         font-size:
-            1.1rem;
+            1rem;
 
     }
 
 
-    /* CONTENT */
-
     .chapter4-letter-content p {
 
+        margin-top:
+            17px;
+
         font-size:
-            1.2rem;
+            1.15rem;
 
         line-height:
-            1.75;
-
-        margin-bottom:
-            20px;
+            1.45;
 
     }
 
@@ -2245,46 +2647,41 @@
     .chapter4-greeting {
 
         font-size:
-            1.5rem !important;
-
-        margin-bottom:
-            25px !important;
+            1.9rem !important;
 
     }
 
 
     .chapter4-letter-signature {
 
-        margin-top:
-            35px !important;
-
         font-size:
-            1.2rem !important;
+            1.35rem !important;
 
     }
 
 
-    /* CONTROLS */
-
     .chapter4-letter-controls {
 
         gap:
-            12px;
+            8px;
 
         margin-top:
-            25px;
+            20px;
 
     }
 
 
     .chapter4-control-btn {
 
+        min-width:
+            0;
+
         padding:
-            9px
-            14px;
+            10px
+            13px;
 
         font-size:
-            0.68rem;
+            0.62rem;
 
     }
 
@@ -2295,25 +2692,20 @@
             45px;
 
         font-size:
-            0.95rem;
+            1.05rem;
 
     }
 
-
-    /* ENDING */
 
     .chapter4-ending {
 
-        margin-top:
-            70px;
+        padding:
+            35px
+            20px
+            40px;
 
-    }
-
-
-    .chapter4-ending-highlight {
-
-        font-size:
-            2.2rem;
+        border-radius:
+            25px;
 
     }
 
@@ -2321,37 +2713,51 @@
     .chapter4-ending-text {
 
         font-size:
-            1.15rem;
+            0.76rem;
 
     }
 
 
-    /* CONTINUE */
+    .chapter4-ending-highlight {
+
+        font-size:
+            2.3rem;
+
+    }
+
 
     .chapter4-continue-section {
 
-        margin-top:
-            70px;
+        padding:
+            30px
+            15px
+            18px;
 
-        padding-top:
-            50px;
+    }
+
+
+    .chapter4-continue-section p {
+
+        font-size:
+            1.4rem;
 
     }
 
 
     .chapter4-continue {
 
+        min-width:
+            145px;
+
         padding:
-            13px
-            25px;
+            11px
+            18px;
 
         font-size:
-            0.75rem;
+            0.68rem;
 
     }
 
-
-    /* DECORATIONS */
 
     .chapter4-heart-1 {
 
@@ -2365,14 +2771,6 @@
 
         right:
             2%;
-
-    }
-
-
-    .chapter4-heart-3 {
-
-        left:
-            5%;
 
     }
 
@@ -2401,13 +2799,22 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-
-    .chapter4-light,
     .chapter4-star,
     .chapter4-heart,
     .chapter4-letter.active {
 
         animation:
+            none;
+
+    }
+
+
+    .chapter4-letter-tab,
+    .chapter4-control-btn,
+    .chapter4-continue,
+    .chapter4-letter-paper {
+
+        transition:
             none;
 
     }
