@@ -8,35 +8,6 @@
 
 
 /* ==========================================================
-   GLOBAL SCROLL FIX
-   ========================================================== */
-
-/*
-   Chapter II is intentionally taller than the viewport.
-   The document itself must be allowed to scroll.
-*/
-
-html {
-    min-height: 100%;
-}
-
-body {
-    min-height: 100%;
-}
-
-/*
-   When Chapter II is active, allow normal browser scrolling.
-   This is especially important if another chapter previously
-   applied overflow:hidden to the body.
-*/
-
-body:has(#chapter2.active) {
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-
-/* ==========================================================
    ROOT
    ========================================================== */
 
@@ -45,21 +16,16 @@ body:has(#chapter2.active) {
 
     width: 100%;
 
-    /*
-       IMPORTANT:
-       Do NOT use height: 100vh.
-       min-height allows the content to become taller than
-       the viewport and therefore creates a scrollbar.
-    */
     min-height: 100vh;
     height: auto;
 
     display: none;
 
     /*
-       Do not hide vertical overflow.
-       The chapter must be allowed to grow naturally.
-    */
+     * IMPORTANT:
+     * Do NOT make Chapter II its own viewport.
+     * The document/page must be allowed to grow naturally.
+     */
     overflow-x: hidden;
     overflow-y: visible;
 
@@ -96,8 +62,8 @@ body:has(#chapter2.active) {
     display: block;
 
     /*
-       Let the content determine the total height.
-    */
+     * Let the chapter expand according to its content.
+     */
     min-height: 100vh;
     height: auto;
 
@@ -113,15 +79,16 @@ body:has(#chapter2.active) {
 .chapter2-background {
     position: absolute;
 
-    /*
-       Keep background attached to the entire Chapter II
-       instead of locking it to the viewport.
-    */
     top: 0;
     left: 0;
     right: 0;
 
+    /*
+     * Do not use a fixed viewport height here.
+     * The background follows the full chapter.
+     */
     min-height: 100%;
+    height: 100%;
 
     z-index: 0;
 
@@ -166,6 +133,8 @@ body:has(#chapter2.active) {
         7s
         ease-in-out
         infinite;
+
+    pointer-events: none;
 }
 
 
@@ -197,6 +166,8 @@ body:has(#chapter2.active) {
         );
 
     filter: blur(25px);
+
+    pointer-events: none;
 }
 
 
@@ -208,6 +179,8 @@ body:has(#chapter2.active) {
     position: absolute;
 
     display: block;
+
+    z-index: 1;
 
     color:
         rgba(255, 196, 231, 0.82);
@@ -224,16 +197,11 @@ body:has(#chapter2.active) {
         ease-in-out
         infinite;
 
-    /*
-       Keep hearts above the background but below content.
-    */
-    z-index: 1;
+    pointer-events: none;
 }
 
 
-/* ==========================================================
-   HEART POSITIONS
-   ========================================================== */
+/* HEART POSITIONS */
 
 .chapter2-heart:nth-child(1) {
     left: 10%;
@@ -243,24 +211,27 @@ body:has(#chapter2.active) {
 .chapter2-heart:nth-child(2) {
     left: 84%;
     top: 27%;
+
     animation-delay: 1.7s;
 }
 
 .chapter2-heart:nth-child(3) {
     left: 17%;
     top: 64%;
+
     animation-delay: 3.2s;
 }
 
 .chapter2-heart:nth-child(4) {
     right: 10%;
     top: 78%;
+
     animation-delay: 0.8s;
 }
 
 
 /* ==========================================================
-   DECORATIVE STARS
+   HEART DECORATIVE STARS
    ========================================================== */
 
 .chapter2-heart::after {
@@ -294,10 +265,9 @@ body:has(#chapter2.active) {
         );
 
     /*
-       IMPORTANT:
-       No fixed height.
-       The wrapper grows according to its content.
-    */
+     * IMPORTANT:
+     * Allow wrapper to become as tall as its content.
+     */
     min-height: 100vh;
     height: auto;
 
@@ -344,13 +314,17 @@ body:has(#chapter2.active) {
         "Poppins",
         sans-serif;
 
-    font-size: 0.74rem;
+    font-size:
+        0.74rem;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    letter-spacing: 0.25em;
+    letter-spacing:
+        0.25em;
 
-    text-transform: uppercase;
+    text-transform:
+        uppercase;
 }
 
 
@@ -375,11 +349,14 @@ body:has(#chapter2.active) {
             7rem
         );
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    line-height: 0.86;
+    line-height:
+        0.86;
 
-    letter-spacing: 0.025em;
+    letter-spacing:
+        0.025em;
 
     text-shadow:
         0 0 12px rgba(255, 176, 222, 0.65),
@@ -406,7 +383,8 @@ body:has(#chapter2.active) {
         "Cormorant Garamond",
         serif;
 
-    font-size: 1.2rem;
+    font-size:
+        1.2rem;
 
     text-shadow:
         0 0 12px
@@ -419,7 +397,8 @@ body:has(#chapter2.active) {
    ========================================================== */
 
 .chapter2-intro p {
-    max-width: 650px;
+    max-width:
+        650px;
 
     margin:
         18px
@@ -436,7 +415,8 @@ body:has(#chapter2.active) {
     font-size:
         0.82rem;
 
-    font-weight: 300;
+    font-weight:
+        300;
 
     line-height:
         1.8;
@@ -540,7 +520,8 @@ body:has(#chapter2.active) {
             transparent 68%
         );
 
-    pointer-events: none;
+    pointer-events:
+        none;
 }
 
 
@@ -561,6 +542,9 @@ body:has(#chapter2.active) {
 
     font-size:
         1.25rem;
+
+    pointer-events:
+        none;
 }
 
 
@@ -704,7 +688,8 @@ body:has(#chapter2.active) {
    ========================================================== */
 
 .chapter2-section-label {
-    display: block;
+    display:
+        block;
 
     margin-bottom:
         10px;
@@ -1193,8 +1178,6 @@ body:has(#chapter2.active) {
         25px
         auto
         15px;
-
-    flex-wrap: wrap;
 }
 
 
@@ -1412,6 +1395,7 @@ body:has(#chapter2.active) {
    ========================================================== */
 
 @keyframes chapter2GlowPulse {
+
     0%, 100% {
         opacity:
             0.65;
@@ -1433,6 +1417,7 @@ body:has(#chapter2.active) {
 
 
 @keyframes chapter2HeartFloat {
+
     0%, 100% {
         opacity:
             0.35;
@@ -1454,6 +1439,7 @@ body:has(#chapter2.active) {
 
 
 @keyframes chapter2SymbolFloat {
+
     0%, 100% {
         transform:
             translateY(0);
@@ -1495,9 +1481,6 @@ body:has(#chapter2.active) {
 
         padding-top:
             55px;
-
-        padding-bottom:
-            70px;
     }
 
     .chapter2-intro {
@@ -1555,9 +1538,6 @@ body:has(#chapter2.active) {
     .chapter2-wrapper {
         width:
             calc(100% - 16px);
-
-        padding-bottom:
-            60px;
     }
 
     .chapter2-intro h2 {
