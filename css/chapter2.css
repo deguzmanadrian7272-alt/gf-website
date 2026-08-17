@@ -15,14 +15,19 @@
     position: relative;
 
     width: 100%;
-
     height: 100vh;
     min-height: 100vh;
 
-    display: none;
+    /*
+        IMPORTANT:
+        Chapter 2 contains more content than the viewport.
+        The chapter itself must be the scroll container.
+    */
 
     overflow-x: hidden;
     overflow-y: auto;
+
+    display: none;
 
     box-sizing: border-box;
 
@@ -34,19 +39,16 @@
             rgba(255, 151, 214, 0.20),
             transparent 30%
         ),
-
         radial-gradient(
             circle at 12% 48%,
             rgba(185, 119, 255, 0.14),
             transparent 28%
         ),
-
         radial-gradient(
             circle at 88% 72%,
             rgba(255, 177, 222, 0.15),
             transparent 30%
         ),
-
         linear-gradient(
             180deg,
             #130b2d 0%,
@@ -73,13 +75,25 @@
 .chapter2-background {
     position: absolute;
 
-    inset: 0;
+    /*
+        IMPORTANT:
+        The background must cover the entire scrollable
+        chapter instead of being limited to the viewport.
+    */
 
-    z-index: 0;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    min-height: 100%;
 
     overflow: hidden;
 
     pointer-events: none;
+
+    z-index: 0;
 }
 
 
@@ -187,7 +201,6 @@
 .chapter2-heart:nth-child(2) {
     left: 84%;
     top: 27%;
-
     animation-delay: 1.7s;
 }
 
@@ -195,7 +208,6 @@
 .chapter2-heart:nth-child(3) {
     left: 17%;
     top: 64%;
-
     animation-delay: 3.2s;
 }
 
@@ -203,7 +215,6 @@
 .chapter2-heart:nth-child(4) {
     right: 10%;
     top: 78%;
-
     animation-delay: 0.8s;
 }
 
@@ -379,8 +390,7 @@
     font-size:
         0.82rem;
 
-    font-weight:
-        300;
+    font-weight: 300;
 
     line-height:
         1.8;
@@ -1422,6 +1432,7 @@
 @keyframes chapter2GlowPulse {
 
     0%, 100% {
+
         opacity:
             0.65;
 
@@ -1431,6 +1442,7 @@
     }
 
     50% {
+
         opacity:
             1;
 
@@ -1444,6 +1456,7 @@
 @keyframes chapter2HeartFloat {
 
     0%, 100% {
+
         opacity:
             0.35;
 
@@ -1453,6 +1466,7 @@
     }
 
     50% {
+
         opacity:
             0.9;
 
@@ -1466,11 +1480,13 @@
 @keyframes chapter2SymbolFloat {
 
     0%, 100% {
+
         transform:
             translateY(0);
     }
 
     50% {
+
         transform:
             translateY(-7px);
     }
@@ -1496,7 +1512,6 @@
 
         overflow-y:
             auto;
-
     }
 
 
@@ -1531,7 +1546,6 @@
 
         overflow-y:
             auto;
-
     }
 
 
@@ -1542,16 +1556,21 @@
 
         padding-top:
             55px;
+
+        padding-bottom:
+            110px;
     }
 
 
     .chapter2-intro {
+
         padding-bottom:
             38px;
     }
 
 
     .chapter2-story {
+
         padding:
             28px
             20px;
@@ -1590,7 +1609,7 @@
             160px;
     }
 
-
+    
     .chapter2-navigation {
 
         gap:
@@ -1619,7 +1638,6 @@
 
         overflow-y:
             auto;
-
     }
 
 
@@ -1627,6 +1645,9 @@
 
         width:
             calc(100% - 16px);
+
+        padding-bottom:
+            100px;
     }
 
 
