@@ -1,7 +1,10 @@
+```css
 /* ==========================================================
    CHAPTER III — POETRY
    Project : Our Story
+   File    : chapter3.css
    Purpose : Romantic Poetry Chapter
+   Theme   : Chapter 7 Purple / Pink Romantic Palette
    ========================================================== */
 
 
@@ -17,12 +20,6 @@
     height: 100vh;
     min-height: 100vh;
 
-    /*
-        IMPORTANT:
-        Chapter 3 contains more content than the viewport.
-        The chapter itself must be the scroll container.
-    */
-
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -30,34 +27,39 @@
 
     box-sizing: border-box;
 
+    /*
+        CHAPTER 7 COLOR PALETTE
+        Background design preserved.
+    */
+
     background:
         radial-gradient(
             circle at 50% 5%,
-            rgba(255, 185, 220, 0.16),
+            rgba(255, 148, 213, 0.22),
             transparent 28%
         ),
 
         radial-gradient(
             circle at 10% 45%,
-            rgba(180, 125, 225, 0.14),
+            rgba(179, 117, 255, 0.18),
             transparent 30%
         ),
 
         radial-gradient(
             circle at 90% 75%,
-            rgba(255, 170, 215, 0.12),
+            rgba(255, 177, 222, 0.16),
             transparent 28%
         ),
 
         linear-gradient(
             180deg,
-            #140b1c 0%,
-            #211126 35%,
-            #29142d 68%,
-            #100812 100%
+            #130b2d 0%,
+            #21103d 42%,
+            #32164d 72%,
+            #180b32 100%
         );
 
-    color: #ffffff;
+    color: #fff7fd;
 
     scroll-behavior: smooth;
 
@@ -112,8 +114,8 @@
     background:
         radial-gradient(
             circle,
-            rgba(255, 170, 215, 0.18),
-            rgba(190, 125, 220, 0.08),
+            rgba(255, 173, 223, 0.18),
+            rgba(197, 131, 255, 0.10),
             transparent 70%
         );
 
@@ -175,9 +177,9 @@
     background:
         radial-gradient(
             circle at 35% 35%,
-            rgba(255, 245, 250, 0.9),
-            rgba(255, 205, 230, 0.35) 40%,
-            rgba(255, 170, 215, 0.08) 65%,
+            rgba(255, 233, 250, 0.9),
+            rgba(255, 217, 239, 0.35) 40%,
+            rgba(255, 173, 223, 0.08) 65%,
             transparent 72%
         );
 
@@ -207,17 +209,25 @@
     color:
         rgba(
             255,
-            210,
-            235,
-            0.75
+            226,
+            248,
+            0.9
         );
 
     text-shadow:
-        0 0 12px
+        0 0 8px
         rgba(
             255,
-            185,
-            225,
+            191,
+            231,
+            0.9
+        ),
+
+        0 0 18px
+        rgba(
+            194,
+            128,
+            255,
             0.55
         );
 
@@ -370,9 +380,9 @@
         1px solid
         rgba(
             255,
-            200,
-            225,
-            0.28
+            198,
+            233,
+            0.35
         );
 
     border-radius:
@@ -381,9 +391,9 @@
     background:
         rgba(
             255,
-            255,
-            255,
-            0.04
+            155,
+            214,
+            0.08
         );
 
     font-family:
@@ -403,12 +413,7 @@
         uppercase;
 
     color:
-        rgba(
-            255,
-            215,
-            235,
-            0.8
-        );
+        #ffd5ee;
 
     backdrop-filter:
         blur(8px);
@@ -417,9 +422,9 @@
         0 5px 25px
         rgba(
             255,
-            170,
-            220,
-            0.06
+            148,
+            215,
+            0.08
         );
 
 }
@@ -458,15 +463,31 @@
         0.01em;
 
     color:
-        #ffffff;
+        #fff0fb;
 
     text-shadow:
-        0 0 35px
+        0 0 12px
         rgba(
             255,
-            180,
-            220,
-            0.20
+            176,
+            222,
+            0.7
+        ),
+
+        0 0 34px
+        rgba(
+            255,
+            125,
+            211,
+            0.35
+        ),
+
+        0 0 70px
+        rgba(
+            188,
+            108,
+            255,
+            0.2
         );
 
 }
@@ -501,9 +522,9 @@
     color:
         rgba(
             255,
-            230,
-            240,
-            0.75
+            228,
+            246,
+            0.78
         );
 
 }
@@ -538,9 +559,9 @@
     color:
         rgba(
             255,
-            190,
-            220,
-            0.7
+            175,
+            222,
+            0.75
         );
 
 }
@@ -579,16 +600,16 @@
         linear-gradient(
             145deg,
             rgba(
-                255,
-                255,
-                255,
-                0.075
+                116,
+                55,
+                137,
+                0.44
             ),
             rgba(
-                255,
-                185,
-                225,
-                0.025
+                47,
+                21,
+                75,
+                0.58
             )
         );
 
@@ -596,21 +617,21 @@
         1px solid
         rgba(
             255,
-            220,
-            235,
-            0.16
+            204,
+            238,
+            0.25
         );
 
     border-radius:
-        18px;
+        32px;
 
     box-shadow:
-        0 25px 80px
+        0 25px 70px
         rgba(
-            0,
-            0,
-            0,
-            0.25
+            7,
+            3,
+            20,
+            0.22
         ),
 
         inset 0 1px 0
@@ -618,14 +639,25 @@
             255,
             255,
             255,
-            0.05
+            0.09
+        ),
+
+        inset 0 0 50px
+        rgba(
+            255,
+            155,
+            218,
+            0.035
         );
 
     backdrop-filter:
-        blur(14px);
+        blur(13px);
 
     -webkit-backdrop-filter:
-        blur(14px);
+        blur(13px);
+
+    overflow:
+        hidden;
 
     transition:
         transform 0.5s ease,
@@ -636,7 +668,7 @@
 
 
 /* ==========================================================
-   POEM CARD DECORATIVE CORNERS
+   POEM CARD GLOW
    ========================================================== */
 
 .chapter3-poem::before {
@@ -663,9 +695,9 @@
     color:
         rgba(
             255,
-            190,
-            225,
-            0.45
+            175,
+            222,
+            0.55
         );
 
 }
@@ -695,9 +727,9 @@
     color:
         rgba(
             255,
-            190,
-            225,
-            0.45
+            175,
+            222,
+            0.55
         );
 
 }
@@ -715,26 +747,26 @@
     border-color:
         rgba(
             255,
-            195,
-            225,
-            0.34
+            221,
+            241,
+            0.72
         );
 
     box-shadow:
         0 35px 90px
         rgba(
-            0,
-            0,
-            0,
+            5,
+            2,
+            18,
             0.32
         ),
 
         0 0 45px
         rgba(
             255,
-            175,
-            220,
-            0.08
+            147,
+            213,
+            0.12
         );
 
 }
@@ -760,9 +792,9 @@
     color:
         rgba(
             255,
-            190,
-            225,
-            0.65
+            175,
+            222,
+            0.75
         );
 
 }
@@ -796,9 +828,9 @@
     color:
         rgba(
             255,
-            195,
-            225,
-            0.65
+            175,
+            222,
+            0.75
         );
 
 }
@@ -825,9 +857,9 @@
     background:
         rgba(
             255,
-            195,
-            225,
-            0.3
+            175,
+            222,
+            0.38
         );
 
 }
@@ -861,15 +893,15 @@
         1.15;
 
     color:
-        #ffffff;
+        #fff1fb;
 
     text-shadow:
         0 0 20px
         rgba(
             255,
-            185,
-            220,
-            0.12
+            176,
+            222,
+            0.18
         );
 
 }
@@ -920,8 +952,8 @@
         rgba(
             255,
             245,
-            248,
-            0.92
+            250,
+            0.94
         );
 
 }
@@ -945,15 +977,15 @@
         italic;
 
     color:
-        #ffd6e9;
+        #ffafd9;
 
     text-shadow:
         0 0 18px
         rgba(
             255,
-            180,
-            220,
-            0.25
+            111,
+            192,
+            0.38
         );
 
 }
@@ -969,16 +1001,16 @@
         linear-gradient(
             145deg,
             rgba(
-                190,
-                145,
-                230,
-                0.07
+                184,
+                135,
+                255,
+                0.20
             ),
             rgba(
                 255,
-                190,
-                225,
-                0.025
+                155,
+                213,
+                0.17
             )
         );
 
@@ -1009,18 +1041,18 @@
         1px solid
         rgba(
             255,
-            210,
-            230,
-            0.14
+            192,
+            226,
+            0.28
         );
 
     border-bottom:
         1px solid
         rgba(
             255,
-            210,
-            230,
-            0.10
+            192,
+            226,
+            0.20
         );
 
 }
@@ -1043,20 +1075,15 @@
         2rem;
 
     color:
-        rgba(
-            255,
-            190,
-            220,
-            0.75
-        );
+        #ffafd9;
 
     text-shadow:
         0 0 20px
         rgba(
             255,
-            170,
-            215,
-            0.25
+            115,
+            193,
+            0.55
         );
 
 }
@@ -1090,7 +1117,7 @@
         italic;
 
     color:
-        #ffffff;
+        #fff0fb;
 
 }
 
@@ -1120,9 +1147,9 @@
     color:
         rgba(
             255,
-            230,
-            240,
-            0.72
+            228,
+            246,
+            0.78
         );
 
 }
@@ -1149,36 +1176,40 @@
         1px solid
         rgba(
             255,
-            200,
-            225,
-            0.4
+            198,
+            233,
+            0.55
         );
 
     border-radius:
         50px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.04
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                132,
+                205,
+                0.23
+            ),
+            rgba(
+                183,
+                111,
+                255,
+                0.18
+            )
         );
 
     color:
-        rgba(
-            255,
-            235,
-            245,
-            0.95
-        );
+        #ffe8f7;
 
     font-family:
         "Poppins",
         sans-serif;
 
     font-size:
-        0.85rem;
+        0.75rem;
 
     letter-spacing:
         0.05em;
@@ -1193,12 +1224,20 @@
         blur(10px);
 
     box-shadow:
-        0 10px 35px
+        0 10px 30px
+        rgba(
+            123,
+            54,
+            152,
+            0.18
+        ),
+
+        inset 0 1px 0
         rgba(
             255,
-            170,
-            220,
-            0.08
+            255,
+            255,
+            0.1
         );
 
     transition:
@@ -1216,28 +1255,45 @@
         translateY(-4px);
 
     background:
-        rgba(
-            255,
-            190,
-            225,
-            0.12
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                139,
+                207,
+                0.36
+            ),
+            rgba(
+                188,
+                120,
+                255,
+                0.28
+            )
         );
 
     border-color:
         rgba(
             255,
-            205,
-            230,
-            0.7
+            221,
+            241,
+            0.72
         );
 
     box-shadow:
-        0 15px 45px
+        0 15px 38px
+        rgba(
+            176,
+            84,
+            166,
+            0.25
+        ),
+
+        0 0 25px
         rgba(
             255,
-            170,
-            220,
-            0.18
+            147,
+            213,
+            0.14
         );
 
 }
@@ -1283,15 +1339,15 @@
             180deg,
             rgba(
                 255,
-                190,
-                220,
-                0.4
+                155,
+                214,
+                0.55
             ),
             rgba(
-                190,
-                140,
-                220,
-                0.4
+                184,
+                135,
+                255,
+                0.55
             )
         );
 
@@ -1308,15 +1364,15 @@
             180deg,
             rgba(
                 255,
-                190,
-                220,
-                0.6
+                155,
+                214,
+                0.75
             ),
             rgba(
-                190,
-                140,
-                220,
-                0.6
+                184,
+                135,
+                255,
+                0.75
             )
         );
 
@@ -1594,3 +1650,4 @@
     }
 
 }
+```
