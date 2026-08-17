@@ -1,8 +1,8 @@
+```css
 /* ==========================================================
    CHAPTER I — ONCE UPON A TIME
    Project : Our Story
    Purpose : Storybook Chapter I
-             Chapter VII Purple / Pink / Lavender Theme
    ========================================================== */
 
 
@@ -33,7 +33,7 @@
 
 /* ==========================================================
    BACKGROUND
-   Moon, petals, and moving clouds preserved
+   Original background preserved
    ========================================================== */
 
 .chapter1-background {
@@ -55,24 +55,14 @@
     background:
         radial-gradient(
             circle at 50% 25%,
-            rgba(255, 148, 213, 0.22),
+            rgba(100, 70, 120, 0.25),
             transparent 35%
-        ),
-        radial-gradient(
-            circle at 12% 55%,
-            rgba(179, 117, 255, 0.16),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 88% 70%,
-            rgba(255, 177, 222, 0.13),
-            transparent 30%
         ),
         linear-gradient(
             180deg,
-            #130b2d 0%,
-            #21103d 50%,
-            #180b32 100%
+            #0d0a18 0%,
+            #171023 50%,
+            #0b0913 100%
         );
 
 }
@@ -80,6 +70,7 @@
 
 /* ==========================================================
    MOON
+   Original moon preserved
    ========================================================== */
 
 .chapter1-moon {
@@ -96,17 +87,18 @@
 
     right: 12%;
 
-    background: #ffe9fa;
+    background: #fff7df;
 
     box-shadow:
-        0 0 25px rgba(255, 224, 247, 0.75),
-        0 0 70px rgba(222, 145, 255, 0.32);
+        0 0 25px rgba(255, 247, 223, 0.45),
+        0 0 70px rgba(255, 247, 223, 0.18);
 
 }
 
 
 /* ==========================================================
    CLOUDS
+   Original cloud design preserved
    ========================================================== */
 
 .chapter1-cloud {
@@ -119,7 +111,7 @@
 
     border-radius: 50px;
 
-    background: rgba(255, 190, 228, 0.075);
+    background: rgba(255, 255, 255, 0.055);
 
     filter: blur(2px);
 
@@ -168,6 +160,7 @@
 
 /* ==========================================================
    PETALS
+   Original petal color preserved
    ========================================================== */
 
 .chapter1-petal {
@@ -176,7 +169,7 @@
 
     top: -40px;
 
-    color: rgba(255, 196, 231, 0.8);
+    color: rgba(255, 210, 230, 0.75);
 
     pointer-events: none;
 
@@ -240,6 +233,7 @@
 
 /* ==========================================================
    CHAPTER LABEL
+   Chapter VII pink theme
    ========================================================== */
 
 .chapter1-label {
@@ -263,6 +257,7 @@
 
 /* ==========================================================
    INTRO TITLE
+   Chapter VII pink/lavender glow
    ========================================================== */
 
 .chapter1-intro h2 {
@@ -345,6 +340,7 @@
 
 /* ==========================================================
    STORYBOOK PAGE
+   ORIGINAL PAGE COLOR PRESERVED
    ========================================================== */
 
 .chapter1-page {
@@ -370,7 +366,7 @@
     overflow: hidden;
 
     border-radius: 8px;
-/* ========================================================== */
+
     background:
         linear-gradient(
             135deg,
@@ -380,16 +376,9 @@
 
     color: #382b35;
 
-    border: 1px solid rgba(255, 204, 238, 0.25);
-
     box-shadow:
-        0 25px 70px rgba(7, 3, 20, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.09),
-        inset 0 0 50px rgba(255, 155, 218, 0.035);
-
-    backdrop-filter: blur(13px);
-
-    -webkit-backdrop-filter: blur(13px);
+        0 25px 70px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.15);
 
     transform-style: preserve-3d;
 
@@ -426,6 +415,7 @@
 
 /* ==========================================================
    PAGE NUMBER
+   Chapter VII accent
    ========================================================== */
 
 .chapter1-page-number {
@@ -440,13 +430,14 @@
 
     text-transform: uppercase;
 
-    color: rgba(255, 213, 238, 0.58);
+    color: rgba(116, 55, 137, 0.65);
 
 }
 
 
 /* ==========================================================
    PAGE TITLE
+   Purple/pink accent while page stays original
    ========================================================== */
 
 .chapter1-page h3 {
@@ -470,16 +461,14 @@
 
     line-height: 1.1;
 
-    color: #fff1fb;
-
-    text-shadow:
-        0 0 12px rgba(255, 176, 222, 0.28);
+    color: #74305f;
 
 }
 
 
 /* ==========================================================
    PAGE TEXT
+   Original readable storybook style preserved
    ========================================================== */
 
 .chapter1-page-text {
@@ -492,7 +481,7 @@
 
     line-height: 1.65;
 
-    color: rgba(255, 228, 246, 0.82);
+    color: #4b3b46;
 
 }
 
@@ -520,6 +509,7 @@
 
 /* ==========================================================
    DECORATIVE FLOWERS
+   Chapter VII pink accent
    ========================================================== */
 
 .chapter1-flower {
@@ -530,7 +520,7 @@
 
     font-family: serif;
 
-    color: rgba(255, 175, 222, 0.42);
+    color: rgba(199, 91, 153, 0.42);
 
     pointer-events: none;
 
@@ -575,6 +565,7 @@
 
 /* ==========================================================
    NAVIGATION
+   Chapter VII button theme
    ========================================================== */
 
 .chapter1-navigation {
@@ -667,7 +658,7 @@
 
 
 /* ==========================================================
-   DISABLED BUTTON
+   DISABLED
    ========================================================== */
 
 .chapter1-nav-btn:disabled {
@@ -703,6 +694,7 @@
 
 /* ==========================================================
    CONTINUE BUTTON
+   Chapter VII button theme
    ========================================================== */
 
 .chapter1-continue {
@@ -756,7 +748,7 @@
 
 
 /* ==========================================================
-   CONTINUE BUTTON HOVER
+   CONTINUE HOVER
    ========================================================== */
 
 .chapter1-continue:hover {
@@ -779,6 +771,7 @@
 
 /* ==========================================================
    ANIMATIONS
+   Original animations preserved
    ========================================================== */
 
 @keyframes chapter1PetalFall {
@@ -1083,3 +1076,4 @@
     }
 
 }
+```
