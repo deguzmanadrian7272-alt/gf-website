@@ -2924,3 +2924,1268 @@
     }
 
 }
+
+/* ==========================================================
+   CHAPTER V — CHAPTER VII COLOR HARMONY
+   Keeps the Chapter 5 layout/game design intact.
+   Only updates the visual theme and background decoration.
+   ========================================================== */
+
+
+/* ==========================================================
+   CHAPTER 5 BACKGROUND — MATCH CHAPTER VII
+   ========================================================== */
+
+#chapter5 {
+
+    color: #fff7fd;
+
+    background:
+        radial-gradient(
+            circle at 50% 12%,
+            rgba(255, 148, 213, 0.22),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 12% 55%,
+            rgba(179, 117, 255, 0.18),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 88% 70%,
+            rgba(255, 177, 222, 0.16),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 45% 100%,
+            rgba(197, 131, 255, 0.10),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            180deg,
+            #130b2d 0%,
+            #21103d 42%,
+            #32164d 72%,
+            #180b32 100%
+        );
+}
+
+
+/* ==========================================================
+   EXTRA BACKGROUND DECORATIONS
+   No HTML changes required.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   EXTRA STARS
+   ---------------------------------------------------------- */
+
+.chapter5-background::before {
+
+    content:
+        "✦   ˚   ♡   ✧   ⋆   ♡   ✦   ˚   ✧   ♡";
+
+    position: absolute;
+
+    top: 7%;
+    left: 50%;
+
+    width: 110%;
+
+    transform:
+        translateX(-50%);
+
+    text-align: center;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            0.7rem,
+            2vw,
+            1.15rem
+        );
+
+    letter-spacing:
+        2.5rem;
+
+    line-height: 1;
+
+    color:
+        rgba(
+            255,
+            226,
+            248,
+            0.72
+        );
+
+    text-shadow:
+        0 0 8px
+        rgba(
+            255,
+            191,
+            231,
+            0.85
+        ),
+
+        0 0 18px
+        rgba(
+            194,
+            128,
+            255,
+            0.55
+        );
+
+    opacity: 0.65;
+
+    animation:
+        chapter5SkyTwinkle
+        5s
+        ease-in-out
+        infinite;
+}
+
+
+/* ----------------------------------------------------------
+   EXTRA FLOATING HEARTS
+   ---------------------------------------------------------- */
+
+.chapter5-background::after {
+
+    content:
+        "♡        ♥        ♡        ✧        ♡";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 7%;
+
+    width: 120%;
+
+    transform:
+        translateX(-50%);
+
+    text-align: center;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            1rem,
+            2.5vw,
+            1.7rem
+        );
+
+    letter-spacing:
+        3.8rem;
+
+    color:
+        rgba(
+            255,
+            196,
+            231,
+            0.52
+        );
+
+    text-shadow:
+        0 0 12px
+        rgba(
+            255,
+            150,
+            216,
+            0.55
+        );
+
+    opacity: 0.6;
+
+    animation:
+        chapter5HeartDrift
+        8s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+/* ==========================================================
+   EXTRA BACKGROUND ANIMATIONS
+   ========================================================== */
+
+@keyframes chapter5SkyTwinkle {
+
+    0%,
+    100% {
+
+        opacity: 0.3;
+
+        transform:
+            translateX(-50%)
+            translateY(4px)
+            scale(0.96);
+    }
+
+    50% {
+
+        opacity: 0.85;
+
+        transform:
+            translateX(-50%)
+            translateY(-8px)
+            scale(1.03);
+    }
+}
+
+
+@keyframes chapter5HeartDrift {
+
+    from {
+
+        opacity: 0.25;
+
+        transform:
+            translateX(-50%)
+            translateY(12px)
+            rotate(-2deg);
+    }
+
+    to {
+
+        opacity: 0.7;
+
+        transform:
+            translateX(-50%)
+            translateY(-12px)
+            rotate(2deg);
+    }
+}
+
+
+/* ==========================================================
+   EXISTING CHAPTER 5 STARS
+   NOW MATCH CHAPTER 7
+   ========================================================== */
+
+.chapter5-star {
+
+    color:
+        rgba(
+            255,
+            226,
+            248,
+            0.9
+        );
+
+    text-shadow:
+        0 0 8px
+        rgba(
+            255,
+            191,
+            231,
+            0.9
+        ),
+
+        0 0 18px
+        rgba(
+            194,
+            128,
+            255,
+            0.55
+        );
+}
+
+
+/* ==========================================================
+   EXISTING CHAPTER 5 HEARTS
+   NOW MATCH CHAPTER 7
+   ========================================================== */
+
+.chapter5-heart {
+
+    color:
+        rgba(
+            255,
+            196,
+            231,
+            0.8
+        );
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            255,
+            150,
+            216,
+            0.65
+        );
+}
+
+
+/* ==========================================================
+   GLOWS — PINK + VIOLET
+   ========================================================== */
+
+.chapter5-glow-1 {
+
+    background:
+        rgba(
+            255,
+            148,
+            213,
+            0.24
+        );
+}
+
+
+.chapter5-glow-2 {
+
+    background:
+        rgba(
+            179,
+            117,
+            255,
+            0.20
+        );
+}
+
+
+.chapter5-glow-3 {
+
+    background:
+        rgba(
+            255,
+            177,
+            222,
+            0.18
+        );
+}
+
+
+/* ==========================================================
+   INTRO COLORS
+   ========================================================== */
+
+.chapter5-label {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.35
+        );
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.9
+        );
+}
+
+
+.chapter5-intro h2 {
+
+    color:
+        #fff0fb;
+
+    text-shadow:
+        0 0 12px
+        rgba(
+            255,
+            176,
+            222,
+            0.55
+        ),
+
+        0 0 34px
+        rgba(
+            255,
+            125,
+            211,
+            0.25
+        );
+}
+
+
+.chapter5-subtitle {
+
+    color:
+        rgba(
+            255,
+            228,
+            246,
+            0.82
+        );
+}
+
+
+/* ==========================================================
+   GAME SELECTOR
+   ========================================================== */
+
+.chapter5-game-select {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.28
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.045
+        );
+
+    color:
+        #fff7fd;
+}
+
+
+.chapter5-game-select:hover {
+
+    background:
+        rgba(
+            255,
+            155,
+            214,
+            0.10
+        );
+
+    border-color:
+        rgba(
+            255,
+            213,
+            241,
+            0.6
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(
+            176,
+            84,
+            166,
+            0.20
+        );
+}
+
+
+.chapter5-game-select.active {
+
+    background:
+        rgba(
+            255,
+            155,
+            214,
+            0.13
+        );
+
+    border-color:
+        rgba(
+            255,
+            183,
+            224,
+            0.72
+        );
+
+    box-shadow:
+        0 12px 40px
+        rgba(
+            255,
+            148,
+            215,
+            0.18
+        );
+}
+
+
+.chapter5-game-icon {
+
+    color:
+        #ffafd9;
+}
+
+
+.chapter5-game-title {
+
+    color:
+        #fff1fb;
+}
+
+
+.chapter5-game-description {
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.6
+        );
+}
+
+
+/* ==========================================================
+   GAME HEADERS
+   ========================================================== */
+
+.chapter5-game-number {
+
+    color:
+        rgba(
+            255,
+            213,
+            237,
+            0.72
+        );
+}
+
+
+.chapter5-game-header h3 {
+
+    color:
+        #fff0fb;
+
+    text-shadow:
+        0 0 18px
+        rgba(
+            255,
+            176,
+            222,
+            0.22
+        );
+}
+
+
+.chapter5-game-header p {
+
+    color:
+        rgba(
+            255,
+            228,
+            246,
+            0.72
+        );
+}
+
+
+/* ==========================================================
+   HEART BOARD
+   ========================================================== */
+
+.chapter5-heart-board {
+
+    border-color:
+        rgba(
+            255,
+            204,
+            238,
+            0.18
+        );
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(
+                255,
+                145,
+                211,
+                0.13
+            ),
+            rgba(
+                179,
+                117,
+                255,
+                0.06
+            ) 35%,
+            transparent 70%
+        );
+}
+
+
+.chapter5-hunt-heart {
+
+    color:
+        #ffb5df;
+}
+
+
+.chapter5-hunt-heart:hover {
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(
+                255,
+                147,
+                210,
+                0.85
+            )
+        );
+}
+
+
+.chapter5-heart-board.completed {
+
+    box-shadow:
+        inset
+        0 0 60px
+        rgba(
+            255,
+            148,
+            215,
+            0.12
+        );
+}
+
+
+/* ==========================================================
+   MEMORY CARDS
+   ========================================================== */
+
+.chapter5-memory-card-front {
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(
+                255,
+                155,
+                214,
+                0.20
+            ),
+            rgba(
+                179,
+                117,
+                255,
+                0.12
+            )
+        );
+
+    color:
+        rgba(
+            255,
+            235,
+            247,
+            0.95
+        );
+}
+
+
+.chapter5-memory-card-back {
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff0f8,
+            #f1d9f8
+        );
+
+    color:
+        #74305f;
+}
+
+
+.chapter5-memory-card-front,
+.chapter5-memory-card-back {
+
+    border-color:
+        rgba(
+            255,
+            204,
+            238,
+            0.3
+        );
+}
+
+
+.chapter5-memory-card:hover
+.chapter5-memory-card-front {
+
+    border-color:
+        rgba(
+            255,
+            221,
+            241,
+            0.72
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            255,
+            142,
+            209,
+            0.18
+        );
+}
+
+
+.chapter5-memory-card.matched
+.chapter5-memory-card-back {
+
+    border-color:
+        rgba(
+            255,
+            183,
+            224,
+            0.82
+        );
+
+    box-shadow:
+        inset
+        0 0 0 2px
+        rgba(
+            255,
+            148,
+            215,
+            0.4
+        ),
+
+        0 0 25px
+        rgba(
+            255,
+            148,
+            215,
+            0.15
+        );
+}
+
+
+/* ==========================================================
+   GAME STATUS
+   ========================================================== */
+
+.chapter5-game-status {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.18
+        );
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.72
+        );
+}
+
+
+.chapter5-game-status strong {
+
+    color:
+        #ffe8f6;
+}
+
+
+/* ==========================================================
+   BUTTONS
+   ========================================================== */
+
+.chapter5-game-button,
+.chapter5-continue {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            233,
+            0.55
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                132,
+                205,
+                0.23
+            ),
+            rgba(
+                183,
+                111,
+                255,
+                0.18
+            )
+        );
+
+    color:
+        #ffe8f7;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            123,
+            54,
+            152,
+            0.16
+        ),
+
+        inset
+        0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+}
+
+
+.chapter5-game-button:hover,
+.chapter5-continue:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                139,
+                207,
+                0.36
+            ),
+            rgba(
+                188,
+                120,
+                255,
+                0.28
+            )
+        );
+
+    border-color:
+        rgba(
+            255,
+            221,
+            241,
+            0.8
+        );
+
+    box-shadow:
+        0 15px 38px
+        rgba(
+            176,
+            84,
+            166,
+            0.25
+        ),
+
+        0 0 25px
+        rgba(
+            255,
+            147,
+            213,
+            0.14
+        );
+}
+
+
+/* ==========================================================
+   QUIZ
+   ========================================================== */
+
+.chapter5-quiz-container {
+
+    border-color:
+        rgba(
+            255,
+            204,
+            238,
+            0.22
+        );
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(
+                116,
+                55,
+                137,
+                0.34
+            ),
+            rgba(
+                47,
+                21,
+                75,
+                0.48
+            )
+        );
+}
+
+
+.chapter5-quiz-progress {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.14
+        );
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.65
+        );
+}
+
+
+.chapter5-quiz-question {
+
+    color:
+        #fff1fb;
+}
+
+
+.chapter5-quiz-answer,
+.chapter5-quiz-option {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.25
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.045
+        );
+
+    color:
+        #ffeef8;
+}
+
+
+.chapter5-quiz-answer:hover,
+.chapter5-quiz-option:hover {
+
+    background:
+        rgba(
+            255,
+            155,
+            214,
+            0.12
+        );
+
+    border-color:
+        rgba(
+            255,
+            221,
+            241,
+            0.6
+        );
+}
+
+
+.chapter5-quiz-feedback {
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.9
+        );
+}
+
+
+/* ==========================================================
+   COMPLETION MESSAGE
+   ========================================================== */
+
+.chapter5-game-message {
+
+    border-color:
+        rgba(
+            255,
+            192,
+            226,
+            0.42
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                181,
+                221,
+                0.16
+            ),
+            rgba(
+                187,
+                126,
+                255,
+                0.13
+            )
+        );
+
+    box-shadow:
+        0 10px 35px
+        rgba(
+            120,
+            75,
+            190,
+            0.16
+        ),
+
+        inset
+        0 0 25px
+        rgba(
+            255,
+            255,
+            255,
+            0.025
+        );
+
+    color:
+        #fff5fc;
+
+    text-shadow:
+        0 0 14px
+        rgba(
+            255,
+            176,
+            222,
+            0.35
+        );
+}
+
+
+.chapter5-game-message::after {
+
+    color:
+        rgba(
+            255,
+            181,
+            223,
+            0.9
+        );
+
+    text-shadow:
+        0 0 12px
+        rgba(
+            255,
+            147,
+            210,
+            0.65
+        );
+}
+
+
+/* ==========================================================
+   COMPLETION
+   ========================================================== */
+
+.chapter5-completion {
+
+    border-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.25
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                181,
+                221,
+                0.14
+            ),
+            rgba(
+                187,
+                126,
+                255,
+                0.10
+            )
+        );
+}
+
+
+.chapter5-completion-symbol {
+
+    color:
+        #ffafd9;
+}
+
+
+.chapter5-completion h3 {
+
+    color:
+        #fff1fb;
+}
+
+
+.chapter5-completion p {
+
+    color:
+        rgba(
+            255,
+            225,
+            245,
+            0.75
+        );
+}
+
+
+/* ==========================================================
+   ENDING
+   ========================================================== */
+
+.chapter5-ending-symbol {
+
+    color:
+        rgba(
+            255,
+            175,
+            222,
+            0.85
+        );
+}
+
+
+.chapter5-ending p {
+
+    color:
+        rgba(
+            255,
+            228,
+            246,
+            0.84
+        );
+}
+
+
+.chapter5-ending h3 {
+
+    color:
+        #fff1fb;
+}
+
+
+/* ==========================================================
+   CONTINUE SECTION
+   ========================================================== */
+
+.chapter5-continue-section {
+
+    border-top-color:
+        rgba(
+            255,
+            198,
+            235,
+            0.18
+        );
+}
+
+
+.chapter5-continue-section p {
+
+    color:
+        rgba(
+            255,
+            228,
+            246,
+            0.85
+        );
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.chapter5-game-select:focus-visible,
+.chapter5-game-button:focus-visible,
+.chapter5-hunt-heart:focus-visible,
+.chapter5-memory-card:focus-visible,
+.chapter5-quiz-answer:focus-visible,
+.chapter5-quiz-option:focus-visible,
+.chapter5-continue:focus-visible {
+
+    outline-color:
+        rgba(
+            255,
+            213,
+            241,
+            0.9
+        );
+}
+
+
+/* ==========================================================
+   MOBILE DECORATION ADJUSTMENT
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .chapter5-background::before {
+
+        top: 5%;
+
+        letter-spacing:
+            1.2rem;
+
+        font-size:
+            0.75rem;
+    }
+
+
+    .chapter5-background::after {
+
+        bottom: 5%;
+
+        letter-spacing:
+            1.5rem;
+
+        font-size:
+            1rem;
+    }
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .chapter5-background::before,
+    .chapter5-background::after {
+
+        animation: none;
+    }
+}
