@@ -2,7 +2,7 @@
    AUDIO.JS
    Project : Our Story
    Purpose : Background Music & Sound Effects
-   Chapter : 0
+   Chapters: 0 → Final
 ========================================================== */
 
 
@@ -18,7 +18,9 @@ const AudioSettings = {
 
     fadeStep: 0.02,
 
-    fadeInterval: 50
+    fadeInterval: 50,
+
+    volumeStep: 0.05
 
 };
 
@@ -31,9 +33,89 @@ const AudioState = {
 
     musicStarted: false,
 
-    musicPlaying: false
+    musicPlaying: false,
+
+    currentChapter: null
 
 };
+
+
+/* ==========================================================
+   CHAPTER MUSIC
+========================================================== */
+
+const ChapterMusic = {
+
+    1: "assets/music/chapter1.mp3",
+
+    // We will add these later:
+    // 2: "assets/music/chapter2.mp3",
+    // 3: "assets/music/chapter3.mp3",
+    // 4: "assets/music/chapter4.mp3",
+    // 5: "assets/music/chapter5.mp3",
+    // 6: "assets/music/chapter6.mp3",
+    // 7: "assets/music/chapter7.mp3",
+    // final: "assets/music/final.mp3"
+
+};
+
+
+/* ==========================================================
+   AUDIO ELEMENT
+========================================================== */
+
+let storyMusic = null;
+
+
+/* ==========================================================
+   CREATE / GET AUDIO ELEMENT
+========================================================== */
+
+function getMusicElement() {
+
+    /*
+        Use the existing bgMusic element if
+        the project already has one.
+
+        Otherwise create one automatically.
+    */
+
+    if (storyMusic) {
+
+        return storyMusic;
+
+    }
+
+
+    storyMusic =
+        document.getElementById("bgMusic");
+
+
+    if (!storyMusic) {
+
+        storyMusic =
+            document.createElement("audio");
+
+        storyMusic.id = "bgMusic";
+
+        storyMusic.preload = "auto";
+
+        document.body.appendChild(
+            storyMusic
+        );
+
+    }
+
+
+    storyMusic.loop = true;
+
+    storyMusic.volume =
+        AudioSettings.musicVolume;
+
+
+    return storyMusic;
+
+}
 
 
 /* ==========================================================
@@ -42,17 +124,14 @@ const AudioState = {
 
 function initAudio() {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
-
-    /*
-        Safety check.
-    */
 
     if (!music) {
 
         console.warn(
-            "Background music element was not found."
+            "Audio element could not be initialized."
         );
 
         return;
@@ -61,19 +140,17 @@ function initAudio() {
 
 
     /*
-        Start completely silent.
+        Start silent.
 
-        The music will only begin after
-        the user interacts with the website.
+        Music will only begin after
+        the user clicks Open My Story.
     */
 
     music.volume = 0;
 
-    music.loop = true;
-
 
     /*
-        Expose useful controls globally.
+        Expose audio controls globally.
     */
 
     window.OurStoryAudio = {
@@ -90,26 +167,231 @@ function initAudio() {
 
         setMusicVolume,
 
-        toggleMusic
+        toggleMusic,
+
+        playChapterMusic,
+
+        stopChapterMusic,
+
+        increaseVolume,
+
+        decreaseVolume
 
     };
 
 
-    console.log("🎵 Audio initialized.");
+    /*
+        Connect Chapter 0's
+        "Open My Story" button.
+    */
+
+    const startBtn =
+        document.getElementById(
+            "startBtn"
+        );
+
+
+    if (startBtn) {
+
+        startBtn.addEventListener(
+            "click",
+            handleStoryStart
+        );
+
+    }
+
+
+    /*
+        Connect Chapter 1's
+        Continue button.
+
+        This stops Chapter 1 music
+        before moving to Chapter 2.
+    */
+
+    const chapter1Continue =
+        document.getElementById(
+            "chapter1Continue"
+        );
+
+
+    if (chapter1Continue) {
+
+        chapter1Continue.addEventListener(
+            "click",
+            () => {
+
+                stopChapterMusic();
+
+            }
+        );
+
+    }
+
+
+    /*
+        Connect Chapter 1 music controls.
+    */
+
+    initChapter1Controls();
+
+
+    console.log(
+        "🎵 Audio initialized."
+    );
 
 }
 
 
 /* ==========================================================
-   PLAY MUSIC
+   STORY START
+========================================================== */
+
+function handleStoryStart() {
+
+    /*
+        Open My Story starts
+        Chapter 1 music.
+    */
+
+    playChapterMusic(1);
+
+}
+
+
+/* ==========================================================
+   PLAY CHAPTER MUSIC
+========================================================== */
+
+async function playChapterMusic(
+    chapter
+) {
+
+    const music =
+        getMusicElement();
+
+
+    const musicFile =
+        ChapterMusic[chapter];
+
+
+    if (!musicFile) {
+
+        console.warn(
+            `No music assigned to Chapter ${chapter}.`
+        );
+
+        return;
+
+    }
+
+
+    /*
+        If the same chapter is already playing,
+        don't restart the song.
+    */
+
+    if (
+        AudioState.currentChapter === chapter &&
+        AudioState.musicPlaying
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+        Stop the previous song first.
+    */
+
+    music.pause();
+
+    music.currentTime = 0;
+
+    music.volume = 0;
+
+
+    /*
+        Load the new chapter song.
+    */
+
+    music.src = musicFile;
+
+    music.loop = true;
+
+    AudioState.currentChapter =
+        chapter;
+
+
+    try {
+
+        await music.play();
+
+
+        AudioState.musicStarted =
+            true;
+
+        AudioState.musicPlaying =
+            true;
+
+
+        if (
+            typeof setMusicState ===
+            "function"
+        ) {
+
+            setMusicState(true);
+
+        }
+
+
+        fadeInMusic();
+
+
+        updateChapterMusicButton();
+
+
+        console.log(
+            `🎵 Chapter ${chapter} music started.`
+        );
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            `Chapter ${chapter} music could not start:`,
+            error
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   PLAY CURRENT MUSIC
 ========================================================== */
 
 async function playMusic() {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
 
-    if (!music) {
+    if (!music.src) {
+
+        /*
+            If no song has been selected yet,
+            start Chapter 1.
+        */
+
+        if (ChapterMusic[1]) {
+
+            playChapterMusic(1);
+
+        }
 
         return;
 
@@ -118,49 +400,33 @@ async function playMusic() {
 
     try {
 
-        /*
-            Attempt to play the music.
-
-            This should be called after a user interaction
-            such as clicking "Open My Story".
-        */
-
         await music.play();
 
 
-        AudioState.musicStarted = true;
+        AudioState.musicStarted =
+            true;
 
-        AudioState.musicPlaying = true;
+        AudioState.musicPlaying =
+            true;
 
 
-        /*
-            Tell app.js about the music state.
-        */
+        fadeInMusic();
 
-        if (typeof setMusicState === "function") {
+        updateChapterMusicButton();
+
+
+        if (
+            typeof setMusicState ===
+            "function"
+        ) {
 
             setMusicState(true);
 
         }
 
-
-        /*
-            Smoothly increase the volume.
-        */
-
-        fadeInMusic();
-
-
-        console.log("🎵 Music started.");
-
     }
 
     catch (error) {
-
-        /*
-            Autoplay restrictions or missing audio files
-            will end up here.
-        */
 
         console.warn(
             "Music could not start:",
@@ -178,7 +444,8 @@ async function playMusic() {
 
 function pauseMusic() {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
 
     if (!music) {
@@ -190,10 +457,18 @@ function pauseMusic() {
 
     music.pause();
 
-    AudioState.musicPlaying = false;
+
+    AudioState.musicPlaying =
+        false;
 
 
-    if (typeof setMusicState === "function") {
+    updateChapterMusicButton();
+
+
+    if (
+        typeof setMusicState ===
+        "function"
+    ) {
 
         setMusicState(false);
 
@@ -208,7 +483,8 @@ function pauseMusic() {
 
 function stopMusic() {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
 
     if (!music) {
@@ -225,16 +501,81 @@ function stopMusic() {
     music.volume = 0;
 
 
-    AudioState.musicStarted = false;
+    AudioState.musicStarted =
+        false;
 
-    AudioState.musicPlaying = false;
+    AudioState.musicPlaying =
+        false;
+
+    AudioState.currentChapter =
+        null;
 
 
-    if (typeof setMusicState === "function") {
+    updateChapterMusicButton();
+
+
+    if (
+        typeof setMusicState ===
+        "function"
+    ) {
 
         setMusicState(false);
 
     }
+
+}
+
+
+/* ==========================================================
+   STOP CHAPTER MUSIC
+========================================================== */
+
+function stopChapterMusic() {
+
+    const music =
+        getMusicElement();
+
+
+    if (!music) {
+
+        return;
+
+    }
+
+
+    /*
+        Fade out before stopping.
+    */
+
+    fadeOutMusic(() => {
+
+        music.pause();
+
+        music.currentTime = 0;
+
+        AudioState.musicStarted =
+            false;
+
+        AudioState.musicPlaying =
+            false;
+
+        AudioState.currentChapter =
+            null;
+
+
+        updateChapterMusicButton();
+
+
+        if (
+            typeof setMusicState ===
+            "function"
+        ) {
+
+            setMusicState(false);
+
+        }
+
+    });
 
 }
 
@@ -245,7 +586,8 @@ function stopMusic() {
 
 function fadeInMusic() {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
 
     if (!music) {
@@ -272,27 +614,33 @@ function fadeInMusic() {
         steps;
 
 
-    const fade = setInterval(() => {
+    const fade =
+        setInterval(() => {
 
-        if (music.volume >= targetVolume) {
+            if (
+                music.volume >=
+                targetVolume
+            ) {
 
-            music.volume = targetVolume;
+                music.volume =
+                    targetVolume;
 
-            clearInterval(fade);
+                clearInterval(fade);
 
-            return;
+                return;
 
-        }
+            }
 
 
-        music.volume = Math.min(
-            music.volume +
-            AudioSettings.fadeStep,
+            music.volume =
+                Math.min(
+                    music.volume +
+                    AudioSettings.fadeStep,
 
-            targetVolume
-        );
+                    targetVolume
+                );
 
-    }, intervalTime);
+        }, intervalTime);
 
 }
 
@@ -305,7 +653,8 @@ function fadeOutMusic(
     callback = null
 ) {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
 
     if (!music) {
@@ -315,34 +664,41 @@ function fadeOutMusic(
     }
 
 
-    const fade = setInterval(() => {
+    const fade =
+        setInterval(() => {
 
-        if (music.volume <= 0.01) {
+            if (
+                music.volume <= 0.01
+            ) {
 
-            music.volume = 0;
+                music.volume = 0;
 
-            clearInterval(fade);
+                clearInterval(fade);
 
 
-            if (typeof callback === "function") {
+                if (
+                    typeof callback ===
+                    "function"
+                ) {
 
-                callback();
+                    callback();
+
+                }
+
+                return;
 
             }
 
-            return;
 
-        }
+            music.volume =
+                Math.max(
+                    music.volume -
+                    AudioSettings.fadeStep,
 
+                    0
+                );
 
-        music.volume = Math.max(
-            music.volume -
-            AudioSettings.fadeStep,
-
-            0
-        );
-
-    }, AudioSettings.fadeInterval);
+        }, AudioSettings.fadeInterval);
 
 }
 
@@ -351,9 +707,12 @@ function fadeOutMusic(
    SET MUSIC VOLUME
 ========================================================== */
 
-function setMusicVolume(volume) {
+function setMusicVolume(
+    volume
+) {
 
-    const music = document.getElementById("bgMusic");
+    const music =
+        getMusicElement();
 
 
     if (!music) {
@@ -362,10 +721,6 @@ function setMusicVolume(volume) {
 
     }
 
-
-    /*
-        Keep volume between 0 and 1.
-    */
 
     const safeVolume =
         Math.max(
@@ -377,11 +732,43 @@ function setMusicVolume(volume) {
         );
 
 
-    music.volume = safeVolume;
+    music.volume =
+        safeVolume;
 
 
     AudioSettings.musicVolume =
         safeVolume;
+
+
+    updateChapterMusicButton();
+
+}
+
+
+/* ==========================================================
+   INCREASE VOLUME
+========================================================== */
+
+function increaseVolume() {
+
+    setMusicVolume(
+        AudioSettings.musicVolume +
+        AudioSettings.volumeStep
+    );
+
+}
+
+
+/* ==========================================================
+   DECREASE VOLUME
+========================================================== */
+
+function decreaseVolume() {
+
+    setMusicVolume(
+        AudioSettings.musicVolume -
+        AudioSettings.volumeStep
+    );
 
 }
 
@@ -392,7 +779,9 @@ function setMusicVolume(volume) {
 
 function toggleMusic() {
 
-    if (AudioState.musicPlaying) {
+    if (
+        AudioState.musicPlaying
+    ) {
 
         pauseMusic();
 
@@ -403,5 +792,156 @@ function toggleMusic() {
         playMusic();
 
     }
+
+}
+
+
+/* ==========================================================
+   CHAPTER 1 MUSIC CONTROLS
+========================================================== */
+
+function initChapter1Controls() {
+
+    const toggleButton =
+        document.getElementById(
+            "chapter1MusicToggle"
+        );
+
+
+    const volumeDown =
+        document.getElementById(
+            "chapter1VolumeDown"
+        );
+
+
+    const volumeUp =
+        document.getElementById(
+            "chapter1VolumeUp"
+        );
+
+
+    /*
+        PLAY / PAUSE
+    */
+
+    if (toggleButton) {
+
+        toggleButton.addEventListener(
+            "click",
+            () => {
+
+                toggleMusic();
+
+            }
+        );
+
+    }
+
+
+    /*
+        VOLUME DOWN
+    */
+
+    if (volumeDown) {
+
+        volumeDown.addEventListener(
+            "click",
+            () => {
+
+                decreaseVolume();
+
+            }
+        );
+
+    }
+
+
+    /*
+        VOLUME UP
+    */
+
+    if (volumeUp) {
+
+        volumeUp.addEventListener(
+            "click",
+            () => {
+
+                increaseVolume();
+
+            }
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   UPDATE CHAPTER 1 PLAY BUTTON
+========================================================== */
+
+function updateChapterMusicButton() {
+
+    const button =
+        document.getElementById(
+            "chapter1MusicToggle"
+        );
+
+
+    if (!button) {
+
+        return;
+
+    }
+
+
+    if (
+        AudioState.musicPlaying
+    ) {
+
+        button.textContent =
+            "❚❚";
+
+        button.setAttribute(
+            "aria-label",
+            "Pause Chapter I music"
+        );
+
+    }
+
+    else {
+
+        button.textContent =
+            "▶";
+
+        button.setAttribute(
+            "aria-label",
+            "Play Chapter I music"
+        );
+
+    }
+
+}
+
+
+/* ==========================================================
+   AUTOMATIC INITIALIZATION
+========================================================== */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initAudio
+    );
+
+}
+
+else {
+
+    initAudio();
 
 }
