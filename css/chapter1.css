@@ -1,4 +1,3 @@
-```css
 /* ==========================================================
    CHAPTER I — ONCE UPON A TIME
    Project : Our Story
@@ -1076,4 +1075,370 @@
     }
 
 }
-```
+
+/* ==========================================================
+   CHAPTER I — MUSIC CONTROLS
+   ========================================================== */
+
+.chapter1-music-controls {
+    position: fixed;
+
+    top: 25px;
+    right: 30px;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 10px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            230,
+            245,
+            0.35
+        );
+
+    border-radius: 50px;
+
+    background:
+        rgba(
+            45,
+            25,
+            45,
+            0.35
+        );
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            20,
+            10,
+            30,
+            0.20
+        );
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        background 0.3s ease;
+}
+
+
+/* ==========================================================
+   SHOW MUSIC CONTROLS
+   ========================================================== */
+
+#chapter1.active .chapter1-music-controls {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    animation:
+        chapter1MusicControlsReveal
+        0.6s
+        ease
+        forwards;
+}
+
+
+@keyframes chapter1MusicControlsReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-12px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ==========================================================
+   MUSIC BUTTONS
+   ========================================================== */
+
+.chapter1-music-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+
+    color:
+        rgba(
+            255,
+            235,
+            247,
+            0.9
+        );
+
+    font-size: 0.85rem;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.chapter1-music-btn:hover {
+
+    transform:
+        scale(1.12);
+
+    background:
+        rgba(
+            255,
+            190,
+            220,
+            0.15
+        );
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 0 15px
+        rgba(
+            255,
+            180,
+            220,
+            0.25
+        );
+}
+
+
+.chapter1-music-btn:active {
+
+    transform:
+        scale(0.95);
+}
+
+
+/* ==========================================================
+   PLAY / STOP BUTTON
+   ========================================================== */
+
+.chapter1-music-play {
+
+    width: 42px;
+    height: 42px;
+
+    background:
+        rgba(
+            255,
+            210,
+            230,
+            0.12
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            220,
+            240,
+            0.25
+        );
+
+    font-size: 1rem;
+}
+
+
+.chapter1-music-play:hover {
+
+    background:
+        rgba(
+            255,
+            190,
+            220,
+            0.20
+        );
+
+    box-shadow:
+        0 0 20px
+        rgba(
+            255,
+            180,
+            220,
+            0.30
+        );
+}
+
+
+/* ==========================================================
+   VOLUME BUTTONS
+   ========================================================== */
+
+.chapter1-music-volume {
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.9rem;
+}
+
+
+/* ==========================================================
+   MUSIC CONTROLS — SMALL LABEL
+   ========================================================== */
+
+.chapter1-music-name {
+
+    margin-right: 4px;
+
+    padding:
+        0
+        4px;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        0.9rem;
+
+    font-style: italic;
+
+    color:
+        rgba(
+            255,
+            235,
+            247,
+            0.75
+        );
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   ACCESSIBILITY
+   ========================================================== */
+
+.chapter1-music-btn:focus-visible {
+
+    outline:
+        2px solid
+        rgba(
+            255,
+            220,
+            240,
+            0.9
+        );
+
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .chapter1-music-controls {
+
+        top: 15px;
+        right: 15px;
+
+        gap: 5px;
+
+        padding:
+            6px
+            7px;
+    }
+
+
+    .chapter1-music-btn {
+
+        width: 32px;
+        height: 32px;
+
+        font-size: 0.75rem;
+    }
+
+
+    .chapter1-music-play {
+
+        width: 37px;
+        height: 37px;
+
+        font-size: 0.85rem;
+    }
+
+
+    .chapter1-music-name {
+
+        display: none;
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .chapter1-music-controls {
+
+        animation: none !important;
+
+        transition: none;
+    }
+
+
+    .chapter1-music-btn {
+
+        transition: none;
+    }
+
+}
