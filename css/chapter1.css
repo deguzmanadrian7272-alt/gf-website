@@ -1142,7 +1142,7 @@
    SHOW MUSIC CONTROLS
    ========================================================== */
 
-#chapter1.active .chapter1-music-controls {
+.chapter1-music-controls {
 
     opacity: 1;
 
