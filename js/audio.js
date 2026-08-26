@@ -50,7 +50,7 @@ const ChapterMusic = {
 
     2: "assets/music/chapter2.mp3",
 
-    // We will add these later:
+    // Add these later:
 
     // 3: "assets/music/chapter3.mp3",
     // 4: "assets/music/chapter4.mp3",
@@ -75,7 +75,11 @@ let storyMusic = null;
 
 let fadeTimer = null;
 
-let chapterControlsBound = false;
+let audioInitialized = false;
+
+let chapterObserver = null;
+
+let lastDetectedChapter = null;
 
 
 /* ==========================================================
@@ -85,10 +89,7 @@ let chapterControlsBound = false;
 function getMusicElement() {
 
     /*
-        Use the existing bgMusic element if
-        the project already has one.
-
-        Otherwise create one automatically.
+        Return existing reference.
     */
 
     if (storyMusic) {
@@ -98,18 +99,29 @@ function getMusicElement() {
     }
 
 
+    /*
+        Try to find existing audio element.
+    */
+
     storyMusic =
         document.getElementById("bgMusic");
 
+
+    /*
+        If no audio element exists,
+        create one automatically.
+    */
 
     if (!storyMusic) {
 
         storyMusic =
             document.createElement("audio");
 
-        storyMusic.id = "bgMusic";
+        storyMusic.id =
+            "bgMusic";
 
-        storyMusic.preload = "auto";
+        storyMusic.preload =
+            "auto";
 
         document.body.appendChild(
             storyMusic
@@ -135,6 +147,20 @@ function getMusicElement() {
 
 function initAudio() {
 
+    /*
+        Prevent initialization twice.
+    */
+
+    if (audioInitialized) {
+
+        return;
+
+    }
+
+
+    audioInitialized = true;
+
+
     const music =
         getMusicElement();
 
@@ -153,15 +179,42 @@ function initAudio() {
     /*
         Start silent.
 
-        Music will only begin after
-        the user clicks Open My Story.
+        Chapter 1 music will begin after
+        the user opens the story.
     */
 
     music.volume = 0;
 
 
     /*
-        Expose audio controls globally.
+        IMPORTANT:
+
+        Listen to the REAL audio element.
+
+        This keeps the button synchronized
+        with the actual music state.
+    */
+
+    music.addEventListener(
+        "play",
+        handleMusicPlay
+    );
+
+
+    music.addEventListener(
+        "pause",
+        handleMusicPause
+    );
+
+
+    music.addEventListener(
+        "ended",
+        handleMusicPause
+    );
+
+
+    /*
+        Expose controls globally.
     */
 
     window.OurStoryAudio = {
@@ -192,35 +245,34 @@ function initAudio() {
 
 
     /*
-        Connect Chapter 0's
-        "Open My Story" button.
+        Chapter 0 → Chapter 1
     */
 
-    const startBtn =
-        document.getElementById(
-            "startBtn"
-        );
-
-
-    if (startBtn) {
-
-        startBtn.addEventListener(
-            "click",
-            handleStoryStart
-        );
-
-    }
+    initStoryStart();
 
 
     /*
-        Initialize chapter music controls.
-
-        Event delegation is used so the controls
-        continue working even when chapters
-        are shown dynamically.
+        Music buttons for all chapters.
     */
 
-    initChapterMusicControls();
+    initMusicControls();
+
+
+    /*
+        Detect which chapter becomes active.
+
+        This is the important fix for
+        Chapter 1 → Chapter 2.
+    */
+
+    initChapterObserver();
+
+
+    /*
+        Initial button state.
+    */
+
+    updateAllMusicButtons();
 
 
     console.log(
@@ -231,14 +283,107 @@ function initAudio() {
 
 
 /* ==========================================================
+   AUDIO PLAY EVENT
+========================================================== */
+
+function handleMusicPlay() {
+
+    AudioState.musicStarted =
+        true;
+
+    AudioState.musicPlaying =
+        true;
+
+
+    updateAllMusicButtons();
+
+
+    if (
+        typeof setMusicState ===
+        "function"
+    ) {
+
+        setMusicState(true);
+
+    }
+
+
+    console.log(
+        "▶️ Music is playing."
+    );
+
+}
+
+
+/* ==========================================================
+   AUDIO PAUSE EVENT
+========================================================== */
+
+function handleMusicPause() {
+
+    AudioState.musicPlaying =
+        false;
+
+
+    updateAllMusicButtons();
+
+
+    if (
+        typeof setMusicState ===
+        "function"
+    ) {
+
+        setMusicState(false);
+
+    }
+
+
+    console.log(
+        "⏸️ Music is paused."
+    );
+
+}
+
+
+/* ==========================================================
    STORY START
+========================================================== */
+
+function initStoryStart() {
+
+    const startBtn =
+        document.getElementById(
+            "startBtn"
+        );
+
+
+    if (!startBtn) {
+
+        return;
+
+    }
+
+
+    startBtn.addEventListener(
+        "click",
+        handleStoryStart
+    );
+
+}
+
+
+/* ==========================================================
+   HANDLE STORY START
 ========================================================== */
 
 function handleStoryStart() {
 
     /*
-        Open My Story starts
-        Chapter 1 music.
+        Chapter 0:
+
+        Open My Story
+        ↓
+        Chapter 1 music
     */
 
     playChapterMusic(1);
@@ -274,14 +419,17 @@ async function playChapterMusic(
 
 
     /*
-        If the same chapter is already playing,
-        don't restart the song.
+        If the requested chapter is
+        already playing, do nothing.
     */
 
     if (
-        AudioState.currentChapter === chapter &&
-        AudioState.musicPlaying
+        AudioState.currentChapter ===
+        chapter &&
+        !music.paused
     ) {
+
+        updateAllMusicButtons();
 
         return;
 
@@ -289,12 +437,14 @@ async function playChapterMusic(
 
 
     /*
-        Cancel any previous fade.
+        Cancel any existing fade.
     */
 
     if (fadeTimer) {
 
-        clearInterval(fadeTimer);
+        clearInterval(
+            fadeTimer
+        );
 
         fadeTimer = null;
 
@@ -302,7 +452,7 @@ async function playChapterMusic(
 
 
     /*
-        Stop previous music.
+        Stop the current song.
     */
 
     music.pause();
@@ -316,9 +466,11 @@ async function playChapterMusic(
         Load the new chapter song.
     */
 
-    music.src = musicFile;
+    music.src =
+        musicFile;
 
-    music.loop = true;
+    music.loop =
+        true;
 
 
     AudioState.currentChapter =
@@ -326,6 +478,12 @@ async function playChapterMusic(
 
 
     try {
+
+        /*
+            The browser allows this because
+            this function is ultimately triggered
+            by the user's interaction/navigation.
+        */
 
         await music.play();
 
@@ -335,6 +493,16 @@ async function playChapterMusic(
 
         AudioState.musicPlaying =
             true;
+
+
+        /*
+            Fade in the new chapter song.
+        */
+
+        fadeInMusic();
+
+
+        updateAllMusicButtons();
 
 
         if (
@@ -347,18 +515,8 @@ async function playChapterMusic(
         }
 
 
-        /*
-            Smoothly fade the new song in.
-        */
-
-        fadeInMusic();
-
-
-        updateAllMusicButtons();
-
-
         console.log(
-            `🎵 Chapter ${chapter} music started.`
+            `🎵 Chapter ${chapter} music started: ${musicFile}`
         );
 
     }
@@ -369,8 +527,11 @@ async function playChapterMusic(
             false;
 
 
+        updateAllMusicButtons();
+
+
         console.warn(
-            `Chapter ${chapter} music could not start:`,
+            `🎵 Chapter ${chapter} music could not start:`,
             error
         );
 
@@ -397,15 +558,20 @@ async function playMusic() {
 
 
     /*
-        If no song is selected yet,
-        start Chapter 1.
+        No song selected yet.
+
+        Start Chapter 1.
     */
 
-    if (!music.src) {
+    if (
+        !music.src
+    ) {
 
-        if (ChapterMusic[1]) {
+        if (
+            ChapterMusic[1]
+        ) {
 
-            playChapterMusic(1);
+            await playChapterMusic(1);
 
         }
 
@@ -417,13 +583,12 @@ async function playMusic() {
     try {
 
         /*
-            Resume the current song.
-
             IMPORTANT:
-            currentTime is NOT reset.
 
-            Therefore the song continues
-            from where it was paused.
+            Do NOT reset currentTime.
+
+            This resumes the song exactly
+            where the user paused it.
         */
 
         await music.play();
@@ -437,8 +602,8 @@ async function playMusic() {
 
 
         /*
-            Restore selected volume
-            if the music was silent.
+            If volume became zero,
+            restore the selected volume.
         */
 
         if (
@@ -473,7 +638,7 @@ async function playMusic() {
     catch (error) {
 
         console.warn(
-            "Music could not resume:",
+            "🎵 Music could not resume:",
             error
         );
 
@@ -500,10 +665,9 @@ function pauseMusic() {
 
 
     /*
-        Pause without resetting currentTime.
+        Pause only.
 
-        This allows the song to continue
-        from the same position when resumed.
+        DO NOT reset currentTime.
     */
 
     music.pause();
@@ -551,12 +715,14 @@ function stopMusic() {
 
 
     /*
-        Cancel active fade.
+        Cancel fade.
     */
 
     if (fadeTimer) {
 
-        clearInterval(fadeTimer);
+        clearInterval(
+            fadeTimer
+        );
 
         fadeTimer = null;
 
@@ -601,7 +767,7 @@ function stopMusic() {
 
 
 /* ==========================================================
-   STOP CHAPTER MUSIC
+   STOP CURRENT CHAPTER MUSIC
 ========================================================== */
 
 function stopChapterMusic(
@@ -625,7 +791,9 @@ function stopChapterMusic(
 
     if (fadeTimer) {
 
-        clearInterval(fadeTimer);
+        clearInterval(
+            fadeTimer
+        );
 
         fadeTimer = null;
 
@@ -633,7 +801,7 @@ function stopChapterMusic(
 
 
     /*
-        Fade the current song out first.
+        Fade out current music.
     */
 
     fadeOutMusic(() => {
@@ -651,9 +819,6 @@ function stopChapterMusic(
         AudioState.musicPlaying =
             false;
 
-        AudioState.currentChapter =
-            null;
-
 
         updateAllMusicButtons();
 
@@ -669,23 +834,12 @@ function stopChapterMusic(
 
 
         console.log(
-            "⏹️ Chapter music stopped."
+            "⏹️ Current chapter music stopped."
         );
 
 
         /*
-            Run the next action after
-            the music has completely faded out.
-
-            This is what allows:
-
-            Chapter 1
-                ↓
-            Chapter 1 music fades out
-                ↓
-            Chapter 2
-                ↓
-            Chapter 2 music starts
+            Continue with the next action.
         */
 
         if (
@@ -703,7 +857,80 @@ function stopChapterMusic(
 
 
 /* ==========================================================
-   FADE IN
+   CHANGE CHAPTER MUSIC
+========================================================== */
+
+function changeChapterMusic(
+    chapter
+) {
+
+    /*
+        If this chapter is already playing,
+        don't restart it.
+    */
+
+    if (
+        AudioState.currentChapter ===
+        chapter
+    ) {
+
+        const music =
+            getMusicElement();
+
+        if (
+            music &&
+            !music.paused
+        ) {
+
+            return;
+
+        }
+
+    }
+
+
+    /*
+        If another chapter is currently playing,
+        fade it out first.
+    */
+
+    const music =
+        getMusicElement();
+
+
+    if (
+        music &&
+        !music.paused &&
+        AudioState.currentChapter !==
+        chapter
+    ) {
+
+        stopChapterMusic(() => {
+
+            playChapterMusic(
+                chapter
+            );
+
+        });
+
+        return;
+
+    }
+
+
+    /*
+        Otherwise start directly.
+    */
+
+    playChapterMusic(
+        chapter
+    );
+
+}
+
+
+/* ==========================================================
+   FADE IN MUSIC
 ========================================================== */
 
 function fadeInMusic() {
@@ -720,12 +947,14 @@ function fadeInMusic() {
 
 
     /*
-        Cancel existing fade.
+        Cancel previous fade.
     */
 
     if (fadeTimer) {
 
-        clearInterval(fadeTimer);
+        clearInterval(
+            fadeTimer
+        );
 
         fadeTimer = null;
 
@@ -785,7 +1014,7 @@ function fadeInMusic() {
 
 
 /* ==========================================================
-   FADE OUT
+   FADE OUT MUSIC
 ========================================================== */
 
 function fadeOutMusic(
@@ -809,7 +1038,9 @@ function fadeOutMusic(
 
     if (fadeTimer) {
 
-        clearInterval(fadeTimer);
+        clearInterval(
+            fadeTimer
+        );
 
         fadeTimer = null;
 
@@ -817,12 +1048,12 @@ function fadeOutMusic(
 
 
     /*
-        If the music is already silent,
-        immediately continue.
+        Already silent.
     */
 
     if (
-        music.volume <= 0.01
+        music.volume <=
+        0.01
     ) {
 
         music.volume = 0;
@@ -846,7 +1077,8 @@ function fadeOutMusic(
         setInterval(() => {
 
             if (
-                music.volume <= 0.01
+                music.volume <=
+                0.01
             ) {
 
                 music.volume = 0;
@@ -904,10 +1136,6 @@ function setMusicVolume(
     }
 
 
-    /*
-        Keep volume between 0 and 1.
-    */
-
     const safeVolume =
         Math.max(
             0,
@@ -918,13 +1146,15 @@ function setMusicVolume(
         );
 
 
+    AudioSettings.musicVolume =
+        safeVolume;
+
+
     music.volume =
         safeVolume;
 
 
-    AudioSettings.musicVolume =
-        safeVolume;
-
+    updateAllMusicButtons();
 
 }
 
@@ -963,14 +1193,27 @@ function decreaseVolume() {
 
 function toggleMusic() {
 
-    /*
-        Playing → Pause
+    const music =
+        getMusicElement();
 
-        Paused → Resume
+
+    if (!music) {
+
+        return;
+
+    }
+
+
+    /*
+        IMPORTANT:
+
+        Check the REAL audio element.
+
+        Do not rely only on AudioState.
     */
 
     if (
-        AudioState.musicPlaying
+        !music.paused
     ) {
 
         pauseMusic();
@@ -987,31 +1230,10 @@ function toggleMusic() {
 
 
 /* ==========================================================
-   MUSIC CONTROL EVENT DELEGATION
+   MUSIC BUTTON CONTROLS
 ========================================================== */
 
-function initChapterMusicControls() {
-
-    /*
-        Prevent duplicate event listeners.
-    */
-
-    if (chapterControlsBound) {
-
-        return;
-
-    }
-
-
-    chapterControlsBound = true;
-
-
-    /*
-        EVENT DELEGATION
-
-        This allows the music buttons to work
-        even if the chapter is shown dynamically.
-    */
+function initMusicControls() {
 
     document.addEventListener(
         "click",
@@ -1063,34 +1285,6 @@ function initChapterMusicControls() {
             ) {
 
                 increaseVolume();
-
-                return;
-
-            }
-
-
-            /* ==================================================
-               CHAPTER 1 → CHAPTER 2
-            ================================================== */
-
-            if (
-                event.target.closest(
-                    "#chapter1Continue"
-                )
-            ) {
-
-                /*
-                    Fade out Chapter 1 first.
-
-                    After the fade completes,
-                    Chapter 2 music begins.
-                */
-
-                stopChapterMusic(() => {
-
-                    playChapterMusic(2);
-
-                });
 
                 return;
 
@@ -1154,28 +1348,251 @@ function initChapterMusicControls() {
 
 
 /* ==========================================================
+   CHAPTER DETECTION
+========================================================== */
+
+function initChapterObserver() {
+
+    /*
+        Find the main chapter elements.
+    */
+
+    const chapter1 =
+        document.getElementById(
+            "chapter1"
+        );
+
+
+    const chapter2 =
+        document.getElementById(
+            "chapter2"
+        );
+
+
+    if (
+        !chapter1 &&
+        !chapter2
+    ) {
+
+        console.warn(
+            "No chapter elements found for audio observer."
+        );
+
+        return;
+
+    }
+
+
+    /*
+        Watch for changes to the "active" class.
+
+        This is important because your existing
+        chapter navigation controls which chapter
+        is visible.
+    */
+
+    chapterObserver =
+        new MutationObserver(() => {
+
+            detectActiveChapter();
+
+        });
+
+
+    /*
+        Observe Chapter 1.
+    */
+
+    if (chapter1) {
+
+        chapterObserver.observe(
+            chapter1,
+            {
+                attributes: true,
+                attributeFilter: [
+                    "class"
+                ]
+            }
+        );
+
+    }
+
+
+    /*
+        Observe Chapter 2.
+    */
+
+    if (chapter2) {
+
+        chapterObserver.observe(
+            chapter2,
+            {
+                attributes: true,
+                attributeFilter: [
+                    "class"
+                ]
+            }
+        );
+
+    }
+
+
+    /*
+        Check immediately.
+    */
+
+    detectActiveChapter();
+
+}
+
+
+/* ==========================================================
+   DETECT ACTIVE CHAPTER
+========================================================== */
+
+function detectActiveChapter() {
+
+    const chapter1 =
+        document.getElementById(
+            "chapter1"
+        );
+
+
+    const chapter2 =
+        document.getElementById(
+            "chapter2"
+        );
+
+
+    /*
+        Chapter 2 is active.
+    */
+
+    if (
+        chapter2 &&
+        chapter2.classList.contains(
+            "active"
+        )
+    ) {
+
+        if (
+            lastDetectedChapter !== 2
+        ) {
+
+            lastDetectedChapter =
+                2;
+
+
+            console.log(
+                "📖 Chapter II detected."
+            );
+
+
+            changeChapterMusic(2);
+
+        }
+
+        return;
+
+    }
+
+
+    /*
+        Chapter 1 is active.
+    */
+
+    if (
+        chapter1 &&
+        chapter1.classList.contains(
+            "active"
+        )
+    ) {
+
+        if (
+            lastDetectedChapter !== 1
+        ) {
+
+            lastDetectedChapter =
+                1;
+
+
+            /*
+                Do not automatically restart
+                Chapter 1 if it is already playing.
+            */
+
+            const music =
+                getMusicElement();
+
+
+            if (
+                !music.src
+            ) {
+
+                console.log(
+                    "📖 Chapter I detected."
+                );
+
+                changeChapterMusic(1);
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* ==========================================================
    UPDATE ALL MUSIC BUTTONS
 ========================================================== */
 
 function updateAllMusicButtons() {
 
+    const music =
+        getMusicElement();
+
+
+    if (!music) {
+
+        return;
+
+    }
+
+
     /*
-        Chapter 1 button
+        IMPORTANT:
+
+        Use the ACTUAL audio state.
+
+        paused = true  → ▶
+        paused = false → ❚❚
     */
 
-    updateChapterMusicButton(
+    const isPlaying =
+        !music.paused;
+
+
+    /*
+        Chapter 1 button.
+    */
+
+    updateMusicButton(
         "chapter1MusicToggle",
-        "Chapter I"
+        "Chapter I",
+        isPlaying
     );
 
 
     /*
-        Chapter 2 button
+        Chapter 2 button.
     */
 
-    updateChapterMusicButton(
+    updateMusicButton(
         "chapter2MusicToggle",
-        "Chapter II"
+        "Chapter II",
+        isPlaying
     );
 
 }
@@ -1185,9 +1602,10 @@ function updateAllMusicButtons() {
    UPDATE INDIVIDUAL MUSIC BUTTON
 ========================================================== */
 
-function updateChapterMusicButton(
+function updateMusicButton(
     buttonId,
-    chapterName
+    chapterName,
+    isPlaying
 ) {
 
     const button =
@@ -1203,9 +1621,7 @@ function updateChapterMusicButton(
     }
 
 
-    if (
-        AudioState.musicPlaying
-    ) {
+    if (isPlaying) {
 
         button.textContent =
             "❚❚";
@@ -1213,6 +1629,14 @@ function updateChapterMusicButton(
         button.setAttribute(
             "aria-label",
             `Pause ${chapterName} music`
+        );
+
+        button.classList.remove(
+            "chapter1-music-play"
+        );
+
+        button.classList.add(
+            "chapter1-music-pause"
         );
 
     }
@@ -1225,6 +1649,14 @@ function updateChapterMusicButton(
         button.setAttribute(
             "aria-label",
             `Play ${chapterName} music`
+        );
+
+        button.classList.remove(
+            "chapter1-music-pause"
+        );
+
+        button.classList.add(
+            "chapter1-music-play"
         );
 
     }
