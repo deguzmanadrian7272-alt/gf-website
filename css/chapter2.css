@@ -1787,3 +1787,349 @@
     }
 
 }
+
+/* ==========================================================
+   CHAPTER II MUSIC CONTROLS
+   ========================================================== */
+
+.chapter2-music-controls {
+    position: fixed;
+
+    top: 24px;
+    right: 28px;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 7px 9px;
+
+    border: 1px solid
+        rgba(255, 198, 233, 0.30);
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 145, 211, 0.13),
+            rgba(183, 111, 255, 0.12)
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(8, 3, 25, 0.25),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.08);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* ==========================================================
+   MUSIC CONTROL HOVER
+   ========================================================== */
+
+.chapter2-music-controls:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(255, 218, 239, 0.50);
+
+    box-shadow:
+        0 14px 35px
+        rgba(8, 3, 25, 0.32),
+
+        0 0 25px
+        rgba(255, 148, 213, 0.10),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.10);
+}
+
+
+/* ==========================================================
+   MUSIC BUTTON
+   ========================================================== */
+
+.chapter2-music-controls .chapter-music-btn {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid
+        rgba(255, 204, 235, 0.35);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    color:
+        #ffe8f7;
+
+    font-family:
+        "Poppins",
+        sans-serif;
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        400;
+
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 16px
+        rgba(8, 3, 25, 0.18),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.06);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* ==========================================================
+   BUTTON HOVER
+   ========================================================== */
+
+.chapter2-music-controls .chapter-music-btn:hover {
+
+    transform:
+        scale(1.08);
+
+    border-color:
+        rgba(255, 222, 241, 0.65);
+
+    background:
+        rgba(255, 159, 216, 0.15);
+
+    box-shadow:
+        0 7px 20px
+        rgba(8, 3, 25, 0.22),
+
+        0 0 18px
+        rgba(255, 151, 214, 0.12);
+}
+
+
+/* ==========================================================
+   BUTTON ACTIVE
+   ========================================================== */
+
+.chapter2-music-controls .chapter-music-btn:active {
+
+    transform:
+        scale(0.94);
+}
+
+
+/* ==========================================================
+   PLAY / PAUSE BUTTON
+   ========================================================== */
+
+.chapter2-music-controls .chapter-music-play {
+
+    width: 38px;
+    height: 38px;
+
+    border-color:
+        rgba(255, 211, 237, 0.48);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 170, 220, 0.18),
+            rgba(184, 116, 255, 0.10)
+        );
+
+    font-size:
+        0.82rem;
+
+    box-shadow:
+        0 7px 22px
+        rgba(8, 3, 25, 0.22),
+
+        0 0 20px
+        rgba(255, 152, 215, 0.10),
+
+        inset 0 0 12px
+        rgba(255, 215, 240, 0.04);
+}
+
+
+/* ==========================================================
+   PLAY BUTTON HOVER
+   ========================================================== */
+
+.chapter2-music-controls .chapter-music-play:hover {
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 176, 223, 0.28),
+            rgba(185, 121, 255, 0.18)
+        );
+
+    border-color:
+        rgba(255, 229, 244, 0.72);
+
+    box-shadow:
+        0 9px 25px
+        rgba(8, 3, 25, 0.28),
+
+        0 0 26px
+        rgba(255, 150, 214, 0.16);
+}
+
+
+/* ==========================================================
+   FOCUS ACCESSIBILITY
+   ========================================================== */
+
+.chapter2-music-controls
+.chapter-music-btn:focus-visible {
+
+    outline:
+        2px solid
+        rgba(255, 215, 240, 0.85);
+
+    outline-offset:
+        3px;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 780px) {
+
+    .chapter2-music-controls {
+
+        top: 18px;
+        right: 18px;
+
+        gap: 6px;
+
+        padding:
+            6px 7px;
+    }
+
+
+    .chapter2-music-controls
+    .chapter-music-btn {
+
+        width: 30px;
+        height: 30px;
+
+        font-size:
+            0.7rem;
+    }
+
+
+    .chapter2-music-controls
+    .chapter-music-play {
+
+        width: 34px;
+        height: 34px;
+
+        font-size:
+            0.74rem;
+    }
+
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+   ========================================================== */
+
+@media (max-width: 520px) {
+
+    .chapter2-music-controls {
+
+        top: 14px;
+        right: 12px;
+
+        gap: 5px;
+
+        padding:
+            5px 6px;
+    }
+
+
+    .chapter2-music-controls
+    .chapter-music-btn {
+
+        width: 28px;
+        height: 28px;
+
+        font-size:
+            0.65rem;
+    }
+
+
+    .chapter2-music-controls
+    .chapter-music-play {
+
+        width: 32px;
+        height: 32px;
+
+        font-size:
+            0.7rem;
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .chapter2-music-controls,
+    .chapter2-music-controls
+    .chapter-music-btn {
+
+        transition:
+            none;
+    }
+
+}
