@@ -1789,10 +1789,13 @@
 }
 
 /* ==========================================================
+   ========================================================== */
+
+/* ==========================================================
    CHAPTER II MUSIC CONTROLS
    ========================================================== */
 
-.chapter2-music-controls {
+.chapter-music-controls {
     position: fixed;
 
     top: 24px;
@@ -1809,10 +1812,12 @@
 
     padding: 7px 9px;
 
-    border: 1px solid
+    border:
+        1px solid
         rgba(255, 198, 233, 0.30);
 
-    border-radius: 999px;
+    border-radius:
+        999px;
 
     background:
         linear-gradient(
@@ -1845,7 +1850,7 @@
    MUSIC CONTROL HOVER
    ========================================================== */
 
-.chapter2-music-controls:hover {
+.chapter-music-controls:hover {
 
     transform:
         translateY(-2px);
@@ -1866,10 +1871,10 @@
 
 
 /* ==========================================================
-   MUSIC BUTTON
+   MUSIC BUTTONS
    ========================================================== */
 
-.chapter2-music-controls .chapter-music-btn {
+.chapter-music-btn {
 
     width: 34px;
     height: 34px;
@@ -1885,7 +1890,8 @@
         1px solid
         rgba(255, 204, 235, 0.35);
 
-    border-radius: 50%;
+    border-radius:
+        50%;
 
     background:
         rgba(255, 255, 255, 0.035);
@@ -1928,7 +1934,7 @@
    BUTTON HOVER
    ========================================================== */
 
-.chapter2-music-controls .chapter-music-btn:hover {
+.chapter-music-btn:hover {
 
     transform:
         scale(1.08);
@@ -1952,7 +1958,7 @@
    BUTTON ACTIVE
    ========================================================== */
 
-.chapter2-music-controls .chapter-music-btn:active {
+.chapter-music-btn:active {
 
     transform:
         scale(0.94);
@@ -1963,7 +1969,7 @@
    PLAY / PAUSE BUTTON
    ========================================================== */
 
-.chapter2-music-controls .chapter-music-play {
+.chapter-music-play {
 
     width: 38px;
     height: 38px;
@@ -1997,7 +2003,7 @@
    PLAY BUTTON HOVER
    ========================================================== */
 
-.chapter2-music-controls .chapter-music-play:hover {
+.chapter-music-play:hover {
 
     background:
         radial-gradient(
@@ -2019,10 +2025,9 @@
 
 
 /* ==========================================================
-   FOCUS ACCESSIBILITY
+   FOCUS
    ========================================================== */
 
-.chapter2-music-controls
 .chapter-music-btn:focus-visible {
 
     outline:
@@ -2040,7 +2045,7 @@
 
 @media (max-width: 780px) {
 
-    .chapter2-music-controls {
+    .chapter-music-controls {
 
         top: 18px;
         right: 18px;
@@ -2052,7 +2057,6 @@
     }
 
 
-    .chapter2-music-controls
     .chapter-music-btn {
 
         width: 30px;
@@ -2063,7 +2067,6 @@
     }
 
 
-    .chapter2-music-controls
     .chapter-music-play {
 
         width: 34px;
@@ -2082,7 +2085,7 @@
 
 @media (max-width: 520px) {
 
-    .chapter2-music-controls {
+    .chapter-music-controls {
 
         top: 14px;
         right: 12px;
@@ -2094,7 +2097,6 @@
     }
 
 
-    .chapter2-music-controls
     .chapter-music-btn {
 
         width: 28px;
@@ -2105,7 +2107,6 @@
     }
 
 
-    .chapter2-music-controls
     .chapter-music-play {
 
         width: 32px;
@@ -2124,8 +2125,7 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    .chapter2-music-controls,
-    .chapter2-music-controls
+    .chapter-music-controls,
     .chapter-music-btn {
 
         transition:
@@ -2133,3 +2133,7 @@
     }
 
 }
+
+
+
+
