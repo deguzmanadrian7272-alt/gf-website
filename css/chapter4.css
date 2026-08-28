@@ -2825,42 +2825,68 @@
    CHAPTER IV — MUSIC CONTROLS
    ========================================================== */
 
-.chapter4-music-controls {
+#chapter4 .chapter4-music-controls {
 
-    position: fixed;
+    position: fixed !important;
 
-    top: 30px;
-    right: 35px;
+    top: 24px !important;
+    right: 28px !important;
 
-    z-index: 9999;
+    z-index: 99999;
 
     display: flex;
+
     align-items: center;
+    justify-content: center;
 
-    gap: 8px;
+    gap: 7px;
 
-    padding: 8px 10px;
+    padding: 7px 9px;
 
-    border: 1px solid
-        rgba(255, 198, 233, 0.25);
+    box-sizing: border-box;
 
-    border-radius: 50px;
+    border:
+        1px solid
+        rgba(
+            255,
+            198,
+            233,
+            0.30
+        );
+
+    border-radius: 999px;
 
     background:
-        rgba(30, 12, 48, 0.45);
+        rgba(
+            30,
+            12,
+            48,
+            0.55
+        );
 
     backdrop-filter:
-        blur(12px);
+        blur(14px);
 
     -webkit-backdrop-filter:
-        blur(12px);
+        blur(14px);
 
     box-shadow:
-        0 8px 30px
-        rgba(5, 2, 18, 0.25),
+
+        0 10px 35px
+        rgba(
+            5,
+            2,
+            18,
+            0.35
+        ),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.08);
+        rgba(
+            255,
+            255,
+            255,
+            0.10
+        );
 
 }
 
@@ -2869,10 +2895,10 @@
    MUSIC BUTTON
    ========================================================== */
 
-.chapter4-music-btn {
+#chapter4 .chapter4-music-btn {
 
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
 
     display: flex;
 
@@ -2880,14 +2906,26 @@
     justify-content: center;
 
     padding: 0;
+    margin: 0;
 
-    border: 1px solid
-        rgba(255, 198, 233, 0.35);
+    border:
+        1px solid
+        rgba(
+            255,
+            198,
+            233,
+            0.40
+        );
 
     border-radius: 50%;
 
     background:
-        rgba(255, 155, 214, 0.08);
+        rgba(
+            255,
+            155,
+            214,
+            0.10
+        );
 
     color:
         #ffe8f7;
@@ -2897,38 +2935,84 @@
         sans-serif;
 
     font-size:
-        0.9rem;
+        0.85rem;
 
-    line-height: 1;
+    font-weight:
+        500;
 
-    cursor: pointer;
+    line-height:
+        1;
+
+    cursor:
+        pointer;
 
     transition:
-        transform 0.3s ease,
-        background 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+
+        transform
+        0.25s
+        ease,
+
+        background
+        0.25s
+        ease,
+
+        border-color
+        0.25s
+        ease,
+
+        box-shadow
+        0.25s
+        ease;
 
 }
 
 
 /* ==========================================================
-   PLAY BUTTON
+   MAIN PLAY BUTTON
    ========================================================== */
 
-.chapter4-music-play {
+#chapter4 .chapter4-music-play {
 
-    width: 44px;
-    height: 44px;
+    width: 43px;
+    height: 43px;
 
     font-size:
-        0.85rem;
+        0.82rem;
 
     background:
+
         linear-gradient(
             135deg,
-            rgba(255, 132, 205, 0.22),
-            rgba(183, 111, 255, 0.18)
+            rgba(
+                255,
+                132,
+                205,
+                0.28
+            ),
+            rgba(
+                183,
+                111,
+                255,
+                0.23
+            )
+        );
+
+    border-color:
+        rgba(
+            255,
+            198,
+            233,
+            0.50
+        );
+
+    box-shadow:
+
+        0 0 18px
+        rgba(
+            255,
+            147,
+            213,
+            0.12
         );
 
 }
@@ -2938,20 +3022,36 @@
    HOVER
    ========================================================== */
 
-.chapter4-music-btn:hover {
+#chapter4 .chapter4-music-btn:hover {
 
     transform:
         translateY(-2px);
 
     background:
-        rgba(255, 155, 214, 0.18);
+        rgba(
+            255,
+            155,
+            214,
+            0.20
+        );
 
     border-color:
-        rgba(255, 221, 241, 0.65);
+        rgba(
+            255,
+            221,
+            241,
+            0.75
+        );
 
     box-shadow:
+
         0 0 20px
-        rgba(255, 147, 213, 0.16);
+        rgba(
+            255,
+            147,
+            213,
+            0.20
+        );
 
 }
 
@@ -2960,7 +3060,7 @@
    ACTIVE
    ========================================================== */
 
-.chapter4-music-btn:active {
+#chapter4 .chapter4-music-btn:active {
 
     transform:
         translateY(0);
@@ -2969,41 +3069,62 @@
 
 
 /* ==========================================================
+   FOCUS
+   ========================================================== */
+
+#chapter4 .chapter4-music-btn:focus-visible {
+
+    outline:
+        2px solid
+        rgba(
+            255,
+            213,
+            241,
+            0.85
+        );
+
+    outline-offset:
+        3px;
+
+}
+
+
+/* ==========================================================
    MOBILE
    ========================================================== */
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
 
-    .chapter4-music-controls {
+    #chapter4 .chapter4-music-controls {
 
-        top: 18px;
-        right: 18px;
+        top: 16px !important;
+        right: 16px !important;
 
         gap: 5px;
 
-        padding: 6px 8px;
+        padding: 6px 7px;
 
     }
 
 
-    .chapter4-music-btn {
+    #chapter4 .chapter4-music-btn {
 
-        width: 32px;
-        height: 32px;
+        width: 31px;
+        height: 31px;
 
         font-size:
-            0.75rem;
+            0.70rem;
 
     }
 
 
-    .chapter4-music-play {
+    #chapter4 .chapter4-music-play {
 
-        width: 38px;
-        height: 38px;
+        width: 37px;
+        height: 37px;
 
         font-size:
-            0.7rem;
+            0.68rem;
 
     }
 
