@@ -82,7 +82,7 @@ const ChapterMusic = {
 
     2: "assets/music/chapter2.mp3",
 
-    3: "assets/music/chapter3.mp3",
+    3: "assets/music/chapter3.mp3"
 
     // Add later:
 
@@ -119,11 +119,6 @@ let chapterControlsBound = false;
 
 function getMusicElement() {
 
-    /*
-        Use existing bgMusic element
-        if one already exists.
-    */
-
     if (storyMusic) {
 
         return storyMusic;
@@ -134,11 +129,6 @@ function getMusicElement() {
     storyMusic =
         document.getElementById("bgMusic");
 
-
-    /*
-        If bgMusic does not exist,
-        create it automatically.
-    */
 
     if (!storyMusic) {
 
@@ -191,10 +181,7 @@ function initAudio() {
 
 
     /*
-        Music starts silent.
-
-        It will begin when
-        Open My Story is clicked.
+        Start completely silent.
     */
 
     music.volume = 0;
@@ -234,8 +221,7 @@ function initAudio() {
 
 
     /* ======================================================
-       CHAPTER 0
-       OPEN MY STORY
+       CHAPTER 0 → CHAPTER 1
     ====================================================== */
 
     const startBtn =
@@ -255,8 +241,7 @@ function initAudio() {
 
 
     /*
-        Initialize all chapter
-        music controls and navigation.
+        Initialize chapter controls.
     */
 
     initChapterControls();
@@ -274,14 +259,6 @@ function initAudio() {
 ========================================================== */
 
 function handleStoryStart() {
-
-    /*
-        Open My Story
-        ↓
-        Chapter 1
-        ↓
-        chapter1.mp3
-    */
 
     playChapterMusic(1);
 
@@ -304,10 +281,6 @@ async function playChapterMusic(
         ChapterMusic[chapter];
 
 
-    /*
-        Check if music exists.
-    */
-
     if (!musicFile) {
 
         console.warn(
@@ -321,7 +294,7 @@ async function playChapterMusic(
 
     /*
         Do not restart the same
-        chapter if it is already playing.
+        chapter if already playing.
     */
 
     if (
@@ -342,7 +315,7 @@ async function playChapterMusic(
 
 
     /*
-        Stop current audio.
+        Stop previous music.
     */
 
     music.pause();
@@ -353,7 +326,7 @@ async function playChapterMusic(
 
 
     /*
-        Load requested chapter music.
+        Load new music.
     */
 
     music.src =
@@ -441,8 +414,8 @@ function transitionToChapterMusic(
 
 
     /*
-        Make sure the next chapter
-        has music assigned.
+        Make sure next chapter
+        actually has music.
     */
 
     if (!nextMusicFile) {
@@ -457,7 +430,7 @@ function transitionToChapterMusic(
 
 
     /*
-        Prevent duplicate transitions.
+        Prevent duplicate clicks.
     */
 
     if (
@@ -481,8 +454,17 @@ function transitionToChapterMusic(
 
 
     /*
-        If current music exists,
-        fade it out first.
+        IMPORTANT:
+
+        Fade the CURRENT music first.
+
+        Example:
+
+        Chapter 2
+             ↓
+        Fade Out
+             ↓
+        Chapter 3
     */
 
     if (
@@ -501,11 +483,6 @@ function transitionToChapterMusic(
     }
 
     else {
-
-        /*
-            If no music is playing,
-            start next chapter directly.
-        */
 
         startNextChapterMusic(
             nextChapter
@@ -532,11 +509,6 @@ async function startNextChapterMusic(
         ChapterMusic[chapter];
 
 
-    /*
-        Make sure requested chapter
-        has a music file.
-    */
-
     if (!musicFile) {
 
         AudioState.transitioning =
@@ -552,14 +524,14 @@ async function startNextChapterMusic(
 
 
     /*
-        Cancel previous fade.
+        Clear any previous fade.
     */
 
     clearFade();
 
 
     /*
-        Completely reset audio.
+        Stop previous chapter completely.
     */
 
     music.pause();
@@ -570,7 +542,10 @@ async function startNextChapterMusic(
 
 
     /*
-        Set new source.
+        IMPORTANT:
+
+        Change the source ONLY
+        after previous music has stopped.
     */
 
     music.src =
@@ -586,7 +561,7 @@ async function startNextChapterMusic(
 
     /*
         Force browser to load
-        new audio source.
+        the new audio source.
     */
 
     music.load();
@@ -618,7 +593,7 @@ async function startNextChapterMusic(
 
 
         /*
-            Fade new music in.
+            Fade Chapter 3 in.
         */
 
         fadeInMusic();
@@ -699,8 +674,7 @@ async function playMusic() {
 
 
         /*
-            Restore selected volume
-            if currently silent.
+            Restore selected volume.
         */
 
         if (
@@ -870,10 +844,6 @@ function stopChapterMusic(
     clearFade();
 
 
-    /*
-        Fade current music out.
-    */
-
     fadeOutMusic(() => {
 
         music.pause();
@@ -950,15 +920,11 @@ function fadeInMusic() {
 
 
     /*
-        Start silent.
+        Always start at zero.
     */
 
     music.volume = 0;
 
-
-    /*
-        Calculate fade steps.
-    */
 
     const steps =
         Math.ceil(
@@ -976,7 +942,7 @@ function fadeInMusic() {
         setInterval(() => {
 
             /*
-                Stop if audio has no source.
+                No source = stop fade.
             */
 
             if (
@@ -1055,7 +1021,7 @@ function fadeOutMusic(
 
     /*
         If already silent,
-        continue immediately.
+        immediately continue.
     */
 
     if (
@@ -1079,6 +1045,10 @@ function fadeOutMusic(
     }
 
 
+    /*
+        Fade down gradually.
+    */
+
     fadeTimer =
         setInterval(() => {
 
@@ -1090,6 +1060,13 @@ function fadeOutMusic(
 
                 clearFade();
 
+
+                /*
+                    IMPORTANT:
+
+                    The callback runs ONLY
+                    after the music reaches zero.
+                */
 
                 if (
                     typeof callback ===
@@ -1155,10 +1132,6 @@ function setMusicVolume(
 
     }
 
-
-    /*
-        Keep volume between 0 and 1.
-    */
 
     const safeVolume =
         Math.max(
@@ -1240,10 +1213,6 @@ function toggleMusic() {
 
 function initChapterControls() {
 
-    /*
-        Prevent duplicate listeners.
-    */
-
     if (
         chapterControlsBound
     ) {
@@ -1266,11 +1235,6 @@ function initChapterControls() {
                CHAPTER 1
             ================================================== */
 
-
-            /*
-                Play / Pause
-            */
-
             if (
                 event.target.closest(
                     "#chapter1MusicToggle"
@@ -1283,10 +1247,6 @@ function initChapterControls() {
 
             }
 
-
-            /*
-                Volume Down
-            */
 
             if (
                 event.target.closest(
@@ -1301,10 +1261,6 @@ function initChapterControls() {
             }
 
 
-            /*
-                Volume Up
-            */
-
             if (
                 event.target.closest(
                     "#chapter1VolumeUp"
@@ -1318,17 +1274,15 @@ function initChapterControls() {
             }
 
 
-            /*
-                Chapter 1 → Chapter 2
-            */
-
             if (
                 event.target.closest(
                     "#chapter1Continue"
                 )
             ) {
 
-                transitionToChapterMusic(2);
+                transitionToChapterMusic(
+                    2
+                );
 
                 return;
 
@@ -1338,11 +1292,6 @@ function initChapterControls() {
             /* ==================================================
                CHAPTER 2
             ================================================== */
-
-
-            /*
-                Play / Pause
-            */
 
             if (
                 event.target.closest(
@@ -1357,10 +1306,6 @@ function initChapterControls() {
             }
 
 
-            /*
-                Volume Down
-            */
-
             if (
                 event.target.closest(
                     "#chapter2VolumeDown"
@@ -1373,10 +1318,6 @@ function initChapterControls() {
 
             }
 
-
-            /*
-                Volume Up
-            */
 
             if (
                 event.target.closest(
@@ -1392,7 +1333,9 @@ function initChapterControls() {
 
 
             /*
-                Chapter 2 → Chapter 3
+                CHAPTER 2 → CHAPTER 3
+
+                This is the important part.
             */
 
             if (
@@ -1401,7 +1344,9 @@ function initChapterControls() {
                 )
             ) {
 
-                transitionToChapterMusic(3);
+                transitionToChapterMusic(
+                    3
+                );
 
                 return;
 
@@ -1412,9 +1357,8 @@ function initChapterControls() {
                CHAPTER 3
             ================================================== */
 
-
             /*
-                Play / Pause
+                Chapter 3 Play / Pause
             */
 
             if (
@@ -1431,7 +1375,7 @@ function initChapterControls() {
 
 
             /*
-                Volume Down
+                Chapter 3 Volume Down
             */
 
             if (
@@ -1448,7 +1392,7 @@ function initChapterControls() {
 
 
             /*
-                Volume Up
+                Chapter 3 Volume Up
             */
 
             if (
@@ -1474,7 +1418,9 @@ function initChapterControls() {
                 )
             ) {
 
-                transitionToChapterMusic(4);
+                transitionToChapterMusic(
+                    4
+                );
 
                 return;
 
@@ -1491,7 +1437,9 @@ function initChapterControls() {
                 )
             ) {
 
-                transitionToChapterMusic(5);
+                transitionToChapterMusic(
+                    5
+                );
 
                 return;
 
@@ -1508,7 +1456,9 @@ function initChapterControls() {
                 )
             ) {
 
-                transitionToChapterMusic(6);
+                transitionToChapterMusic(
+                    6
+                );
 
                 return;
 
@@ -1525,7 +1475,9 @@ function initChapterControls() {
                 )
             ) {
 
-                transitionToChapterMusic(7);
+                transitionToChapterMusic(
+                    7
+                );
 
                 return;
 
@@ -1563,9 +1515,9 @@ function initChapterControls() {
 function updateMusicButtons() {
 
 
-    /* ========================================================
+    /* ======================================================
        CHAPTER 1
-    ======================================================== */
+    ====================================================== */
 
     const chapter1Button =
         document.getElementById(
@@ -1604,9 +1556,9 @@ function updateMusicButtons() {
     }
 
 
-    /* ========================================================
+    /* ======================================================
        CHAPTER 2
-    ======================================================== */
+    ====================================================== */
 
     const chapter2Button =
         document.getElementById(
@@ -1645,9 +1597,9 @@ function updateMusicButtons() {
     }
 
 
-    /* ========================================================
+    /* ======================================================
        CHAPTER 3
-    ======================================================== */
+    ====================================================== */
 
     const chapter3Button =
         document.getElementById(
