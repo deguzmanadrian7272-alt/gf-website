@@ -1651,70 +1651,191 @@
 }
 
 /* ==========================================================
-   CHAPTER III MUSIC CONTROLS
-========================================================== */
+   CHAPTER III — MUSIC CONTROLS
+   ========================================================== */
 
 .chapter3-music-controls {
-    position: fixed;
 
-    top: 25px;
-    right: 25px;
+    position:
+        fixed;
 
-    z-index: 50;
+    right:
+        28px;
 
-    display: flex;
+    bottom:
+        28px;
 
-    align-items: center;
+    z-index:
+        50;
 
-    gap: 8px;
+    display:
+        flex;
 
-    padding: 7px 9px;
+    align-items:
+        center;
 
-    border: 1px solid
-        rgba(255, 198, 233, 0.28);
+    gap:
+        8px;
 
-    border-radius: 999px;
+    padding:
+        8px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            198,
+            233,
+            0.28
+        );
+
+    border-radius:
+        50px;
 
     background:
-        rgba(35, 15, 55, 0.55);
+        linear-gradient(
+            135deg,
+            rgba(
+                38,
+                18,
+                65,
+                0.78
+            ),
+            rgba(
+                92,
+                39,
+                104,
+                0.62
+            )
+        );
 
     box-shadow:
-        0 8px 25px
-        rgba(8, 2, 20, 0.25),
+        0 12px 35px
+        rgba(
+            7,
+            2,
+            20,
+            0.35
+        ),
+
+        0 0 25px
+        rgba(
+            255,
+            145,
+            214,
+            0.08
+        ),
 
         inset 0 1px 0
-        rgba(255, 255, 255, 0.08);
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
 
     backdrop-filter:
-        blur(12px);
+        blur(14px);
 
     -webkit-backdrop-filter:
-        blur(12px);
+        blur(14px);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+
+}
+
+
+/* ==========================================================
+   CONTROL HOVER
+   ========================================================== */
+
+.chapter3-music-controls:hover {
+
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(
+            255,
+            211,
+            237,
+            0.48
+        );
+
+    box-shadow:
+        0 16px 40px
+        rgba(
+            7,
+            2,
+            20,
+            0.42
+        ),
+
+        0 0 30px
+        rgba(
+            255,
+            148,
+            215,
+            0.12
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
 }
 
 
 /* ==========================================================
    MUSIC BUTTON
-========================================================== */
+   ========================================================== */
 
 .chapter3-music-btn {
-    display: flex;
 
-    align-items: center;
-    justify-content: center;
+    width:
+        38px;
 
-    width: 34px;
-    height: 34px;
+    height:
+        38px;
 
-    padding: 0;
+    display:
+        flex;
 
-    border: 1px solid
-        rgba(255, 201, 232, 0.30);
+    align-items:
+        center;
 
-    border-radius: 50%;
+    justify-content:
+        center;
+
+    padding:
+        0;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            198,
+            233,
+            0.25
+        );
+
+    border-radius:
+        50%;
 
     background:
-        rgba(255, 160, 216, 0.08);
+        rgba(
+            255,
+            174,
+            222,
+            0.07
+        );
 
     color:
         #ffe8f7;
@@ -1724,148 +1845,270 @@
         sans-serif;
 
     font-size:
-        0.75rem;
+        0.9rem;
 
-    line-height: 1;
+    font-weight:
+        400;
 
-    cursor: pointer;
+    line-height:
+        1;
+
+    cursor:
+        pointer;
+
+    user-select:
+        none;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
 
     transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        color 0.3s ease;
+
 }
 
 
 /* ==========================================================
-   MUSIC BUTTON HOVER
-========================================================== */
+   BUTTON HOVER
+   ========================================================== */
 
 .chapter3-music-btn:hover {
+
     transform:
-        translateY(-2px);
+        translateY(-2px)
+        scale(1.04);
 
     background:
-        rgba(255, 163, 218, 0.18);
+        rgba(
+            255,
+            168,
+            220,
+            0.17
+        );
 
     border-color:
-        rgba(255, 220, 241, 0.60);
+        rgba(
+            255,
+            218,
+            239,
+            0.58
+        );
+
+    color:
+        #fff4fb;
 
     box-shadow:
-        0 0 18px
-        rgba(255, 151, 214, 0.18);
+        0 5px 18px
+        rgba(
+            255,
+            135,
+            205,
+            0.15
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+}
+
+
+/* ==========================================================
+   BUTTON ACTIVE
+   ========================================================== */
+
+.chapter3-music-btn:active {
+
+    transform:
+        scale(0.94);
+
 }
 
 
 /* ==========================================================
    PLAY / PAUSE BUTTON
-========================================================== */
+   ========================================================== */
 
 .chapter3-music-play {
-    width: 38px;
-    height: 38px;
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    border-color:
+        rgba(
+            255,
+            193,
+            229,
+            0.42
+        );
 
     background:
         linear-gradient(
             135deg,
-            rgba(255, 147, 211, 0.20),
-            rgba(184, 117, 255, 0.16)
+            rgba(
+                255,
+                143,
+                210,
+                0.16
+            ),
+            rgba(
+                177,
+                113,
+                255,
+                0.15
+            )
         );
-
-    border-color:
-        rgba(255, 210, 238, 0.42);
-
-    font-size:
-        0.78rem;
 
     box-shadow:
         0 0 18px
-        rgba(255, 150, 214, 0.10);
+        rgba(
+            255,
+            154,
+            216,
+            0.10
+        ),
+
+        inset 0 1px 0
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
 }
 
 
 /* ==========================================================
-   MUSIC BUTTON ACTIVE / FOCUS
-========================================================== */
+   PLAY / PAUSE HOVER
+   ========================================================== */
 
-.chapter3-music-btn:active {
-    transform:
-        scale(0.94);
-}
+.chapter3-music-play:hover {
 
+    background:
+        linear-gradient(
+            135deg,
+            rgba(
+                255,
+                151,
+                216,
+                0.28
+            ),
+            rgba(
+                184,
+                121,
+                255,
+                0.25
+            )
+        );
 
-.chapter3-music-btn:focus-visible {
-    outline:
-        2px solid
-        rgba(255, 216, 239, 0.85);
+    border-color:
+        rgba(
+            255,
+            224,
+            242,
+            0.72
+        );
 
-    outline-offset:
-        3px;
+    box-shadow:
+        0 0 25px
+        rgba(
+            255,
+            151,
+            216,
+            0.18
+        ),
+
+        0 5px 20px
+        rgba(
+            99,
+            45,
+            126,
+            0.22
+        );
+
 }
 
 
 /* ==========================================================
-   MOBILE MUSIC CONTROLS
-========================================================== */
+   MOBILE
+   ========================================================== */
 
-@media (max-width: 780px) {
+@media (max-width: 480px) {
 
     .chapter3-music-controls {
-        top: 18px;
-        right: 18px;
 
-        gap: 6px;
+        right:
+            15px;
 
-        padding: 6px 7px;
+        bottom:
+            15px;
+
+        gap:
+            6px;
+
+        padding:
+            6px;
+
     }
 
 
     .chapter3-music-btn {
-        width: 31px;
-        height: 31px;
+
+        width:
+            34px;
+
+        height:
+            34px;
 
         font-size:
-            0.68rem;
+            0.8rem;
+
     }
 
 
     .chapter3-music-play {
-        width: 35px;
-        height: 35px;
+
+        width:
+            38px;
+
+        height:
+            38px;
+
     }
 
 }
 
 
 /* ==========================================================
-   SMALL MOBILE MUSIC CONTROLS
-========================================================== */
+   REDUCED MOTION
+   ========================================================== */
 
-@media (max-width: 520px) {
+@media (prefers-reduced-motion: reduce) {
 
-    .chapter3-music-controls {
-        top: 14px;
-        right: 14px;
-
-        gap: 5px;
-
-        padding: 5px 6px;
-    }
-
-
+    .chapter3-music-controls,
     .chapter3-music-btn {
-        width: 28px;
-        height: 28px;
 
-        font-size:
-            0.62rem;
-    }
+        transition:
+            none;
 
-
-    .chapter3-music-play {
-        width: 32px;
-        height: 32px;
     }
 
 }
