@@ -1652,24 +1652,37 @@
 
 /* ==========================================================
    CHAPTER III — MUSIC CONTROLS
+   FIXED UPPER-RIGHT POSITION
    ========================================================== */
 
-.chapter3-music-controls {
+#chapter3 .chapter3-music-controls {
 
-    position: absolute;
+    position: fixed !important;
 
-    top: 30px;
-    right: 35px;
+    top: 30px !important;
+    right: 35px !important;
 
-    z-index: 20;
+    left: auto !important;
+    bottom: auto !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    z-index: 9999 !important;
 
     display: flex;
+
     align-items: center;
+    justify-content: center;
+
     gap: 8px;
 
     padding: 8px 10px;
 
-    border: 1px solid
+    box-sizing: border-box;
+
+    border:
+        1px solid
         rgba(255, 198, 233, 0.25);
 
     border-radius: 50px;
@@ -1694,10 +1707,10 @@
 
 
 /* ==========================================================
-   MUSIC BUTTON
+   CHAPTER III MUSIC BUTTONS
    ========================================================== */
 
-.chapter3-music-btn {
+#chapter3 .chapter3-music-btn {
 
     width: 38px;
     height: 38px;
@@ -1709,7 +1722,10 @@
 
     padding: 0;
 
-    border: 1px solid
+    margin: 0;
+
+    border:
+        1px solid
         rgba(255, 198, 233, 0.35);
 
     border-radius: 50%;
@@ -1731,6 +1747,8 @@
 
     cursor: pointer;
 
+    box-sizing: border-box;
+
     transition:
         transform 0.3s ease,
         background 0.3s ease,
@@ -1744,7 +1762,7 @@
    PLAY BUTTON
    ========================================================== */
 
-.chapter3-music-play {
+#chapter3 .chapter3-music-play {
 
     width: 44px;
     height: 44px;
@@ -1765,7 +1783,7 @@
    HOVER
    ========================================================== */
 
-.chapter3-music-btn:hover {
+#chapter3 .chapter3-music-btn:hover {
 
     transform:
         translateY(-2px);
@@ -1787,7 +1805,7 @@
    ACTIVE
    ========================================================== */
 
-.chapter3-music-btn:active {
+#chapter3 .chapter3-music-btn:active {
 
     transform:
         translateY(0);
@@ -1801,10 +1819,10 @@
 
 @media (max-width: 480px) {
 
-    .chapter3-music-controls {
+    #chapter3 .chapter3-music-controls {
 
-        top: 18px;
-        right: 18px;
+        top: 18px !important;
+        right: 18px !important;
 
         gap: 5px;
 
@@ -1813,7 +1831,7 @@
     }
 
 
-    .chapter3-music-btn {
+    #chapter3 .chapter3-music-btn {
 
         width: 32px;
         height: 32px;
@@ -1823,7 +1841,7 @@
     }
 
 
-    .chapter3-music-play {
+    #chapter3 .chapter3-music-play {
 
         width: 38px;
         height: 38px;
