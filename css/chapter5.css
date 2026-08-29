@@ -4190,3 +4190,134 @@
     }
 }
 
+/* ==========================================================
+   CHAPTER V — MUSIC CONTROLS
+   Position: Upper Right
+========================================================== */
+
+.chapter5-music-controls {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    z-index: 100;
+}
+
+
+/* ==========================================================
+   MUSIC BUTTON
+========================================================== */
+
+.chapter5-music-btn {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.chapter5-music-btn:hover {
+    transform: translateY(-2px);
+
+    background: rgba(255, 255, 255, 0.22);
+
+    border-color: rgba(255, 255, 255, 0.75);
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==========================================================
+   ACTIVE / CLICK
+========================================================== */
+
+.chapter5-music-btn:active {
+    transform: scale(0.92);
+}
+
+
+/* ==========================================================
+   PLAY / PAUSE BUTTON
+========================================================== */
+
+.chapter5-music-play {
+    width: 44px;
+    height: 44px;
+
+    font-size: 17px;
+}
+
+
+/* ==========================================================
+   FOCUS ACCESSIBILITY
+========================================================== */
+
+.chapter5-music-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .chapter5-music-controls {
+        top: 18px;
+        right: 18px;
+
+        gap: 6px;
+    }
+
+
+    .chapter5-music-btn {
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+    }
+
+
+    .chapter5-music-play {
+        width: 40px;
+        height: 40px;
+
+        font-size: 15px;
+    }
+
+}
