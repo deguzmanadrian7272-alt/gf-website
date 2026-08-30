@@ -49,11 +49,23 @@
    Chapter 6 music starts
         ↓
    Chapter 6 fades in
+        ↓
+   Chapter 6 Continue
+        ↓
+   Chapter 6 fades out
+        ↓
+   Chapter 7 music starts
+        ↓
+   Chapter 7 fades in
+        ↓
+   Chapter 7 Continue
+        ↓
+   Chapter 7 fades out
+        ↓
+   Final music starts
+        ↓
+   Final music fades in
 
-   Same pattern will later be used for:
-
-   Chapter 6 → 7
-   Chapter 7 → Final
 ========================================================== */
 
 
@@ -109,15 +121,11 @@ const ChapterMusic = {
 
     5: "assets/music/chapter5.mp3",
 
-    6: "assets/music/chapter6.mp3"
+    6: "assets/music/chapter6.mp3",
 
-    /*
-        Add later:
+    7: "assets/music/chapter7.mp3",
 
-        7: "assets/music/chapter7.mp3",
-
-        final: "assets/music/final.mp3"
-    */
+    final: "assets/music/final.mp3"
 
 };
 
@@ -686,9 +694,8 @@ async function transitionToChapterMusic(
         We check BOTH the audio state and the
         actual audio element.
 
-        This is important for Chapter 3 → 4,
-        Chapter 4 → 5,
-        and Chapter 5 → 6.
+        This is important for all chapter
+        transitions.
     */
 
     const hasCurrentMusic =
@@ -1688,7 +1695,6 @@ function initChapterControls() {
                CHAPTER 1
             ================================================== */
 
-
             if (
                 event.target.closest(
                     "#chapter1MusicToggle"
@@ -1747,7 +1753,6 @@ function initChapterControls() {
                CHAPTER 2
             ================================================== */
 
-
             if (
                 event.target.closest(
                     "#chapter2MusicToggle"
@@ -1805,7 +1810,6 @@ function initChapterControls() {
             /* ==================================================
                CHAPTER 3
             ================================================== */
-
 
             if (
                 event.target.closest(
@@ -1879,7 +1883,6 @@ function initChapterControls() {
                CHAPTER 4
             ================================================== */
 
-
             if (
                 event.target.closest(
                     "#chapter4MusicToggle"
@@ -1941,7 +1944,6 @@ function initChapterControls() {
             /* ==================================================
                CHAPTER 5
             ================================================== */
-
 
             if (
                 event.target.closest(
@@ -2015,15 +2017,6 @@ function initChapterControls() {
                CHAPTER 6
             ================================================== */
 
-
-            /*
-                Play / Pause
-
-                Expected HTML ID:
-
-                #chapter6MusicToggle
-            */
-
             if (
                 event.target.closest(
                     "#chapter6MusicToggle"
@@ -2037,14 +2030,6 @@ function initChapterControls() {
             }
 
 
-            /*
-                Volume Down
-
-                Expected HTML ID:
-
-                #chapter6VolumeDown
-            */
-
             if (
                 event.target.closest(
                     "#chapter6VolumeDown"
@@ -2057,14 +2042,6 @@ function initChapterControls() {
 
             }
 
-
-            /*
-                Volume Up
-
-                Expected HTML ID:
-
-                #chapter6VolumeUp
-            */
 
             if (
                 event.target.closest(
@@ -2081,6 +2058,16 @@ function initChapterControls() {
 
             /*
                 Chapter 6 → Chapter 7
+
+                Chapter 6 fades out
+                       ↓
+                Chapter 6 hard stops
+                       ↓
+                chapter7.mp3 loads
+                       ↓
+                chapter7.mp3 plays
+                       ↓
+                Chapter 7 fades in
             */
 
             if (
@@ -2099,8 +2086,85 @@ function initChapterControls() {
 
 
             /* ==================================================
-               CHAPTER 7 → FINAL
+               CHAPTER 7
             ================================================== */
+
+            /*
+                Play / Pause
+
+                Expected HTML ID:
+
+                #chapter7MusicToggle
+            */
+
+            if (
+                event.target.closest(
+                    "#chapter7MusicToggle"
+                )
+            ) {
+
+                toggleMusic();
+
+                return;
+
+            }
+
+
+            /*
+                Volume Down
+
+                Expected HTML ID:
+
+                #chapter7VolumeDown
+            */
+
+            if (
+                event.target.closest(
+                    "#chapter7VolumeDown"
+                )
+            ) {
+
+                decreaseVolume();
+
+                return;
+
+            }
+
+
+            /*
+                Volume Up
+
+                Expected HTML ID:
+
+                #chapter7VolumeUp
+            */
+
+            if (
+                event.target.closest(
+                    "#chapter7VolumeUp"
+                )
+            ) {
+
+                increaseVolume();
+
+                return;
+
+            }
+
+
+            /*
+                Chapter 7 → Final
+
+                Chapter 7 fades out
+                       ↓
+                Chapter 7 hard stops
+                       ↓
+                final.mp3 loads
+                       ↓
+                final.mp3 plays
+                       ↓
+                Final music fades in
+            */
 
             if (
                 event.target.closest(
@@ -2148,7 +2212,9 @@ function updateMusicButtons() {
 
         "chapter5MusicToggle",
 
-        "chapter6MusicToggle"
+        "chapter6MusicToggle",
+
+        "chapter7MusicToggle"
 
     ];
 
