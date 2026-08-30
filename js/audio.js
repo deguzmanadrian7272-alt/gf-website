@@ -691,11 +691,9 @@ async function transitionToChapterMusic(
         FADE OUT CURRENT MUSIC
         ======================================================
 
-        We check BOTH the audio state and the
-        actual audio element.
-
-        This is important for all chapter
-        transitions.
+        The current chapter completely
+        fades out before the next chapter
+        begins.
     */
 
     const hasCurrentMusic =
@@ -733,7 +731,7 @@ async function transitionToChapterMusic(
         HARD STOP CURRENT AUDIO
         ======================================================
 
-        This guarantees that the previous
+        Guarantees that the previous
         chapter music cannot continue.
     */
 
@@ -1852,16 +1850,6 @@ function initChapterControls() {
 
             /*
                 Chapter 3 → Chapter 4
-
-                Chapter 3 fades out
-                       ↓
-                Chapter 3 hard stops
-                       ↓
-                chapter4.mp3 loads
-                       ↓
-                chapter4.mp3 plays
-                       ↓
-                Chapter 4 fades in
             */
 
             if (
@@ -1986,16 +1974,6 @@ function initChapterControls() {
 
             /*
                 Chapter 5 → Chapter 6
-
-                Chapter 5 fades out
-                       ↓
-                Chapter 5 hard stops
-                       ↓
-                chapter6.mp3 loads
-                       ↓
-                chapter6.mp3 plays
-                       ↓
-                Chapter 6 fades in
             */
 
             if (
@@ -2091,10 +2069,6 @@ function initChapterControls() {
 
             /*
                 Play / Pause
-
-                Expected HTML ID:
-
-                #chapter7MusicToggle
             */
 
             if (
@@ -2112,10 +2086,6 @@ function initChapterControls() {
 
             /*
                 Volume Down
-
-                Expected HTML ID:
-
-                #chapter7VolumeDown
             */
 
             if (
@@ -2133,10 +2103,6 @@ function initChapterControls() {
 
             /*
                 Volume Up
-
-                Expected HTML ID:
-
-                #chapter7VolumeUp
             */
 
             if (
