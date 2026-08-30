@@ -152,6 +152,10 @@ let chapterControlsBound = false;
 
 function getMusicElement() {
 
+    /*
+        Return existing audio element.
+    */
+
     if (storyMusic) {
 
         return storyMusic;
@@ -159,9 +163,17 @@ function getMusicElement() {
     }
 
 
+    /*
+        Try to find existing audio element.
+    */
+
     storyMusic =
         document.getElementById("bgMusic");
 
+
+    /*
+        Create audio element if necessary.
+    */
 
     if (!storyMusic) {
 
@@ -216,9 +228,6 @@ function initAudio() {
 
     /*
         Start silent.
-
-        Music will fade in when
-        a chapter starts.
     */
 
     music.volume = 0;
@@ -242,48 +251,6 @@ function initAudio() {
                 music.currentSrc ||
                 music.src
             );
-
-        }
-    );
-
-
-    /*
-        Detect when browser pauses audio.
-    */
-
-    music.addEventListener(
-        "play",
-        () => {
-
-            AudioState.musicPlaying =
-                true;
-
-            updateMusicButtons();
-
-        }
-    );
-
-
-    music.addEventListener(
-        "pause",
-        () => {
-
-            /*
-                Do not overwrite the state
-                while a chapter transition
-                is actively happening.
-            */
-
-            if (
-                !AudioState.transitioning
-            ) {
-
-                AudioState.musicPlaying =
-                    false;
-
-                updateMusicButtons();
-
-            }
 
         }
     );
@@ -350,7 +317,7 @@ function initAudio() {
 
 
     /*
-        Update button states.
+        Update music buttons.
     */
 
     updateMusicButtons();
@@ -368,6 +335,14 @@ function initAudio() {
 ========================================================== */
 
 function handleStoryStart() {
+
+    /*
+        Open My Story
+        ↓
+        Chapter 1
+        ↓
+        chapter1.mp3
+    */
 
     playChapterMusic(1);
 
@@ -390,6 +365,10 @@ async function playChapterMusic(
         ChapterMusic[chapter];
 
 
+    /*
+        Check music file.
+    */
+
     if (!musicFile) {
 
         console.warn(
@@ -402,14 +381,12 @@ async function playChapterMusic(
 
 
     /*
-        Do not restart the same chapter
-        if it is already playing.
+        Do not restart the same chapter.
     */
 
     if (
         AudioState.currentChapter === chapter &&
-        AudioState.musicPlaying &&
-        !music.paused
+        AudioState.musicPlaying
     ) {
 
         return;
@@ -418,14 +395,14 @@ async function playChapterMusic(
 
 
     /*
-        Cancel any active fade.
+        Cancel any existing fade.
     */
 
     clearFade();
 
 
     /*
-        Completely stop previous audio.
+        Stop current audio completely.
     */
 
     music.pause();
@@ -436,7 +413,7 @@ async function playChapterMusic(
 
 
     /*
-        Remove old source.
+        Remove previous source.
     */
 
     music.removeAttribute(
@@ -447,7 +424,7 @@ async function playChapterMusic(
 
 
     /*
-        Set new source.
+        Set requested source.
     */
 
     music.src =
@@ -466,16 +443,32 @@ async function playChapterMusic(
 
     try {
 
+        /*
+            Load audio.
+        */
+
         music.load();
 
+
+        /*
+            Wait until audio is ready.
+        */
 
         await waitForAudioReady(
             music
         );
 
 
+        /*
+            Start playback.
+        */
+
         await music.play();
 
+
+        /*
+            Update state.
+        */
 
         AudioState.musicStarted =
             true;
@@ -487,6 +480,11 @@ async function playChapterMusic(
             false;
 
 
+        /*
+            Update external music state
+            if available.
+        */
+
         if (
             typeof setMusicState ===
             "function"
@@ -496,6 +494,10 @@ async function playChapterMusic(
 
         }
 
+
+        /*
+            Fade music in.
+        */
 
         fadeInMusic();
 
@@ -546,6 +548,10 @@ function waitForAudioReady(
 
     return new Promise(
         (resolve, reject) => {
+
+            /*
+                Audio is already ready.
+            */
 
             if (
                 music.readyState >= 3
@@ -622,7 +628,7 @@ function waitForAudioReady(
 
 
 /* ==========================================================
-   TRANSITION TO NEXT CHAPTER MUSIC
+   TRANSITION TO NEXT CHAPTER
 ========================================================== */
 
 async function transitionToChapterMusic(
@@ -638,7 +644,7 @@ async function transitionToChapterMusic(
 
 
     /*
-        Make sure next chapter has music.
+        Make sure the next chapter exists.
     */
 
     if (!nextMusicFile) {
@@ -653,8 +659,7 @@ async function transitionToChapterMusic(
 
 
     /*
-        Prevent double-clicks / multiple
-        transitions.
+        Prevent multiple transitions.
     */
 
     if (
@@ -675,7 +680,7 @@ async function transitionToChapterMusic(
 
 
     /*
-        Stop any existing fade.
+        Cancel any existing fade.
     */
 
     clearFade();
@@ -691,38 +696,12 @@ async function transitionToChapterMusic(
 
 
     /* ======================================================
-       FORCE FADE OUT
-       ======================================================
-
-       IMPORTANT:
-
-       We DO NOT rely only on AudioState.musicPlaying.
-
-       The actual audio element is the source of truth.
-
-       This fixes the Chapter 6 → Chapter 7 problem
-       where Chapter 6 may still be active even if the
-       state says otherwise.
-    */
-
-    console.log(
-        `🎵 Current audio state:`,
-        {
-            chapter: AudioState.currentChapter,
-            playing: AudioState.musicPlaying,
-            paused: music.paused,
-            volume: music.volume,
-            source: music.currentSrc
-        }
-    );
-
-
-    /*
-        If there is an actual audio source,
-        always perform fade-out.
-    */
+       STEP 1
+       FADE OUT CURRENT MUSIC
+    ====================================================== */
 
     if (
+        !music.paused &&
         music.currentSrc
     ) {
 
@@ -742,17 +721,22 @@ async function transitionToChapterMusic(
 
 
     /* ======================================================
-       HARD STOP
+       STEP 2
+       HARD STOP CURRENT MUSIC
     ====================================================== */
 
     clearFade();
 
 
+    /*
+        Pause the audio.
+    */
+
     music.pause();
 
 
     /*
-        Reset current playback position.
+        Reset playback position.
     */
 
     try {
@@ -764,7 +748,7 @@ async function transitionToChapterMusic(
     catch (error) {
 
         console.warn(
-            "🎵 Could not reset audio position:",
+            "🎵 Could not reset audio time:",
             error
         );
 
@@ -779,18 +763,7 @@ async function transitionToChapterMusic(
 
 
     /*
-        Remove the old source completely.
-    */
-
-    music.removeAttribute(
-        "src"
-    );
-
-    music.load();
-
-
-    /*
-        Reset state.
+        Update state.
     */
 
     AudioState.musicPlaying =
@@ -803,16 +776,22 @@ async function transitionToChapterMusic(
     updateMusicButtons();
 
 
-    console.log(
-        `🎵 Previous chapter audio completely stopped.`
+    /* ======================================================
+       STEP 3
+       REMOVE OLD AUDIO SOURCE
+    ====================================================== */
+
+    music.removeAttribute(
+        "src"
     );
 
+    music.load();
 
-    /*
-        ======================================================
-        START NEXT CHAPTER
-        ======================================================
-    */
+
+    /* ======================================================
+       STEP 4
+       START NEXT CHAPTER
+    ====================================================== */
 
     await startNextChapterMusic(
         nextChapter
@@ -837,6 +816,10 @@ async function startNextChapterMusic(
         ChapterMusic[chapter];
 
 
+    /*
+        Verify music file.
+    */
+
     if (!musicFile) {
 
         AudioState.transitioning =
@@ -851,16 +834,43 @@ async function startNextChapterMusic(
     }
 
 
+    /*
+        Cancel previous fade.
+    */
+
     clearFade();
 
 
     /*
-        Ensure audio is completely stopped.
+        Force audio to stop.
     */
 
     music.pause();
 
-    music.currentTime = 0;
+
+    /*
+        Reset playback position.
+    */
+
+    try {
+
+        music.currentTime = 0;
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "🎵 Could not reset audio position:",
+            error
+        );
+
+    }
+
+
+    /*
+        Start next music silently.
+    */
 
     music.volume = 0;
 
@@ -879,6 +889,11 @@ async function startNextChapterMusic(
         "auto";
 
 
+    /*
+        Update current chapter
+        BEFORE playback.
+    */
+
     AudioState.currentChapter =
         chapter;
 
@@ -890,8 +905,16 @@ async function startNextChapterMusic(
 
     try {
 
+        /*
+            Load the new audio.
+        */
+
         music.load();
 
+
+        /*
+            Wait for the new audio.
+        */
 
         await waitForAudioReady(
             music
@@ -903,8 +926,31 @@ async function startNextChapterMusic(
         );
 
 
+        /*
+            Explicitly start playback.
+        */
+
         await music.play();
 
+
+        /*
+            Verify playback actually started.
+        */
+
+        if (
+            music.paused
+        ) {
+
+            throw new Error(
+                `Chapter ${chapter} audio remained paused after play().`
+            );
+
+        }
+
+
+        /*
+            Update audio state.
+        */
 
         AudioState.musicStarted =
             true;
@@ -915,6 +961,10 @@ async function startNextChapterMusic(
         AudioState.transitioning =
             false;
 
+
+        /*
+            Update external music state.
+        */
 
         if (
             typeof setMusicState ===
@@ -927,11 +977,15 @@ async function startNextChapterMusic(
 
 
         /*
-            Fade new chapter in.
+            Fade the new chapter in.
         */
 
         fadeInMusic();
 
+
+        /*
+            Update buttons.
+        */
 
         updateMusicButtons();
 
@@ -952,6 +1006,16 @@ async function startNextChapterMusic(
 
         AudioState.transitioning =
             false;
+
+
+        /*
+            Make sure failed audio
+            cannot continue.
+        */
+
+        music.pause();
+
+        music.volume = 0;
 
 
         console.error(
@@ -988,6 +1052,7 @@ async function playMusic() {
 
     /*
         No current chapter.
+        Start Chapter 1.
     */
 
     if (
@@ -1003,7 +1068,7 @@ async function playMusic() {
 
 
     /*
-        Chapter exists but source is missing.
+        Chapter exists but source disappeared.
     */
 
     if (
@@ -1031,6 +1096,10 @@ async function playMusic() {
         AudioState.musicPlaying =
             true;
 
+
+        /*
+            Restore volume.
+        */
 
         if (
             music.volume === 0 &&
@@ -1141,6 +1210,10 @@ function stopMusic() {
     clearFade();
 
 
+    /*
+        Hard stop.
+    */
+
     music.pause();
 
     music.currentTime = 0;
@@ -1148,12 +1221,20 @@ function stopMusic() {
     music.volume = 0;
 
 
+    /*
+        Remove source.
+    */
+
     music.removeAttribute(
         "src"
     );
 
     music.load();
 
+
+    /*
+        Reset state.
+    */
 
     AudioState.musicStarted =
         false;
@@ -1223,6 +1304,10 @@ function stopChapterMusic(
         .then(
             () => {
 
+                /*
+                    Hard stop.
+                */
+
                 music.pause();
 
                 music.currentTime = 0;
@@ -1230,12 +1315,20 @@ function stopChapterMusic(
                 music.volume = 0;
 
 
+                /*
+                    Remove source.
+                */
+
                 music.removeAttribute(
                     "src"
                 );
 
                 music.load();
 
+
+                /*
+                    Reset state.
+                */
 
                 AudioState.musicStarted =
                     false;
@@ -1305,11 +1398,15 @@ function fadeInMusic() {
 
 
     /*
-        Start silent.
+        Start from zero.
     */
 
     music.volume = 0;
 
+
+    /*
+        Nothing to fade if volume is zero.
+    */
 
     if (
         targetVolume <= 0
@@ -1319,6 +1416,10 @@ function fadeInMusic() {
 
     }
 
+
+    /*
+        Calculate fade timing.
+    */
 
     const steps =
         Math.ceil(
@@ -1337,7 +1438,8 @@ function fadeInMusic() {
             () => {
 
                 /*
-                    Stop if source disappeared.
+                    Stop fade if source
+                    no longer exists.
                 */
 
                 if (
@@ -1352,7 +1454,8 @@ function fadeInMusic() {
 
 
                 /*
-                    Stop if audio is paused.
+                    Stop fade if audio
+                    has been paused.
                 */
 
                 if (
@@ -1384,6 +1487,10 @@ function fadeInMusic() {
 
                 }
 
+
+                /*
+                    Increase volume.
+                */
 
                 music.volume =
                     Math.min(
@@ -1432,19 +1539,16 @@ function fadeOutMusic(
 
 
     /*
-        Always return a Promise.
-
-        The transition system can wait for
-        this fade to finish before loading
-        the next chapter.
+        Return Promise so transitions
+        can wait for completion.
     */
 
     return new Promise(
         (resolve) => {
 
             /*
-                If there is no source,
-                nothing needs fading.
+                If audio has no source,
+                stop immediately.
             */
 
             if (
@@ -1472,8 +1576,8 @@ function fadeOutMusic(
 
 
             /*
-                If volume is already essentially
-                zero, finish immediately.
+                If audio is already silent,
+                stop immediately.
             */
 
             if (
@@ -1501,15 +1605,7 @@ function fadeOutMusic(
 
 
             /*
-                Calculate a safe fade interval.
-            */
-
-            const fadeAmount =
-                AudioSettings.fadeStep;
-
-
-            /*
-                Start fade.
+                Fade downward.
             */
 
             fadeTimer =
@@ -1523,7 +1619,7 @@ function fadeOutMusic(
                         music.volume =
                             Math.max(
                                 music.volume -
-                                fadeAmount,
+                                AudioSettings.fadeStep,
                                 0
                             );
 
@@ -1533,16 +1629,19 @@ function fadeOutMusic(
                         */
 
                         if (
-                            music.volume <=
-                            0.001
+                            music.volume <= 0.001
                         ) {
 
-                            music.volume =
-                                0;
+                            music.volume = 0;
 
 
                             clearFade();
 
+
+                            /*
+                                Callback happens
+                                AFTER fade reaches zero.
+                            */
 
                             if (
                                 typeof callback ===
@@ -1574,14 +1673,13 @@ function fadeOutMusic(
 
 function clearFade() {
 
-    if (fadeTimer) {
+    if (fadeTimer !== null) {
 
         clearInterval(
             fadeTimer
         );
 
-        fadeTimer =
-            null;
+        fadeTimer = null;
 
     }
 
@@ -1617,11 +1715,19 @@ function setMusicVolume(
         );
 
 
-    music.volume =
+    /*
+        Save selected volume.
+    */
+
+    AudioSettings.musicVolume =
         safeVolume;
 
 
-    AudioSettings.musicVolume =
+    /*
+        Apply volume.
+    */
+
+    music.volume =
         safeVolume;
 
 
@@ -1670,8 +1776,7 @@ function decreaseVolume() {
 function toggleMusic() {
 
     if (
-        AudioState.musicPlaying &&
-        !getMusicElement().paused
+        AudioState.musicPlaying
     ) {
 
         pauseMusic();
@@ -1713,8 +1818,8 @@ function initChapterControls() {
     /*
         One global click listener.
 
-        Works with dynamically shown
-        and hidden chapters.
+        This works with dynamically
+        shown/hidden chapters.
     */
 
     document.addEventListener(
@@ -2060,7 +2165,7 @@ function initChapterControls() {
 
                 Chapter 6 fades out
                        ↓
-                Chapter 6 hard stops
+                Chapter 6 stops
                        ↓
                 chapter7.mp3 loads
                        ↓
@@ -2074,6 +2179,11 @@ function initChapterControls() {
                     "#chapter6Continue"
                 )
             ) {
+
+                console.log(
+                    "🎵 Chapter 6 Continue clicked → Chapter 7"
+                );
+
 
                 transitionToChapterMusic(
                     7
@@ -2129,6 +2239,16 @@ function initChapterControls() {
 
             /*
                 Chapter 7 → Final
+
+                Chapter 7 fades out
+                       ↓
+                Chapter 7 stops
+                       ↓
+                final.mp3 loads
+                       ↓
+                final.mp3 plays
+                       ↓
+                Final music fades in
             */
 
             if (
@@ -2136,6 +2256,11 @@ function initChapterControls() {
                     "#chapter7Continue"
                 )
             ) {
+
+                console.log(
+                    "🎵 Chapter 7 Continue clicked → Final"
+                );
+
 
                 transitionToChapterMusic(
                     "final"
@@ -2156,6 +2281,13 @@ function initChapterControls() {
 ========================================================== */
 
 function updateMusicButtons() {
+
+    /*
+        All chapters share one audio element.
+
+        Therefore all music buttons
+        show the same playback state.
+    */
 
     const musicButtonIds = [
 
