@@ -47,6 +47,8 @@
    Chapter 5 fades out
         ↓
    Chapter 6 music starts
+        ↓
+   Chapter 6 fades in
 
    Same pattern will later be used for:
 
@@ -105,12 +107,13 @@ const ChapterMusic = {
 
     4: "assets/music/chapter4.mp3",
 
-    5: "assets/music/chapter5.mp3"
+    5: "assets/music/chapter5.mp3",
+
+    6: "assets/music/chapter6.mp3"
 
     /*
         Add later:
 
-        6: "assets/music/chapter6.mp3",
         7: "assets/music/chapter7.mp3",
 
         final: "assets/music/final.mp3"
@@ -683,8 +686,9 @@ async function transitionToChapterMusic(
         We check BOTH the audio state and the
         actual audio element.
 
-        This is important for Chapter 3 → 4
-        and Chapter 4 → 5.
+        This is important for Chapter 3 → 4,
+        Chapter 4 → 5,
+        and Chapter 5 → 6.
     */
 
     const hasCurrentMusic =
@@ -766,7 +770,7 @@ async function transitionToChapterMusic(
 
     /*
         ======================================================
-        START NEXT CHAPTER
+        START NEXT CHAPTER MUSIC
         ======================================================
     */
 
@@ -1939,14 +1943,6 @@ function initChapterControls() {
             ================================================== */
 
 
-            /*
-                Play / Pause
-
-                Expected HTML ID:
-
-                #chapter5MusicToggle
-            */
-
             if (
                 event.target.closest(
                     "#chapter5MusicToggle"
@@ -1960,14 +1956,6 @@ function initChapterControls() {
             }
 
 
-            /*
-                Volume Down
-
-                Expected HTML ID:
-
-                #chapter5VolumeDown
-            */
-
             if (
                 event.target.closest(
                     "#chapter5VolumeDown"
@@ -1980,14 +1968,6 @@ function initChapterControls() {
 
             }
 
-
-            /*
-                Volume Up
-
-                Expected HTML ID:
-
-                #chapter5VolumeUp
-            */
 
             if (
                 event.target.closest(
@@ -2004,6 +1984,16 @@ function initChapterControls() {
 
             /*
                 Chapter 5 → Chapter 6
+
+                Chapter 5 fades out
+                       ↓
+                Chapter 5 hard stops
+                       ↓
+                chapter6.mp3 loads
+                       ↓
+                chapter6.mp3 plays
+                       ↓
+                Chapter 6 fades in
             */
 
             if (
@@ -2022,8 +2012,76 @@ function initChapterControls() {
 
 
             /* ==================================================
-               CHAPTER 6 → 7
+               CHAPTER 6
             ================================================== */
+
+
+            /*
+                Play / Pause
+
+                Expected HTML ID:
+
+                #chapter6MusicToggle
+            */
+
+            if (
+                event.target.closest(
+                    "#chapter6MusicToggle"
+                )
+            ) {
+
+                toggleMusic();
+
+                return;
+
+            }
+
+
+            /*
+                Volume Down
+
+                Expected HTML ID:
+
+                #chapter6VolumeDown
+            */
+
+            if (
+                event.target.closest(
+                    "#chapter6VolumeDown"
+                )
+            ) {
+
+                decreaseVolume();
+
+                return;
+
+            }
+
+
+            /*
+                Volume Up
+
+                Expected HTML ID:
+
+                #chapter6VolumeUp
+            */
+
+            if (
+                event.target.closest(
+                    "#chapter6VolumeUp"
+                )
+            ) {
+
+                increaseVolume();
+
+                return;
+
+            }
+
+
+            /*
+                Chapter 6 → Chapter 7
+            */
 
             if (
                 event.target.closest(
@@ -2088,7 +2146,9 @@ function updateMusicButtons() {
 
         "chapter4MusicToggle",
 
-        "chapter5MusicToggle"
+        "chapter5MusicToggle",
+
+        "chapter6MusicToggle"
 
     ];
 
