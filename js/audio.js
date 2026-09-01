@@ -1,7 +1,7 @@
 /* ==========================================================
    AUDIO.JS
    Project : Our Story
-   Purpose : Background Music & Sound Effects
+   Purpose : Background Music & Sound Effects (SPA Version)
    Chapters: 0 → Final
 ========================================================== */
 
@@ -41,7 +41,7 @@ const ChapterMusic = {
 };
 
 /* ==========================================================
-   AUDIO ELEMENT & STATE
+   AUDIO ELEMENT & CONTROL STATE
 ========================================================== */
 let storyMusic = null;
 let fadeTimer = null;
@@ -111,40 +111,9 @@ function initAudio() {
     }
 
     initChapterControls();
-    detectAndAutoPlayChapter();
     updateMusicButtons();
 
     console.log("🎵 Audio initialized.");
-}
-
-/* ==========================================================
-   URL / PAGE DETECTION HELPER
-========================================================== */
-function detectAndAutoPlayChapter() {
-    const path = window.location.pathname.toLowerCase();
-    let currentCh = null;
-
-    if (path.includes("chapter1")) currentCh = 1;
-    else if (path.includes("chapter2")) currentCh = 2;
-    else if (path.includes("chapter3")) currentCh = 3;
-    else if (path.includes("chapter4")) currentCh = 4;
-    else if (path.includes("chapter5")) currentCh = 5;
-    else if (path.includes("chapter6")) currentCh = 6;
-    else if (path.includes("chapter7")) currentCh = 7;
-    else if (path.includes("final")) currentCh = "final";
-
-    if (currentCh !== null && currentCh !== 1) {
-        // Attempt play or wait for first user gesture if blocked by browser
-        const attemptPlay = () => {
-            if (!AudioState.musicPlaying) {
-                playChapterMusic(currentCh);
-            }
-        };
-
-        attemptPlay();
-        document.addEventListener("click", attemptPlay, { once: true });
-        document.addEventListener("keydown", attemptPlay, { once: true });
-    }
 }
 
 /* ==========================================================
@@ -239,7 +208,7 @@ function waitForAudioReady(music) {
 }
 
 /* ==========================================================
-   TRANSITION TO NEXT CHAPTER
+   TRANSITION TO NEXT CHAPTER MUSIC
 ========================================================== */
 async function transitionToChapterMusic(nextChapter) {
     const music = getMusicElement();
@@ -553,7 +522,7 @@ function setMusicVolume(volume) {
 }
 
 /* ==========================================================
-   VOLUME SHORTCUTS & TOGGLE
+   VOLUME CONTROLS & TOGGLE
 ========================================================== */
 function increaseVolume() {
     setMusicVolume(AudioSettings.musicVolume + AudioSettings.volumeStep);
@@ -572,29 +541,14 @@ function toggleMusic() {
 }
 
 /* ==========================================================
-   NAVIGATION HELPER
-========================================================== */
-function navigateToNextChapter(chapterTarget, fallbackUrl) {
-    if (typeof window[`openChapter${chapterTarget}`] === "function") {
-        window[`openChapter${chapterTarget}`]();
-    } else if (typeof window[`goToChapter${chapterTarget}`] === "function") {
-        window[`goToChapter${chapterTarget}`]();
-    } else if (typeof window.navigateToChapter === "function") {
-        window.navigateToChapter(chapterTarget);
-    } else {
-        window.location.href = fallbackUrl;
-    }
-}
-
-/* ==========================================================
-   CHAPTER CONTROLS
+   CHAPTER CONTROLS (SPA COORDINATION)
 ========================================================== */
 function initChapterControls() {
     if (chapterControlsBound) return;
     chapterControlsBound = true;
 
     document.addEventListener("click", (event) => {
-        // Universal Music Toggle & Volume Buttons (Chapters 1 - 7)
+        // Music toggles & Volume adjustments for Chapters 1-7
         for (let ch = 1; ch <= 7; ch++) {
             if (event.target.closest(`#chapter${ch}MusicToggle`)) {
                 toggleMusic();
@@ -610,42 +564,37 @@ function initChapterControls() {
             }
         }
 
-        // Sequential Continue Interceptions
+        // Chapters 1 through 5 Continue buttons
         for (let ch = 1; ch <= 5; ch++) {
             if (event.target.closest(`#chapter${ch}Continue`)) {
                 transitionToChapterMusic(ch + 1);
+                if (typeof window.transitionToChapter === "function") {
+                    window.transitionToChapter(ch + 1);
+                }
                 return;
             }
         }
 
-        // CHAPTER 6 → CHAPTER 7
-        const chapter6Continue = event.target.closest("#chapter6Continue");
-        if (chapter6Continue) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-
-            if (AudioState.transitioning) return;
-
-            fadeOutMusic().then(() => {
-                navigateToNextChapter(7, "chapter7.html");
-            });
+        // Chapter 6 Continue -> Chapter 7
+        const ch6Btn = event.target.closest("#chapter6Continue");
+        if (ch6Btn) {
+            transitionToChapterMusic(7);
+            if (typeof window.transitionToChapter === "function") {
+                window.transitionToChapter(7);
+            }
             return;
         }
 
-        // CHAPTER 7 → FINAL
-        const chapter7Continue = event.target.closest("#chapter7Continue");
-        if (chapter7Continue) {
-            event.preventDefault();
-            event.stopImmediatePropagation();
-
-            if (AudioState.transitioning) return;
-
-            fadeOutMusic().then(() => {
-                navigateToNextChapter("Final", "final.html");
-            });
+        // Chapter 7 Continue -> Final Chapter
+        const ch7Btn = event.target.closest("#chapter7Continue");
+        if (ch7Btn) {
+            transitionToChapterMusic("final");
+            if (typeof window.transitionToChapter === "function") {
+                window.transitionToChapter("final");
+            }
             return;
         }
-    }, true);
+    });
 }
 
 /* ==========================================================
