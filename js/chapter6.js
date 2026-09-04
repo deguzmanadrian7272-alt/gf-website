@@ -226,7 +226,7 @@ function initChapter6() {
            ================================================== */
 
         [
-            "I love listening to you talk, even when the topic is something completely random.",
+            "I love listening to you talk, even when the topic is completely random.",
 
             "I love the little stories you tell me.",
 
@@ -671,7 +671,7 @@ function initChapter6() {
                 class="chapter6-reason-timer-number"
                 aria-live="polite"
             >
-                5
+                3
             </div>
 
             <div class="chapter6-reason-timer-track">
@@ -748,7 +748,7 @@ function initChapter6() {
 
 
     /* ======================================================
-       START 7-SECOND COUNTDOWN
+       START 3-SECOND COUNTDOWN
        ====================================================== */
 
     function startCountdown() {
@@ -774,7 +774,7 @@ function initChapter6() {
 
 
         let secondsRemaining =
-            5;
+            3;
 
 
         updateCountdown(
