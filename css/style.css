@@ -254,8 +254,6 @@ button{
 #line1,
 #line2{
 
-    font-size:1.15rem;
-
     color:var(--text-secondary);
 
     line-height:1.8;
@@ -267,12 +265,14 @@ button{
 }
 
 #line1{
+    font-size:1.15rem;
 
     margin-top:28px;
 
 }
 
 #line2{
+    font-size:0.80rem;
 
     margin-top:16px;
 
