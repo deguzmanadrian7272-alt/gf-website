@@ -735,7 +735,7 @@ function initChapter6() {
             const percentage =
                 (
                     seconds /
-                    5
+                    3
                 ) * 100;
 
 
