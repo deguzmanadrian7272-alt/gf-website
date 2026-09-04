@@ -353,7 +353,7 @@ function startChapter1Intro() {
 
                     setTimeout(
                         revealChapter1Book,
-                        5000
+                        6000
                     );
 
                 }
@@ -376,7 +376,7 @@ function startChapter1Intro() {
 
     setTimeout(
         revealChapter1Book,
-        5000
+        6000
     );
 
 }
