@@ -803,7 +803,7 @@ function initFinalChapter() {
         if (
             !INSTAGRAM_URL ||
             INSTAGRAM_URL.includes(
-                "YOUR_USERNAME_HERE"
+                "https://www.instagram.com/kazeu_3/"
             )
         ) {
 
