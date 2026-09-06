@@ -1036,15 +1036,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 "Blue",
 
-                "Block",
-
                 "Red",
+
+                "Block",
 
                 "Pink"
 
             ],
 
-            correct: 2
+            correct: 3
 
         },
 
@@ -1066,7 +1066,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             ],
 
-            correct: 4
+            correct: 2
 
         },
 
