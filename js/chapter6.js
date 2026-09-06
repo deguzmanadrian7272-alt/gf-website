@@ -174,7 +174,7 @@ function initChapter6() {
         DO NOT CHANGE THIS VALUE.
     */
 
-    const MESSAGE_DURATION = 7000;
+    const MESSAGE_DURATION = 3000;
 
 
     /* ======================================================
@@ -786,7 +786,7 @@ function initChapter6() {
             Count down once every second.
 
             The actual reason remains visible
-            for exactly 7000ms because the main
+            for exactly 3000ms because the main
             timeout below controls the removal.
         */
 
