@@ -1082,13 +1082,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 "May",
 
-                "July",
+                "August",
 
-                "August"
+                "July"
 
             ],
 
-            correct: 3
+            correct: 4
 
         },
 
@@ -1100,9 +1100,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             answers: [
 
-                "Codm",
-
                 "Mlbb",
+
+                "Codm",
 
                 "Roblox",
 
@@ -1110,7 +1110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             ],
 
-            correct: 1
+            correct: 2
 
         },
 
@@ -1126,13 +1126,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 "gano'n?",
 
-                "Walanjo",
+                "netoo~",
 
-                "netoo~"
+                "Walanjo"
 
             ],
 
-            correct: 3
+            correct: 4
 
         }
 
