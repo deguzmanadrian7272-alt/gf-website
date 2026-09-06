@@ -1022,7 +1022,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ======================================================
-       GAME 3 — HOW WELL DO YOU KNOW US?
+       GAME 3 — HOW WELL DO YOU KNOW ME?
        ====================================================== */
 
     const quizQuestions = [
@@ -1030,17 +1030,17 @@ document.addEventListener("DOMContentLoaded", () => {
         {
 
             question:
-                "Which chapter are we playing right now?",
+                "What is my favorite color?",
 
             answers: [
 
-                "Chapter III",
+                "Blue",
 
-                "Chapter IV",
+                "Block",
 
-                "Chapter V",
+                "Red",
 
-                "Chapter VI"
+                "Pink"
 
             ],
 
@@ -1052,21 +1052,21 @@ document.addEventListener("DOMContentLoaded", () => {
         {
 
             question:
-                "How many mini games are waiting for you?",
+                "What is my favorite food?",
 
             answers: [
 
-                "One",
+                "Sinigang",
 
-                "Two",
+                "Adobo",
 
-                "Three",
+                "Igado",
 
-                "Five"
+                "chapsui"
 
             ],
 
-            correct: 2
+            correct: 4
 
         },
 
@@ -1074,39 +1074,17 @@ document.addEventListener("DOMContentLoaded", () => {
         {
 
             question:
-                "What are you supposed to find in the first game?",
+                "What is my birth month? ",
 
             answers: [
 
-                "Stars",
+                "December",
 
-                "Hearts",
+                "May",
 
-                "Letters",
+                "July",
 
-                "Flowers"
-
-            ],
-
-            correct: 1
-
-        },
-
-
-        {
-
-            question:
-                "What do we have to match in the second game?",
-
-            answers: [
-
-                "Pictures",
-
-                "Numbers",
-
-                "Hearts",
-
-                "Pairs"
+                "August"
 
             ],
 
@@ -1118,21 +1096,43 @@ document.addEventListener("DOMContentLoaded", () => {
         {
 
             question:
-                "What is the best part of this little game?",
+                "What is my favorite game?",
 
             answers: [
 
-                "Winning",
+                "Codm",
 
-                "The score",
+                "Mlbb",
 
-                "Spending time together",
+                "Roblox",
 
-                "Finishing quickly"
+                "blood strike"
 
             ],
 
-            correct: 2
+            correct: 1
+
+        },
+
+
+        {
+
+            question:
+                "What is my best expression word?",
+
+            answers: [
+
+                "Taragis",
+
+                "gano'n?",
+
+                "Walanjo",
+
+                "netoo~"
+
+            ],
+
+            correct: 3
 
         }
 
