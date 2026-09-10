@@ -289,7 +289,7 @@ function initFinalChapter() {
             ) {
 
                 hint.textContent =
-                    "Are you sure? ♡";
+                    "Luh? ba't gan'yan?🤨♡";
 
             }
 
@@ -298,14 +298,14 @@ function initFinalChapter() {
             ) {
 
                 hint.textContent =
-                    "Maybe think about it again... ♡";
+                    "Sakit shet. para akong sinasaksak... 🥹♡";
 
             }
 
             else {
 
                 hint.textContent =
-                    "I think the NO button has given up... ♡";
+                    "Edi NO button for you... 🤪♡";
 
             }
 
