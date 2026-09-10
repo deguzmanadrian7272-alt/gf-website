@@ -1026,118 +1026,57 @@ document.addEventListener("DOMContentLoaded", () => {
        ====================================================== */
 
     const quizQuestions = [
-
         {
-
-            question:
-                "What is my favorite color?",
-
+            question: "What is my favorite color?",
             answers: [
-
                 "Blue",
-
                 "Red",
-
-                "Block",
-
+                "Black",
                 "Pink"
-
             ],
-
-            correct: 3
-
+            correct: 2 // Black (3rd option)
         },
-
-
         {
-
-            question:
-                "What is my favorite food?",
-
+            question: "What is my favorite food?",
             answers: [
-
                 "Sinigang",
-
                 "Adobo",
-
                 "Igado",
-
-                "chapsui"
-
+                "Chop suey"
             ],
-
-            correct: 2
-
+            correct: 1 // Adobo (2nd option)
         },
-
-
         {
-
-            question:
-                "What is my birth month? ",
-
+            question: "What is my birth month?",
             answers: [
-
                 "December",
-
                 "May",
-
                 "August",
-
                 "July"
-
             ],
-
-            correct: 4
-
+            correct: 3 // July (4th option)
         },
-
-
         {
-
-            question:
-                "What is my favorite game?",
-
+            question: "What is my favorite game?",
             answers: [
-
-                "Mlbb",
-
-                "Codm",
-
+                "MLBB",
+                "CODM",
                 "Roblox",
-
-                "blood strike"
-
+                "Blood Strike"
             ],
-
-            correct: 2
-
+            correct: 1 // CODM (2nd option)
         },
-
-
         {
-
-            question:
-                "What is my best expression word?",
-
+            question: "What is my best expression word?",
             answers: [
-
                 "Taragis",
-
                 "gano'n?",
-
                 "netoo~",
-
                 "Walanjo"
-
             ],
-
-            correct: 4
-
+            correct: 3 // Walanjo (4th option)
         }
-
     ];
-
 
     function startQuiz() {
 
