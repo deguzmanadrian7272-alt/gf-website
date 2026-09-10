@@ -6,24 +6,42 @@
    ========================================================== */
 
 /* ==========================================================
-   ROOT CONTAINER & BACKGROUND
+   ROOT
    ========================================================== */
 
 #chapter2 {
     position: relative;
     width: 100%;
-    height: 100vh;
     min-height: 100vh;
+    height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
     display: none;
     box-sizing: border-box;
     color: #fff7fd;
     background:
-        radial-gradient(circle at 50% 8%, rgba(255, 151, 214, 0.22), transparent 35%),
-        radial-gradient(circle at 12% 48%, rgba(185, 119, 255, 0.16), transparent 30%),
-        radial-gradient(circle at 88% 72%, rgba(255, 177, 222, 0.16), transparent 32%),
-        linear-gradient(180deg, #130b2d 0%, #21103d 43%, #30164a 72%, #180b31 100%);
+        radial-gradient(
+            circle at 50% 8%,
+            rgba(255, 151, 214, 0.20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 12% 48%,
+            rgba(185, 119, 255, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 72%,
+            rgba(255, 177, 222, 0.15),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #130b2d 0%,
+            #21103d 43%,
+            #30164a 72%,
+            #180b31 100%
+        );
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
@@ -31,6 +49,10 @@
 #chapter2.active {
     display: block;
 }
+
+/* ==========================================================
+   BACKGROUND
+   ========================================================== */
 
 .chapter2-background {
     position: absolute;
@@ -44,69 +66,70 @@
     z-index: 0;
 }
 
-/* Atmospheric Glows */
 .chapter2-glow {
     position: absolute;
-    width: 80vw;
-    height: 80vw;
+    width: 75vw;
+    height: 75vw;
     max-width: 1050px;
     max-height: 1050px;
     left: 50%;
-    top: 0%;
+    top: 2%;
     transform: translateX(-50%);
     border-radius: 50%;
     background: radial-gradient(
         circle,
-        rgba(255, 181, 224, 0.18) 0%,
-        rgba(198, 130, 255, 0.10) 40%,
+        rgba(255, 181, 224, 0.15) 0%,
+        rgba(198, 130, 255, 0.09) 38%,
         transparent 70%
     );
-    filter: blur(20px);
-    animation: chapter2GlowPulse 8s ease-in-out infinite alternate;
+    filter: blur(12px);
+    animation: chapter2GlowPulse 7s ease-in-out infinite;
 }
 
 .chapter2-background::after {
     content: "";
     position: absolute;
-    width: 85%;
-    height: 35%;
+    width: 80%;
+    height: 30%;
     left: 50%;
-    bottom: 2%;
+    bottom: 4%;
     transform: translateX(-50%);
     border-radius: 50%;
     background: radial-gradient(
         ellipse,
-        rgba(255, 137, 205, 0.18),
-        rgba(190, 116, 255, 0.08) 45%,
+        rgba(255, 137, 205, 0.17),
+        rgba(190, 116, 255, 0.07) 45%,
         transparent 72%
     );
-    filter: blur(35px);
+    filter: blur(25px);
 }
 
-/* Floating Ambient Hearts */
+/* ==========================================================
+   FLOATING HEARTS & STARS
+   ========================================================== */
+
 .chapter2-heart {
     position: absolute;
     display: block;
-    color: rgba(255, 196, 231, 0.85);
-    font-size: 0.95rem;
+    color: rgba(255, 196, 231, 0.82);
+    font-size: 0.85rem;
     text-shadow:
-        0 0 10px rgba(255, 175, 222, 0.85),
-        0 0 22px rgba(194, 128, 255, 0.45);
-    animation: chapter2HeartFloat 6s ease-in-out infinite;
-    user-select: none;
+        0 0 8px rgba(255, 175, 222, 0.8),
+        0 0 18px rgba(194, 128, 255, 0.35);
+    animation: chapter2HeartFloat 7s ease-in-out infinite;
 }
 
-.chapter2-heart:nth-child(1) { left: 8%;  top: 15%; animation-delay: 0s; }
-.chapter2-heart:nth-child(2) { left: 86%; top: 28%; animation-delay: 1.8s; font-size: 0.8rem; }
-.chapter2-heart:nth-child(3) { left: 12%; top: 62%; animation-delay: 3.4s; font-size: 1.1rem; }
-.chapter2-heart:nth-child(4) { right: 8%; top: 76%; animation-delay: 1.2s; }
+.chapter2-heart:nth-child(1) { left: 10%; top: 18%; }
+.chapter2-heart:nth-child(2) { left: 84%; top: 27%; animation-delay: 1.7s; }
+.chapter2-heart:nth-child(3) { left: 17%; top: 64%; animation-delay: 3.2s; }
+.chapter2-heart:nth-child(4) { right: 10%; top: 78%; animation-delay: 0.8s; }
 
 .chapter2-heart::after {
     content: "✦";
     position: absolute;
-    margin-left: 14px;
-    margin-top: -6px;
-    color: rgba(255, 225, 246, 0.5);
+    margin-left: 18px;
+    margin-top: -4px;
+    color: rgba(255, 225, 246, 0.45);
     font-size: 0.45rem;
 }
 
@@ -117,36 +140,29 @@
 .chapter2-wrapper {
     position: relative;
     z-index: 5;
-    width: min(880px, calc(100% - 40px));
+    width: min(1000px, calc(100% - 40px));
     min-height: 100vh;
     margin: 0 auto;
-    padding: 80px 0 100px;
+    padding: 74px 0 90px;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
 }
 
 /* ==========================================================
-   INTRO SECTION
+   INTRO
    ========================================================== */
 
 .chapter2-intro {
     position: relative;
-    padding: 20px 20px 30px;
+    padding: 15px 20px 50px;
     text-align: center;
 }
 
 .chapter2-label {
     display: inline-block;
-    margin-bottom: 12px;
-    padding: 4px 14px;
-    border-radius: 999px;
-    background: rgba(255, 213, 238, 0.08);
-    border: 1px solid rgba(255, 213, 238, 0.2);
+    margin-bottom: 10px;
     color: #ffd5ee;
     font-family: "Poppins", sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     font-weight: 500;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -156,31 +172,32 @@
     margin: 0;
     color: #fff0fb;
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+    font-size: clamp(3.2rem, 8vw, 6rem);
     font-weight: 500;
-    line-height: 1;
-    letter-spacing: 0.02em;
+    line-height: 0.95;
+    letter-spacing: 0.025em;
     text-shadow:
-        0 0 14px rgba(255, 176, 222, 0.6),
-        0 0 38px rgba(255, 125, 211, 0.25);
+        0 0 12px rgba(255, 176, 222, 0.65),
+        0 0 34px rgba(255, 125, 211, 0.30),
+        0 0 70px rgba(188, 108, 255, 0.18);
 }
 
 .chapter2-intro h2::after {
     content: "♡";
     display: block;
-    margin-top: 14px;
+    margin-top: 18px;
     color: #ffafd9;
     font-family: "Cormorant Garamond", serif;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     text-shadow: 0 0 12px rgba(255, 160, 218, 0.5);
 }
 
 .chapter2-intro p {
-    max-width: 580px;
-    margin: 14px auto 0;
-    color: rgba(255, 226, 245, 0.82);
+    max-width: 650px;
+    margin: 16px auto 0;
+    color: rgba(255, 226, 245, 0.78);
     font-family: "Poppins", sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     font-weight: 300;
     line-height: 1.8;
 }
@@ -191,91 +208,102 @@
 
 .chapter2-story {
     position: relative;
-    padding: 38px 40px;
-    border: 1px solid rgba(255, 204, 238, 0.22);
+    display: block;
+    margin-bottom: 22px;
+    padding: 34px 34px 30px;
+    border: 1px solid rgba(255, 204, 238, 0.25);
     border-radius: 28px;
     background: linear-gradient(
         145deg,
-        rgba(116, 55, 137, 0.38),
-        rgba(47, 21, 75, 0.55)
+        rgba(116, 55, 137, 0.44),
+        rgba(47, 21, 75, 0.58)
     );
     box-shadow:
-        0 20px 60px rgba(7, 3, 20, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.12),
-        inset 0 0 40px rgba(255, 155, 218, 0.03);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+        0 25px 70px rgba(7, 3, 20, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.09),
+        inset 0 0 50px rgba(255, 155, 218, 0.035);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
     overflow: hidden;
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .chapter2-story:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 211, 238, 0.45);
+    border-color: rgba(255, 211, 238, 0.42);
     box-shadow:
-        0 28px 70px rgba(7, 3, 20, 0.35),
-        0 0 25px rgba(255, 145, 213, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+        0 30px 80px rgba(7, 3, 20, 0.30),
+        0 0 28px rgba(255, 145, 213, 0.07),
+        inset 0 1px 0 rgba(255, 255, 255, 0.11);
 }
 
 .chapter2-story::before {
     content: "";
     position: absolute;
-    width: 240px;
-    height: 240px;
-    top: -120px;
-    right: -80px;
+    width: 260px;
+    height: 260px;
+    top: -150px;
+    right: -90px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 173, 223, 0.14), transparent 70%);
+    background: radial-gradient(circle, rgba(255, 173, 223, 0.16), transparent 68%);
     pointer-events: none;
 }
 
 .chapter2-story::after {
     content: "♡";
     position: absolute;
-    right: 24px;
-    bottom: 20px;
-    color: rgba(255, 175, 222, 0.35);
+    right: 22px;
+    bottom: 18px;
+    color: rgba(255, 175, 222, 0.45);
     font-size: 1.25rem;
-    pointer-events: none;
-}
-
-.chapter2-story-content {
-    position: relative;
-    z-index: 1;
 }
 
 .chapter2-story-number {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 184, 225, 0.45);
-    border-radius: 16px;
+    width: 54px;
+    height: 54px;
+    margin-bottom: 18px;
+    border: 1px solid rgba(255, 184, 225, 0.55);
+    border-radius: 18px;
     color: #ffe2f4;
     font-family: "Cormorant Garamond", serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    background: radial-gradient(circle, rgba(255, 161, 218, 0.25), rgba(196, 112, 255, 0.1));
-    box-shadow: 0 0 20px rgba(255, 142, 209, 0.15);
+    font-size: 1.55rem;
+    background: radial-gradient(
+        circle,
+        rgba(255, 161, 218, 0.20),
+        rgba(196, 112, 255, 0.08)
+    );
+    box-shadow:
+        0 0 24px rgba(255, 142, 209, 0.12),
+        inset 0 0 14px rgba(255, 220, 244, 0.05);
+}
+
+.chapter2-story-content {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
 }
 
 .chapter2-story h3 {
+    display: block;
     margin: 0 0 16px;
     color: #fff1fb;
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(2rem, 3.8vw, 2.7rem);
-    font-weight: 600;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    font-weight: 500;
     line-height: 1.1;
 }
 
 .chapter2-story p {
+    display: block;
+    max-width: 780px;
     margin: 0 0 14px;
     color: rgba(255, 228, 246, 0.82);
     font-family: "Poppins", sans-serif;
-    font-size: 0.86rem;
+    font-size: 0.84rem;
     font-weight: 300;
     line-height: 1.85;
 }
@@ -285,31 +313,32 @@
 }
 
 /* ==========================================================
-   INSIDE JOKES SECTION
+   INSIDE JOKES
    ========================================================== */
 
 .chapter2-inside-jokes {
-    margin-top: 15px;
+    margin-top: 35px;
+    padding: 10px 0 20px;
     text-align: center;
-}
-
-.chapter2-inside-jokes h3 {
-    margin: 0 0 6px;
-    color: #fff1fb;
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-    font-weight: 500;
 }
 
 .chapter2-section-label {
     display: block;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     color: #ffd5ee;
     font-family: "Poppins", sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    font-size: 0.70rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    opacity: 0.85;
+}
+
+.chapter2-inside-jokes h3 {
+    margin: 0 0 28px;
+    color: #fff1fb;
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(2.3rem, 5vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1;
 }
 
 .chapter2-jokes-grid {
@@ -320,18 +349,22 @@
 
 .chapter2-joke-card {
     position: relative;
-    min-height: 150px;
-    padding: 24px 20px;
+    min-height: 170px;
+    padding: 26px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 204, 238, 0.2);
-    border-radius: 20px;
-    background: linear-gradient(145deg, rgba(255, 159, 216, 0.12), rgba(171, 119, 238, 0.1));
+    border: 1px solid rgba(255, 204, 238, 0.22);
+    border-radius: 22px;
+    background: linear-gradient(
+        145deg,
+        rgba(255, 159, 216, 0.12),
+        rgba(171, 119, 238, 0.10)
+    );
     color: #ffeefa;
     box-shadow:
-        0 14px 35px rgba(7, 2, 20, 0.2),
+        0 18px 45px rgba(7, 2, 20, 0.20),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -340,15 +373,31 @@
 }
 
 .chapter2-joke-card:nth-child(even) {
-    background: linear-gradient(145deg, rgba(184, 135, 255, 0.12), rgba(255, 155, 213, 0.09));
+    background: linear-gradient(
+        145deg,
+        rgba(184, 135, 255, 0.12),
+        rgba(255, 155, 213, 0.09)
+    );
 }
 
 .chapter2-joke-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 221, 241, 0.5);
+    border-color: rgba(255, 221, 241, 0.55);
     box-shadow:
-        0 20px 45px rgba(7, 2, 20, 0.3),
-        0 0 20px rgba(255, 142, 210, 0.12);
+        0 25px 55px rgba(7, 2, 20, 0.30),
+        0 0 24px rgba(255, 142, 210, 0.09);
+}
+
+.chapter2-joke-card::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -100px;
+    right: -70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 173, 223, 0.16), transparent 70%);
+    pointer-events: none;
 }
 
 .chapter2-joke-icon {
@@ -357,43 +406,49 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    margin-bottom: 12px;
-    border: 1px solid rgba(255, 190, 230, 0.35);
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 190, 230, 0.40);
     border-radius: 50%;
-    background: rgba(255, 152, 215, 0.1);
+    background: rgba(255, 152, 215, 0.08);
     color: #ffd8ed;
     font-size: 1.05rem;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 18px rgba(255, 141, 211, 0.08);
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .chapter2-joke-card:hover .chapter2-joke-icon {
-    transform: scale(1.12) rotate(6deg);
-    background: rgba(255, 152, 215, 0.2);
+    transform: scale(1.10) rotate(8deg);
+    background: rgba(255, 152, 215, 0.18);
 }
 
 .chapter2-joke-card p {
+    max-width: 420px;
     margin: 0;
-    color: rgba(255, 228, 246, 0.88);
+    color: rgba(255, 228, 246, 0.85);
     font-family: "Poppins", sans-serif;
     font-size: 0.82rem;
-    font-weight: 400;
     line-height: 1.6;
     text-align: center;
 }
 
 /* ==========================================================
-   ENDING SECTION
+   ENDING
    ========================================================== */
 
 .chapter2-ending {
     position: relative;
-    padding: 40px 30px;
+    margin-top: 30px;
+    padding: 40px 30px 45px;
     border: 1px solid rgba(255, 192, 226, 0.28);
-    border-radius: 28px;
-    background: linear-gradient(135deg, rgba(255, 181, 221, 0.15), rgba(187, 126, 255, 0.12));
+    border-radius: 26px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 181, 221, 0.16),
+        rgba(187, 126, 255, 0.13)
+    );
     text-align: center;
     box-shadow:
-        0 20px 50px rgba(5, 2, 16, 0.22),
+        0 22px 60px rgba(5, 2, 16, 0.20),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
@@ -401,36 +456,38 @@
 .chapter2-ending::after {
     content: "♡";
     position: absolute;
-    color: rgba(255, 175, 222, 0.45);
-    font-size: 1.5rem;
+    color: rgba(255, 175, 222, 0.55);
+    font-size: 1.6rem;
 }
 
-.chapter2-ending::before { left: 24px; top: 20px; }
-.chapter2-ending::after { right: 24px; bottom: 20px; }
+.chapter2-ending::before { left: 22px; top: 18px; }
+.chapter2-ending::after { right: 22px; bottom: 18px; }
 
 .chapter2-ending-symbol {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: #ffafd9;
-    font-size: 1.5rem;
-    text-shadow: 0 0 15px rgba(255, 145, 213, 0.4);
-    animation: chapter2SymbolFloat 3.5s ease-in-out infinite;
+    font-family: "Cormorant Garamond", serif;
+    font-size: 1.4rem;
+    text-shadow: 0 0 15px rgba(255, 145, 213, 0.35);
+    animation: chapter2SymbolFloat 4s ease-in-out infinite;
 }
 
 .chapter2-ending h3 {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     color: #fff1fb;
     font-family: "Cormorant Garamond", serif;
-    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
     font-weight: 500;
+    line-height: 1;
 }
 
 .chapter2-ending p {
-    max-width: 620px;
-    margin: 0 auto 8px;
+    max-width: 680px;
+    margin: 0 auto 10px;
     color: rgba(255, 232, 247, 0.85);
     font-family: "Poppins", sans-serif;
-    font-size: 0.86rem;
-    line-height: 1.75;
+    font-size: 0.84rem;
+    line-height: 1.8;
 }
 
 /* ==========================================================
@@ -438,45 +495,45 @@
    ========================================================== */
 
 #chapter2Continue {
-    display: inline-flex;
-    align-self: center;
+    display: flex;
     align-items: center;
     justify-content: center;
     min-width: 190px;
-    margin: 10px auto 0;
+    margin: 30px auto 20px;
     padding: 14px 32px;
     border: 1px solid rgba(255, 198, 233, 0.55);
     border-radius: 999px;
-    background: linear-gradient(135deg, rgba(255, 132, 205, 0.25), rgba(183, 111, 255, 0.2));
+    background: linear-gradient(
+        135deg,
+        rgba(255, 132, 205, 0.23),
+        rgba(183, 111, 255, 0.18)
+    );
     color: #ffe8f7;
     font-family: "Poppins", sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
+    font-size: 0.78rem;
     letter-spacing: 0.05em;
     cursor: pointer;
     box-shadow:
-        0 10px 28px rgba(123, 54, 152, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        0 10px 30px rgba(123, 54, 152, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 #chapter2Continue:hover,
 #chapter2Continue:focus-visible {
-    transform: translateY(-3px) scale(1.02);
-    background: linear-gradient(135deg, rgba(255, 139, 207, 0.38), rgba(188, 120, 255, 0.3));
+    transform: translateY(-3px);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 139, 207, 0.36),
+        rgba(188, 120, 255, 0.28)
+    );
     box-shadow:
-        0 14px 34px rgba(176, 84, 166, 0.3),
-        0 0 22px rgba(255, 147, 213, 0.2);
-}
-
-#chapter2Continue:focus-visible,
-.chapter2-music-btn:focus-visible {
-    outline: 2px solid rgba(255, 213, 241, 0.85);
-    outline-offset: 3px;
+        0 15px 38px rgba(176, 84, 166, 0.25),
+        0 0 25px rgba(255, 147, 213, 0.14);
 }
 
 /* ==========================================================
-   CHAPTER II MUSIC CONTROLS (Floating Corner Glassmorphism)
+   MUSIC CONTROLS
    ========================================================== */
 
 .chapter2-music-controls {
@@ -487,25 +544,25 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 8px;
+    padding: 7px 9px;
     border: 1px solid rgba(255, 198, 233, 0.28);
     border-radius: 999px;
-    background: rgba(35, 15, 55, 0.6);
+    background: rgba(35, 15, 55, 0.55);
     box-shadow:
-        0 8px 25px rgba(8, 2, 20, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+        0 8px 25px rgba(8, 2, 20, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .chapter2-music-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     padding: 0;
-    border: 1px solid rgba(255, 201, 232, 0.3);
+    border: 1px solid rgba(255, 201, 232, 0.30);
     border-radius: 50%;
     background: rgba(255, 160, 216, 0.08);
     color: #ffe8f7;
@@ -513,47 +570,25 @@
     font-size: 0.75rem;
     line-height: 1;
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .chapter2-music-btn:hover {
     transform: translateY(-2px);
-    background: rgba(255, 163, 218, 0.2);
-    border-color: rgba(255, 220, 241, 0.6);
-    box-shadow: 0 0 14px rgba(255, 151, 214, 0.25);
-}
-
-.chapter2-music-btn:active {
-    transform: scale(0.92);
+    background: rgba(255, 163, 218, 0.18);
+    border-color: rgba(255, 220, 241, 0.60);
 }
 
 .chapter2-music-play {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, rgba(255, 147, 211, 0.25), rgba(184, 117, 255, 0.2));
-    border-color: rgba(255, 210, 238, 0.45);
-    font-size: 0.8rem;
-}
-
-/* ==========================================================
-   SCROLLBAR
-   ========================================================== */
-
-#chapter2::-webkit-scrollbar {
-    width: 7px;
-}
-
-#chapter2::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-#chapter2::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, rgba(255, 190, 220, 0.35), rgba(190, 140, 220, 0.35));
-    border-radius: 10px;
-}
-
-#chapter2::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, rgba(255, 190, 220, 0.55), rgba(190, 140, 220, 0.55));
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 147, 211, 0.20),
+        rgba(184, 117, 255, 0.16)
+    );
+    border-color: rgba(255, 210, 238, 0.42);
+    font-size: 0.78rem;
 }
 
 /* ==========================================================
@@ -561,57 +596,73 @@
    ========================================================== */
 
 @keyframes chapter2GlowPulse {
-    0% {
-        opacity: 0.6;
+    0%, 100% {
+        opacity: 0.65;
         transform: translateX(-50%) scale(1);
     }
-    100% {
-        opacity: 0.95;
+    50% {
+        opacity: 1;
         transform: translateX(-50%) scale(1.08);
     }
 }
 
 @keyframes chapter2HeartFloat {
     0%, 100% {
-        opacity: 0.4;
+        opacity: 0.35;
         transform: translateY(0) rotate(-4deg);
     }
     50% {
         opacity: 0.9;
-        transform: translateY(-12px) rotate(4deg);
+        transform: translateY(-10px) rotate(4deg);
     }
 }
 
 @keyframes chapter2SymbolFloat {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-6px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
 }
 
 /* ==========================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE (TABLET & MOBILE)
    ========================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
     .chapter2-wrapper {
-        width: calc(100% - 30px);
-        padding: 60px 0 90px;
-        gap: 22px;
+        width: calc(100% - 24px);
+        padding-top: 55px;
+        padding-bottom: 80px;
+    }
+
+    .chapter2-intro {
+        padding-bottom: 30px;
+    }
+
+    .chapter2-intro h2 {
+        font-size: clamp(2.8rem, 13vw, 4.2rem);
     }
 
     .chapter2-story {
-        padding: 28px 22px;
+        padding: 24px 20px;
         border-radius: 22px;
+        margin-bottom: 16px;
     }
 
     .chapter2-story-number {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
         font-size: 1.3rem;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
+    }
+
+    .chapter2-story h3 {
+        font-size: 1.75rem;
+        margin-bottom: 12px;
+    }
+
+    .chapter2-story p {
+        font-size: 0.8rem;
+        line-height: 1.75;
     }
 
     .chapter2-jokes-grid {
@@ -620,8 +671,8 @@
     }
 
     .chapter2-joke-card {
-        min-height: 120px;
-        padding: 20px;
+        min-height: 130px;
+        padding: 20px 16px;
     }
 
     .chapter2-ending {
@@ -629,38 +680,42 @@
     }
 
     .chapter2-music-controls {
-        top: 15px;
-        right: 15px;
+        top: 16px;
+        right: 16px;
+        gap: 6px;
+        padding: 5px 6px;
+    }
+
+    .chapter2-music-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.65rem;
+    }
+
+    .chapter2-music-play {
+        width: 34px;
+        height: 34px;
     }
 }
 
 @media (max-width: 480px) {
     .chapter2-intro h2 {
-        font-size: clamp(2.8rem, 12vw, 3.8rem);
+        font-size: clamp(2.4rem, 12vw, 3.4rem);
+    }
+
+    .chapter2-intro p,
+    .chapter2-story p,
+    .chapter2-ending p {
+        font-size: 0.78rem;
     }
 
     .chapter2-story h3 {
-        font-size: 1.85rem;
+        font-size: 1.6rem;
     }
 
-    .chapter2-story p,
-    .chapter2-intro p,
-    .chapter2-ending p {
-        font-size: 0.8rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .chapter2-glow,
-    .chapter2-heart,
-    .chapter2-ending-symbol {
-        animation: none;
-    }
-
-    .chapter2-story,
-    .chapter2-joke-card,
-    #chapter2Continue,
-    .chapter2-music-btn {
-        transition: none;
+    #chapter2Continue {
+        min-width: 170px;
+        padding: 12px 26px;
+        font-size: 0.74rem;
     }
 }
